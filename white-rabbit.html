@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="it" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>White Rabbit Project - Angelo Russo</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#050505',
+                        primary: '#ffffff',
+                        muted: '#a1a1aa',
+                        wrOrange: '#f97316', 
+                        kongYellow: '#FACC15'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Courier New', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #050505; color: white; }
+        .hide-scroll::-webkit-scrollbar { display: none; }
+        .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-wrOrange selection:text-black">
+
+    <header class="fixed top-0 left-0 w-full p-4 z-50 bg-[#050505]/80 backdrop-blur-md border-b border-white/10">
+        <a href="index.html" class="inline-flex items-center gap-2 text-muted hover:text-white transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+            <span class="font-bold">Torna al Portfolio</span>
+        </a>
+    </header>
+
+    <main class="container mx-auto px-4 py-32">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+            
+            <div class="space-y-12">
+                <div>
+                    <h1 class="text-4xl md:text-5xl font-black tracking-tighter mb-4 leading-tight">
+                        Strategia AI Generativa <br> & Produzione Visiva
+                    </h1>
+                    <h2 class="text-xl text-wrOrange font-mono mb-4">
+                        Creative Designer & AI Specialist @ White Rabbit Agency (Bruxelles)
+                    </h2>
+                    <p class="text-muted italic text-lg border-l-2 border-wrOrange pl-4">
+                        Ridefinire i workflow creativi per il mercato europeo.
+                    </p>
+                </div>
+
+                <div class="bg-gray-900/50 p-8 rounded-2xl border border-white/5">
+                    <h3 class="text-2xl font-bold mb-4 text-white">The Challenge</h3>
+                    <p class="text-muted leading-relaxed">
+                        L’obiettivo era posizionare White Rabbit come leader nell’adozione dell’Intelligenza Artificiale nel settore creativo europeo. La vera sfida quotidiana? Gestire campagne social e progetti di branding con tempi strettissimi e risorse minime.<br><br>
+                        Serviva una soluzione per produrre contenuti di alto profilo, partendo quasi da zero, e farlo in modo rapido e scalabile.
+                    </p>
+                </div>
+
+                <div class="bg-gray-900/50 p-8 rounded-2xl border border-white/5">
+                    <h3 class="text-2xl font-bold mb-4 text-white">The Solution</h3>
+                    <p class="text-muted leading-relaxed">
+                        Ho scelto di abbracciare i limiti e trasformarli in opportunità. Ho integrato modelli di AI (Higgsfield, Gemini, NanoBananaPro) nel mio workflow creativo per convertire sketch e concept in asset visivi finiti.<br><br>
+                        Così ho potuto presentare ai clienti non solo moodboard, ma video completi e prototipi visivi in tempi record.
+                    </p>
+                </div>
+
+                <div class="bg-gray-900/50 p-8 rounded-2xl border border-white/5">
+                    <h3 class="text-2xl font-bold mb-4 text-white">Outcome</h3>
+                    <ul class="space-y-3 text-muted list-disc pl-5">
+                        <li>Produzione più veloce e reattiva</li>
+                        <li>Contenuti di qualità anche da materiale grezzo</li>
+                        <li>Presentazioni più coinvolgenti e concrete</li>
+                        <li>Percezione dell’agenzia come early adopter nel settore AI</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="relative hidden lg:block">
+                <div class="sticky top-32 space-y-8">
+                    
+                    <div class="bg-black border border-gray-700 rounded-xl overflow-hidden shadow-2xl shadow-wrOrange/10 relative">
+                        <div class="relative aspect-[4/3] bg-gray-900 group">
+                            <img id="rawImage" src="assets/edgar-lq.jpg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 opacity-100 z-10" alt="Raw Input">
+                            <img id="generatedImage" src="assets/edgar.png" class="absolute inset-0 w-full h-full object-contain bg-white transition-opacity duration-700 opacity-0 z-20" alt="Generated Output">
+                            <div id="scannerEffect" class="absolute top-0 left-0 w-full h-1 bg-wrOrange shadow-[0_0_15px_2px_#f97316] animate-[pulse_2s_infinite] z-30"></div>
+                        </div>
+
+                        <div class="p-4 bg-gray-900 border-t border-gray-700 flex flex-col gap-4 relative z-40">
+                            <div class="font-mono text-xs text-gray-400 bg-black/50 p-3 rounded border border-gray-700 truncate">
+                                > /imagine prompt: editorial photography of red glasses, cinematic lighting, 8k --v 6.0
+                            </div>
+                            <button id="generateBtn" class="w-full py-3 bg-gray-800 hover:bg-wrOrange/10 border border-wrOrange/50 text-wrOrange font-bold tracking-widest rounded transition-all duration-300 hover:shadow-[0_0_15px_rgba(249,115,22,0.3)]">
+                                GENERATE
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-black border border-gray-700 rounded-xl p-4">
+                        <h4 class="text-center font-mono text-xs text-wrOrange mb-4 tracking-widest">FINAL OUTPUT EXAMPLE</h4>
+                        <div class="aspect-[9/16] bg-gray-800 rounded overflow-hidden relative flex items-center justify-center text-muted">
+                             <video src="assets/WR_EDGAR_COLOR_edit2.mp4" autoplay loop muted playsinline class="w-full h-full object-cover"></video>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <section class="py-20 border-t border-gray-800 bg-gray-900/20">
+        <div class="container mx-auto px-4 text-center mb-12">
+            <h2 class="text-3xl font-black tracking-tighter mb-4">THE ENDURANCE</h2>
+            <p class="max-w-3xl mx-auto text-lg text-muted leading-relaxed">
+                The Endurance è stato uno dei lavori più stimolanti perché ha combinato AI, After Effects, Premiere e sound design. Abbiamo coinvolto attivamente i clienti, inserendo i loro volti nel video promozionale commissionato per la loro azienda.
+            </p>
+        </div>
+
+        <div class="flex overflow-x-auto gap-6 px-4 pb-8 hide-scroll snap-x snap-mandatory container mx-auto h-[50vh] md:h-[60vh] items-center">
+            
+            <div class="snap-center shrink-0 h-full w-auto aspect-video bg-black rounded-xl border border-gray-700 overflow-hidden shadow-2xl relative group">
+                 <video src="assets/WR-RP-Endurance.mp4" controls class="h-full w-full object-cover"></video>
+            </div>
+
+            <div class="snap-center shrink-0 h-full w-auto aspect-[9/16] bg-black rounded-2xl border-4 border-gray-800 overflow-hidden shadow-2xl relative">
+                <video src="assets/WR-RP-backstage.mov" autoplay loop muted playsinline class="h-full w-full object-cover"></video>
+            </div>
+
+            <div class="snap-center shrink-0 h-full w-auto bg-black rounded-xl border border-gray-700 overflow-hidden relative group">
+                <img src="assets/WR-ENDURANCE-REFERENCE.JPEG" class="h-full w-auto object-cover opacity-80 group-hover:opacity-100 transition-opacity" alt="Reference 1">
+            </div>
+            <div class="snap-center shrink-0 h-full w-auto bg-black rounded-xl border border-gray-700 overflow-hidden relative group">
+                <img src="assets/WR-ENDURANCE-REFERENCE-1.JPEG" class="h-full w-auto object-cover opacity-80 group-hover:opacity-100 transition-opacity" alt="Reference 2">
+            </div>
+            <div class="snap-center shrink-0 h-full w-auto bg-black rounded-xl border border-gray-700 overflow-hidden relative group">
+                <img src="assets/WR-ENDURANCE-REFERENCE-2.JPEG" class="h-full w-auto object-cover opacity-80 group-hover:opacity-100 transition-opacity" alt="Reference 3">
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 border-t border-gray-800">
+        <div class="container mx-auto px-4">
+            
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
+                <div>
+                    <h2 class="text-4xl font-black tracking-tighter mb-2">URBAN KONG</h2>
+                    <h3 class="text-xl text-kongYellow font-mono">Social Media Ecosystem & Custom AI Agent</h3>
+                </div>
+                <p class="max-w-xl text-muted text-lg leading-relaxed text-left md:text-right">
+                    Un progetto nativo verticale. Produzione visiva per Instagram e TikTok potenziata da un 
+                    <span class="text-white font-bold">Agente Gemini personalizzato</span>, addestrato sul Tone of Voice del brand per generare script e caption on-trend.
+                </p>
+            </div>
+
+            <div class="flex overflow-x-auto gap-8 pb-8 hide-scroll snap-x snap-mandatory h-[70vh] items-center">
+                
+                <div class="snap-center shrink-0 h-full w-auto bg-black rounded-3xl border-4 border-gray-800 overflow-hidden shadow-2xl relative group">
+                    <video src="assets/UKO_King_Powa.mov" autoplay loop muted playsinline class="h-full w-auto object-cover"></video>
+                    <div class="absolute bottom-4 left-0 w-full text-center">
+                        <span class="bg-black/50 backdrop-blur px-3 py-1 rounded-full text-xs text-white/80 border border-white/10">Commercial</span>
+                    </div>
+                </div>
+
+                <div class="snap-center shrink-0 h-full w-auto bg-black rounded-3xl border-4 border-gray-800 overflow-hidden shadow-2xl relative group">
+                    <img src="assets/3.png" class="h-full w-auto object-cover" alt="Social Post">
+                    <div class="absolute bottom-4 left-0 w-full text-center">
+                        <span class="bg-black/50 backdrop-blur px-3 py-1 rounded-full text-xs text-white/80 border border-white/10">Social Visual</span>
+                    </div>
+                </div>
+
+                <div class="snap-center shrink-0 h-full w-auto bg-gray-900 rounded-3xl border-4 border-gray-800 overflow-hidden shadow-2xl relative group">
+                    <img src="assets/UK-gemini-agent.jpg" class="h-full w-auto object-cover" alt="Gemini AI Training">
+                    <div class="absolute bottom-4 left-0 w-full text-center">
+                        <span class="bg-black/50 backdrop-blur px-3 py-1 rounded-full text-xs text-white/80 border border-white/10">AI Agent Training</span>
+                    </div>
+                </div>
+
+            </div>
+            
+            <p class="text-center text-xs text-muted mt-4 animate-pulse">← Scorri per esplorare l'ecosistema Urban Kong →</p>
+
+        </div>
+    </section>
+
+    <section class="py-24 border-t border-gray-800 bg-gray-900/10">
+        <div class="container mx-auto px-4">
+            
+            <div class="text-center max-w-4xl mx-auto mb-16">
+                <h2 class="text-4xl font-black tracking-tighter mb-4">AI BRAND CONSISTENCY</h2>
+                <h3 class="text-xl text-wrOrange font-mono mb-6">Controlled Generation & Spot Production</h3>
+                <p class="text-muted text-lg leading-relaxed">
+                    La vera sfida dell'AI generativa non è creare, ma <span class="text-white">mantenere</span>. 
+                    In questa serie di sperimentazioni, ho sviluppato workflow specifici per garantire la 
+                    <span class="text-white font-bold">Character Consistency</span> (coerenza dei volti) e la stabilità del prodotto 
+                    attraverso shot diversi, trasformando il caos generativo in narrazione commerciale solida per i brand.
+                </p>
+            </div>
+
+            <div class="flex overflow-x-auto gap-6 px-4 pb-8 hide-scroll snap-x snap-mandatory container mx-auto h-[60vh] items-center">
+                
+                <div class="snap-center shrink-0 h-full w-auto bg-black rounded-2xl border border-gray-700 overflow-hidden shadow-2xl relative">
+                    <video src="assets/brand-spot-main.mp4" autoplay loop muted playsinline controls class="h-full w-auto object-cover"></video>
+                </div>
+
+                <div class="snap-center shrink-0 h-full w-auto bg-black rounded-2xl border border-gray-700 overflow-hidden shadow-xl relative">
+                    <video src="assets/consistency-model.mp4" autoplay loop muted playsinline controls class="h-full w-auto object-cover"></video>
+                </div>
+
+                <div class="snap-center shrink-0 h-full w-auto bg-black rounded-2xl border border-gray-700 overflow-hidden shadow-xl relative">
+                    <img src="assets/product-detail.jpg" class="h-full w-auto object-cover" alt="Product Detail">
+                </div>
+
+                <div class="snap-center shrink-0 h-full w-auto bg-black rounded-2xl border border-gray-700 overflow-hidden shadow-xl relative">
+                    <img src="assets/brand-mood.jpg" class="h-full w-auto object-cover" alt="Brand Mood">
+                </div>
+
+            </div>
+            
+            <p class="text-center text-xs text-muted mt-8 animate-pulse">← Scorri i contenuti →</p>
+        </div>
+    </section>
+
+    <footer class="border-t border-gray-800 py-12 text-center text-muted">
+        <p class="text-sm opacity-50">© 2025 Angelo Russo. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const generateBtn = document.getElementById('generateBtn');
+        const rawImage = document.getElementById('rawImage');
+        const generatedImage = document.getElementById('generatedImage');
+        const scannerEffect = document.getElementById('scannerEffect');
+
+        generateBtn.addEventListener('click', function() {
+            rawImage.classList.replace('opacity-100', 'opacity-0');
+            scannerEffect.classList.add('hidden');
+            generatedImage.classList.replace('opacity-0', 'opacity-100');
+            generateBtn.textContent = "GENERATION COMPLETED";
+            generateBtn.classList.add('bg-wrOrange/20', 'cursor-not-allowed', 'text-white');
+            generateBtn.classList.remove('hover:bg-wrOrange/10', 'hover:shadow-[0_0_15px_rgba(249,115,22,0.3)]');
+            generateBtn.disabled = true;
+        });
+    </script>
+
+</body>
+</html>
