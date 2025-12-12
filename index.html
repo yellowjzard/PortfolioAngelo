@@ -15,7 +15,7 @@
                     colors: {
                         // DARK MODE (DEFAULT)
                         background: '#050505',
-                        primary: '#ffffff',
+                        primary: '#ffffff', // TESTO BIANCO NEL TEMA SCURO
                         muted: '#a1a1aa',
                         accent: '#4ade80',
                         'gray-900': '#1f2937'
@@ -23,9 +23,9 @@
                     // LIGHT MODE OVERRIDES
                     light: {
                         background: '#ffffff', // Sfondo Bianco
-                        primary: '#1f2937',    // Testo Nero Scuro
+                        primary: '#1f2937',    // TESTO NERO NEL TEMA CHIARO
                         muted: '#6b7280',      // Testo Grigio Scuro
-                        'gray-900': '#e5e7eb', // Grigio molto chiaro per i blocchi di input/sfondo
+                        'gray-900': '#e5e7eb', // Grigio molto chiaro per i blocchi
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -48,21 +48,26 @@
         /* Applica i colori di base del tema */
         .dark {
             background-color: #050505;
-            color: #ffffff;
+            color: #ffffff; /* Testo principale bianco */
         }
         .light {
             background-color: #ffffff;
-            color: #1f2937;
+            color: #1f2937; /* Testo principale nero */
         }
 
-        /* Fix per gli elementi interni nel tema chiaro */
+        /* Correzioni specifiche per il testo principale in entrambi i temi */
+        .dark .text-primary { color: #ffffff; }
         .light .text-primary { color: #1f2937; }
+        
+        /* Fix per gli elementi interni nel tema chiaro */
         .light .text-muted { color: #6b7280; }
         .light .bg-gray-100 { background-color: #f3f4f6; }
         .light .border-gray-800 { border-color: #d1d5db; }
-        .light .text-white { color: #1f2937; } /* Forza testo chiaro a diventare scuro */
+        .light .text-white { color: #1f2937; } /* Forza testo 'white' (nei bottoni, ad esempio) a diventare scuro */
         .light .bg-gray-900 { background-color: #e5e7eb; } /* Forza i blocchi scuri a diventare chiari */
         .light .bg-white { background-color: #ffffff; }
+        .light .text-black { color: #1f2937; }
+
 
         /* Stili aggiuntivi */
         html { scroll-behavior: smooth; }
@@ -275,15 +280,15 @@
                 <div class="p-6 dark:bg-gray-900 light:bg-light-gray-900 rounded-lg border dark:border-gray-800 light:border-gray-300">
                     <div>
                         <label class="block text-sm font-medium text-muted mb-2" data-key="form-name-label">Nome</label>
-                        <input type="text" name="name" required data-key="form-name-ph" placeholder="Il tuo nome" class="w-full bg-gray-900 dark:bg-gray-900 light:bg-gray-100 border dark:border-gray-800 light:border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:border-primary transition-colors text-primary">
+                        <input type="text" name="name" required data-key="form-name-ph" placeholder="Il tuo nome" class="w-full dark:bg-gray-900 light:bg-gray-100 border dark:border-gray-800 light:border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:border-primary transition-colors text-primary">
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium text-muted mb-2" data-key="form-email-label">Email</label>
-                        <input type="email" name="email" required data-key="form-email-ph" placeholder="tua@email.com" class="w-full bg-gray-900 dark:bg-gray-900 light:bg-gray-100 border dark:border-gray-800 light:border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:border-primary transition-colors text-primary">
+                        <input type="email" name="email" required data-key="form-email-ph" placeholder="tua@email.com" class="w-full dark:bg-gray-900 light:bg-gray-100 border dark:border-gray-800 light:border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:border-primary transition-colors text-primary">
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium text-muted mb-2" data-key="form-message-label">Messaggio</label>
-                        <textarea name="message" required rows="5" data-key="form-message-ph" placeholder="Come posso aiutarti?" class="w-full bg-gray-900 dark:bg-gray-900 light:bg-gray-100 border dark:border-gray-800 light:border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:border-primary transition-colors text-primary"></textarea>
+                        <textarea name="message" required rows="5" data-key="form-message-ph" placeholder="Come posso aiutarti?" class="w-full dark:bg-gray-900 light:bg-gray-100 border dark:border-gray-800 light:border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:border-primary transition-colors text-primary"></textarea>
                     </div>
                 </div>
                 <button type="submit" class="w-full bg-primary text-black dark:text-black light:text-primary font-bold py-4 rounded-lg hover:bg-gray-200 transition-colors duration-300">
@@ -455,10 +460,9 @@
         // Forza la modalità scura/chiara all'avvio in base alle preferenze di sistema
         document.addEventListener('DOMContentLoaded', () => {
             const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            // Legge la preferenza di sistema e imposta la classe iniziale sul tag <html>
             document.documentElement.classList.add(systemPrefersDark ? 'dark' : 'light');
             
-            // Legge la lingua di default dal tag <html>
+            // Imposta la lingua di default (IT)
             currentLang = document.documentElement.lang;
             updateTexts(currentLang);
         });
