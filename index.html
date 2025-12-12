@@ -17,13 +17,15 @@
                         background: '#050505',
                         primary: '#ffffff',
                         muted: '#a1a1aa',
-                        accent: '#4ade80' 
+                        accent: '#4ade80',
+                        'gray-900': '#1f2937' // ridefiniamo il gray-900 per il dark mode
                     },
                     // LIGHT MODE OVERRIDES
                     light: {
                         background: '#f8f8f8',
                         primary: '#1f2937',
                         muted: '#6b7280',
+                        'gray-900': '#e5e7eb', // grigio molto chiaro per i blocchi
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -37,31 +39,33 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     
     <style>
-        /* Stili per la modalità chiara/scura automatica e la transizione */
+        /* CSS per il tema: applichiamo i colori custom definiti sopra */
         body { 
             font-family: 'Inter', sans-serif;
             transition: background-color 0.5s, color 0.5s;
         }
-        
-        /* Tema Scuro (Dark) */
+
+        /* Dark Mode (Classica) */
         .dark {
             background-color: #050505;
-            color: white;
+            color: #ffffff;
         }
-        .dark .bg-white { background-color: #1f2937; color: white; } /* per i blocchi che prima erano bianchi */
-        .dark .text-black { color: white; } /* per i testi che prima erano neri */
 
-        /* Tema Chiaro (Light) - usa i colori definiti in light:{} */
+        /* Light Mode (Sovrascrittura) */
         .light {
             background-color: #f8f8f8;
             color: #1f2937;
         }
-        .light .text-muted { color: #6b7280; }
-        .light .bg-gray-900\/50 { background-color: #e5e7eb; }
-        .light .border-gray-800 { border-color: #d1d5db; }
-        .light .bg-green-700 { background-color: #10b981; }
-        .light .bg-green-600 { background-color: #059669; }
-        
+
+        /* Forzatura del colore sui link */
+        a {
+            color: inherit; /* Assicura che i link usino il colore del testo primario */
+        }
+
+        /* Fix per i contenitori che erano neri fissi */
+        .dark .bg-dark-container { background-color: #1f2937; }
+        .light .bg-dark-container { background-color: #ffffff; border-color: #d1d5db; }
+
         /* Stili aggiuntivi */
         html { scroll-behavior: smooth; }
         .status-badge { transition: all 0.3s ease; }
@@ -74,7 +78,11 @@
 
 <body class="antialiased bg-background text-primary selection:bg-white selection:text-black">
 
-    <div class="fixed inset-0 z-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gray-900 via-[#050505] to-[#050505] dark:from-gray-900 dark:via-[#050505] light:from-gray-300 light:via-[#f8f8f8]"></div>
+    <div class="fixed inset-0 z-0 pointer-events-none 
+                bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] 
+                dark:from-gray-900 dark:via-[#050505] dark:to-[#050505]
+                light:from-gray-300 light:via-[#f8f8f8] light:to-[#f8f8f8]">
+    </div>
 
     <div class="relative z-10">
         
@@ -100,7 +108,7 @@
             </div>
         </section>
 
-        <section class="container mx-auto py-20 px-4 border-b border-gray-800">
+        <section class="container mx-auto py-20 px-4 border-b border-gray-800 dark:border-gray-800 light:border-gray-300">
             <div class="text-center mb-12">
                 <h2 class="text-2xl font-bold tracking-tight mb-2 text-primary" data-key="demo-title">REAL-TIME EVENT AUTOMATION</h2>
                 <p class="text-muted max-w-2xl mx-auto" data-key="demo-desc">
@@ -111,7 +119,7 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
                 
-                <div class="bg-white text-black rounded-lg overflow-hidden shadow-2xl font-mono text-sm border-4 border-gray-700 transform lg:rotate-1 hover:rotate-0 transition-transform duration-500">
+                <div class="bg-white text-black rounded-lg overflow-hidden shadow-2xl font-mono text-sm border-4 border-gray-700 light:border-gray-300 transform lg:rotate-1 hover:rotate-0 transition-transform duration-500">
                     <div class="bg-green-700 text-white p-3 text-xs flex justify-between items-center">
                         <div class="flex items-center gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3z"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M9 3v18"/><path d="M15 3v18"/></svg>
@@ -120,14 +128,14 @@
                         <span class="bg-green-600 px-2 rounded animate-pulse" data-key="sheet-status">Live Sync...</span>
                     </div>
                     
-                    <div class="grid grid-cols-4 bg-gray-100 border-b border-gray-300 font-bold text-xs p-3">
+                    <div class="grid grid-cols-4 bg-gray-100 dark:bg-gray-100 light:bg-light-gray-900 border-b border-gray-300 font-bold text-xs p-3">
                         <div class="col-span-2" data-key="sheet-col1">ITEM_ID</div>
                         <div class="text-center" data-key="sheet-col2">STOCK</div>
                         <div class="text-center" data-key="sheet-col3">UPDATE</div>
                     </div>
 
                     <div class="grid grid-cols-4 border-b border-gray-200 p-3 items-center hover:bg-blue-50 transition-colors">
-                        <div class="col-span-2 font-bold text-gray-700">TSHIRT_RED_01</div>
+                        <div class="col-span-2 font-bold text-gray-700 light:text-primary">TSHIRT_RED_01</div>
                         <div id="sheet-red-val" class="text-center font-bold text-lg text-red-600">8</div>
                         <div class="flex justify-center gap-2">
                             <button onclick="updateStock('red', -1)" class="w-8 h-8 bg-gray-200 hover:bg-gray-300 rounded flex items-center justify-center font-bold text-lg active:scale-90 transition-transform">-</button>
@@ -136,7 +144,7 @@
                     </div>
 
                     <div class="grid grid-cols-4 border-b border-gray-200 p-3 items-center hover:bg-blue-50 transition-colors">
-                        <div class="col-span-2 font-bold text-gray-700">TSHIRT_BLUE_02</div>
+                        <div class="col-span-2 font-bold text-gray-700 light:text-primary">TSHIRT_BLUE_02</div>
                         <div id="sheet-blue-val" class="text-center font-bold text-lg text-blue-600">2</div>
                         <div class="flex justify-center gap-2">
                             <button onclick="updateStock('blue', -1)" class="w-8 h-8 bg-gray-200 hover:bg-gray-300 rounded flex items-center justify-center font-bold text-lg active:scale-90 transition-transform">-</button>
@@ -145,7 +153,7 @@
                     </div>
 
                     <div class="grid grid-cols-4 p-3 items-center hover:bg-blue-50 transition-colors">
-                        <div class="col-span-2 font-bold text-gray-700">TSHIRT_GREEN_03</div>
+                        <div class="col-span-2 font-bold text-gray-700 light:text-primary">TSHIRT_GREEN_03</div>
                         <div id="sheet-green-val" class="text-center font-bold text-lg text-green-600">0</div>
                         <div class="flex justify-center gap-2">
                             <button onclick="updateStock('green', -1)" class="w-8 h-8 bg-gray-200 hover:bg-gray-300 rounded flex items-center justify-center font-bold text-lg active:scale-90 transition-transform">-</button>
@@ -154,7 +162,7 @@
                     </div>
                 </div>
 
-                <div class="relative bg-gray-900 border-8 border-gray-800 rounded-2xl p-6 shadow-[0_0_50px_rgba(255,255,255,0.1)]">
+                <div class="relative bg-gray-900 border-8 border-gray-800 dark:bg-gray-900 light:bg-gray-900 dark:border-gray-800 light:border-gray-800 rounded-2xl p-6 shadow-[0_0_50px_rgba(255,255,255,0.1)]">
                     <div class="absolute top-0 right-0 w-full h-full bg-gradient-to-bl from-white/5 to-transparent pointer-events-none rounded-xl"></div>
                     
                     <h3 class="text-xs font-bold text-white/50 uppercase tracking-[0.3em] mb-6 text-center border-b border-white/10 pb-4" data-key="display-header">Digital Signage • Room A</h3>
@@ -195,64 +203,64 @@
         </section>
 
         <section class="container mx-auto py-20 px-4">
-            <h2 class="text-xs font-bold tracking-[0.2em] text-muted mb-12 uppercase border-b border-gray-800 pb-4" data-key="works-header">PROGETTI SELEZIONATI</h2>
+            <h2 class="text-xs font-bold tracking-[0.2em] text-muted mb-12 uppercase border-b border-gray-800 dark:border-gray-800 light:border-gray-300 pb-4" data-key="works-header">PROGETTI SELEZIONATI</h2>
             
             <div class="flex flex-col">
                 
-                <a href="white-rabbit.html" class="group block py-12 border-b border-gray-800 hover:border-white transition-colors duration-300">
+                <a href="white-rabbit.html" class="group block py-12 border-b border-gray-800 dark:border-gray-800 light:border-gray-300 hover:border-primary transition-colors duration-300">
                     <div class="flex justify-between items-center">
                         <h3 class="text-4xl md:text-7xl font-bold tracking-tighter group-hover:text-orange-500 transition-colors duration-300">
                             White Rabbit
                         </h3>
-                        <span class="text-muted group-hover:text-white group-hover:translate-x-4 transition-all duration-300">
+                        <span class="text-muted group-hover:text-primary group-hover:translate-x-4 transition-all duration-300">
                             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                         </span>
                     </div>
                     <p class="text-muted mt-4 text-lg" data-key="wr-tag">AI Strategy & Visual Production</p>
                 </a>
 
-                <a href="nero-espresso.html" class="group block py-12 border-b border-gray-800 hover:border-white transition-colors duration-300">
+                <a href="nero-espresso.html" class="group block py-12 border-b border-gray-800 dark:border-gray-800 light:border-gray-300 hover:border-primary transition-colors duration-300">
                     <div class="flex justify-between items-center">
                         <h3 class="text-4xl md:text-7xl font-bold tracking-tighter group-hover:text-rose-900 transition-colors duration-300">
                             Nero Espresso
                         </h3>
-                        <span class="text-muted group-hover:text-white group-hover:translate-x-4 transition-all duration-300">
+                        <span class="text-muted group-hover:text-primary group-hover:translate-x-4 transition-all duration-300">
                             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                         </span>
                     </div>
                     <p class="text-muted mt-4 text-lg" data-key="ne-tag">Branding & Graphic Design</p>
                 </a>
 
-                <a href="cuoredinapoli.html" class="group block py-12 border-b border-gray-800 hover:border-white transition-colors duration-300">
+                <a href="cuoredinapoli.html" class="group block py-12 border-b border-gray-800 dark:border-gray-800 light:border-gray-300 hover:border-primary transition-colors duration-300">
                     <div class="flex justify-between items-center">
                         <h3 class="text-4xl md:text-7xl font-bold tracking-tighter group-hover:text-red-600 transition-colors duration-300">
                             #CuorediNapoli
                         </h3>
-                        <span class="text-muted group-hover:text-white group-hover:translate-x-4 transition-all duration-300">
+                        <span class="text-muted group-hover:text-primary group-hover:translate-x-4 transition-all duration-300">
                             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                         </span>
                     </div>
                     <p class="text-muted mt-4 text-lg" data-key="cdn-tag">Phygital Art Installation</p>
                 </a>
 
-                <a href="noi-umani.html" class="group block py-12 border-b border-gray-800 hover:border-white transition-colors duration-300">
+                <a href="noi-umani.html" class="group block py-12 border-b border-gray-800 dark:border-gray-800 light:border-gray-300 hover:border-primary transition-colors duration-300">
                     <div class="flex justify-between items-center">
                         <h3 class="text-4xl md:text-7xl font-bold tracking-tighter group-hover:text-blue-500 transition-colors duration-300">
                             Noi Umani
                         </h3>
-                        <span class="text-muted group-hover:text-white group-hover:translate-x-4 transition-all duration-300">
+                        <span class="text-muted group-hover:text-primary group-hover:translate-x-4 transition-all duration-300">
                             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                         </span>
                     </div>
                     <p class="text-muted mt-4 text-lg" data-key="nu-tag">Science & Art Storytelling</p>
                 </a>
 
-                 <a href="procida.html" class="group block py-12 border-b border-gray-800 hover:border-white transition-colors duration-300">
+                 <a href="procida.html" class="group block py-12 border-b border-gray-800 dark:border-gray-800 light:border-gray-300 hover:border-primary transition-colors duration-300">
                     <div class="flex justify-between items-center">
                         <h3 class="text-4xl md:text-7xl font-bold tracking-tighter group-hover:text-pink-500 transition-colors duration-300">
                             Non io ma noi
                         </h3>
-                        <span class="text-muted group-hover:text-white group-hover:translate-x-4 transition-all duration-300">
+                        <span class="text-muted group-hover:text-primary group-hover:translate-x-4 transition-all duration-300">
                             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                         </span>
                     </div>
@@ -263,31 +271,33 @@
         </section>
 
         <section class="container mx-auto py-20 px-4 max-w-2xl">
-            <h2 class="text-3xl font-bold mb-12 text-center tracking-tighter" data-key="contact-title">CONTACT ME</h2>
+            <h2 class="text-3xl font-bold mb-12 text-center tracking-tighter text-primary" data-key="contact-title">CONTACT ME</h2>
             
             <form action="https://formspree.io/f/mrbnlyyl" method="POST" class="space-y-6">
-                <div>
-                    <label class="block text-sm font-medium text-muted mb-2" data-key="form-name-label">Nome</label>
-                    <input type="text" name="name" required data-key="form-name-ph" placeholder="Il tuo nome" class="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-3 focus:outline-none focus:border-white transition-colors">
+                <div class="bg-dark-container rounded-lg p-6 border border-gray-800 light:border-gray-300">
+                    <div>
+                        <label class="block text-sm font-medium text-muted mb-2" data-key="form-name-label">Nome</label>
+                        <input type="text" name="name" required data-key="form-name-ph" placeholder="Il tuo nome" class="w-full bg-gray-900 dark:bg-gray-900 light:bg-light-gray-900 border border-gray-800 light:border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:border-primary transition-colors text-primary">
+                    </div>
+                    <div class="mt-4">
+                        <label class="block text-sm font-medium text-muted mb-2" data-key="form-email-label">Email</label>
+                        <input type="email" name="email" required data-key="form-email-ph" placeholder="tua@email.com" class="w-full bg-gray-900 dark:bg-gray-900 light:bg-light-gray-900 border border-gray-800 light:border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:border-primary transition-colors text-primary">
+                    </div>
+                    <div class="mt-4">
+                        <label class="block text-sm font-medium text-muted mb-2" data-key="form-message-label">Messaggio</label>
+                        <textarea name="message" required rows="5" data-key="form-message-ph" placeholder="Come posso aiutarti?" class="w-full bg-gray-900 dark:bg-gray-900 light:bg-light-gray-900 border border-gray-800 light:border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:border-primary transition-colors text-primary"></textarea>
+                    </div>
                 </div>
-                <div>
-                    <label class="block text-sm font-medium text-muted mb-2" data-key="form-email-label">Email</label>
-                    <input type="email" name="email" required data-key="form-email-ph" placeholder="tua@email.com" class="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-3 focus:outline-none focus:border-white transition-colors">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-muted mb-2" data-key="form-message-label">Messaggio</label>
-                    <textarea name="message" required rows="5" data-key="form-message-ph" placeholder="Come posso aiutarti?" class="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-3 focus:outline-none focus:border-white transition-colors"></textarea>
-                </div>
-                <button type="submit" class="w-full bg-white text-black font-bold py-4 rounded-lg hover:bg-gray-200 transition-colors duration-300" data-key="form-submit">
-                    INVIA MESSAGGIO
+                <button type="submit" class="w-full bg-primary text-black font-bold py-4 rounded-lg hover:bg-gray-200 transition-colors duration-300">
+                    <span data-key="form-submit">INVIA MESSAGGIO</span>
                 </button>
             </form>
         </section>
 
-        <footer class="border-t border-gray-800 py-12 text-center text-muted">
+        <footer class="border-t border-gray-800 dark:border-gray-800 light:border-gray-300 py-12 text-center text-muted">
             <div class="flex justify-center gap-6 mb-8">
-                <a href="https://www.linkedin.com/in/angelo-russo-0964a8183/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">LinkedIn</a>
-                <a href="https://www.instagram.com/yellowjzard?igsh=MTNmMDNwZ24zYXY0eg%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Instagram</a>
+                <a href="https://www.linkedin.com/in/angelo-russo-0964a8183/" target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors">LinkedIn</a>
+                <a href="https://www.instagram.com/yellowjzard?igsh=MTNmMDNwZ24zYXY0eg%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors">Instagram</a>
             </div>
             <p class="text-sm opacity-50">© 2025 Angelo Russo. All rights reserved.</p>
         </footer>
@@ -297,6 +307,7 @@
     <script>
         // --- STOCK SIMULATOR DATA & LOGIC ---
         const stockData = { red: 8, blue: 2, green: 0 };
+
         function updateStock(color, change) {
             const newVal = stockData[color] + change;
             if (newVal < 0) return;
@@ -405,24 +416,27 @@
         function updateTexts(lang) {
             document.querySelectorAll('[data-key]').forEach(element => {
                 const key = element.getAttribute('data-key');
-                if (LANG_DATA[lang][key]) {
+                const text = LANG_DATA[lang][key];
+
+                if (text) {
                     if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                        element.placeholder = LANG_DATA[lang][key];
-                    } else if (element.tagName === 'BUTTON') {
-                        element.innerText = LANG_DATA[lang][key];
+                        element.placeholder = text;
+                    } else if (element.tagName === 'BUTTON' && element.id !== 'lang-toggle') {
+                        element.querySelector('span').innerText = text;
                     } else {
-                        element.innerText = LANG_DATA[lang][key];
+                        element.innerText = text;
                     }
                 }
             });
 
-            // Aggiorna lo stato dei badge (deve essere rifatto dopo il cambio lingua)
+            langToggleBtn.innerText = lang === 'it' ? 'ENG' : 'ITA';
+            document.documentElement.lang = lang;
+            currentLang = lang;
+            
+            // Aggiorna lo stato dei badge dopo il cambio lingua
             updateStockStatus('red');
             updateStockStatus('blue');
             updateStockStatus('green');
-
-            langToggleBtn.innerText = lang === 'it' ? 'ENG' : 'ITA';
-            document.documentElement.lang = lang;
         }
 
         function updateStockStatus(color) {
@@ -436,17 +450,23 @@
         }
 
         langToggleBtn.addEventListener('click', () => {
-            currentLang = currentLang === 'it' ? 'en' : 'it';
+            const newLang = currentLang === 'it' ? 'en' : 'it';
+            updateTexts(newLang);
+        });
+
+        // Forza la modalità scura/chiara all'avvio in base alle preferenze di sistema
+        document.addEventListener('DOMContentLoaded', () => {
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            document.documentElement.classList.add(systemPrefersDark ? 'dark' : 'light');
+            
+            // Imposta la lingua di default (IT)
+            currentLang = document.documentElement.lang;
             updateTexts(currentLang);
         });
 
-        // Esegui all'avvio per impostare la lingua iniziale corretta
-        document.addEventListener('DOMContentLoaded', () => {
-             // Forza la modalità scura/chiara in base alle preferenze di sistema
-            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            document.documentElement.classList.add(systemPrefersDark ? 'dark' : 'light');
-            updateTexts(currentLang);
-        });
+        // Controlla e applica il tema preferito all'avvio
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.classList.add(systemPrefersDark ? 'dark' : 'light');
     </script>
 
 </body>
