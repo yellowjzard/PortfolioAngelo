@@ -266,14 +266,12 @@
 
             document.getElementById(`sheet-${color}-val`).innerText = newVal;
             
-            // Animazione "Ping" quando cambia
             const displayQty = document.getElementById(`display-${color}-qty`);
             displayQty.innerText = newVal;
             displayQty.classList.remove('ping-update');
             void displayQty.offsetWidth; // Trigger reflow
             displayQty.classList.add('ping-update');
 
-            // Logica Badge
             const statusEl = document.getElementById(`display-${color}-status`);
             
             if (newVal === 0) {
