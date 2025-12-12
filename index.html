@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     
     <script>
-        // Configurazione Tailwind: solo tema scuro
+        // Configurazione Tailwind: Colori del progetto
         tailwind.config = {
             darkMode: 'class',
             theme: {
@@ -16,7 +16,14 @@
                     colors: {
                         background: '#050505',
                         muted: '#a1a1aa',
-                        accent: '#4ade80' 
+                        accent: '#4ade80', // Verde Generale (usato per il form)
+                        
+                        // Colori specifici dei progetti
+                        wrOrange: '#f97316',
+                        neroRed: '#be123c',
+                        cdnRed: '#dc2626',
+                        techBlue: '#3b82f6',
+                        procidaPink: '#ec4899'
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -31,12 +38,54 @@
     
     <style>
         /* Stili fissi per il tema scuro */
-        body { font-family: 'Inter', sans-serif; background-color: #050505; color: white; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #050505; 
+            color: white; 
+            transition: background-color 0.5s, color 0.5s;
+        }
+        
+        .text-white { color: white; }
+        .text-muted { color: #a1a1aa; }
+        
         html { scroll-behavior: smooth; }
         .status-badge { transition: all 0.3s ease; }
         .ping-update { animation: ping 0.5s cubic-bezier(0, 0, 0.2, 1) 1; }
         @keyframes ping {
             75%, 100% { transform: scale(1.1); opacity: 0; }
+        }
+
+        /* --- EFFETTO HOVER CATCHY: GRADIENTE DI COLORE --- */
+        .project-link {
+            position: relative;
+            isolation: isolate; /* Per z-index corretto */
+            transition: border-color 0.3s ease;
+        }
+
+        .project-link::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.5s ease-in-out;
+            pointer-events: none;
+            /* Inizialmente un gradiente generico, il colore specifico sarà dato dalla classe JS */
+            background: radial-gradient(circle at center, var(--hover-color) 0%, transparent 50%);
+            transform: scale(0.1);
+        }
+
+        .project-link:hover::before {
+            opacity: 0.15;
+            transform: scale(1);
+        }
+
+        /* Applica il colore al testo al passaggio del mouse per renderlo più catchy */
+        .project-link:hover .project-title {
+            color: var(--hover-color) !important;
         }
     </style>
 </head>
@@ -168,9 +217,11 @@
             
             <div class="flex flex-col">
                 
-                <a href="white-rabbit.html" class="group block py-12 border-b border-gray-800 hover:border-white transition-colors duration-300">
+                <a href="white-rabbit.html" class="project-link group block py-12 border-b border-gray-800 hover:border-white transition-colors duration-300" 
+                   onmouseover="this.style.setProperty('--hover-color', 'var(--tw-colors-wrOrange)')" 
+                   onmouseout="this.style.setProperty('--hover-color', 'transparent')">
                     <div class="flex justify-between items-center">
-                        <h3 class="text-4xl md:text-7xl font-bold tracking-tighter group-hover:text-orange-500 transition-colors duration-300 text-white">
+                        <h3 class="project-title text-4xl md:text-7xl font-bold tracking-tighter text-white transition-colors duration-300">
                             White Rabbit
                         </h3>
                         <span class="text-muted group-hover:text-white group-hover:translate-x-4 transition-all duration-300">
@@ -180,9 +231,11 @@
                     <p class="text-muted mt-4 text-lg" data-key="wr-tag">AI Strategy & Visual Production</p>
                 </a>
 
-                <a href="nero-espresso.html" class="group block py-12 border-b border-gray-800 hover:border-white transition-colors duration-300">
+                <a href="nero-espresso.html" class="project-link group block py-12 border-b border-gray-800 hover:border-white transition-colors duration-300"
+                   onmouseover="this.style.setProperty('--hover-color', 'var(--tw-colors-neroRed)')" 
+                   onmouseout="this.style.setProperty('--hover-color', 'transparent')">
                     <div class="flex justify-between items-center">
-                        <h3 class="text-4xl md:text-7xl font-bold tracking-tighter group-hover:text-rose-900 transition-colors duration-300 text-white">
+                        <h3 class="project-title text-4xl md:text-7xl font-bold tracking-tighter text-white transition-colors duration-300">
                             Nero Espresso
                         </h3>
                         <span class="text-muted group-hover:text-white group-hover:translate-x-4 transition-all duration-300">
@@ -192,9 +245,11 @@
                     <p class="text-muted mt-4 text-lg" data-key="ne-tag">Branding & Graphic Design</p>
                 </a>
 
-                <a href="cuoredinapoli.html" class="group block py-12 border-b border-gray-800 hover:border-white transition-colors duration-300">
+                <a href="cuoredinapoli.html" class="project-link group block py-12 border-b border-gray-800 hover:border-white transition-colors duration-300"
+                   onmouseover="this.style.setProperty('--hover-color', 'var(--tw-colors-cdnRed)')" 
+                   onmouseout="this.style.setProperty('--hover-color', 'transparent')">
                     <div class="flex justify-between items-center">
-                        <h3 class="text-4xl md:text-7xl font-bold tracking-tighter group-hover:text-red-600 transition-colors duration-300 text-white">
+                        <h3 class="project-title text-4xl md:text-7xl font-bold tracking-tighter text-white transition-colors duration-300">
                             #CuorediNapoli
                         </h3>
                         <span class="text-muted group-hover:text-white group-hover:translate-x-4 transition-all duration-300">
@@ -204,9 +259,11 @@
                     <p class="text-muted mt-4 text-lg" data-key="cdn-tag">Phygital Art Installation</p>
                 </a>
 
-                <a href="noi-umani.html" class="group block py-12 border-b border-gray-800 hover:border-white transition-colors duration-300">
+                <a href="noi-umani.html" class="project-link group block py-12 border-b border-gray-800 hover:border-white transition-colors duration-300"
+                   onmouseover="this.style.setProperty('--hover-color', 'var(--tw-colors-techBlue)')" 
+                   onmouseout="this.style.setProperty('--hover-color', 'transparent')">
                     <div class="flex justify-between items-center">
-                        <h3 class="text-4xl md:text-7xl font-bold tracking-tighter group-hover:text-blue-500 transition-colors duration-300 text-white">
+                        <h3 class="project-title text-4xl md:text-7xl font-bold tracking-tighter text-white transition-colors duration-300">
                             Noi Umani
                         </h3>
                         <span class="text-muted group-hover:text-white group-hover:translate-x-4 transition-all duration-300">
@@ -216,9 +273,11 @@
                     <p class="text-muted mt-4 text-lg" data-key="nu-tag">Science & Art Storytelling</p>
                 </a>
 
-                 <a href="procida.html" class="group block py-12 border-b border-gray-800 hover:border-white transition-colors duration-300">
+                 <a href="procida.html" class="project-link group block py-12 border-b border-gray-800 hover:border-white transition-colors duration-300"
+                    onmouseover="this.style.setProperty('--hover-color', 'var(--tw-colors-procidaPink)')" 
+                    onmouseout="this.style.setProperty('--hover-color', 'transparent')">
                     <div class="flex justify-between items-center">
-                        <h3 class="text-4xl md:text-7xl font-bold tracking-tighter group-hover:text-pink-500 transition-colors duration-300 text-white">
+                        <h3 class="project-title text-4xl md:text-7xl font-bold tracking-tighter text-white transition-colors duration-300">
                             Non io ma noi
                         </h3>
                         <span class="text-muted group-hover:text-white group-hover:translate-x-4 transition-all duration-300">
@@ -311,7 +370,7 @@
              statusEl.innerText = LANG_DATA[currentLang][statusKey];
         }
 
-        // --- LANGUAGE DATA (Mantenuto) ---
+        // --- LANGUAGE DATA ---
         const LANG_DATA = {
             it: {
                 'page-title': 'Angelo Russo - Creative Designer & AI Specialist',
@@ -381,7 +440,7 @@
             }
         };
 
-        // --- LANGUAGE SWITCHER LOGIC (Mantenuta) ---
+        // --- LANGUAGE SWITCHER LOGIC ---
         let currentLang = 'it';
         const langToggleBtn = document.getElementById('lang-toggle');
 
@@ -394,7 +453,7 @@
                     if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
                         element.placeholder = text;
                     } else if (element.tagName === 'BUTTON' && element.id !== 'lang-toggle') {
-                        // Questo caso non dovrebbe attivarsi con l'attuale markup, ma manteniamo la sicurezza.
+                        element.querySelector('span').innerText = text;
                     } else if (element.tagName === 'SPAN' && element.closest('button') && element.closest('button').type === 'submit') {
                         element.innerText = text;
                     } else {
@@ -421,13 +480,7 @@
         // Imposta la lingua di default all'avvio
         document.addEventListener('DOMContentLoaded', () => {
             currentLang = document.documentElement.lang;
-            // Se la lingua di default nel tag html non è 'it', imposta 'en' come base.
-            if (currentLang !== 'it') {
-                updateTexts(currentLang);
-            } else {
-                 // Aggiorna la traduzione e il testo del pulsante alla base
-                 updateTexts('it');
-            }
+            updateTexts(currentLang);
         });
     </script>
 
