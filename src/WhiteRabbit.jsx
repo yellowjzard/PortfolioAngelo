@@ -19,7 +19,7 @@ const ICON_WEB = "Icona_site.webp";
 const SOCIAL_LINKS = {
     web: "https://www.tuosito.com",                 // <--- TODO: Inserisci link Sito
     ig: "https://www.instagram.com/white_rabbit_brussels?igsh=MmduaWZvamlqM3U=",     // <--- TODO: Inserisci link Instagram
-    ln: "https://www.linkedin.com/in/tuoprofilo"    // <--- TODO: Inserisci link LinkedIn
+    ln: "https://www.linkedin.com/company/whiterabbithole/"    // <--- TODO: Inserisci link LinkedIn
 };
 
 // --- DATI FEED INSTAGRAM ---
