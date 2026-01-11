@@ -2,6 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { ShaderGradientCanvas, ShaderGradient } from '@shadergradient/react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'; 
 
+// --- CONFIGURAZIONE LINK (MODIFICA QUI I TUOI SOCIAL) ---
+const SOCIAL_LINKS = {
+    web: "https://www.brusselswhiterabbit.eu/?utm_source=ig&utm_medium=social&utm_content=link_in_bio",
+    ig: "https://www.instagram.com/white_rabbit_brussels?igsh=MmduaWZvamlqM3U=",
+    ln: "https://www.linkedin.com/company/whiterabbithole/"
+};
+
 // --- ASSET ---
 const PROMPT_IMG_RAW = "Reference_Edgar_raw.webp";
 const PROMPT_IMG_GEN = "Reference_Edgar_Gen.webp";
@@ -90,7 +97,7 @@ const Typewriter = ({ text }) => {
 };
 const Reveal = ({ children }) => <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-10%" }} transition={{ duration: 0.8 }}>{children}</motion.div>;
 
-// --- COMPONENTE SOCIAL ICONE AGGIORNATO E SICURO ---
+// --- COMPONENTE SOCIAL ICONE (Corretto per leggere l'oggetto) ---
 const SocialIconOnly = ({ type, link }) => { 
     const renderIcon = () => { 
         if(type === 'web') return <img src={ICON_WEB} alt="Web" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
@@ -100,9 +107,9 @@ const SocialIconOnly = ({ type, link }) => {
     }; 
     return (
         <motion.a 
-            href={link} 
+            href={link} // Usa la prop link passata dal genitore
             target="_blank"
-            rel="noopener noreferrer" // IMPORTANTE PER SICUREZZA E NUOVA SCHEDA
+            rel="noopener noreferrer" 
             className="social-btn-circle" 
             whileHover={{ scale: 1.1, backgroundColor: "#fff" }} 
             whileTap={{ scale: 0.95 }}
@@ -110,7 +117,7 @@ const SocialIconOnly = ({ type, link }) => {
                 padding: '10px', 
                 pointerEvents: 'auto', 
                 position: 'relative', 
-                zIndex: 999 // FORZIAMO LO Z-INDEX
+                zIndex: 999 
             }} 
         >
             {renderIcon()}
@@ -158,8 +165,11 @@ const WhiteRabbit = ({ lang, goBack }) => {
 
     return (
         <div className="app-container">
+            {/* GRADIENTE WATER (Originale) */}
             <div className="gradient-bg" style={{pointerEvents: 'none'}}> 
-                <ShaderGradientCanvas style={{ width: '100%', height: '100%', pointerEvents: 'none' }} pixelDensity={1}><SphereGradient /></ShaderGradientCanvas>
+                <ShaderGradientCanvas style={{ width: '100%', height: '100%', pointerEvents: 'none' }} pixelDensity={1}>
+                    <WaterGradient />
+                </ShaderGradientCanvas>
             </div>
             
             <header><button onClick={goBack} className="lang-btn" style={{position:'fixed', left:'30px', zIndex:100}}>{t['back']}</button></header>
@@ -179,11 +189,11 @@ const WhiteRabbit = ({ lang, goBack }) => {
                                 <p className="bio-highlight" style={{marginBottom:'20px', fontWeight:600, color: '#ff6b42'}}>{t['role-sub']}</p>
                                 <p className="bio-text" style={{marginBottom:'40px'}}>{t['slogan']}</p>
                                 
-                                {/* LINK SOCIAL - HARDCODED PER SICUREZZA */}
+                                {/* LINK SOCIAL: USA L'OGGETTO CONFIGURABILE */}
                                 <div className="social-row" style={{position:'relative', zIndex:50}}>
-                                    <SocialIconOnly type="web" link="https://www.brusselswhiterabbit.eu/?utm_source=ig&utm_medium=social&utm_content=link_in_bio" />
-                                    <SocialIconOnly type="ig" link="https://www.instagram.com/white_rabbit_brussels?igsh=MmduaWZvamlqM3U=" />
-                                    <SocialIconOnly type="ln" link="https://www.linkedin.com/company/whiterabbithole/" />
+                                    <SocialIconOnly type="web" link={SOCIAL_LINKS.web} />
+                                    <SocialIconOnly type="ig" link={SOCIAL_LINKS.ig} />
+                                    <SocialIconOnly type="ln" link={SOCIAL_LINKS.ln} />
                                 </div>
 
                             </div>
@@ -373,52 +383,8 @@ const WhiteRabbit = ({ lang, goBack }) => {
 };
 
 // --- GRADIENTE STANDARD ---
-function SphereGradient() {
-    return (
-        <ShaderGradient
-            animate="on"
-            axesHelper="on"
-            bgColor1="#000000"
-            bgColor2="#000000"
-            brightness={1.5}
-            cAzimuthAngle={60}
-            cDistance={7.1}
-            cPolarAngle={90}
-            cameraZoom={15.3}
-            color1="#ff7a33"
-            color2="#33a0ff"
-            color3="#ffc53d"
-            destination="onCanvas"
-            embedMode="off"
-            envPreset="dawn"
-            format="gif"
-            fov={45}
-            frameRate={10}
-            gizmoHelper="hide"
-            grain="off"
-            lightType="3d"
-            pixelDensity={1}
-            positionX={0}
-            positionY={-0.15}
-            positionZ={0}
-            range="disabled"
-            rangeEnd={40}
-            rangeStart={0}
-            reflection={0.1}
-            rotationX={0}
-            rotationY={0}
-            rotationZ={0}
-            shader="defaults"
-            type="sphere"
-            uAmplitude={1.4}
-            uDensity={1.1}
-            uFrequency={5.5}
-            uSpeed={0.1}
-            uStrength={0.4}
-            uTime={0}
-            wireframe={false}
-        />
-    );
+function WaterGradient() {
+    return <ShaderGradient animate="on" axesHelper="off" bgColor1="#000000" bgColor2="#000000" brightness={1.2} cAzimuthAngle={180} cDistance={2.9} cPolarAngle={120} cameraZoom={1} color1="#ebedff" color2="#f3f2f8" color3="#dbf8ff" destination="onCanvas" embedMode="off" envPreset="city" format="gif" fov={45} frameRate={10} gizmoHelper="hide" grain="off" lightType="3d" pixelDensity={1} positionX={0} positionY={1.8} positionZ={0} range="disabled" rangeEnd={40} rangeStart={0} reflection={0.1} rotationX={0} rotationY={0} rotationZ={-90} shader="defaults" type="waterPlane" uAmplitude={0} uDensity={1} uFrequency={5.5} uSpeed={0.3} uStrength={3} uTime={0.2} wireframe={false} />;
 }
 
 export default WhiteRabbit;
