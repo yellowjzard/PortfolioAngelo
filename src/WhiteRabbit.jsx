@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { ShaderGradientCanvas, ShaderGradient } from '@shadergradient/react';
-// Importa useScroll e useTransform (e AnimatePresence per la modale)
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'; 
 
 // --- ASSET DEL PROMPT GENERATOR ---
@@ -15,15 +14,14 @@ const ICON_IG = "Icona_instagram.webp";
 const ICON_LN = "Icona_linkedin.webp";
 const ICON_WEB = "Icona_site.webp";
 
-// --- LINK SOCIAL (MODIFICA QUI I TUOI LINK) ---
+// --- LINK SOCIAL (CONFIGURATI) ---
 const SOCIAL_LINKS = {
-    web: "https://www.brusselswhiterabbit.eu/?utm_source=ig&utm_medium=social&utm_content=link_in_bio",                 // <--- TODO: Inserisci link Sito
-    ig: "https://www.instagram.com/white_rabbit_brussels?igsh=MmduaWZvamlqM3U=",     // <--- TODO: Inserisci link Instagram
-    ln: "https://www.linkedin.com/company/whiterabbithole/"    // <--- TODO: Inserisci link LinkedIn
+    web: "https://www.brusselswhiterabbit.eu/?utm_source=ig&utm_medium=social&utm_content=link_in_bio",
+    ig: "https://www.instagram.com/white_rabbit_brussels?igsh=MmduaWZvamlqM3U=",
+    ln: "https://www.linkedin.com/company/whiterabbithole/"
 };
 
 // --- DATI FEED INSTAGRAM ---
-// Assicurati che questi file siano nella cartella public
 const IG_CONTENT = [
     { id: 1, type: 'image', thumb: 'ukopost1.jpg', src: 'ukopost1.jpg' },
     { id: 2, type: 'image', thumb: 'ukopost2.jpg', src: 'ukopost2.jpg' },
@@ -43,7 +41,7 @@ const CASE_IMAGES = {
     process_step2: "edit_after.webp",
     process_step3: "sounddesign.webp",
 
-    // URBAN KONG 
+    // URBAN KONG
     uk_step1: "agentai.webp",
     uk_step2: "copertina uko.webp",
     uk_step3: "copertinauko02.webp",
@@ -126,7 +124,7 @@ const WR_LANG = {
         'step-2-t': 'Hybrid Editing & Face Swap', 'step-2-d': 'Traditional timeline editing integrated with Neural Face Swap techniques. I replaced the faces of generated subjects with client-approved target characters, ensuring identity continuity (Character Consistency) in every scene.',
         'step-3-t': 'Sonic Branding', 'step-3-d': 'Immersive sound design and audio synchronization to give emotional depth and realistic weight to the generated clips.',
         
-        // URBAN KONG 
+        // URBAN KONG
         'project-uk': 'URBAN KONG', 
         'project-uk-desc': 'Social Media Growth & Hybrid Content Strategy.',
         'uk-s1-t': 'AI Editorial Brain', 'uk-s1-d': 'Trend analysis and topic cluster ideation via Gemini Agents for an always-on, data-driven editorial calendar.',
@@ -148,6 +146,7 @@ const Typewriter = ({ text }) => {
 };
 const Reveal = ({ children }) => <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-10%" }} transition={{ duration: 0.8 }}>{children}</motion.div>;
 
+// --- COMPONENTE SOCIAL ICONE AGGIORNATO ---
 const SocialIconOnly = ({ type, link }) => { 
     const renderIcon = () => { 
         if(type === 'web') return <img src={ICON_WEB} alt="Web" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
@@ -162,7 +161,7 @@ const SocialIconOnly = ({ type, link }) => {
             className="social-btn-circle" 
             whileHover={{ scale: 1.1, backgroundColor: "#fff" }} 
             whileTap={{ scale: 0.95 }}
-            style={{padding: '10px'}} 
+            style={{padding: '10px', pointerEvents: 'auto', position: 'relative', zIndex: 50}} // FIX Z-INDEX
         >
             {renderIcon()}
         </motion.a>
@@ -209,8 +208,14 @@ const WhiteRabbit = ({ lang, goBack }) => {
 
     return (
         <div className="app-container">
-            <div className="gradient-bg"><ShaderGradientCanvas style={{ width: '100%', height: '100%', pointerEvents: 'none' }} pixelDensity={1}><WaterGradient /></ShaderGradientCanvas></div>
+            <div className="gradient-bg" style={{pointerEvents: 'none'}}> 
+                <ShaderGradientCanvas style={{ width: '100%', height: '100%', pointerEvents: 'none' }} pixelDensity={1}>
+                    <SphereGradient />
+                </ShaderGradientCanvas>
+            </div>
+            
             <header><button onClick={goBack} className="lang-btn" style={{position:'fixed', left:'30px', zIndex:100}}>{t['back']}</button></header>
+            
             <motion.div className="fixed-intro-layer" style={{ opacity: introOpacity, filter: introBlur, scale: introScale }}>
                 <Typewriter text={t['title']} />
             </motion.div>
@@ -226,8 +231,8 @@ const WhiteRabbit = ({ lang, goBack }) => {
                                 <p className="bio-highlight" style={{marginBottom:'20px', fontWeight:600, color: '#ff6b42'}}>{t['role-sub']}</p>
                                 <p className="bio-text" style={{marginBottom:'40px'}}>{t['slogan']}</p>
                                 
-                                {/* --- MODIFICA LINK SOCIAL QUI --- */}
-                                <div className="social-row">
+                                {/* LINK SOCIAL - Z-INDEX FIX */}
+                                <div className="social-row" style={{position:'relative', zIndex:20}}>
                                     <SocialIconOnly type="web" link={SOCIAL_LINKS.web} />
                                     <SocialIconOnly type="ig" link={SOCIAL_LINKS.ig} />
                                     <SocialIconOnly type="ln" link={SOCIAL_LINKS.ln} />
@@ -285,24 +290,13 @@ const WhiteRabbit = ({ lang, goBack }) => {
                     <Reveal>
                         <div className="section-label" style={{textAlign:'center', width:'100%'}}>{t['project-uk']}</div>
                         <p className="section-desc" style={{textAlign:'center'}}>{t['project-uk-desc']}</p>
-                        
                         <div className="process-pipeline">
-                            <div className="process-step">
-                                <div className="process-thumb-container"><img src={CASE_IMAGES.uk_step1} alt="Plan" className="process-thumb" /><span className="step-badge">01</span></div>
-                                <h4>{t['uk-s1-t']}</h4><p>{t['uk-s1-d']}</p>
-                            </div>
+                            <div className="process-step"><div className="process-thumb-container"><img src={CASE_IMAGES.uk_step1} alt="Plan" className="process-thumb" /><span className="step-badge">01</span></div><h4>{t['uk-s1-t']}</h4><p>{t['uk-s1-d']}</p></div>
                             <div className="process-arrow">→</div>
-                            <div className="process-step">
-                                <div className="process-thumb-container"><img src={CASE_IMAGES.uk_step2} alt="Create" className="process-thumb" /><span className="step-badge">02</span></div>
-                                <h4>{t['uk-s2-t']}</h4><p>{t['uk-s2-d']}</p>
-                            </div>
+                            <div className="process-step"><div className="process-thumb-container"><img src={CASE_IMAGES.uk_step2} alt="Create" className="process-thumb" /><span className="step-badge">02</span></div><h4>{t['uk-s2-t']}</h4><p>{t['uk-s2-d']}</p></div>
                             <div className="process-arrow">→</div>
-                            <div className="process-step">
-                                <div className="process-thumb-container"><img src={CASE_IMAGES.uk_step3} alt="Manage" className="process-thumb" /><span className="step-badge">03</span></div>
-                                <h4>{t['uk-s3-t']}</h4><p>{t['uk-s3-d']}</p>
-                            </div>
+                            <div className="process-step"><div className="process-thumb-container"><img src={CASE_IMAGES.uk_step3} alt="Manage" className="process-thumb" /><span className="step-badge">03</span></div><h4>{t['uk-s3-t']}</h4><p>{t['uk-s3-d']}</p></div>
                         </div>
-                        
                         <div className="uk-grid-showcase">
                             <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
                                 <div className="ig-phone-mockup">
@@ -430,9 +424,53 @@ const WhiteRabbit = ({ lang, goBack }) => {
     );
 };
 
-// --- GRADIENTE STANDARD ---
-function WaterGradient() {
-    return <ShaderGradient animate="on" axesHelper="off" bgColor1="#000000" bgColor2="#000000" brightness={1.2} cAzimuthAngle={180} cDistance={2.9} cPolarAngle={120} cameraZoom={1} color1="#ebedff" color2="#f3f2f8" color3="#dbf8ff" destination="onCanvas" embedMode="off" envPreset="city" format="gif" fov={45} frameRate={10} gizmoHelper="hide" grain="off" lightType="3d" pixelDensity={1} positionX={0} positionY={1.8} positionZ={0} range="disabled" rangeEnd={40} rangeStart={0} reflection={0.1} rotationX={0} rotationY={0} rotationZ={-90} shader="defaults" type="waterPlane" uAmplitude={0} uDensity={1} uFrequency={5.5} uSpeed={0.3} uStrength={3} uTime={0.2} wireframe={false} />;
+// --- GRADIENTE SPHERE ---
+function SphereGradient() {
+    return (
+        <ShaderGradient
+            animate="on"
+            axesHelper="off"
+            bgColor1="#000000"
+            bgColor2="#000000"
+            brightness={1.5}
+            cAzimuthAngle={60}
+            cDistance={7.1}
+            cPolarAngle={90}
+            cameraZoom={15.3}
+            color1="#ff7a33"
+            color2="#33a0ff"
+            color3="#ffc53d"
+            destination="onCanvas"
+            embedMode="off"
+            envPreset="dawn"
+            format="gif"
+            fov={45}
+            frameRate={10}
+            gizmoHelper="hide"
+            grain="off"
+            lightType="3d"
+            pixelDensity={1}
+            positionX={0}
+            positionY={-0.15}
+            positionZ={0}
+            range="disabled"
+            rangeEnd={40}
+            rangeStart={0}
+            reflection={0.1}
+            rotationX={0}
+            rotationY={0}
+            rotationZ={0}
+            shader="defaults"
+            type="sphere"
+            uAmplitude={1.4}
+            uDensity={1.1}
+            uFrequency={5.5}
+            uSpeed={0.1}
+            uStrength={0.4}
+            uTime={0}
+            wireframe={false}
+        />
+    );
 }
 
 export default WhiteRabbit;
