@@ -2,24 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { ShaderGradientCanvas, ShaderGradient } from '@shadergradient/react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'; 
 
-// --- ASSET DEL PROMPT GENERATOR ---
+// --- ASSET ---
 const PROMPT_IMG_RAW = "Reference_Edgar_raw.webp";
 const PROMPT_IMG_GEN = "Reference_Edgar_Gen.webp";
-
-// --- FILE VIDEO ---
 const WR_VIDEO = "WR-RP-Endurance.mp4"; 
 
 // --- ICONE SOCIAL ---
 const ICON_IG = "Icona_instagram.webp";
 const ICON_LN = "Icona_linkedin.webp";
 const ICON_WEB = "Icona_site.webp";
-
-// --- LINK SOCIAL (CONFIGURATI) ---
-const SOCIAL_LINKS = {
-    web: "https://www.brusselswhiterabbit.eu/?utm_source=ig&utm_medium=social&utm_content=link_in_bio",
-    ig: "https://www.instagram.com/white_rabbit_brussels?igsh=MmduaWZvamlqM3U=",
-    ln: "https://www.linkedin.com/company/whiterabbithole/"
-};
 
 // --- DATI FEED INSTAGRAM ---
 const IG_CONTENT = [
@@ -35,29 +26,19 @@ const IG_CONTENT = [
 const CASE_IMAGES = {
     challenge_thumb: "log_whiterabbit.webp", 
     solution_thumb: "icon_lasoluzione.webp",
-
-    // ENDURANCE
     process_step1: "Gen_imageandvideo.webp",
     process_step2: "edit_after.webp",
     process_step3: "sounddesign.webp",
-
-    // URBAN KONG
     uk_step1: "agentai.webp",
     uk_step2: "copertina uko.webp",
     uk_step3: "copertinauko02.webp",
-    
-    // NUOVA FOTO PROFILO UKO
     uk_profile_pic: "uko.logo.jpg", 
-
-    // EU PROJECT
     eu_step1: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=500&auto=format&fit=crop", 
     eu_step2: "https://images.unsplash.com/photo-1626785774573-4b799312c95d?q=80&w=500&auto=format&fit=crop", 
     eu_step3: "https://images.unsplash.com/photo-1586717791821-3f44a5638d48?q=80&w=500&auto=format&fit=crop", 
     eu_slide1: "https://images.unsplash.com/photo-1541462608143-67571c6738dd?q=80&w=800&auto=format&fit=crop",
     eu_slide2: "https://images.unsplash.com/photo-1586717791821-3f44a5638d48?q=80&w=800&auto=format&fit=crop",
     eu_slide3: "https://images.unsplash.com/photo-1626785774573-4b799312c95d?q=80&w=800&auto=format&fit=crop",
-
-    // CREDITS AVATAR
     collab_avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop" 
 };
 
@@ -70,48 +51,19 @@ const WR_LANG = {
         'slogan': 'Ingegnerizzare la creatività: flussi video neurali e Agenti AI.', 
         'prompt-text': '/imagine prompt: editorial photography, futuristic fashion, cinematic lighting --v 6.0',
         'btn-generate': 'GENERA', 'btn-done': 'COMPLETATO',
-        
-        'challenge-t': 'LA SFIDA', 
-        'challenge-d': 'L’agenzia necessitava di un salto evolutivo nella produzione video per campagne internazionali. La sfida era superare i limiti di tempo e budget del rendering tradizionale, mantenendo una qualità cinematografica e un controllo autoriale preciso.', 
-        
-        'solution-t': 'LA SOLUZIONE', 
-        'solution-d': 'Ho progettato una pipeline "AI-Augmented" proprietaria. Ho integrato Higgsfield (sfruttando modelli come Nano, Banana Pro e Veo) per la generazione video controllata, e sviluppato Agenti Gemini per automatizzare la fase di scripting e concept. Da giorni di lavoro a ore di generazione.', 
-        
-        'results-t': 'IMPATTO & RISULTATI', 
-        'res-1': 'Time-to-Market: -60%', 
-        'res-2': 'Workflow Ibrido', 
-        'res-3': 'Agenti Autonomi', 
-        'res-4': 'AI Pioneer Status', 
-
-        // --- ENDURANCE ---
-        'project-endurance': 'THE ENDURANCE PROJECT', 
-        'project-desc': 'Corporate Storytelling Epico: un tributo alla resilienza del team ispirato alla storica spedizione del 1914. I dipendenti diventano i protagonisti cinematografici dell\'impresa grazie all\'integrazione di AI Face Swap.', 
-        'step-1-t': 'AI World Building', 
-        'step-1-d': 'Definizione dell’estetica tramite prompting avanzato e generazione di style-frames coerenti per il setting delle scene.', 
-        'step-2-t': 'Hybrid Editing & Face Swap', 
-        'step-2-d': 'Montaggio tradizionale su timeline integrato con tecniche di Neural Face Swap. Ho sostituito i volti dei soggetti generati con i character target approvati dal cliente, garantendo la continuità dell\'identità (Character Consistency) in ogni scena.', 
-        'step-3-t': 'Sonic Branding', 
-        'step-3-d': 'Sound design immersivo e sincronizzazione audio per dare profondità emotiva e peso realistico alle clip generate.', 
-
-        // --- URBAN KONG ---
-        'project-uk': 'URBAN KONG', 
-        'project-uk-desc': 'Social Media Growth & Hybrid Content Strategy.',
-        
-        'uk-s1-t': 'AI Editorial Brain', 
-        'uk-s1-d': 'Analisi trend e ideazione topic cluster tramite Agenti Gemini per un piano editoriale data-driven sempre aggiornato.',
-        
-        'uk-s2-t': 'Reels & Motion', 
-        'uk-s2-d': 'Produzione video short-form. Editing dinamico, sound design e hook visivi per massimizzare la retention dell\'utente.',
-        
-        'uk-s3-t': 'Brand Aesthetics', 
-        'uk-s3-d': 'Cura maniacale del feed e gestione della community per trasformare l\'identità visiva in engagement reale.',
-        
-        'ig-btn-label': 'VISITA @URBANKONG_', 
-
-        'project-eu': 'PANAFGEO / EU BRANDING', 'project-eu-desc': 'Visual Identity istituzionale conforme alle EU Guidelines.',
-        'eu-s1-t': 'EU Guidelines', 'eu-s1-d': 'Analisi dei gateway normativi e visivi dell\'Unione Europea.',
-        'eu-s2-t': 'Editorial Design', 'eu-s2-d': 'Impaginazione brochure rispettando griglie istituzionali.',
-        'eu-s3-t': 'Brand Application', 'eu-s3-d': 'Declinazione su supporti fisici (Rollup, Stand, Gadget).',
+        'challenge-t': 'LA SFIDA', 'challenge-d': 'L’agenzia necessitava di un salto evolutivo nella produzione video per campagne internazionali. La sfida era superare i limiti di tempo e budget del rendering tradizionale, mantenendo una qualità cinematografica e un controllo autoriale preciso.', 
+        'solution-t': 'LA SOLUZIONE', 'solution-d': 'Ho progettato una pipeline "AI-Augmented" proprietaria. Ho integrato Higgsfield (sfruttando modelli come Nano, Banana Pro e Veo) per la generazione video controllata, e sviluppato Agenti Gemini per automatizzare la fase di scripting e concept. Da giorni di lavoro a ore di generazione.', 
+        'results-t': 'IMPATTO & RISULTATI', 'res-1': 'Time-to-Market: -60%', 'res-2': 'Workflow Ibrido', 'res-3': 'Agenti Autonomi', 'res-4': 'AI Pioneer Status', 
+        'project-endurance': 'THE ENDURANCE PROJECT', 'project-desc': 'Corporate Storytelling Epico: un tributo alla resilienza del team ispirato alla storica spedizione del 1914. I dipendenti diventano i protagonisti cinematografici dell\'impresa grazie all\'integrazione di AI Face Swap.', 
+        'step-1-t': 'AI World Building', 'step-1-d': 'Definizione dell’estetica tramite prompting avanzato e generazione di style-frames coerenti per il setting delle scene.', 
+        'step-2-t': 'Hybrid Editing & Face Swap', 'step-2-d': 'Montaggio tradizionale su timeline integrato con tecniche di Neural Face Swap. Ho sostituito i volti dei soggetti generati con i character target approvati dal cliente, garantendo la continuità dell\'identità (Character Consistency) in ogni scena.', 
+        'step-3-t': 'Sonic Branding', 'step-3-d': 'Sound design immersivo e sincronizzazione audio per dare profondità emotiva e peso realistico alle clip generate.', 
+        'project-uk': 'URBAN KONG', 'project-uk-desc': 'Social Media Growth & Hybrid Content Strategy.',
+        'uk-s1-t': 'AI Editorial Brain', 'uk-s1-d': 'Analisi trend e ideazione topic cluster tramite Agenti Gemini per un piano editoriale data-driven sempre aggiornato.',
+        'uk-s2-t': 'Reels & Motion', 'uk-s2-d': 'Produzione video short-form. Editing dinamico, sound design e hook visivi per massimizzare la retention dell\'utente.',
+        'uk-s3-t': 'Brand Aesthetics', 'uk-s3-d': 'Cura maniacale del feed e gestione della community per trasformare l\'identità visiva in engagement reale.',
+        'ig-btn-label': 'VISITA @URBANKONG_',
+        'project-eu': 'PANAFGEO / EU BRANDING', 'project-eu-desc': 'Visual Identity istituzionale conforme alle EU Guidelines.', 'eu-s1-t': 'EU Guidelines', 'eu-s1-d': 'Analisi dei gateway normativi e visivi dell\'Unione Europea.', 'eu-s2-t': 'Editorial Design', 'eu-s2-d': 'Impaginazione brochure rispettando griglie istituzionali.', 'eu-s3-t': 'Brand Application', 'eu-s3-d': 'Declinazione su supporti fisici (Rollup, Stand, Gadget).',
         'credits-title': 'CREDITS & TEAM', 'collab-name': 'Gennaro Grieco', 'collab-role': 'Co-Designer / Collaborator'
     },
     en: {
@@ -123,15 +75,7 @@ const WR_LANG = {
         'step-1-t': 'AI World Building', 'step-1-d': 'Defining aesthetics through advanced prompting and generating coherent style-frames for scene setting.',
         'step-2-t': 'Hybrid Editing & Face Swap', 'step-2-d': 'Traditional timeline editing integrated with Neural Face Swap techniques. I replaced the faces of generated subjects with client-approved target characters, ensuring identity continuity (Character Consistency) in every scene.',
         'step-3-t': 'Sonic Branding', 'step-3-d': 'Immersive sound design and audio synchronization to give emotional depth and realistic weight to the generated clips.',
-        
-        // URBAN KONG
-        'project-uk': 'URBAN KONG', 
-        'project-uk-desc': 'Social Media Growth & Hybrid Content Strategy.',
-        'uk-s1-t': 'AI Editorial Brain', 'uk-s1-d': 'Trend analysis and topic cluster ideation via Gemini Agents for an always-on, data-driven editorial calendar.',
-        'uk-s2-t': 'Reels & Motion', 'uk-s2-d': 'Short-form video production. Dynamic editing, sound design, and visual hooks to maximize user retention.',
-        'uk-s3-t': 'Brand Aesthetics', 'uk-s3-d': 'Meticulous feed curation and community management to turn visual identity into real engagement.',
-        'ig-btn-label': 'VISIT @URBANKONG_',
-        
+        'project-uk': 'URBAN KONG', 'project-uk-desc': 'Social Media Growth & Hybrid Content Strategy.', 'uk-s1-t': 'AI Editorial Brain', 'uk-s1-d': 'Trend analysis and topic cluster ideation via Gemini Agents for an always-on, data-driven editorial calendar.', 'uk-s2-t': 'Reels & Motion', 'uk-s2-d': 'Short-form video production. Dynamic editing, sound design, and visual hooks to maximize user retention.', 'uk-s3-t': 'Brand Aesthetics', 'uk-s3-d': 'Meticulous feed curation and community management to turn visual identity into real engagement.', 'ig-btn-label': 'VISIT @URBANKONG_',
         'project-eu': 'PANAFGEO / EU BRANDING', 'project-eu-desc': 'Institutional Visual Identity compliant with EU Guidelines.', 'eu-s1-t': 'EU Guidelines', 'eu-s1-d': 'Analysis of European Union visual and regulatory gateways.', 'eu-s2-t': 'Editorial Design', 'eu-s2-d': 'Brochure layout respecting institutional grids.', 'eu-s3-t': 'Brand Application', 'eu-s3-d': 'Adaptation on physical supports (Rollups, Stands).',
         'credits-title': 'CREDITS & TEAM', 'collab-name': 'Gennaro Grieco', 'collab-role': 'Co-Designer / Collaborator'
     }
@@ -146,7 +90,7 @@ const Typewriter = ({ text }) => {
 };
 const Reveal = ({ children }) => <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-10%" }} transition={{ duration: 0.8 }}>{children}</motion.div>;
 
-// --- COMPONENTE SOCIAL ICONE AGGIORNATO ---
+// --- COMPONENTE SOCIAL ICONE AGGIORNATO E SICURO ---
 const SocialIconOnly = ({ type, link }) => { 
     const renderIcon = () => { 
         if(type === 'web') return <img src={ICON_WEB} alt="Web" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
@@ -157,11 +101,17 @@ const SocialIconOnly = ({ type, link }) => {
     return (
         <motion.a 
             href={link} 
-            target="_blank" 
+            target="_blank"
+            rel="noopener noreferrer" // IMPORTANTE PER SICUREZZA E NUOVA SCHEDA
             className="social-btn-circle" 
             whileHover={{ scale: 1.1, backgroundColor: "#fff" }} 
             whileTap={{ scale: 0.95 }}
-            style={{padding: '10px', pointerEvents: 'auto', position: 'relative', zIndex: 50}} // FIX Z-INDEX
+            style={{
+                padding: '10px', 
+                pointerEvents: 'auto', 
+                position: 'relative', 
+                zIndex: 999 // FORZIAMO LO Z-INDEX
+            }} 
         >
             {renderIcon()}
         </motion.a>
@@ -209,9 +159,7 @@ const WhiteRabbit = ({ lang, goBack }) => {
     return (
         <div className="app-container">
             <div className="gradient-bg" style={{pointerEvents: 'none'}}> 
-                <ShaderGradientCanvas style={{ width: '100%', height: '100%', pointerEvents: 'none' }} pixelDensity={1}>
-                    <SphereGradient />
-                </ShaderGradientCanvas>
+                <ShaderGradientCanvas style={{ width: '100%', height: '100%', pointerEvents: 'none' }} pixelDensity={1}><SphereGradient /></ShaderGradientCanvas>
             </div>
             
             <header><button onClick={goBack} className="lang-btn" style={{position:'fixed', left:'30px', zIndex:100}}>{t['back']}</button></header>
@@ -231,11 +179,11 @@ const WhiteRabbit = ({ lang, goBack }) => {
                                 <p className="bio-highlight" style={{marginBottom:'20px', fontWeight:600, color: '#ff6b42'}}>{t['role-sub']}</p>
                                 <p className="bio-text" style={{marginBottom:'40px'}}>{t['slogan']}</p>
                                 
-                                {/* LINK SOCIAL - Z-INDEX FIX */}
-                                <div className="social-row" style={{position:'relative', zIndex:20}}>
-                                    <SocialIconOnly type="web" link={SOCIAL_LINKS.web} />
-                                    <SocialIconOnly type="ig" link={SOCIAL_LINKS.ig} />
-                                    <SocialIconOnly type="ln" link={SOCIAL_LINKS.ln} />
+                                {/* LINK SOCIAL - HARDCODED PER SICUREZZA */}
+                                <div className="social-row" style={{position:'relative', zIndex:50}}>
+                                    <SocialIconOnly type="web" link="https://www.brusselswhiterabbit.eu/?utm_source=ig&utm_medium=social&utm_content=link_in_bio" />
+                                    <SocialIconOnly type="ig" link="https://www.instagram.com/white_rabbit_brussels?igsh=MmduaWZvamlqM3U=" />
+                                    <SocialIconOnly type="ln" link="https://www.linkedin.com/company/whiterabbithole/" />
                                 </div>
 
                             </div>
@@ -424,12 +372,12 @@ const WhiteRabbit = ({ lang, goBack }) => {
     );
 };
 
-// --- GRADIENTE SPHERE ---
+// --- GRADIENTE STANDARD ---
 function SphereGradient() {
     return (
         <ShaderGradient
             animate="on"
-            axesHelper="off"
+            axesHelper="on"
             bgColor1="#000000"
             bgColor2="#000000"
             brightness={1.5}
