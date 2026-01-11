@@ -1,27 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { ShaderGradientCanvas, ShaderGradient } from '@shadergradient/react';
-// Importiamo AnimatePresence per la modale
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'; 
 
-// --- ASSET IMMAGINI (File nella cartella public) ---
-// Sostituisci questi nomi con i tuoi file reali se diversi
+// --- CONFIGURAZIONE LINK (MODIFICA QUI I TUOI SOCIAL) ---
+const SOCIAL_LINKS = {
+    ig: "https://www.instagram.com/neroespresso_official?igsh=bHR6MzY1d3A4ZThq", // <--- LINK INSTAGRAM
+    ln: "https://www.linkedin.com/company/neroespresso/", // <--- LINK LINKEDIN
+    web: "https://www.neroespresso.com/" // <--- SITO WEB
+};
+
+// --- ASSET IMMAGINI ---
 const NE_ASSETS = {
-    // Prototipazione (Gallery orizzontale)
     proto1: "NE-prerender-insegna.png", 
     proto2: "prototipo-neroespresso-1.png", 
     proto3: "prototipo-neroespresso-4.png",
     proto4: "prototipo-neroespresso-3.png", 
-    
-    // Foto Profilo Instagram
-    profile_pic: "nerologo.jpg" // <--- Assicurati di avere questo file
+    profile_pic: "nero_logo.jpg" 
 };
 
-// --- DATI FEED INSTAGRAM (DINAMICI) ---
+// --- ICONE SOCIAL ---
+const ICON_IG = "Icona_instagram.webp";
+const ICON_LN = "Icona_linkedin.webp";
+const ICON_WEB = "Icona_site.webp";
+
+// --- DATI FEED INSTAGRAM ---
 const IG_CONTENT = [
     { id: 1, type: 'video', thumb: 'nero1.png', src: 'nero1.mp4' },
     { id: 2, type: 'image', thumb: 'nero2.jpg', src: 'nero2.jpg' },
     { id: 3, type: 'image', thumb: 'nero3.jpg', src: 'nero3.jpg' },
-    { id: 4, type: 'image', thumb: 'nero4.jpg', src: 'nero4.jpg' }, // Se è un video, cambia type in 'video'
+    { id: 4, type: 'image', thumb: 'nero4.jpg', src: 'nero4.jpg' }, 
     { id: 5, type: 'image', thumb: 'nero5.jpg', src: 'nero5.jpg' },
     { id: 6, type: 'image', thumb: 'nero6.jpg', src: 'nero6.jpg' },
 ];
@@ -40,7 +47,7 @@ const NE_LANG = {
         
         'feed-title': 'SOCIAL FEED',
         'feed-desc': 'Cura del feed Instagram per trasmettere l\'aroma e l\'identità premium del brand.',
-        'ig-btn-label': 'VISITA @NEROESPRESSO_OFFICIAL',  // <--- Link corretto
+        'ig-btn-label': 'VISITA @NEROESPRESSO_OFFICIAL', 
 
         'proto-title': 'PROTOTIPAZIONE STRATEGICA',
         'proto-desc': 'Sviluppo di concept e schede tecniche dettagliate per supportare la visione di prodotto.'
@@ -67,11 +74,37 @@ const Typewriter = ({ text }) => {
 };
 const Reveal = ({ children }) => <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-10%" }} transition={{ duration: 0.8 }}>{children}</motion.div>;
 
+// --- COMPONENTE SOCIAL ICONE ---
+const SocialIconOnly = ({ type, link }) => { 
+    const renderIcon = () => { 
+        if(type === 'web') return <img src={ICON_WEB} alt="Web" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
+        if(type === 'ig') return <img src={ICON_IG} alt="Instagram" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
+        if(type === 'ln') return <img src={ICON_LN} alt="LinkedIn" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
+        return null; 
+    }; 
+    
+    if (!link) return null;
+
+    return (
+        <motion.a 
+            href={link} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="social-btn-circle" 
+            whileHover={{ scale: 1.1, backgroundColor: "#fff" }} 
+            whileTap={{ scale: 0.95 }}
+            style={{padding: '10px', pointerEvents: 'auto', position: 'relative', zIndex: 50, margin: '0 5px'}} 
+        >
+            {renderIcon()}
+        </motion.a>
+    ); 
+};
+
 // --- MAIN COMPONENT ---
 const NeroEspresso = ({ lang, goBack }) => {
     const t = NE_LANG[lang];
     const { scrollY } = useScroll();
-    const [activePost, setActivePost] = useState(null); // STATO MODALE
+    const [activePost, setActivePost] = useState(null); 
 
     const introOpacity = useTransform(scrollY, [0, 400], [1, 0]);
     const introBlur = useTransform(scrollY, [0, 400], ["blur(0px)", "blur(20px)"]);
@@ -81,7 +114,14 @@ const NeroEspresso = ({ lang, goBack }) => {
 
     return (
         <div className="app-container">
-            <div className="gradient-bg"><ShaderGradientCanvas style={{ width: '100%', height: '100%', pointerEvents: 'none' }} pixelDensity={1}><WaterGradient /></ShaderGradientCanvas></div>
+            
+            {/* SFONDO GRADIENTE CORRETTO */}
+            <div className="gradient-bg" style={{pointerEvents: 'none'}}>
+                <ShaderGradientCanvas style={{ width: '100%', height: '100%', pointerEvents: 'none' }} pixelDensity={1}>
+                    <WaterGradient />
+                </ShaderGradientCanvas>
+            </div>
+            
             <header><button onClick={goBack} className="lang-btn" style={{position:'fixed', left:'30px', zIndex:100}}>{t['back']}</button></header>
 
             {/* INTRO */}
@@ -94,8 +134,26 @@ const NeroEspresso = ({ lang, goBack }) => {
                 {/* HERO & STRATEGY */}
                 <section className="glass-section">
                     <Reveal>
-                        <h2 className="bio-headline" style={{textAlign:'center', fontSize: 'clamp(1.5rem, 3vw, 2.5rem)'}}>{t['role-title']}</h2>
-                        <p className="bio-text" style={{textAlign:'center', margin: '0 auto 60px auto'}}>{t['slogan']}</p>
+                        <h2 className="bio-headline" style={{textAlign:'center', fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', marginBottom: '15px'}}>{t['role-title']}</h2>
+                        
+                        {/* SLOGAN RESPONSIVE E CENTRATO */}
+                        <p className="bio-text" style={{
+                            textAlign: 'center',       // Allinea il testo al centro
+                            margin: '0 auto 40px auto', // Centra il blocco nella pagina e dà spazio sotto
+                            maxWidth: '700px',         // Su PC non diventa più largo di così (evita righe lunghissime)
+                            width: '90%',              // SU MOBILE occupa il 90% dello schermo (lascia margini ai lati)
+                            lineHeight: '1.6',         // Migliora la lettura
+                            fontSize: '1.1rem'         // Leggermente più grande per impatto
+                        }}>
+                            {t['slogan']}
+                        </p>
+
+                        {/* SOCIAL ICONS */}
+                        <div style={{display: 'flex', justifyContent: 'center', marginBottom: '60px', position: 'relative', zIndex: 50}}>
+                            <SocialIconOnly type="web" link={SOCIAL_LINKS.web} />
+                            <SocialIconOnly type="ig" link={SOCIAL_LINKS.ig} />
+                            <SocialIconOnly type="ln" link={SOCIAL_LINKS.ln} />
+                        </div>
 
                         <div className="bento-grid">
                             <div className="bento-card solution-card"> 
@@ -135,7 +193,6 @@ const NeroEspresso = ({ lang, goBack }) => {
                                                 whileHover={{ filter: "brightness(0.8)" }}
                                                 onClick={() => setActivePost(post)}
                                             >
-                                                {/* Fallback per immagini mancanti */}
                                                 <img 
                                                     src={post.thumb} 
                                                     alt="Post" 
@@ -150,10 +207,11 @@ const NeroEspresso = ({ lang, goBack }) => {
                                     </div>
                                 </div>
                                 
-                                {/* Link Esterno */}
+                                {/* Link Esterno Aggiornato */}
                                 <motion.a 
-                                    href="https://www.instagram.com/neroespresso_official?igsh=bHR6MzY1d3A4ZThq" 
+                                    href={SOCIAL_LINKS.ig} 
                                     target="_blank" 
+                                    rel="noopener noreferrer"
                                     className="ig-visit-btn"
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
@@ -171,7 +229,7 @@ const NeroEspresso = ({ lang, goBack }) => {
                         <div className="section-label">{t['proto-title']}</div>
                         <p className="section-desc">{t['proto-desc']}</p>
                         <div className="horizontal-gallery-track">
-                            {[NE_ASSETS.proto1, NE_ASSETS.proto2, NE_ASSETS.proto3,NE_ASSETS.proto4].map((img, i) => (
+                            {[NE_ASSETS.proto1, NE_ASSETS.proto2, NE_ASSETS.proto3, NE_ASSETS.proto4].map((img, i) => (
                                 <div key={i} className="gallery-item-proto">
                                     <img src={img} alt="Prototype" />
                                     <span className="item-badge">TECH SPEC {i+1}</span>
@@ -248,8 +306,53 @@ const NeroEspresso = ({ lang, goBack }) => {
     );
 };
 
+// --- GRADIENTE WATER (Corretto) ---
 function WaterGradient() {
-    return <ShaderGradient animate="on" axesHelper="off" bgColor1="#000000" bgColor2="#000000" brightness={1.2} cAzimuthAngle={180} cDistance={2.9} cPolarAngle={120} cameraZoom={1} color1="#ebedff" color2="#f3f2f8" color3="#dbf8ff" destination="onCanvas" embedMode="off" envPreset="city" format="gif" fov={45} frameRate={10} gizmoHelper="hide" grain="off" lightType="3d" pixelDensity={1} positionX={0} positionY={1.8} positionZ={0} range="disabled" rangeEnd={40} rangeStart={0} reflection={0.1} rotationX={0} rotationY={0} rotationZ={-90} shader="defaults" type="waterPlane" uAmplitude={0} uDensity={1} uFrequency={5.5} uSpeed={0.3} uStrength={3} uTime={0.2} wireframe={false} />;
+    return (
+        <ShaderGradient 
+            animate="on" 
+            axesHelper="off" 
+            bgColor1="#000000" 
+            bgColor2="#000000" 
+            brightness={1.2} 
+            cAzimuthAngle={180} 
+            cDistance={2.9} 
+            cPolarAngle={120} 
+            cameraZoom={1} 
+            color1="#ebedff" 
+            color2="#f3f2f8" 
+            color3="#dbf8ff" 
+            destination="onCanvas" 
+            embedMode="off" 
+            envPreset="city" 
+            format="gif" 
+            fov={45} 
+            frameRate={10} 
+            gizmoHelper="hide" 
+            grain="off" 
+            lightType="3d" 
+            pixelDensity={1} 
+            positionX={0} 
+            positionY={1.8} 
+            positionZ={0} 
+            range="disabled" 
+            rangeEnd={40} 
+            rangeStart={0} 
+            reflection={0.1} 
+            rotationX={0} 
+            rotationY={0} 
+            rotationZ={-90} 
+            shader="defaults" 
+            type="waterPlane" 
+            uAmplitude={0} 
+            uDensity={1} 
+            uFrequency={5.5} 
+            uSpeed={0.3} 
+            uStrength={3} 
+            uTime={0.2} 
+            wireframe={false} 
+        />
+    );
 }
 
 export default NeroEspresso;
