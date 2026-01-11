@@ -1,0 +1,34 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Il robot si attiva quando modifichi il ramo main
+
+permissions:
+  contents: write # Diamo il permesso al robot di scrivere sul sito
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v4
+
+      - name: Install Node.js 🔧
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Dependencies 📦
+        run: npm ci
+
+      - name: Build 🏗️
+        # Modifica la base url nel file vite.config.js se necessario, ma qui lanciamo la build
+        run: npm run build
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist # La cartella che viene creata dalla build
+          branch: gh-pages # Il ramo dove sta il sito online
