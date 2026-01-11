@@ -15,13 +15,20 @@ const ICON_IG = "Icona_instagram.webp";
 const ICON_LN = "Icona_linkedin.webp";
 const ICON_WEB = "Icona_site.webp";
 
+// --- LINK SOCIAL (MODIFICA QUI I TUOI LINK) ---
+const SOCIAL_LINKS = {
+    web: "https://www.tuosito.com",                 // <--- TODO: Inserisci link Sito
+    ig: "https://www.instagram.com/tuoprofilo",     // <--- TODO: Inserisci link Instagram
+    ln: "https://www.linkedin.com/in/tuoprofilo"    // <--- TODO: Inserisci link LinkedIn
+};
+
 // --- DATI FEED INSTAGRAM ---
 // Assicurati che questi file siano nella cartella public
 const IG_CONTENT = [
     { id: 1, type: 'image', thumb: 'ukopost1.jpg', src: 'ukopost1.jpg' },
     { id: 2, type: 'image', thumb: 'ukopost2.jpg', src: 'ukopost2.jpg' },
     { id: 3, type: 'image', thumb: 'ukopost3.jpg', src: 'ukopost3.jpg' },
-    { id: 4, type: 'video', thumb: 'ukopost4.png', src: 'ukopost4.mp4' }, // Assicurati di avere la thumb .png e il video .mp4
+    { id: 4, type: 'video', thumb: 'ukopost4.png', src: 'ukopost4.mp4' }, 
     { id: 5, type: 'image', thumb: 'ukopost5.jpg', src: 'ukopost5.jpg' },
     { id: 6, type: 'image', thumb: 'ukopost6.jpg', src: 'ukopost6.jpg' },
 ];
@@ -36,13 +43,13 @@ const CASE_IMAGES = {
     process_step2: "edit_after.webp",
     process_step3: "sounddesign.webp",
 
-    // URBAN KONG (Immagini corrette)
+    // URBAN KONG 
     uk_step1: "agentai.webp",
     uk_step2: "copertina uko.webp",
     uk_step3: "copertinauko02.webp",
     
     // NUOVA FOTO PROFILO UKO
-    uk_profile_pic: "uko.logo.jpg", // <--- NUOVA FOTO AGGIUNTA QUI
+    uk_profile_pic: "uko.logo.jpg", 
 
     // EU PROJECT
     eu_step1: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=500&auto=format&fit=crop", 
@@ -88,7 +95,7 @@ const WR_LANG = {
         'step-3-t': 'Sonic Branding', 
         'step-3-d': 'Sound design immersivo e sincronizzazione audio per dare profondità emotiva e peso realistico alle clip generate.', 
 
-        // --- URBAN KONG (TESTI STRATEGICI AGGIORNATI) ---
+        // --- URBAN KONG ---
         'project-uk': 'URBAN KONG', 
         'project-uk-desc': 'Social Media Growth & Hybrid Content Strategy.',
         
@@ -101,7 +108,7 @@ const WR_LANG = {
         'uk-s3-t': 'Brand Aesthetics', 
         'uk-s3-d': 'Cura maniacale del feed e gestione della community per trasformare l\'identità visiva in engagement reale.',
         
-        'ig-btn-label': 'VISITA @URBANKONG_', // AGGIORNATO
+        'ig-btn-label': 'VISITA @URBANKONG_', 
 
         'project-eu': 'PANAFGEO / EU BRANDING', 'project-eu-desc': 'Visual Identity istituzionale conforme alle EU Guidelines.',
         'eu-s1-t': 'EU Guidelines', 'eu-s1-d': 'Analisi dei gateway normativi e visivi dell\'Unione Europea.',
@@ -119,7 +126,7 @@ const WR_LANG = {
         'step-2-t': 'Hybrid Editing & Face Swap', 'step-2-d': 'Traditional timeline editing integrated with Neural Face Swap techniques. I replaced the faces of generated subjects with client-approved target characters, ensuring identity continuity (Character Consistency) in every scene.',
         'step-3-t': 'Sonic Branding', 'step-3-d': 'Immersive sound design and audio synchronization to give emotional depth and realistic weight to the generated clips.',
         
-        // URBAN KONG (UPDATED EN)
+        // URBAN KONG 
         'project-uk': 'URBAN KONG', 
         'project-uk-desc': 'Social Media Growth & Hybrid Content Strategy.',
         'uk-s1-t': 'AI Editorial Brain', 'uk-s1-d': 'Trend analysis and topic cluster ideation via Gemini Agents for an always-on, data-driven editorial calendar.',
@@ -192,7 +199,7 @@ const ParallaxSlide = ({ img, index }) => {
 const WhiteRabbit = ({ lang, goBack }) => {
     const t = WR_LANG[lang];
     const { scrollY } = useScroll();
-    const [activePost, setActivePost] = useState(null); // STATO PER LA MODALE
+    const [activePost, setActivePost] = useState(null); 
 
     const introOpacity = useTransform(scrollY, [0, 400], [1, 0]);
     const introBlur = useTransform(scrollY, [0, 400], ["blur(0px)", "blur(20px)"]);
@@ -218,7 +225,14 @@ const WhiteRabbit = ({ lang, goBack }) => {
                                 <h2 className="bio-headline" style={{fontSize: 'clamp(1.5rem, 2.5vw, 2.5rem)', marginBottom:'10px'}}>{t['role-title']}</h2>
                                 <p className="bio-highlight" style={{marginBottom:'20px', fontWeight:600, color: '#ff6b42'}}>{t['role-sub']}</p>
                                 <p className="bio-text" style={{marginBottom:'40px'}}>{t['slogan']}</p>
-                                <div className="social-row"><SocialIconOnly type="web" link="#" /><SocialIconOnly type="ig" link="#" /><SocialIconOnly type="ln" link="#" /></div>
+                                
+                                {/* --- MODIFICA LINK SOCIAL QUI --- */}
+                                <div className="social-row">
+                                    <SocialIconOnly type="web" link={SOCIAL_LINKS.web} />
+                                    <SocialIconOnly type="ig" link={SOCIAL_LINKS.ig} />
+                                    <SocialIconOnly type="ln" link={SOCIAL_LINKS.ln} />
+                                </div>
+
                             </div>
                             <div className="wr-demo-col"><PromptSimulator t={t} /></div>
                         </div>
@@ -272,7 +286,6 @@ const WhiteRabbit = ({ lang, goBack }) => {
                         <div className="section-label" style={{textAlign:'center', width:'100%'}}>{t['project-uk']}</div>
                         <p className="section-desc" style={{textAlign:'center'}}>{t['project-uk-desc']}</p>
                         
-                        {/* Process Steps (UK) */}
                         <div className="process-pipeline">
                             <div className="process-step">
                                 <div className="process-thumb-container"><img src={CASE_IMAGES.uk_step1} alt="Plan" className="process-thumb" /><span className="step-badge">01</span></div>
@@ -290,12 +303,10 @@ const WhiteRabbit = ({ lang, goBack }) => {
                             </div>
                         </div>
                         
-                        {/* Feed Interattivo */}
                         <div className="uk-grid-showcase">
                             <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
                                 <div className="ig-phone-mockup">
                                     <div className="ig-header">
-                                        {/* FOTO PROFILO DINAMICA */}
                                         <div className="ig-avatar" style={{backgroundImage: `url(${CASE_IMAGES.uk_profile_pic})`, backgroundSize:'cover', backgroundPosition:'center'}}></div>
                                         <div className="ig-username">urbankong_</div>
                                     </div>
