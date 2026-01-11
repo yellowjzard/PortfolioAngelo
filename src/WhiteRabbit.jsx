@@ -17,7 +17,7 @@ const ICON_WEB = "Icona_site.webp";
 
 // --- LINK SOCIAL (MODIFICA QUI I TUOI LINK) ---
 const SOCIAL_LINKS = {
-    web: "https://www.tuosito.com",                 // <--- TODO: Inserisci link Sito
+    web: "https://www.brusselswhiterabbit.eu/?utm_source=ig&utm_medium=social&utm_content=link_in_bio",                 // <--- TODO: Inserisci link Sito
     ig: "https://www.instagram.com/white_rabbit_brussels?igsh=MmduaWZvamlqM3U=",     // <--- TODO: Inserisci link Instagram
     ln: "https://www.linkedin.com/company/whiterabbithole/"    // <--- TODO: Inserisci link LinkedIn
 };
