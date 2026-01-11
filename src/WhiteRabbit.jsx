@@ -18,7 +18,7 @@ const ICON_WEB = "Icona_site.webp";
 // --- LINK SOCIAL (MODIFICA QUI I TUOI LINK) ---
 const SOCIAL_LINKS = {
     web: "https://www.tuosito.com",                 // <--- TODO: Inserisci link Sito
-    ig: "https://www.instagram.com/tuoprofilo",     // <--- TODO: Inserisci link Instagram
+    ig: "https://www.instagram.com/white_rabbit_brussels?igsh=MmduaWZvamlqM3U=",     // <--- TODO: Inserisci link Instagram
     ln: "https://www.linkedin.com/in/tuoprofilo"    // <--- TODO: Inserisci link LinkedIn
 };
 
