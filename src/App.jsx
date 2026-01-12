@@ -264,7 +264,7 @@ function App() {
 
                 <footer style={{textAlign: 'center', padding: '6rem 2rem', opacity: 0.8}}>
                     <div style={{marginBottom: '20px'}}>
-                        <FooterSocialBtn icon={ICON_LN} link="https://www.linkedin.com/" />
+                        <FooterSocialBtn icon={ICON_LN} link="https://www.linkedin.com/in/angelo-russo-0964a8183?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" />
                         <FooterSocialBtn icon={ICON_IG} link="https://www.instagram.com/yellowjzard?igsh=MTNmMDNwZ24zYXY0eg%3D%3D&utm_source=qr" />
                     </div>
                     <p style={{opacity: 0.6}}>© 2025 Angelo Russo. All rights reserved.</p>
