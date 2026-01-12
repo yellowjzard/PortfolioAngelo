@@ -317,7 +317,7 @@ const WhiteRabbit = ({ lang, goBack }) => {
                             <motion.div className="collaborator-card" whileHover={{ scale: 1.02 }}>
                                 <img src={CASE_IMAGES.collab_avatar} alt="Collaborator" className="collab-avatar" />
                                 <div className="collab-info"><span className="collab-name">{t['collab-name']}</span><span className="collab-role">{t['collab-role']}</span></div>
-                                <div className="collab-links"><SocialIconOnly type="ig" link="#" /><SocialIconOnly type="ln" link="#" /></div>
+                                <div className="collab-links"><SocialIconOnly type="ig" link="https://www.instagram.com/_gennygrieco_?igsh=eTNoN3NkNDlvMWFr" /><SocialIconOnly type="ln" link="https://www.linkedin.com/in/gennaro-grieco/" /></div>
                             </motion.div>
                         </div>
                     </Reveal>
