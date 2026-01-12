@@ -69,7 +69,7 @@ const WR_LANG = {
         'uk-s3-t': 'Brand Aesthetics', 'uk-s3-d': 'Cura maniacale del feed e gestione della community per trasformare l\'identità visiva in engagement reale.',
         'ig-btn-label': 'VISITA @URBANKONG_',
         'project-eu': 'PANAFGEO / EU BRANDING', 'project-eu-desc': 'Visual Identity istituzionale conforme alle EU Guidelines.', 'eu-s1-t': 'EU Guidelines', 'eu-s1-d': 'Analisi dei gateway normativi e visivi dell\'Unione Europea.', 'eu-s2-t': 'Editorial Design', 'eu-s2-d': 'Impaginazione brochure rispettando griglie istituzionali.', 'eu-s3-t': 'Brand Application', 'eu-s3-d': 'Declinazione su supporti fisici (Rollup, Stand, Gadget).',
-        'credits-title': 'CREDITS & TEAM', 'collab-name': 'Gennaro Grieco', 'collab-role': 'Co-Designer / Collaborator'
+        'credits-title': 'CREDITS & TEAM', 'collab-name': 'Gennaro Grieco', 'collab-role': 'Graphic Designer | UI/UX '
     },
     en: {
         'back': '← BACK', 'title': 'WHITE RABBIT AGENCY', 'role-title': 'Generative AI Strategy & Visual Production', 'role-sub': 'Creative Designer & AI Specialist @ White Rabbit Agency', 'slogan': 'Engineering creativity: neural video flows and AI Agents.', 'prompt-text': '/imagine prompt: editorial photography, futuristic fashion, cinematic lighting --v 6.0', 'btn-generate': 'GENERATE', 'btn-done': 'DONE',
