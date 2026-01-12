@@ -13,6 +13,7 @@ const SOCIAL_LINKS = {
 const PROMPT_IMG_RAW = "Reference_Edgar_raw.webp";
 const PROMPT_IMG_GEN = "Reference_Edgar_Gen.webp";
 const WR_VIDEO = "WR-RP-Endurance.mp4"; 
+const EU_PDF_FILE = "panafgeo_brand_guidelines.pdf"; // <--- ASSICURATI DI AVERE QUESTO FILE IN PUBLIC
 
 // --- ICONE SOCIAL ---
 const ICON_IG = "Icona_instagram.webp";
@@ -43,9 +44,7 @@ const CASE_IMAGES = {
     eu_step1: "euguide.003.png", 
     eu_step2: "brochure.005.png", 
     eu_step3: "gadget.009.png", 
-    eu_slide1: "https://images.unsplash.com/photo-1541462608143-67571c6738dd?q=80&w=800&auto=format&fit=crop",
-    eu_slide2: "https://images.unsplash.com/photo-1586717791821-3f44a5638d48?q=80&w=800&auto=format&fit=crop",
-    eu_slide3: "https://images.unsplash.com/photo-1626785774573-4b799312c95d?q=80&w=800&auto=format&fit=crop",
+    // Le slide non servono più se usiamo il PDF, ma le lascio per sicurezza
     collab_avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop" 
 };
 
@@ -71,7 +70,8 @@ const WR_LANG = {
         'uk-s3-t': 'Brand Aesthetics', 'uk-s3-d': 'Cura maniacale del feed e gestione della community per trasformare l\'identità visiva in engagement reale.',
         'ig-btn-label': 'VISITA @URBANKONG_',
         'project-eu': 'PANAFGEO / EU BRANDING', 'project-eu-desc': 'Visual Identity istituzionale conforme alle EU Guidelines.', 'eu-s1-t': 'EU Guidelines', 'eu-s1-d': 'Analisi dei gateway normativi e visivi dell\'Unione Europea.', 'eu-s2-t': 'Editorial Design', 'eu-s2-d': 'Impaginazione brochure rispettando griglie istituzionali.', 'eu-s3-t': 'Brand Application', 'eu-s3-d': 'Declinazione su supporti fisici (Rollup, Stand, Gadget).',
-        'credits-title': 'CREDITS & TEAM', 'collab-name': 'Gennaro Grieco', 'collab-role': 'Co-Designer / Collaborator'
+        'credits-title': 'CREDITS & TEAM', 'collab-name': 'Gennaro Grieco', 'collab-role': 'Co-Designer / Collaborator',
+        'pdf-btn': 'SCARICA PDF COMPLETO'
     },
     en: {
         'back': '← BACK', 'title': 'WHITE RABBIT AGENCY', 'role-title': 'Generative AI Strategy & Visual Production', 'role-sub': 'Creative Designer & AI Specialist @ White Rabbit Agency', 'slogan': 'Engineering creativity: neural video flows and AI Agents.', 'prompt-text': '/imagine prompt: editorial photography, futuristic fashion, cinematic lighting --v 6.0', 'btn-generate': 'GENERATE', 'btn-done': 'DONE',
@@ -84,7 +84,8 @@ const WR_LANG = {
         'step-3-t': 'Sonic Branding', 'step-3-d': 'Immersive sound design and audio synchronization to give emotional depth and realistic weight to the generated clips.',
         'project-uk': 'URBAN KONG', 'project-uk-desc': 'Social Media Growth & Hybrid Content Strategy.', 'uk-s1-t': 'AI Editorial Brain', 'uk-s1-d': 'Trend analysis and topic cluster ideation via Gemini Agents for an always-on, data-driven editorial calendar.', 'uk-s2-t': 'Reels & Motion', 'uk-s2-d': 'Short-form video production. Dynamic editing, sound design, and visual hooks to maximize user retention.', 'uk-s3-t': 'Brand Aesthetics', 'uk-s3-d': 'Meticulous feed curation and community management to turn visual identity into real engagement.', 'ig-btn-label': 'VISIT @URBANKONG_',
         'project-eu': 'PANAFGEO / EU BRANDING', 'project-eu-desc': 'Institutional Visual Identity compliant with EU Guidelines.', 'eu-s1-t': 'EU Guidelines', 'eu-s1-d': 'Analysis of European Union visual and regulatory gateways.', 'eu-s2-t': 'Editorial Design', 'eu-s2-d': 'Brochure layout respecting institutional grids.', 'eu-s3-t': 'Brand Application', 'eu-s3-d': 'Adaptation on physical supports (Rollups, Stands).',
-        'credits-title': 'CREDITS & TEAM', 'collab-name': 'Gennaro Grieco', 'collab-role': 'Co-Designer / Collaborator'
+        'credits-title': 'CREDITS & TEAM', 'collab-name': 'Gennaro Grieco', 'collab-role': 'Co-Designer / Collaborator',
+        'pdf-btn': 'DOWNLOAD FULL PDF'
     }
 };
 
@@ -97,7 +98,6 @@ const Typewriter = ({ text }) => {
 };
 const Reveal = ({ children }) => <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-10%" }} transition={{ duration: 0.8 }}>{children}</motion.div>;
 
-// --- COMPONENTE SOCIAL ICONE (Corretto per leggere l'oggetto) ---
 const SocialIconOnly = ({ type, link }) => { 
     const renderIcon = () => { 
         if(type === 'web') return <img src={ICON_WEB} alt="Web" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
@@ -107,18 +107,13 @@ const SocialIconOnly = ({ type, link }) => {
     }; 
     return (
         <motion.a 
-            href={link} // Usa la prop link passata dal genitore
+            href={link} 
             target="_blank"
             rel="noopener noreferrer" 
             className="social-btn-circle" 
             whileHover={{ scale: 1.1, backgroundColor: "#fff" }} 
             whileTap={{ scale: 0.95 }}
-            style={{
-                padding: '10px', 
-                pointerEvents: 'auto', 
-                position: 'relative', 
-                zIndex: 999 
-            }} 
+            style={{ padding: '10px', pointerEvents: 'auto', position: 'relative', zIndex: 999 }} 
         >
             {renderIcon()}
         </motion.a>
@@ -144,11 +139,39 @@ const PromptSimulator = ({ t }) => {
     );
 };
 
-const ParallaxSlide = ({ img, index }) => {
+// --- NUOVO COMPONENTE PER IL PDF ---
+const PdfViewer = ({ file, t }) => {
     return (
-        <motion.div className="eu-slide-card" initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-15%" }} transition={{ duration: 0.8, delay: index * 0.1 }}>
-            <img src={img} alt={`Slide ${index}`} className="slide-img-vertical" />
-        </motion.div>
+        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '40px' }}>
+            <div style={{
+                width: '100%',
+                height: '600px', // Altezza del visualizzatore
+                border: '1px solid rgba(0,0,0,0.1)',
+                borderRadius: '12px',
+                overflow: 'hidden',
+                boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
+                backgroundColor: '#f5f5f7'
+            }}>
+                <iframe 
+                    src={`${file}#toolbar=0&navpanes=0&scrollbar=0`} // Nasconde toolbar per look pulito
+                    width="100%" 
+                    height="100%" 
+                    style={{ border: 'none' }}
+                    title="PDF Viewer"
+                />
+            </div>
+            
+            <motion.a 
+                href={file} 
+                download 
+                className="ig-visit-btn"
+                whileHover={{ scale: 1.05 }} 
+                whileTap={{ scale: 0.95 }}
+                style={{ marginTop: '20px' }}
+            >
+                {t['pdf-btn']} ↓
+            </motion.a>
+        </div>
     );
 };
 
@@ -188,14 +211,11 @@ const WhiteRabbit = ({ lang, goBack }) => {
                                 <h2 className="bio-headline" style={{fontSize: 'clamp(1.5rem, 2.5vw, 2.5rem)', marginBottom:'10px'}}>{t['role-title']}</h2>
                                 <p className="bio-highlight" style={{marginBottom:'20px', fontWeight:600, color: '#ff6b42'}}>{t['role-sub']}</p>
                                 <p className="bio-text" style={{marginBottom:'40px'}}>{t['slogan']}</p>
-                                
-                                {/* LINK SOCIAL: USA L'OGGETTO CONFIGURABILE */}
                                 <div className="social-row" style={{position:'relative', zIndex:50}}>
                                     <SocialIconOnly type="web" link={SOCIAL_LINKS.web} />
                                     <SocialIconOnly type="ig" link={SOCIAL_LINKS.ig} />
                                     <SocialIconOnly type="ln" link={SOCIAL_LINKS.ln} />
                                 </div>
-
                             </div>
                             <div className="wr-demo-col"><PromptSimulator t={t} /></div>
                         </div>
@@ -232,13 +252,7 @@ const WhiteRabbit = ({ lang, goBack }) => {
                             <div className="process-step"><div className="process-thumb-container"><img src={CASE_IMAGES.process_step3} alt="Sound" className="process-thumb" /><span className="step-badge">03</span></div><h4>{t['step-3-t']}</h4><p>{t['step-3-d']}</p></div>
                         </div>
                         <div className="cinema-container">
-                            <motion.video 
-                                src={WR_VIDEO} 
-                                controls 
-                                poster={CASE_IMAGES.process_step1} 
-                                style={{width:'100%', borderRadius:'12px', boxShadow:'0 30px 60px rgba(0,0,0,0.3)', border:'1px solid #333', backgroundColor:'#000'}} 
-                                initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} 
-                            />
+                            <motion.video src={WR_VIDEO} controls poster={CASE_IMAGES.process_step1} style={{width:'100%', borderRadius:'12px', boxShadow:'0 30px 60px rgba(0,0,0,0.3)', border:'1px solid #333', backgroundColor:'#000'}} initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} />
                         </div>
                     </Reveal>
                 </section>
@@ -264,22 +278,9 @@ const WhiteRabbit = ({ lang, goBack }) => {
                                     </div>
                                     <div className="ig-grid">
                                         {IG_CONTENT.map((post) => (
-                                            <motion.div 
-                                                key={post.id} 
-                                                className="ig-post" 
-                                                style={{position: 'relative'}}
-                                                whileHover={{ filter: "brightness(0.8)" }}
-                                                onClick={() => setActivePost(post)}
-                                            >
-                                                <img 
-                                                    src={post.thumb} 
-                                                    alt="Post" 
-                                                    style={{width: '100%', height: '100%', objectFit: 'cover'}} 
-                                                    onError={(e) => {e.target.style.display='none'; e.target.parentElement.style.backgroundColor='#eee'}}
-                                                />
-                                                {post.type === 'video' && (
-                                                    <div style={{position:'absolute', top:5, right:5, color:'white', textShadow:'0 0 5px rgba(0,0,0,0.5)'}}>▶</div>
-                                                )}
+                                            <motion.div key={post.id} className="ig-post" style={{position: 'relative'}} whileHover={{ filter: "brightness(0.8)" }} onClick={() => setActivePost(post)}>
+                                                <img src={post.thumb} alt="Post" style={{width: '100%', height: '100%', objectFit: 'cover'}} onError={(e) => {e.target.style.display='none'; e.target.parentElement.style.backgroundColor='#eee'}} />
+                                                {post.type === 'video' && (<div style={{position:'absolute', top:5, right:5, color:'white', textShadow:'0 0 5px rgba(0,0,0,0.5)'}}>▶</div>)}
                                             </motion.div>
                                         ))}
                                     </div>
@@ -290,11 +291,13 @@ const WhiteRabbit = ({ lang, goBack }) => {
                     </Reveal>
                 </section>
 
-                {/* 3. EU PROJECT */}
+                {/* 3. EU PROJECT CON PDF VIEWER */}
                 <section className="glass-section" style={{textAlign:'center', marginTop:'40px'}}>
                     <Reveal>
                         <div className="section-label" style={{textAlign:'center', width:'100%'}}>{t['project-eu']}</div>
                         <p className="section-desc" style={{textAlign:'center'}}>{t['project-eu-desc']}</p>
+                        
+                        {/* Process Steps */}
                         <div className="process-pipeline">
                             <div className="process-step"><div className="process-thumb-container"><img src={CASE_IMAGES.eu_step1} alt="Step 1" className="process-thumb" /><span className="step-badge">01</span></div><h4>{t['eu-s1-t']}</h4><p>{t['eu-s1-d']}</p></div>
                             <div className="process-arrow">→</div>
@@ -302,11 +305,14 @@ const WhiteRabbit = ({ lang, goBack }) => {
                             <div className="process-arrow">→</div>
                             <div className="process-step"><div className="process-thumb-container"><img src={CASE_IMAGES.eu_step3} alt="Step 3" className="process-thumb" /><span className="step-badge">03</span></div><h4>{t['eu-s3-t']}</h4><p>{t['eu-s3-d']}</p></div>
                         </div>
-                        <div className="eu-vertical-gallery">
-                            <ParallaxSlide img={CASE_IMAGES.eu_slide1} index={0} />
-                            <ParallaxSlide img={CASE_IMAGES.eu_slide2} index={1} />
-                            <ParallaxSlide img={CASE_IMAGES.eu_slide3} index={2} />
+
+                        {/* PDF VIEWER AL POSTO DELLE SLIDE */}
+                        <div style={{marginTop: '60px', width: '100%'}}>
+                            <h4 style={{marginBottom:'20px', fontFamily:'Unbounded', textTransform:'uppercase', fontSize:'0.9rem', color:'#666'}}>Brand Guidelines Viewer</h4>
+                            {/* Inseriamo il file PDF qui */}
+                            <PdfViewer file={EU_PDF_FILE} t={t} />
                         </div>
+
                         <div className="credits-section">
                             <h4 className="credits-title-small">{t['credits-title']}</h4>
                             <motion.div className="collaborator-card" whileHover={{ scale: 1.02 }}>
@@ -324,67 +330,5 @@ const WhiteRabbit = ({ lang, goBack }) => {
             {/* MODALE LIGHTBOX */}
             <AnimatePresence>
                 {activePost && (
-                    <motion.div 
-                        initial={{ opacity: 0 }} 
-                        animate={{ opacity: 1 }} 
-                        exit={{ opacity: 0 }} 
-                        style={{
-                            position: 'fixed', top: 0, left: 0, width: '100%', height: '100%',
-                            background: 'rgba(0,0,0,0.9)', zIndex: 1000,
-                            display: 'flex', justifyContent: 'center', alignItems: 'center',
-                            cursor: 'pointer'
-                        }}
-                        onClick={() => setActivePost(null)}
-                    >
-                        <motion.div 
-                            initial={{ scale: 0.8, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            exit={{ scale: 0.8, opacity: 0 }}
-                            style={{
-                                width: '90%', maxWidth: '500px', maxHeight: '80vh',
-                                borderRadius: '12px', overflow: 'hidden', backgroundColor: '#000',
-                                position: 'relative'
-                            }}
-                            onClick={(e) => e.stopPropagation()}
-                        >
-                            <button 
-                                onClick={() => setActivePost(null)}
-                                style={{
-                                    position: 'absolute', top: 10, right: 10, 
-                                    background: 'rgba(0,0,0,0.5)', color: 'white', 
-                                    border: 'none', borderRadius: '50%', width: 30, height: 30,
-                                    cursor: 'pointer', zIndex: 10, fontSize: '16px', lineHeight: '30px', padding: 0
-                                }}
-                            >
-                                ✕
-                            </button>
-
-                            {activePost.type === 'video' ? (
-                                <video 
-                                    src={activePost.src} 
-                                    controls 
-                                    autoPlay 
-                                    style={{width: '100%', height: '100%', objectFit: 'contain'}} 
-                                />
-                            ) : (
-                                <img 
-                                    src={activePost.src} 
-                                    alt="Full Post" 
-                                    style={{width: '100%', height: 'auto', objectFit: 'contain', display: 'block'}} 
-                                />
-                            )}
-                        </motion.div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-
-        </div>
-    );
-};
-
-// --- GRADIENTE STANDARD ---
-function WaterGradient() {
-    return <ShaderGradient animate="on" axesHelper="off" bgColor1="#000000" bgColor2="#000000" brightness={1.2} cAzimuthAngle={180} cDistance={2.9} cPolarAngle={120} cameraZoom={1} color1="#ebedff" color2="#f3f2f8" color3="#dbf8ff" destination="onCanvas" embedMode="off" envPreset="city" format="gif" fov={45} frameRate={10} gizmoHelper="hide" grain="off" lightType="3d" pixelDensity={1} positionX={0} positionY={1.8} positionZ={0} range="disabled" rangeEnd={40} rangeStart={0} reflection={0.1} rotationX={0} rotationY={0} rotationZ={-90} shader="defaults" type="waterPlane" uAmplitude={0} uDensity={1} uFrequency={5.5} uSpeed={0.3} uStrength={3} uTime={0.2} wireframe={false} />;
-}
-
-export default WhiteRabbit;
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.9)', zIndex: 1000, display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer' }} onClick={() => setActivePost(null)}>
+                        <motion.div
