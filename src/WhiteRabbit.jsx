@@ -13,7 +13,7 @@ const SOCIAL_LINKS = {
 const PROMPT_IMG_RAW = "Reference_Edgar_raw.webp";
 const PROMPT_IMG_GEN = "Reference_Edgar_Gen.webp";
 const WR_VIDEO = "WR-RP-Endurance.mp4"; 
-const EU_PDF_FILE = "panafgeo_brand_guidelines.pdf"; // <--- ASSICURATI DI AVERE QUESTO FILE IN PUBLIC
+const EU_PDF_FILE = "panafgeo_brand_guidelines.pdf"; // <--- FILE PDF
 
 // --- ICONE SOCIAL ---
 const ICON_IG = "Icona_instagram.webp";
@@ -44,7 +44,6 @@ const CASE_IMAGES = {
     eu_step1: "euguide.003.png", 
     eu_step2: "brochure.005.png", 
     eu_step3: "gadget.009.png", 
-    // Le slide non servono più se usiamo il PDF, ma le lascio per sicurezza
     collab_avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop" 
 };
 
@@ -145,7 +144,7 @@ const PdfViewer = ({ file, t }) => {
         <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '40px' }}>
             <div style={{
                 width: '100%',
-                height: '600px', // Altezza del visualizzatore
+                height: '600px',
                 border: '1px solid rgba(0,0,0,0.1)',
                 borderRadius: '12px',
                 overflow: 'hidden',
@@ -153,7 +152,7 @@ const PdfViewer = ({ file, t }) => {
                 backgroundColor: '#f5f5f7'
             }}>
                 <iframe 
-                    src={`${file}#toolbar=0&navpanes=0&scrollbar=0`} // Nasconde toolbar per look pulito
+                    src={`${file}#toolbar=0&navpanes=0&scrollbar=0`} 
                     width="100%" 
                     height="100%" 
                     style={{ border: 'none' }}
@@ -327,8 +326,70 @@ const WhiteRabbit = ({ lang, goBack }) => {
                 <footer style={{textAlign: 'center', padding: '6rem 2rem', opacity: 0.5}}><p>© 2025 White Rabbit Agency Case Study.</p></footer>
             </div>
 
-            {/* MODALE LIGHTBOX */}
+            {/* MODALE LIGHTBOX (STRUTTURA CORRETTA) */}
             <AnimatePresence>
                 {activePost && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.9)', zIndex: 1000, display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer' }} onClick={() => setActivePost(null)}>
-                        <motion.div
+                    <motion.div 
+                        initial={{ opacity: 0 }} 
+                        animate={{ opacity: 1 }} 
+                        exit={{ opacity: 0 }} 
+                        style={{
+                            position: 'fixed', top: 0, left: 0, width: '100%', height: '100%',
+                            background: 'rgba(0,0,0,0.9)', zIndex: 1000,
+                            display: 'flex', justifyContent: 'center', alignItems: 'center',
+                            cursor: 'pointer'
+                        }}
+                        onClick={() => setActivePost(null)}
+                    >
+                        <motion.div 
+                            initial={{ scale: 0.8, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.8, opacity: 0 }}
+                            style={{
+                                width: '90%', maxWidth: '500px', maxHeight: '80vh',
+                                borderRadius: '12px', overflow: 'hidden', backgroundColor: '#000',
+                                position: 'relative'
+                            }}
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <button 
+                                onClick={() => setActivePost(null)}
+                                style={{
+                                    position: 'absolute', top: 10, right: 10, 
+                                    background: 'rgba(0,0,0,0.5)', color: 'white', 
+                                    border: 'none', borderRadius: '50%', width: 30, height: 30,
+                                    cursor: 'pointer', zIndex: 10, fontSize: '16px', lineHeight: '30px', padding: 0
+                                }}
+                            >
+                                ✕
+                            </button>
+
+                            {activePost.type === 'video' ? (
+                                <video 
+                                    src={activePost.src} 
+                                    controls 
+                                    autoPlay 
+                                    style={{width: '100%', height: '100%', objectFit: 'contain'}} 
+                                />
+                            ) : (
+                                <img 
+                                    src={activePost.src} 
+                                    alt="Full Post" 
+                                    style={{width: '100%', height: 'auto', objectFit: 'contain', display: 'block'}} 
+                                />
+                            )}
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+        </div>
+    );
+};
+
+// --- GRADIENTE STANDARD ---
+function WaterGradient() {
+    return <ShaderGradient animate="on" axesHelper="off" bgColor1="#000000" bgColor2="#000000" brightness={1.2} cAzimuthAngle={180} cDistance={2.9} cPolarAngle={120} cameraZoom={1} color1="#ebedff" color2="#f3f2f8" color3="#dbf8ff" destination="onCanvas" embedMode="off" envPreset="city" format="gif" fov={45} frameRate={10} gizmoHelper="hide" grain="off" lightType="3d" pixelDensity={1} positionX={0} positionY={1.8} positionZ={0} range="disabled" rangeEnd={40} rangeStart={0} reflection={0.1} rotationX={0} rotationY={0} rotationZ={-90} shader="defaults" type="waterPlane" uAmplitude={0} uDensity={1} uFrequency={5.5} uSpeed={0.3} uStrength={3} uTime={0.2} wireframe={false} />;
+}
+
+export default WhiteRabbit;
