@@ -44,7 +44,7 @@ const CASE_IMAGES = {
     eu_step1: "euguide.003.png", 
     eu_step2: "brochure.005.png", 
     eu_step3: "gadget.009.png", 
-    collab_avatar: "gennarogrieco.jpeg" 
+    collab_avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop" 
 };
 
 const WR_LANG = {
@@ -69,8 +69,7 @@ const WR_LANG = {
         'uk-s3-t': 'Brand Aesthetics', 'uk-s3-d': 'Cura maniacale del feed e gestione della community per trasformare l\'identità visiva in engagement reale.',
         'ig-btn-label': 'VISITA @URBANKONG_',
         'project-eu': 'PANAFGEO / EU BRANDING', 'project-eu-desc': 'Visual Identity istituzionale conforme alle EU Guidelines.', 'eu-s1-t': 'EU Guidelines', 'eu-s1-d': 'Analisi dei gateway normativi e visivi dell\'Unione Europea.', 'eu-s2-t': 'Editorial Design', 'eu-s2-d': 'Impaginazione brochure rispettando griglie istituzionali.', 'eu-s3-t': 'Brand Application', 'eu-s3-d': 'Declinazione su supporti fisici (Rollup, Stand, Gadget).',
-        'credits-title': 'CREDITS & TEAM', 'collab-name': 'Gennaro Grieco', 'collab-role': 'Co-Designer / Collaborator',
-        'pdf-btn': 'SCARICA PDF COMPLETO'
+        'credits-title': 'CREDITS & TEAM', 'collab-name': 'Gennaro Grieco', 'collab-role': 'Co-Designer / Collaborator'
     },
     en: {
         'back': '← BACK', 'title': 'WHITE RABBIT AGENCY', 'role-title': 'Generative AI Strategy & Visual Production', 'role-sub': 'Creative Designer & AI Specialist @ White Rabbit Agency', 'slogan': 'Engineering creativity: neural video flows and AI Agents.', 'prompt-text': '/imagine prompt: editorial photography, futuristic fashion, cinematic lighting --v 6.0', 'btn-generate': 'GENERATE', 'btn-done': 'DONE',
@@ -83,8 +82,7 @@ const WR_LANG = {
         'step-3-t': 'Sonic Branding', 'step-3-d': 'Immersive sound design and audio synchronization to give emotional depth and realistic weight to the generated clips.',
         'project-uk': 'URBAN KONG', 'project-uk-desc': 'Social Media Growth & Hybrid Content Strategy.', 'uk-s1-t': 'AI Editorial Brain', 'uk-s1-d': 'Trend analysis and topic cluster ideation via Gemini Agents for an always-on, data-driven editorial calendar.', 'uk-s2-t': 'Reels & Motion', 'uk-s2-d': 'Short-form video production. Dynamic editing, sound design, and visual hooks to maximize user retention.', 'uk-s3-t': 'Brand Aesthetics', 'uk-s3-d': 'Meticulous feed curation and community management to turn visual identity into real engagement.', 'ig-btn-label': 'VISIT @URBANKONG_',
         'project-eu': 'PANAFGEO / EU BRANDING', 'project-eu-desc': 'Institutional Visual Identity compliant with EU Guidelines.', 'eu-s1-t': 'EU Guidelines', 'eu-s1-d': 'Analysis of European Union visual and regulatory gateways.', 'eu-s2-t': 'Editorial Design', 'eu-s2-d': 'Brochure layout respecting institutional grids.', 'eu-s3-t': 'Brand Application', 'eu-s3-d': 'Adaptation on physical supports (Rollups, Stands).',
-        'credits-title': 'CREDITS & TEAM', 'collab-name': 'Gennaro Grieco', 'collab-role': 'Co-Designer / Collaborator',
-        'pdf-btn': 'DOWNLOAD FULL PDF'
+        'credits-title': 'CREDITS & TEAM', 'collab-name': 'Gennaro Grieco', 'collab-role': 'Co-Designer / Collaborator'
     }
 };
 
@@ -138,8 +136,8 @@ const PromptSimulator = ({ t }) => {
     );
 };
 
-// --- NUOVO COMPONENTE PER IL PDF ---
-const PdfViewer = ({ file, t }) => {
+// --- NUOVO COMPONENTE PER IL PDF (SENZA BOTTONE DOWNLOAD) ---
+const PdfViewer = ({ file }) => {
     return (
         <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '40px' }}>
             <div style={{
@@ -159,17 +157,6 @@ const PdfViewer = ({ file, t }) => {
                     title="PDF Viewer"
                 />
             </div>
-            
-            <motion.a 
-                href={file} 
-                download 
-                className="ig-visit-btn"
-                whileHover={{ scale: 1.05 }} 
-                whileTap={{ scale: 0.95 }}
-                style={{ marginTop: '20px' }}
-            >
-                {t['pdf-btn']} ↓
-            </motion.a>
         </div>
     );
 };
@@ -309,7 +296,7 @@ const WhiteRabbit = ({ lang, goBack }) => {
                         <div style={{marginTop: '60px', width: '100%'}}>
                             <h4 style={{marginBottom:'20px', fontFamily:'Unbounded', textTransform:'uppercase', fontSize:'0.9rem', color:'#666'}}>Brand Guidelines Viewer</h4>
                             {/* Inseriamo il file PDF qui */}
-                            <PdfViewer file={EU_PDF_FILE} t={t} />
+                            <PdfViewer file={EU_PDF_FILE} />
                         </div>
 
                         <div className="credits-section">
@@ -317,7 +304,7 @@ const WhiteRabbit = ({ lang, goBack }) => {
                             <motion.div className="collaborator-card" whileHover={{ scale: 1.02 }}>
                                 <img src={CASE_IMAGES.collab_avatar} alt="Collaborator" className="collab-avatar" />
                                 <div className="collab-info"><span className="collab-name">{t['collab-name']}</span><span className="collab-role">{t['collab-role']}</span></div>
-                                <div className="collab-links"><SocialIconOnly type="ig" link="https://www.instagram.com/_gennygrieco_?igsh=eTNoN3NkNDlvMWFr" /><SocialIconOnly type="ln" link="https://www.linkedin.com/in/gennaro-grieco/" /></div>
+                                <div className="collab-links"><SocialIconOnly type="ig" link="#" /><SocialIconOnly type="ln" link="#" /></div>
                             </motion.div>
                         </div>
                     </Reveal>
