@@ -44,7 +44,7 @@ const CASE_IMAGES = {
     eu_step1: "euguide.003.png", 
     eu_step2: "brochure.005.png", 
     eu_step3: "gadget.009.png", 
-    collab_avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop" 
+    collab_avatar: "gennarogrieco.jpeg" 
 };
 
 const WR_LANG = {
