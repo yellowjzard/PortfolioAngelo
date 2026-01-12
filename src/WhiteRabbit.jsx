@@ -13,7 +13,7 @@ const SOCIAL_LINKS = {
 const PROMPT_IMG_RAW = "Reference_Edgar_raw.webp";
 const PROMPT_IMG_GEN = "Reference_Edgar_Gen.webp";
 const WR_VIDEO = "WR-RP-Endurance.mp4"; 
-const EU_PDF_FILE = "panafgeo_brand_guidelines.pdf"; // <--- FILE PDF
+const EU_PDF_FILE = "PanAfGeo Branding.pdf"; // <--- FILE PDF
 
 // --- ICONE SOCIAL ---
 const ICON_IG = "Icona_instagram.webp";
