@@ -25,7 +25,7 @@ const LANG_DATA = {
         'scroll-hint': 'Scorri per entrare',
         
         'bio-title': 'Angelo Russo.',
-        'bio-sub': 'New Media Artist & AI Specialist.',
+        'bio-sub': 'Creative Designer | AI Strategy & Visual Production',
         
         'bio-intro': [
             `Il mio approccio al design è agnostico rispetto agli strumenti: non parto dalla tecnologia, ma dall'idea. Come New Media Artist, considero i software non come vincoli, ma come mezzi flessibili da orchestrare per trovare la soluzione più efficace. La mia missione è trasformare la complessità tecnologica in narrazioni visive potenti, garantendo che la tecnica sia sempre al servizio del concept.`,
