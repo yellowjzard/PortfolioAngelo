@@ -12,6 +12,7 @@ const PROFILE_IMG = "Portrait-Angelo-Russo.webp";
 const WR_ICON = "Icona_whiterabbit.webp"; 
 const CUORE_ICON = "Icona_cuoredinapoli.webp";
 const NTA_ICON = "Icona_NTA.webp"; 
+const GCERTI_ICON = "Icona_gcerti.webp"; // Nuova icona per GCERTI Italy
 
 // ICONE SOCIAL
 const ICON_IG = "Icona_instagram.webp";
@@ -101,6 +102,7 @@ const FolderItem = ({ title, type, onClick }) => {
 
     const renderIcon = () => {
         switch (type) {
+            case 'gcerti': return <motion.img src={GCERTI_ICON} alt="GCERTI Italy" className="folder-pop-icon" variants={iconVariants} style={{ objectFit: 'contain' }} />;
             case 'whiterabbit': return <motion.img src={WR_ICON} alt="White Rabbit" className="folder-pop-icon" variants={iconVariants} style={{ objectFit: 'contain' }} />;
             case 'nero': return <motion.svg viewBox="0 0 100 100" className="folder-pop-icon" variants={iconVariants}><path d="M30 40 L 30 70 Q 30 85 50 85 Q 70 85 70 70 L 70 40 Z" fill="#4b3621" /><path d="M70 50 Q 85 50 85 60 Q 85 70 70 70" fill="none" stroke="#4b3621" strokeWidth="3" /></motion.svg>;
             case 'cuore': return <motion.img src={CUORE_ICON} alt="#CuorediNapoli" className="folder-pop-icon" variants={iconVariants} style={{ objectFit: 'contain' }} />;
@@ -292,6 +294,8 @@ function App() {
                     <Reveal>
                         <div className="section-label">01 / {LANG_DATA[lang]['works-title']}</div>
                         <div className="folders-grid">
+                            {/* GCERTI Italy aggiunto davanti a White Rabbit */}
+                            <FolderItem title="GCERTI Italy" type="gcerti" onClick={() => window.open('https://www.gcerti.it/', '_blank')} />
                             <FolderItem title="White Rabbit" type="whiterabbit" onClick={() => navigateTo('whiterabbit')} />
                             <FolderItem title="Nero Espresso" type="nero" onClick={() => navigateTo('nero')} />
                             <FolderItem title="#CUOREDINAPOLI" type="cuore" onClick={() => window.open('https://cuoredinapoli.net/', '_blank')} />
