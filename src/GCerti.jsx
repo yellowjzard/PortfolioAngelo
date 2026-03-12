@@ -211,7 +211,7 @@ const GCerti = ({ lang, goBack }) => {
                     </Reveal>
                 </section>
 
-                <section className="glass-section" style={{ background: 'rgba(255,255,255,0.6)', backdropFilter: 'blur(20px)' }}>
+                <section className="glass-section" style={{ background: 'rgba(255,255,255,0.4)', backdropFilter: 'blur(20px)' }}>
                     <Reveal>
                         <h2 className="section-label">{t['takeaway-title']}</h2>
                         <div style={{ padding: '40px', background: 'rgba(37,99,235,0.05)', borderRadius: '24px', border: '1px solid rgba(37,99,235,0.1)', marginTop: '20px', position: 'relative' }}>
