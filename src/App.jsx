@@ -194,9 +194,20 @@ function App() {
                             </div>
 
                             <div className="bio-text-col">
-                                <h2 className="bio-headline" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 800 }}>
-                                    {LANG_DATA[lang]['bio-title']} <br />
-                                    <span className="bio-highlight">{LANG_DATA[lang]['bio-sub']}</span>
+                                <h1 className="bio-headline" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 800, marginBottom: '0.25rem' }}>
+                                    {LANG_DATA[lang]['bio-title']}
+                                </h1>
+                                
+                                {/* SOTTOTITOLO RIDIMENSIONATO - PIÙ PICCOLO E MINIMAL */}
+                                <h2 style={{ 
+                                    fontSize: 'clamp(1rem, 1.5vw, 1.25rem)', 
+                                    fontWeight: 400, 
+                                    color: 'rgba(0,0,0,0.6)', 
+                                    letterSpacing: '0.3px',
+                                    marginTop: 0,
+                                    marginBottom: '1.5rem'
+                                }}>
+                                    {LANG_DATA[lang]['bio-sub']}
                                 </h2>
                                 
                                 <p className="bio-text" style={{ marginBottom: '20px' }}>
