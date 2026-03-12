@@ -215,10 +215,10 @@ const GCerti = ({ lang, goBack }) => {
                     </Reveal>
                 </section>
 
-                {/* RISULTATI TANGIBILI: Ripristinato lo sfondo glass coerente */}
+                {/* SEZIONE RISULTATI - CORRETTA: Titolo allineato a sinistra come gli altri */}
                 <section className="glass-section" style={{ background: 'rgba(255,255,255,0.4)', backdropFilter: 'blur(15px)' }}>
                     <Reveal>
-                        <h2 className="section-label" style={{ color: '#111', width: '100%', textAlign: 'center' }}>{t['results-title']}</h2>
+                        <h2 className="section-label" style={{ textAlign: 'left' }}>{t['results-title']}</h2>
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '25px', marginTop: '30px' }}>
                             {t['results-stats'].map((stat, index) => (
                                 <MetricCard key={index} {...stat} />
