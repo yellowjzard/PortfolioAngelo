@@ -4,19 +4,14 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 
 // --- CONFIGURAZIONE LINK ---
 const SOCIAL_LINKS = {
-    ig: "https://www.instagram.com/gcerti_certificazioni?igsh=aHcwcjhiNzd1YWZq&utm_source=qr", 
-    ln: "https://www.linkedin.com/company/gcerticertificazioni/", 
+    ig: "https://www.instagram.com/gcerti.italy/", 
+    ln: "https://www.linkedin.com/company/gcerti-italy/", 
     web: "https://www.gcerti.it/" 
 };
 
 // --- ASSET IMMAGINI ---
 const GCERTI_ASSETS = {
-    proto1: "gcerti-proto-1.jpg",
-    proto2: "gcerti-proto-2.jpg",
-    proto3: "gcerti-proto-3.jpg",
-    proto4: "gcerti-proto-4.jpg",
     profile_pic: "gcerti_logo.jpg",
-    hero_graph: "gcerti-grafico-risultati.png" 
 };
 
 // --- ICONE SOCIAL ---
@@ -36,87 +31,87 @@ const IG_CONTENT = [
 
 const GCERTI_LANG = {
     it: {
-        'back': '← TORNA',
+        'back': '← TORNA ALLA HOME',
         'title': 'GCERTI ITALY',
         'role-title': 'Da "Spesa Marketing" a Motore di Acquisizione B2B',
-        'subtitle': 'Strategia di Riposizionamento per un Ente di Certificazione',
-        'slogan': 'Riposizionamento del Brand, Ottimizzazione Budget Ads e Generazione di Lead Qualificati.',
+        'subtitle': 'Strategia di Riposizionamento Brand per Ente di Certificazione',
+        'slogan': 'Ottimizzazione Budget Ads, Brand Authority e Lead Generation qualificata.',
         
-        'problem-title': '🚨 Il Problema',
-        'problem-desc': 'Dispersione del Budget e Sovrapposizione del Tono di Voce',
+        'problem-title': '🚨 L\'Analisi del Problema',
+        'problem-desc': 'Dispersione del budget e sovrapposizione del tono di voce istituzionale.',
         'problem-content': [
-            'Trappola del Consulente: Il tono di voce aziendale si sovrapponeva a quello dei consulenti esterni, diluendo l\'autorevolezza di GCERTI come Ente Terzo Indipendente.',
-            'Contenuti Burocratici: I post social erano meri elenchi normativi, ignorati dai Decision Maker che percepivano le certificazioni solo come un costo burocratico.',
-            'Inefficienza Pubblicitaria: Un approccio generalista con spese fino a 9.000€ ogni 20 giorni su parole chiave non profilate.'
+            'Trappola del Consulente: Il tono di voce aziendale si sovrapponeva a quello dei consulenti esterni, diluendo l\'autorevolezza come Ente Terzo Indipendente.',
+            'Contenuti Burocratici: Comunicazione basata su meri elenchi normativi, ignorati dai Decision Maker che percepivano le certificazioni solo come burocrazia.',
+            'Inefficienza Budget Ads: Approccio generalista con spese fino a 9.000€ ogni 20 giorni su parole chiave non profilate.'
         ],
 
-        'strategy-title': '🧠 La Strategia',
+        'strategy-title': '🧠 La Strategia AI-Driven',
         'strategy-name': '"Zero-Click Authority" e Rigore Istituzionale',
-        'strategy-p1': 'Ho rimosso ogni riferimento alla "consulenza" per riposizionare GCERTI come giudice imparziale del mercato. Non forniamo supporto operativo: misuriamo la tenuta aziendale attraverso indici qualitativi e punteggi oggettivi.',
-        'strategy-p2': 'Ho trasformato i trend normativi (Bando ISI INAIL, Patente a Crediti, AI Act) in contenuti Deep-Dive su LinkedIn, applicando la strategia dello Zero-Click Content per massimizzare l\'autorità immediata.',
+        'strategy-p1': 'Ho eliminato ogni verbo legato al "supporto" per riposizionare GCERTI come giudice imparziale. Noi non facciamo i compiti per le aziende, noi misuriamo la loro conformità attraverso standard oggettivi.',
+        'strategy-p2': 'Ho trasformato i trend normativi caldi (ISI INAIL, Patente a Crediti, AI Act) in Caroselli Deep-Dive su LinkedIn, applicando la regola dello Zero-Click Content per valore immediato.',
 
         'execution-title': '⚙️ Esecuzione Strategica',
         'execution-items': [
-            'Digital Content Strategy: Produzione di 32 contenuti in 28 giorni (posizionamento al 75° percentile di settore).',
-            'Event Coverage & Networking: Gestione della comunicazione per LetExpo Verona, Richmond HR Forum e Unione Industriali Napoli.',
-            'Ads Micro-Targeting: Campagne chirurgiche su Parità di Genere (Bando Umbria), ISO 27001 (NIS2) e Gare SOA.'
+            'Editorial Strategy: 32 asset prodotti in 28 giorni (posizionamento al 75° percentile del settore).',
+            'Event Coverage: Gestione comunicazione live per LetExpo Verona e Richmond HR Forum Rimini.',
+            'Google Ads Targeting: Campagne chirurgiche su Parità di Genere, ISO 27001 (NIS2) ed Edilizia.'
         ],
 
-        'results-title': '📈 Risultati Misurabili',
+        'results-title': '📈 Risultati Tangibili',
         'results-stats': [
             { value: '+542,8%', label: 'Instagram Engagement', sub: 'Crescita organica delle interazioni stabili' },
-            { value: '465', label: 'LinkedIn One-Day Clicks', sub: 'Picco storico di traffico qualificato' },
-            { value: '-24,3%', label: 'Riduzione CPC', sub: 'Ottimizzazione costi su campagne core' },
-            { value: '468€', label: 'Budget Ads (20 gg)', sub: 'A fronte dei 9.280€ della gestione precedente' }
+            { value: '465', label: 'LinkedIn One-Day Clicks', sub: 'Picco storico di traffico qualificato B2B' },
+            { value: '-24,3%', label: 'Ottimizzazione CPC', sub: 'Riduzione costo per clic su campagne core' },
+            { value: '468€', label: 'Ads Budget (20 gg)', sub: 'Invece dei 9.280€ della gestione precedente' }
         ],
 
         'takeaway-title': '🎯 Key Takeaway',
-        'takeaway-desc': 'Interpretare le direttive di legge e trasformarle in ganci di marketing (normative FOMO), ottimizzando chirurgicamente il budget, ha permesso a GCERTI Italy di trasformare il marketing da centro di costo ad asset finanziario scalabile.',
+        'takeaway-desc': 'Interpretare le direttive di legge e trasformarle in ganci di marketing ottimizzando il budget ha permesso a GCERTI Italy di trasformare il marketing in un asset finanziario scalabile.',
 
         'feed-title': 'SOCIAL AUTHORITY',
-        'feed-desc': 'Cura del feed LinkedIn e Instagram per consolidare l\'autorità istituzionale B2B.',
+        'feed-desc': 'Cura del feed LinkedIn e Instagram per consolidare l\'autorità B2B.',
         'ig-btn-label': 'VISITA @GCERTI.ITALY'
     },
     en: {
-        'back': '← BACK',
+        'back': '← BACK TO HOME',
         'title': 'GCERTI ITALY',
         'role-title': 'From "Marketing Expense" to B2B Acquisition Engine',
         'subtitle': 'Brand Repositioning Strategy for a Certification Body',
-        'slogan': 'Brand Strategy, Ads Budget Optimization, and High-Quality Lead Generation.',
+        'slogan': 'Ads Budget Optimization, Brand Authority, and Qualified Lead Generation.',
         
         'problem-title': '🚨 The Challenge',
-        'problem-desc': 'Budget Inefficiency and Brand Dilution',
+        'problem-desc': 'Budget dispersion and institutional voice overlap.',
         'problem-content': [
-            'Consultant Trap: The corporate voice was indistinguishable from consultants, undermining GCERTI\'s authority as an Independent Third Party.',
-            'Bureaucratic Content: Social media was used for dry regulatory lists, failing to engage Decision Makers.',
-            'Spending Inefficiency: A "spray and pray" approach with expenditures reaching €9,000 every 20 days on generic keywords.'
+            'Consultant Trap: Corporate voice overlapped with external consultants, undermining authority as an Independent Third Party.',
+            'Bureaucratic Content: Communication relied on dry regulatory lists, failing to engage high-level Decision Makers.',
+            'Inefficient Ads Spend: Generic "spray and pray" approach with expenditures reaching €9,000 every 20 days.'
         ],
 
-        'strategy-title': '🧠 The Strategy',
+        'strategy-title': '🧠 Strategic Approach',
         'strategy-name': '"Zero-Click Authority" & Institutional Rigor',
-        'strategy-p1': 'I eliminated all "consulting-style" language to reposition GCERTI as an impartial market judge. We don\'t perform the work for clients; we measure their performance through objective scoring.',
-        'strategy-p2': 'I leveraged regulatory trends (ISI INAIL, AI Act) into Deep-Dive LinkedIn Carousels, utilizing Zero-Click Content to establish immediate market leadership.',
+        'strategy-p1': 'Repositioned GCERTI as an impartial market judge by eliminating "consulting-style" support language. We don\'t do the work; we measure its quality.',
+        'strategy-p2': 'Leveraged regulatory trends (ISI INAIL, AI Act) into Deep-Dive LinkedIn carousels using Zero-Click Content strategies to build instant trust.',
 
-        'execution-title': '⚙️ Execution',
+        'execution-title': '⚙️ Strategic Execution',
         'execution-items': [
-            'Content Lifecycle Management: 32 high-value assets produced in 28 days (Industry top tier).',
-            'Live Event Strategy: Communication management for major forums like LetExpo and Richmond HR.',
-            'Micro-Targeted Ads: Precision campaigns focused on Gender Equality, ISO 27001, and Public Tenders.'
+            'Content Lifecycle: 32 high-value assets produced in 28 days (Industry top 25%).',
+            'Event Management: Full digital coverage for LetExpo Verona and Richmond HR Forum.',
+            'Micro-Targeted Ads: Precision campaigns on Gender Equality, ISO 27001, and Public Tenders.'
         ],
 
-        'results-title': '📈 Results',
+        'results-title': '📈 Measurable Impact',
         'results-stats': [
-            { value: '+542.8%', label: 'Instagram Engagement', sub: 'Consistent organic interaction growth' },
+            { value: '+542.8%', label: 'Instagram Engagement', sub: 'Significant organic interaction growth' },
             { value: '465', label: 'LinkedIn Daily Clicks', sub: 'Historical peak for qualified B2B traffic' },
-            { value: '-24.3%', label: 'CPC Reduction', sub: 'Smarter bidding on high-intent keywords' },
+            { value: '-24.3%', label: 'CPC Reduction', sub: 'Optimized bidding on high-intent keywords' },
             { value: '€468', label: 'Ads Budget (20 days)', sub: 'Successfully replaced the previous €9,280 spend' }
         ],
 
         'takeaway-title': '🎯 Key Takeaway',
-        'takeaway-desc': 'Translating legal directives into marketing hooks and surgically optimizing the budget allowed GCERTI Italy to transform its marketing department into a scalable financial asset.',
+        'takeaway-desc': 'By translating legal directives into marketing hooks and surgically optimizing the budget, GCERTI Italy transformed its marketing department into a scalable financial asset.',
 
         'feed-title': 'SOCIAL AUTHORITY',
-        'feed-desc': 'LinkedIn and Instagram feed curation for B2B institutional authority.',
+        'feed-desc': 'Curated LinkedIn and Instagram presence for institutional B2B authority.',
         'ig-btn-label': 'VISIT @GCERTI.ITALY'
     }
 };
@@ -129,32 +124,16 @@ const Typewriter = ({ text }) => {
     return <motion.h1 className="intro-text" variants={container} initial="hidden" animate="visible">{letters.map((char, index) => <motion.span key={index} variants={child}>{char}</motion.span>)}</motion.h1>;
 };
 
-const Reveal = ({ children }) => <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-10%" }} transition={{ duration: 0.8 }}>{children}</motion.div>;
-
-const SocialIconOnly = ({ type, link }) => { 
-    const renderIcon = () => { 
-        if(type === 'web') return <img src={ICON_WEB} alt="Corporate Website" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
-        if(type === 'ig') return <img src={ICON_IG} alt="Instagram Feed" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
-        if(type === 'ln') return <img src={ICON_LN} alt="LinkedIn Profile" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
-        return null; 
-    }; 
-    if (!link) return null;
-    return (
-        <motion.a href={link} target="_blank" rel="noopener noreferrer" className="social-btn-circle" whileHover={{ scale: 1.1, backgroundColor: "#fff" }} whileTap={{ scale: 0.95 }} style={{padding: '10px', pointerEvents: 'auto', position: 'relative', zIndex: 50, margin: '0 5px'}}>
-            {renderIcon()}
-        </motion.a>
-    ); 
-};
+const Reveal = ({ children }) => <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-10%" }} transition={{ duration: 0.8 }}>{children}</motion.div>;
 
 const MetricCard = ({ value, label, sub }) => (
-    <motion.div className="metric-card" whileHover={{ scale: 1.05, backgroundColor: 'rgba(37, 99, 235, 0.1)' }} style={{ padding: '1.5rem', borderRadius: '16px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', textAlign: 'center' }}>
-        <div style={{ fontSize: '2.2rem', fontWeight: 800, color: '#2563eb', marginBottom: '0.5rem' }}>{value}</div>
-        <div style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.25rem', color: '#fff' }}>{label}</div>
-        <div style={{ fontSize: '0.8rem', opacity: 0.6, lineHeight: '1.3' }}>{sub}</div>
+    <motion.div className="metric-card" whileHover={{ scale: 1.05, backgroundColor: 'rgba(37, 99, 235, 0.12)' }} style={{ padding: '2rem', borderRadius: '20px', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', textAlign: 'center', backdropFilter: 'blur(10px)' }}>
+        <div style={{ fontSize: '2.4rem', fontWeight: 800, color: '#2563eb', marginBottom: '0.5rem' }}>{value}</div>
+        <div style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '0.5rem', color: '#111' }}>{label}</div>
+        <div style={{ fontSize: '0.85rem', opacity: 0.7, color: '#444', lineHeight: '1.4' }}>{sub}</div>
     </motion.div>
 );
 
-// --- MAIN COMPONENT ---
 const GCerti = ({ lang, goBack }) => {
     const t = GCERTI_LANG[lang];
     const { scrollY } = useScroll();
@@ -174,7 +153,7 @@ const GCerti = ({ lang, goBack }) => {
                 </ShaderGradientCanvas>
             </div>
             
-            <header><button onClick={goBack} className="lang-btn" style={{position:'fixed', left:'30px', zIndex:100}}>{t['back']}</button></header>
+            <header><button onClick={goBack} className="lang-btn" style={{position:'fixed', left:'30px', zIndex:100, backdropFilter: 'blur(5px)'}}>{t['back']}</button></header>
 
             <motion.div className="fixed-intro-layer" style={{ opacity: introOpacity, filter: introBlur, scale: introScale }}>
                 <Typewriter text={t['title']} />
@@ -182,28 +161,23 @@ const GCerti = ({ lang, goBack }) => {
 
             <div className="content-scroll-layer">
                 
-                <section className="glass-section">
+                <section className="glass-section" style={{ background: 'rgba(255,255,255,0.4)', backdropFilter: 'blur(15px)' }}>
                     <Reveal>
-                        <h2 className="bio-headline" style={{textAlign:'center', fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', marginBottom: '15px'}}>{t['role-title']}</h2>
-                        <h3 style={{textAlign:'center', fontSize: 'clamp(1.1rem, 2vw, 1.5rem)', opacity: 0.7, fontWeight: 400, marginBottom: '40px'}}>{t['subtitle']}</h3>
-                        <p className="bio-text" style={{ textAlign: 'center', margin: '0 auto 40px auto', maxWidth: '750px', width: '90%', lineHeight: '1.7', fontSize: '1.1rem' }}>
+                        <h2 className="bio-headline" style={{textAlign:'center', fontSize: 'clamp(1.6rem, 4vw, 2.8rem)', marginBottom: '15px', color: '#111'}}>{t['role-title']}</h2>
+                        <h3 style={{textAlign:'center', fontSize: 'clamp(1.1rem, 2vw, 1.4rem)', opacity: 0.8, fontWeight: 500, marginBottom: '40px', color: '#333'}}>{t['subtitle']}</h3>
+                        <p className="bio-text" style={{ textAlign: 'center', margin: '0 auto 40px auto', maxWidth: '800px', width: '95%', lineHeight: '1.8', fontSize: '1.15rem', color: '#222' }}>
                             {t['slogan']}
                         </p>
-                        <div style={{display: 'flex', justifyContent: 'center', marginBottom: '20px', position: 'relative', zIndex: 50}}>
-                            <SocialIconOnly type="web" link={SOCIAL_LINKS.web} />
-                            <SocialIconOnly type="ig" link={SOCIAL_LINKS.ig} />
-                            <SocialIconOnly type="ln" link={SOCIAL_LINKS.ln} />
-                        </div>
                     </Reveal>
                 </section>
 
-                <section className="glass-section">
+                <section className="glass-section" style={{ background: 'rgba(255,255,255,0.4)', backdropFilter: 'blur(15px)' }}>
                     <Reveal>
                         <h2 className="section-label">{t['problem-title']}</h2>
-                        <h3 style={{ fontSize: '1.6rem', marginBottom: '25px', fontWeight: 700 }}>{t['problem-desc']}</h3>
+                        <h3 style={{ fontSize: '1.7rem', marginBottom: '25px', fontWeight: 800, color: '#111' }}>{t['problem-desc']}</h3>
                         <ul style={{ listStyle: 'none', padding: 0 }}>
                             {t['problem-content'].map((item, index) => (
-                                <motion.li key={index} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }} style={{ marginBottom: '15px', padding: '20px', background: 'rgba(239, 68, 68, 0.05)', borderRadius: '12px', borderLeft: '4px solid #ef4444' }}>
+                                <motion.li key={index} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }} style={{ marginBottom: '18px', padding: '25px', background: 'rgba(239, 68, 68, 0.08)', borderRadius: '16px', borderLeft: '5px solid #ef4444', color: '#222', lineHeight: '1.6' }}>
                                     {item}
                                 </motion.li>
                             ))}
@@ -211,25 +185,25 @@ const GCerti = ({ lang, goBack }) => {
                     </Reveal>
                 </section>
 
-                <section className="glass-section">
+                <section className="glass-section" style={{ background: 'rgba(255,255,255,0.4)', backdropFilter: 'blur(15px)' }}>
                     <Reveal>
                         <h2 className="section-label">{t['strategy-title']}</h2>
-                        <h3 style={{ fontSize: '1.6rem', marginBottom: '25px', fontWeight: 700 }}>{t['strategy-name']}</h3>
-                        <div className="bento-grid">
-                            <div className="bento-card" style={{ background: 'rgba(37,99,235,0.08)', padding: '25px' }}>
-                                <p style={{ lineHeight: '1.8' }}>{t['strategy-p1']}</p>
+                        <h3 style={{ fontSize: '1.7rem', marginBottom: '25px', fontWeight: 800, color: '#111' }}>{t['strategy-name']}</h3>
+                        <div className="bento-grid" style={{ gap: '20px' }}>
+                            <div className="bento-card" style={{ background: 'rgba(37,99,235,0.1)', padding: '30px', borderRadius: '20px', border: '1px solid rgba(37,99,235,0.2)' }}>
+                                <p style={{ lineHeight: '1.9', fontSize: '1.05rem', color: '#111' }}>{t['strategy-p1']}</p>
                             </div>
-                            <div className="bento-card" style={{ background: 'rgba(37,99,235,0.08)', padding: '25px' }}>
-                                <p style={{ lineHeight: '1.8' }}>{t['strategy-p2']}</p>
+                            <div className="bento-card" style={{ background: 'rgba(37,99,235,0.1)', padding: '30px', borderRadius: '20px', border: '1px solid rgba(37,99,235,0.2)' }}>
+                                <p style={{ lineHeight: '1.9', fontSize: '1.05rem', color: '#111' }}>{t['strategy-p2']}</p>
                             </div>
                         </div>
                     </Reveal>
                 </section>
 
-                <section className="glass-section">
+                <section className="glass-section" style={{ background: 'transparent', backdropFilter: 'none', boxShadow: 'none' }}>
                     <Reveal>
-                        <h2 className="section-label">{t['results-title']}</h2>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '20px', marginTop: '30px' }}>
+                        <h2 className="section-label" style={{ color: '#111' }}>{t['results-title']}</h2>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '25px', marginTop: '30px' }}>
                             {t['results-stats'].map((stat, index) => (
                                 <MetricCard key={index} {...stat} />
                             ))}
@@ -237,67 +211,28 @@ const GCerti = ({ lang, goBack }) => {
                     </Reveal>
                 </section>
 
-                <section className="glass-section">
+                <section className="glass-section" style={{ background: 'rgba(255,255,255,0.6)', backdropFilter: 'blur(20px)' }}>
                     <Reveal>
                         <h2 className="section-label">{t['takeaway-title']}</h2>
-                        <div style={{ padding: '35px', background: 'rgba(255,255,255,0.03)', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)', marginTop: '20px', position: 'relative', overflow: 'hidden' }}>
-                            <div style={{ position: 'absolute', top: 0, left: 0, width: '4px', height: '100%', background: '#2563eb' }}></div>
-                            <p style={{ fontSize: '1.25rem', lineHeight: '1.8', fontStyle: 'italic', color: '#eee' }}>
+                        <div style={{ padding: '40px', background: 'rgba(37,99,235,0.05)', borderRadius: '24px', border: '1px solid rgba(37,99,235,0.1)', marginTop: '20px', position: 'relative' }}>
+                            <div style={{ position: 'absolute', top: 0, left: 0, width: '6px', height: '100%', background: '#2563eb' }}></div>
+                            <p style={{ fontSize: '1.3rem', lineHeight: '1.9', fontStyle: 'italic', color: '#111', fontWeight: 500 }}>
                                 "{t['takeaway-desc']}"
                             </p>
                         </div>
                     </Reveal>
                 </section>
 
-                <section className="glass-section" style={{textAlign:'center'}}>
-                    <Reveal>
-                        <h2 className="section-label" style={{textAlign:'center', width:'100%', display:'block'}}>{t['feed-title']}</h2>
-                        <p className="section-desc" style={{textAlign:'center', marginBottom: '40px'}}>{t['feed-desc']}</p>
-                        <div className="uk-grid-showcase">
-                            <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
-                                <div className="ig-phone-mockup">
-                                    <div className="ig-header">
-                                        <div className="ig-avatar" style={{backgroundImage: `url(${GCERTI_ASSETS.profile_pic})`, backgroundSize:'cover'}}></div>
-                                        <div className="ig-username">gcerti.italy</div>
-                                    </div>
-                                    <div className="ig-grid">
-                                        {IG_CONTENT.map((post) => (
-                                            <motion.div key={post.id} className="ig-post" whileHover={{ filter: "brightness(0.8)" }} onClick={() => setActivePost(post)}>
-                                                <img src={post.thumb} alt={`GCERTI Institutional Content ${post.id}`} style={{width: '100%', height: '100%', objectFit: 'cover'}} />
-                                                {post.type === 'video' && <div style={{position:'absolute', top:5, right:5, color:'white'}}>▶</div>}
-                                            </motion.div>
-                                        ))}
-                                    </div>
-                                </div>
-                                <motion.a href={SOCIAL_LINKS.ig} target="_blank" rel="noopener noreferrer" className="ig-visit-btn" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                                    {t['ig-btn-label']} ↗
-                                </motion.a>
-                            </div>
-                        </div>
-                    </Reveal>
-                </section>
-
-                <footer style={{textAlign: 'center', padding: '6rem 2rem', opacity: 0.5}}>
-                    <p>© 2026 Angelo Russo | B2B Brand Strategist. Case Study: GCERTI Italy.</p>
+                <footer style={{textAlign: 'center', padding: '6rem 2rem', opacity: 0.7}}>
+                    <p style={{ color: '#111', fontWeight: 600 }}>© 2026 Angelo Russo | Strategic B2B Branding.</p>
                 </footer>
             </div>
-
-            <AnimatePresence>
-                {activePost && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.9)', zIndex: 1000, display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer' }} onClick={() => setActivePost(null)}>
-                        <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.8, opacity: 0 }} style={{ width: '90%', maxWidth: '500px', maxHeight: '80vh', borderRadius: '12px', overflow: 'hidden', backgroundColor: '#000', position: 'relative' }} onClick={(e) => e.stopPropagation()}>
-                            <button onClick={() => setActivePost(null)} style={{ position: 'absolute', top: 10, right: 10, background: 'rgba(0,0,0,0.5)', color: 'white', border: 'none', borderRadius: '50%', width: 30, height: 30, cursor: 'pointer', zIndex: 10 }}>✕</button>
-                            {activePost.type === 'video' ? <video src={activePost.src} controls autoPlay style={{width: '100%', height: '100%'}} /> : <img src={activePost.src} alt="Case Result Detail" style={{width: '100%', height: 'auto'}} />}
-                        </motion.div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
         </div>
     );
 };
 
 function WaterGradient() {
-    return <ShaderGradient animate="on" axesHelper="off" bgColor1="#000000" bgColor2="#000000" brightness={1.2} cAzimuthAngle={180} cDistance={2.9} cPolarAngle={120} cameraZoom={1} color1="#ebedff" color2="#f3f2f8" color3="#dbf8ff" destination="onCanvas" embedMode="off" envPreset="city" fov={45} frameRate={10} gizmoHelper="hide" grain="off" lightType="3d" pixelDensity={1} positionX={0} positionY={1.8} positionZ={0} range="disabled" reflection={0.1} rotationX={0} rotationY={0} rotationZ={-90} shader="defaults" type="waterPlane" uAmplitude={0} uDensity={1} uFrequency={5.5} uSpeed={0.3} uStrength={3} uTime={0.2} wireframe={false} />;
+    return <ShaderGradient animate="on" axesHelper="off" bgColor1="#ffffff" bgColor2="#f0f4f8" brightness={1.1} cAzimuthAngle={180} cDistance={3} cPolarAngle={120} cameraZoom={1} color1="#e0e7ff" color2="#f8fafc" color3="#dbeafe" destination="onCanvas" embedMode="off" envPreset="city" fov={45} frameRate={10} gizmoHelper="hide" grain="off" lightType="3d" pixelDensity={1} positionX={0} positionY={1.8} positionZ={0} range="disabled" reflection={0.1} rotationX={0} rotationY={0} rotationZ={-90} shader="defaults" type="waterPlane" uAmplitude={0} uDensity={1} uFrequency={5.5} uSpeed={0.2} uStrength={2} uTime={0.2} wireframe={false} />;
 }
 
 export default GCerti;
