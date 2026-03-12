@@ -6,14 +6,14 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import WhiteRabbit from './WhiteRabbit';
 import NeroEspresso from './NeroEspresso';
 import Freelance from './Freelance';
-import GCerrti from './Gcerti';
+import GCerti from './GCerti'; // Import corretto (GCerti con una 'r' e C maiuscola)
 
 // --- ASSET STATICI ---
 const PROFILE_IMG = "Portrait-Angelo-Russo.webp"; 
 const WR_ICON = "Icona_whiterabbit.webp"; 
 const CUORE_ICON = "Icona_cuoredinapoli.webp";
 const NTA_ICON = "Icona_NTA.webp"; 
-const GCERTI_ICON = "Icona_gcerti.webp"; // Nuova icona per GCERTI Italy
+const GCERTI_ICON = "Icona_gcerti.webp"; // Icona per GCERTI Italy
 
 // ICONE SOCIAL
 const ICON_IG = "Icona_instagram.webp";
@@ -164,9 +164,11 @@ function App() {
     const toggleLang = () => setLang(prev => prev === 'it' ? 'en' : 'it');
     const navigateTo = (pageName) => setView(pageName);
 
+    // Gestione navigazione pagine progetto
     if (view === 'whiterabbit') return <WhiteRabbit lang={lang} goBack={() => setView('home')} />;
     if (view === 'nero') return <NeroEspresso lang={lang} goBack={() => setView('home')} />;
     if (view === 'freelance') return <Freelance lang={lang} goBack={() => setView('home')} />;
+    if (view === 'gcerti') return <GCerti lang={lang} goBack={() => setView('home')} />; // Nuova route per GCerti
 
     return (
         <div className="app-container">
@@ -295,8 +297,8 @@ function App() {
                     <Reveal>
                         <div className="section-label">01 / {LANG_DATA[lang]['works-title']}</div>
                         <div className="folders-grid">
-                            {/* GCERTI Italy aggiunto davanti a White Rabbit */}
-                            <FolderItem title="GCERTI Italy" type="gcerti" onClick={() => window.open('https://www.gcerti.it/', '_blank')} />
+                            {/* GCERTI Italy - Navigazione interna (non più link esterno) */}
+                            <FolderItem title="GCERTI Italy" type="gcerti" onClick={() => navigateTo('gcerti')} />
                             <FolderItem title="White Rabbit" type="whiterabbit" onClick={() => navigateTo('whiterabbit')} />
                             <FolderItem title="Nero Espresso" type="nero" onClick={() => navigateTo('nero')} />
                             <FolderItem title="#CUOREDINAPOLI" type="cuore" onClick={() => window.open('https://cuoredinapoli.net/', '_blank')} />
