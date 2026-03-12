@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { ShaderGradientCanvas, ShaderGradient } from '@shadergradient/react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'; 
 
-// --- CONFIGURAZIONE LINK (MODIFICA QUI I TUOI SOCIAL) ---
+// --- CONFIGURAZIONE LINK ---
 const SOCIAL_LINKS = {
-    ig: "https://www.instagram.com/neroespresso_official?igsh=bHR6MzY1d3A4ZThq", // <--- LINK INSTAGRAM
-    ln: "https://www.linkedin.com/company/neroespresso/", // <--- LINK LINKEDIN
-    web: "https://www.neroespresso.com/" // <--- SITO WEB
+    ig: "https://www.instagram.com/neroespresso_official?igsh=bHR6MzY1d3A4ZThq", 
+    ln: "https://www.linkedin.com/company/neroespresso/", 
+    web: "https://www.neroespresso.com/" 
 };
 
 // --- ASSET IMMAGINI ---
@@ -35,33 +35,37 @@ const IG_CONTENT = [
 
 const NE_LANG = {
     it: {
-        'back': '← TORNA',
+        'back': '← TORNA ALLA HOME',
         'title': 'NERO ESPRESSO',
-        'role-title': 'Brand Identity e Comunicazione Visiva',
-        'slogan': 'Dal design social al supporto vendite: un ecosistema visivo coerente e multifunzionale.',
+        'role-title': 'Brand Identity e Visual Design a Napoli',
+        'slogan': 'Un ecosistema visivo coerente e multifunzionale ad Afragola: dal social design al supporto vendite strategico.',
         
-        'comm-title': 'Social & Visual',
-        'comm-desc': 'Gestione completa dei canali Instagram/LinkedIn. Creazione di grafiche editoriali e Reels dinamici per rafforzare il posizionamento digitale.',
-        'ops-title': 'Sales & Operations',
-        'ops-desc': 'Design come strumento di vendita: render 3D, pre-visualizzazioni e gestione del flusso operativo con i fornitori.',
+        'comm-title': 'Social & Visual Strategy',
+        'comm-desc': 'Gestione professionale dei canali Instagram e LinkedIn. Sviluppo di grafiche editoriali e Reels dinamici per il posizionamento del brand nel mercato campano.',
+        'ops-title': 'Sales & Operations Design',
+        'ops-desc': 'Il design come leva di profitto: render 3D fotorealistici, pre-visualizzazioni tecniche e coordinamento operativo con i fornitori locali.',
         
-        'feed-title': 'SOCIAL FEED',
-        'feed-desc': 'Cura del feed Instagram per trasmettere l\'aroma e l\'identità premium del brand.',
-        'ig-btn-label': 'VISITA @NEROESPRESSO_OFFICIAL', 
+        'feed-title': 'SOCIAL CONTENT PRODUCTION',
+        'feed-desc': 'Cura estetica del feed Instagram per comunicare l\'identità premium e l\'aroma del caffè napoletano.',
+        'ig-btn-label': 'VISITA IL PROFILO UFFICIALE', 
 
-        'proto-title': 'PROTOTIPAZIONE STRATEGICA',
-        'proto-desc': 'Sviluppo di concept e schede tecniche dettagliate per supportare la visione di prodotto.'
+        'proto-title': 'PROTOTIPAZIONE TECNICA 3D',
+        'proto-desc': 'Sviluppo di concept grafici e schede tecniche per la produzione di insegne e materiali promozionali fisici.'
     },
     en: {
-        'back': '← BACK',
+        'back': '← BACK TO HOME',
         'title': 'NERO ESPRESSO',
-        'role-title': 'Brand Identity & Visual Communication',
-        'slogan': 'From social design to sales support: a coherent and multifunctional visual ecosystem.',
-        'comm-title': 'Social & Visual', 'comm-desc': 'Full management of Instagram/LinkedIn. Creation of editorial graphics and dynamic Reels to strengthen digital positioning.',
-        'ops-title': 'Sales & Operations', 'ops-desc': 'Design as a sales tool: 3D renders, pre-visualizations, and operational flow management with suppliers.',
-        'feed-title': 'SOCIAL FEED', 'feed-desc': 'Curation of the Instagram feed to convey the aroma and premium identity of the brand.',
+        'role-title': 'Brand Identity & Visual Design in Naples',
+        'slogan': 'A coherent and multifunctional visual ecosystem in Afragola: from social design to strategic sales support.',
+        'comm-title': 'Social & Visual Strategy', 
+        'comm-desc': 'Full management of Instagram/LinkedIn. Creation of editorial graphics and dynamic Reels to strengthen digital positioning.',
+        'ops-title': 'Sales & Operations Design', 
+        'ops-desc': 'Design as a sales tool: 3D renders, pre-visualizations, and operational flow management with local suppliers.',
+        'feed-title': 'SOCIAL CONTENT PRODUCTION', 
+        'feed-desc': 'Curation of the Instagram feed to convey the premium identity of Neapolitan coffee.',
         'ig-btn-label': 'VISIT @NEROESPRESSO',
-        'proto-title': 'STRATEGIC PROTOTYPING', 'proto-desc': 'Development of detailed concepts and technical sheets to support product vision.'
+        'proto-title': '3D TECHNICAL PROTOTYPING', 
+        'proto-desc': 'Development of detailed concepts and technical sheets to support product production.'
     }
 };
 
@@ -74,27 +78,16 @@ const Typewriter = ({ text }) => {
 };
 const Reveal = ({ children }) => <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-10%" }} transition={{ duration: 0.8 }}>{children}</motion.div>;
 
-// --- COMPONENTE SOCIAL ICONE ---
 const SocialIconOnly = ({ type, link }) => { 
     const renderIcon = () => { 
-        if(type === 'web') return <img src={ICON_WEB} alt="Web" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
-        if(type === 'ig') return <img src={ICON_IG} alt="Instagram" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
-        if(type === 'ln') return <img src={ICON_LN} alt="LinkedIn" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
+        if(type === 'web') return <img src={ICON_WEB} alt="Sito Web Nero Espresso" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
+        if(type === 'ig') return <img src={ICON_IG} alt="Instagram Nero Espresso" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
+        if(type === 'ln') return <img src={ICON_LN} alt="LinkedIn Nero Espresso" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
         return null; 
     }; 
-    
     if (!link) return null;
-
     return (
-        <motion.a 
-            href={link} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="social-btn-circle" 
-            whileHover={{ scale: 1.1, backgroundColor: "#fff" }} 
-            whileTap={{ scale: 0.95 }}
-            style={{padding: '10px', pointerEvents: 'auto', position: 'relative', zIndex: 50, margin: '0 5px'}} 
-        >
+        <motion.a href={link} target="_blank" rel="noopener noreferrer" className="social-btn-circle" whileHover={{ scale: 1.1, backgroundColor: "#fff" }} whileTap={{ scale: 0.95 }} style={{padding: '10px', pointerEvents: 'auto', position: 'relative', zIndex: 50, margin: '0 5px'}}>
             {renderIcon()}
         </motion.a>
     ); 
@@ -114,8 +107,6 @@ const NeroEspresso = ({ lang, goBack }) => {
 
     return (
         <div className="app-container">
-            
-            {/* SFONDO GRADIENTE CORRETTO */}
             <div className="gradient-bg" style={{pointerEvents: 'none'}}>
                 <ShaderGradientCanvas style={{ width: '100%', height: '100%', pointerEvents: 'none' }} pixelDensity={1}>
                     <WaterGradient />
@@ -124,31 +115,18 @@ const NeroEspresso = ({ lang, goBack }) => {
             
             <header><button onClick={goBack} className="lang-btn" style={{position:'fixed', left:'30px', zIndex:100}}>{t['back']}</button></header>
 
-            {/* INTRO */}
             <motion.div className="fixed-intro-layer" style={{ opacity: introOpacity, filter: introBlur, scale: introScale }}>
                 <Typewriter text={t['title']} />
             </motion.div>
 
             <div className="content-scroll-layer">
-                
-                {/* HERO & STRATEGY */}
                 <section className="glass-section">
                     <Reveal>
                         <h2 className="bio-headline" style={{textAlign:'center', fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', marginBottom: '15px'}}>{t['role-title']}</h2>
-                        
-                        {/* SLOGAN RESPONSIVE E CENTRATO */}
-                        <p className="bio-text" style={{
-                            textAlign: 'center',       // Allinea il testo al centro
-                            margin: '0 auto 40px auto', // Centra il blocco nella pagina e dà spazio sotto
-                            maxWidth: '700px',         // Su PC non diventa più largo di così (evita righe lunghissime)
-                            width: '90%',              // SU MOBILE occupa il 90% dello schermo (lascia margini ai lati)
-                            lineHeight: '1.6',         // Migliora la lettura
-                            fontSize: '1.1rem'         // Leggermente più grande per impatto
-                        }}>
+                        <p className="bio-text" style={{ textAlign: 'center', margin: '0 auto 40px auto', maxWidth: '700px', width: '90%', lineHeight: '1.6', fontSize: '1.1rem' }}>
                             {t['slogan']}
                         </p>
 
-                        {/* SOCIAL ICONS */}
                         <div style={{display: 'flex', justifyContent: 'center', marginBottom: '60px', position: 'relative', zIndex: 50}}>
                             <SocialIconOnly type="web" link={SOCIAL_LINKS.web} />
                             <SocialIconOnly type="ig" link={SOCIAL_LINKS.ig} />
@@ -170,15 +148,13 @@ const NeroEspresso = ({ lang, goBack }) => {
                     </Reveal>
                 </section>
 
-                {/* SOCIAL FEED (INTERATTIVO) */}
                 <section className="glass-section" style={{textAlign:'center'}}>
                     <Reveal>
-                        <div className="section-label" style={{textAlign:'center', width:'100%'}}>{t['feed-title']}</div>
+                        <h2 className="section-label" style={{textAlign:'center', width:'100%', display:'block'}}>{t['feed-title']}</h2>
                         <p className="section-desc" style={{textAlign:'center'}}>{t['feed-desc']}</p>
                         
                         <div className="uk-grid-showcase">
                             <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
-                                {/* Phone Mockup */}
                                 <div className="ig-phone-mockup">
                                     <div className="ig-header">
                                         <div className="ig-avatar" style={{backgroundImage: `url(${NE_ASSETS.profile_pic})`, backgroundSize:'cover'}}></div>
@@ -186,36 +162,14 @@ const NeroEspresso = ({ lang, goBack }) => {
                                     </div>
                                     <div className="ig-grid">
                                         {IG_CONTENT.map((post) => (
-                                            <motion.div 
-                                                key={post.id} 
-                                                className="ig-post" 
-                                                style={{position: 'relative'}}
-                                                whileHover={{ filter: "brightness(0.8)" }}
-                                                onClick={() => setActivePost(post)}
-                                            >
-                                                <img 
-                                                    src={post.thumb} 
-                                                    alt="Post" 
-                                                    style={{width: '100%', height: '100%', objectFit: 'cover'}} 
-                                                    onError={(e) => {e.target.style.display='none'; e.target.parentElement.style.backgroundColor='#eee'}}
-                                                />
-                                                {post.type === 'video' && (
-                                                    <div style={{position:'absolute', top:5, right:5, color:'white', textShadow:'0 0 5px rgba(0,0,0,0.5)'}}>▶</div>
-                                                )}
+                                            <motion.div key={post.id} className="ig-post" whileHover={{ filter: "brightness(0.8)" }} onClick={() => setActivePost(post)}>
+                                                <img src={post.thumb} alt="Angelo Russo Social Work" style={{width: '100%', height: '100%', objectFit: 'cover'}} />
+                                                {post.type === 'video' && <div style={{position:'absolute', top:5, right:5, color:'white'}}>▶</div>}
                                             </motion.div>
                                         ))}
                                     </div>
                                 </div>
-                                
-                                {/* Link Esterno Aggiornato */}
-                                <motion.a 
-                                    href={SOCIAL_LINKS.ig} 
-                                    target="_blank" 
-                                    rel="noopener noreferrer"
-                                    className="ig-visit-btn"
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                >
+                                <motion.a href={SOCIAL_LINKS.ig} target="_blank" rel="noopener noreferrer" className="ig-visit-btn" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                                     {t['ig-btn-label']} ↗
                                 </motion.a>
                             </div>
@@ -223,16 +177,15 @@ const NeroEspresso = ({ lang, goBack }) => {
                     </Reveal>
                 </section>
 
-                {/* PROTOTIPAZIONE */}
                 <section className="glass-section">
                     <Reveal>
-                        <div className="section-label">{t['proto-title']}</div>
+                        <h2 className="section-label">{t['proto-title']}</h2>
                         <p className="section-desc">{t['proto-desc']}</p>
                         <div className="horizontal-gallery-track">
                             {[NE_ASSETS.proto1, NE_ASSETS.proto2, NE_ASSETS.proto3, NE_ASSETS.proto4].map((img, i) => (
                                 <div key={i} className="gallery-item-proto">
-                                    <img src={img} alt="Prototype" />
-                                    <span className="item-badge">TECH SPEC {i+1}</span>
+                                    <img src={img} alt="Render 3D Angelo Russo Designer" />
+                                    <span className="item-badge">SPECS {i+1}</span>
                                 </div>
                             ))}
                         </div>
@@ -240,119 +193,26 @@ const NeroEspresso = ({ lang, goBack }) => {
                 </section>
 
                 <footer style={{textAlign: 'center', padding: '6rem 2rem', opacity: 0.5}}>
-                    <p>© 2025 Nero Espresso Case Study.</p>
+                    <p>© 2026 Angelo Russo | Graphic Designer & Creative Specialist Afragola.</p>
                 </footer>
-
             </div>
 
-            {/* MODALE LIGHTBOX */}
             <AnimatePresence>
                 {activePost && (
-                    <motion.div 
-                        initial={{ opacity: 0 }} 
-                        animate={{ opacity: 1 }} 
-                        exit={{ opacity: 0 }} 
-                        style={{
-                            position: 'fixed', top: 0, left: 0, width: '100%', height: '100%',
-                            background: 'rgba(0,0,0,0.9)', zIndex: 1000,
-                            display: 'flex', justifyContent: 'center', alignItems: 'center',
-                            cursor: 'pointer'
-                        }}
-                        onClick={() => setActivePost(null)}
-                    >
-                        <motion.div 
-                            initial={{ scale: 0.8, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            exit={{ scale: 0.8, opacity: 0 }}
-                            style={{
-                                width: '90%', maxWidth: '500px', maxHeight: '80vh',
-                                borderRadius: '12px', overflow: 'hidden', backgroundColor: '#000',
-                                position: 'relative'
-                            }}
-                            onClick={(e) => e.stopPropagation()}
-                        >
-                            <button 
-                                onClick={() => setActivePost(null)}
-                                style={{
-                                    position: 'absolute', top: 10, right: 10, 
-                                    background: 'rgba(0,0,0,0.5)', color: 'white', 
-                                    border: 'none', borderRadius: '50%', width: 30, height: 30,
-                                    cursor: 'pointer', zIndex: 10, fontSize: '16px', lineHeight: '30px', padding: 0
-                                }}
-                            >
-                                ✕
-                            </button>
-
-                            {activePost.type === 'video' ? (
-                                <video 
-                                    src={activePost.src} 
-                                    controls 
-                                    autoPlay 
-                                    style={{width: '100%', height: '100%', objectFit: 'contain'}} 
-                                />
-                            ) : (
-                                <img 
-                                    src={activePost.src} 
-                                    alt="Full Post" 
-                                    style={{width: '100%', height: 'auto', objectFit: 'contain', display: 'block'}} 
-                                />
-                            )}
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.9)', zIndex: 1000, display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer' }} onClick={() => setActivePost(null)}>
+                        <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.8, opacity: 0 }} style={{ width: '90%', maxWidth: '500px', maxHeight: '80vh', borderRadius: '12px', overflow: 'hidden', backgroundColor: '#000', position: 'relative' }} onClick={(e) => e.stopPropagation()}>
+                            <button onClick={() => setActivePost(null)} style={{ position: 'absolute', top: 10, right: 10, background: 'rgba(0,0,0,0.5)', color: 'white', border: 'none', borderRadius: '50%', width: 30, height: 30, cursor: 'pointer', zIndex: 10 }}>✕</button>
+                            {activePost.type === 'video' ? <video src={activePost.src} controls autoPlay style={{width: '100%', height: '100%'}} /> : <img src={activePost.src} alt="Full Post Angelo Russo" style={{width: '100%', height: 'auto'}} />}
                         </motion.div>
                     </motion.div>
                 )}
             </AnimatePresence>
-
         </div>
     );
 };
 
-// --- GRADIENTE WATER (Corretto) ---
 function WaterGradient() {
-    return (
-        <ShaderGradient 
-            animate="on" 
-            axesHelper="off" 
-            bgColor1="#000000" 
-            bgColor2="#000000" 
-            brightness={1.2} 
-            cAzimuthAngle={180} 
-            cDistance={2.9} 
-            cPolarAngle={120} 
-            cameraZoom={1} 
-            color1="#ebedff" 
-            color2="#f3f2f8" 
-            color3="#dbf8ff" 
-            destination="onCanvas" 
-            embedMode="off" 
-            envPreset="city" 
-            format="gif" 
-            fov={45} 
-            frameRate={10} 
-            gizmoHelper="hide" 
-            grain="off" 
-            lightType="3d" 
-            pixelDensity={1} 
-            positionX={0} 
-            positionY={1.8} 
-            positionZ={0} 
-            range="disabled" 
-            rangeEnd={40} 
-            rangeStart={0} 
-            reflection={0.1} 
-            rotationX={0} 
-            rotationY={0} 
-            rotationZ={-90} 
-            shader="defaults" 
-            type="waterPlane" 
-            uAmplitude={0} 
-            uDensity={1} 
-            uFrequency={5.5} 
-            uSpeed={0.3} 
-            uStrength={3} 
-            uTime={0.2} 
-            wireframe={false} 
-        />
-    );
+    return <ShaderGradient animate="on" axesHelper="off" bgColor1="#000000" bgColor2="#000000" brightness={1.2} cAzimuthAngle={180} cDistance={2.9} cPolarAngle={120} cameraZoom={1} color1="#ebedff" color2="#f3f2f8" color3="#dbf8ff" destination="onCanvas" embedMode="off" envPreset="city" fov={45} frameRate={10} gizmoHelper="hide" grain="off" lightType="3d" pixelDensity={1} positionX={0} positionY={1.8} positionZ={0} range="disabled" reflection={0.1} rotationX={0} rotationY={0} rotationZ={-90} shader="defaults" type="waterPlane" uAmplitude={0} uDensity={1} uFrequency={5.5} uSpeed={0.3} uStrength={3} uTime={0.2} wireframe={false} />;
 }
 
 export default NeroEspresso;
