@@ -14,6 +14,7 @@ const PROMPT_IMG_RAW = "Reference_Edgar_raw.webp";
 const PROMPT_IMG_GEN = "Reference_Edgar_Gen.webp";
 const WR_VIDEO = "WR-RP-Endurance.mp4"; 
 const EU_PDF_FILE = "PanAfGeo_Branding.pdf"; 
+const EU_COVER_IMG = "eu_guidelines_cover.webp"; // <--- Nuova immagine copertina
 
 // --- ICONE SOCIAL ---
 const ICON_IG = "Icona_instagram.webp";
@@ -68,8 +69,13 @@ const WR_LANG = {
         'uk-s2-t': 'Reels & Motion', 'uk-s2-d': 'Produzione video short-form: editing dinamico, sound design e hook visivi per massimizzare la retention.',
         'uk-s3-t': 'Brand Aesthetics', 'uk-s3-d': 'Cura del feed e gestione della community per trasformare l\'identità visiva in engagement reale.',
         'ig-btn-label': 'VISITA @URBANKONG_',
-        'project-eu': 'PANAFGEO / EU BRANDING', 'project-eu-desc': 'Visual Identity istituzionale conforme alle EU Guidelines dell\'Unione Europea.', 'eu-s1-t': 'EU Guidelines', 'eu-s1-d': 'Analisi dei gateway normativi e visivi dell\'Unione Europea.', 'eu-s2-t': 'Editorial Design', 'eu-s2-d': 'Impaginazione brochure rispettando le griglie istituzionali.', 'eu-s3-t': 'Brand Application', 'eu-s3-d': 'Declinazione su supporti fisici (Rollup, Stand, Gadget).',
-        'credits-title': 'CREDITS & TEAM', 'collab-name': 'Gennaro Grieco', 'collab-role': 'Graphic Designer | UI/UX '
+        'project-eu': 'PANAFGEO / EU BRANDING', 'project-eu-desc': 'Visual Identity istituzionale conforme alle EU Guidelines dell\'Unione Europea.', 
+        'eu-s1-t': 'EU Guidelines', 'eu-s1-d': 'Analisi dei gateway normativi e visivi dell\'Unione Europea.', 
+        'eu-s2-t': 'Editorial Design', 'eu-s2-d': 'Impaginazione brochure rispettando le griglie istituzionali.', 
+        'eu-s3-t': 'Brand Application', 'eu-s3-d': 'Declinazione su supporti fisici (Rollup, Stand, Gadget).',
+        'credits-title': 'CREDITS & TEAM', 'collab-name': 'Gennaro Grieco', 'collab-role': 'Graphic Designer | UI/UX ',
+        'download-pdf': 'SCARICA PDF COMPLETO',
+        'flip-hint': 'Clicca per girare'
     },
     en: {
         'back': '← BACK', 'title': 'WHITE RABBIT AGENCY', 'role-title': 'Generative AI Strategy & Visual Production', 'role-sub': 'Creative Designer & AI Specialist @ White Rabbit Agency', 'slogan': 'Engineering creativity: neural video workflows and custom AI Agents.', 'prompt-text': '/imagine prompt: editorial photography, futuristic fashion, cinematic lighting --v 6.0', 'btn-generate': 'GENERATE', 'btn-done': 'DONE',
@@ -82,7 +88,9 @@ const WR_LANG = {
         'step-3-t': 'Sonic Branding', 'step-3-d': 'Immersive sound design and audio synchronization to provide emotional depth and realistic weight to AI-generated clips.',
         'project-uk': 'URBAN KONG', 'project-uk-desc': 'Social Media Growth & Hybrid Content Strategy.', 'uk-s1-t': 'AI Editorial Brain', 'uk-s1-d': 'Trend analysis and topic cluster ideation via Gemini Agents for a data-driven, real-time editorial calendar.', 'uk-s2-t': 'Reels & Motion', 'uk-s2-d': 'Short-form video production: dynamic editing, sound design, and visual hooks to maximize user retention.', 'uk-s3-t': 'Brand Aesthetics', 'uk-s3-d': 'Meticulous feed curation and community management to translate visual identity into real engagement.', 'ig-btn-label': 'VISIT @URBANKONG_',
         'project-eu': 'PANAFGEO / EU BRANDING', 'project-eu-desc': 'Institutional Visual Identity compliant with official European Union Guidelines.', 'eu-s1-t': 'EU Guidelines', 'eu-s1-d': 'Analysis of EU regulatory and visual frameworks.', 'eu-s2-t': 'Editorial Design', 'eu-s2-d': 'Brochure layout adhering to institutional grids.', 'eu-s3-t': 'Brand Application', 'eu-s3-d': 'Application on physical supports (Rollups, Exhibition Stands, Gadgets).',
-        'credits-title': 'CREDITS & TEAM', 'collab-name': 'Gennaro Grieco', 'collab-role': 'Graphic Designer | UI/UX'
+        'credits-title': 'CREDITS & TEAM', 'collab-name': 'Gennaro Grieco', 'collab-role': 'Graphic Designer | UI/UX',
+        'download-pdf': 'DOWNLOAD FULL PDF',
+        'flip-hint': 'Click to flip'
     }
 };
 
@@ -93,6 +101,7 @@ const Typewriter = ({ text }) => {
     const child = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100 } } };
     return <motion.h1 className="intro-text" variants={container} initial="hidden" animate="visible">{letters.map((char, index) => <motion.span key={index} variants={child}>{char}</motion.span>)}</motion.h1>;
 };
+
 const Reveal = ({ children }) => <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-10%" }} transition={{ duration: 0.8 }}>{children}</motion.div>;
 
 const SocialIconOnly = ({ type, link }) => { 
@@ -134,43 +143,216 @@ const PromptSimulator = ({ t }) => {
     );
 };
 
-// --- PDF VIEWER RISOLUTIVO (Slides-only view) ---
-const PdfViewer = ({ file }) => {
+// --- NUOVO COMPONENTE MOCKUP 3D PER BRAND GUIDELINES ---
+const BrandGuidelines3D = ({ file, coverImg, t }) => {
+    const [isFlipped, setIsFlipped] = useState(false);
+    
     return (
-        <div style={{ 
-            width: '100%', 
-            display: 'flex', 
+        <div style={{
+            perspective: '2000px',
+            marginTop: '40px',
+            marginBottom: '20px',
+            display: 'flex',
             justifyContent: 'center',
-            marginTop: '40px' 
+            alignItems: 'center',
+            flexDirection: 'column'
         }}>
-            <div style={{
-                width: '100%',
-                maxWidth: '1000px',
-                aspectRatio: '16/10.5', // Rapporto perfetto per PDF orizzontali
-                borderRadius: '20px',
-                overflow: 'hidden',
-                boxShadow: '0 40px 100px rgba(0,0,0,0.2)',
-                backgroundColor: '#000',
-                position: 'relative',
-                border: '1px solid rgba(255,255,255,0.1)'
-            }}>
-                <iframe 
-                    /* TRUCCO: 
-                       #view=Fit - adatta la pagina al contenitore
-                       #pagemode=none - nasconde le miniature laterali
-                       #scrollbar=0 - nasconde le barre (dove possibile)
-                       &navpanes=0 - nasconde il pannello navigazione
-                    */
-                    src={`${file}#view=Fit&pagemode=none&navpanes=0&toolbar=0`} 
-                    width="100%" 
-                    height="100%" 
-                    style={{ 
-                        border: 'none',
-                        display: 'block'
+            <motion.div
+                style={{
+                    width: '100%',
+                    maxWidth: '800px',
+                    aspectRatio: '16/11',
+                    position: 'relative',
+                    transformStyle: 'preserve-3d',
+                    cursor: 'pointer'
+                }}
+                animate={{ rotateY: isFlipped ? 180 : 0 }}
+                transition={{ duration: 0.8, type: 'spring', stiffness: 100 }}
+                onClick={() => setIsFlipped(!isFlipped)}
+                whileHover={{ scale: 1.02 }}
+            >
+                {/* Fronte - Copertina del PDF */}
+                <motion.div
+                    style={{
+                        position: 'absolute',
+                        width: '100%',
+                        height: '100%',
+                        backfaceVisibility: 'hidden',
+                        borderRadius: '20px',
+                        overflow: 'hidden',
+                        boxShadow: '0 30px 60px rgba(0,0,0,0.3)',
+                        border: '1px solid rgba(255,255,255,0.1)'
                     }}
-                    title="PanAfGeo Branding Guidelines"
-                />
-            </div>
+                >
+                    <img
+                        src={coverImg}
+                        alt="Brand Guidelines Cover"
+                        style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            display: 'block'
+                        }}
+                        onError={(e) => {
+                            e.target.style.display = 'none';
+                            e.target.parentElement.style.background = 'linear-gradient(135deg, #1a1a1a, #2a2a2a)';
+                        }}
+                    />
+                    
+                    {/* Overlay con titolo */}
+                    <div style={{
+                        position: 'absolute',
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        padding: '30px',
+                        background: 'linear-gradient(to top, rgba(0,0,0,0.9), transparent)',
+                        color: 'white'
+                    }}>
+                        <h3 style={{
+                            margin: 0,
+                            fontSize: 'clamp(1.2rem, 2vw, 1.8rem)',
+                            fontWeight: 700,
+                            fontFamily: 'Unbounded, sans-serif'
+                        }}>
+                            PANAFGEO
+                        </h3>
+                        <p style={{
+                            opacity: 0.8,
+                            margin: '5px 0 0',
+                            fontSize: 'clamp(0.8rem, 1.5vw, 1rem)'
+                        }}>
+                            EU Brand Guidelines
+                        </p>
+                    </div>
+                    
+                    {/* Hint visivo per girare */}
+                    <div style={{
+                        position: 'absolute',
+                        top: '20px',
+                        right: '20px',
+                        background: 'rgba(255,255,255,0.2)',
+                        backdropFilter: 'blur(10px)',
+                        padding: '8px 15px',
+                        borderRadius: '30px',
+                        color: 'white',
+                        fontSize: '0.8rem',
+                        border: '1px solid rgba(255,255,255,0.3)'
+                    }}>
+                        {t['flip-hint']} ↻
+                    </div>
+                </motion.div>
+                
+                {/* Retro - Download */}
+                <motion.div
+                    style={{
+                        position: 'absolute',
+                        width: '100%',
+                        height: '100%',
+                        backfaceVisibility: 'hidden',
+                        transform: 'rotateY(180deg)',
+                        background: 'linear-gradient(135deg, #1a1a1a, #2d2d2d)',
+                        borderRadius: '20px',
+                        border: '1px solid rgba(255,255,255,0.2)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        gap: '20px',
+                        padding: '20px',
+                        boxShadow: '0 30px 60px rgba(0,0,0,0.3)'
+                    }}
+                >
+                    {/* Icona PDF animata */}
+                    <motion.div
+                        animate={{ 
+                            y: [0, -10, 0],
+                        }}
+                        transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                        }}
+                        style={{
+                            fontSize: '5rem',
+                            filter: 'drop-shadow(0 10px 20px rgba(255,107,66,0.3))'
+                        }}
+                    >
+                        📄
+                    </motion.div>
+                    
+                    <h3 style={{
+                        color: 'white',
+                        margin: 0,
+                        fontSize: '1.8rem',
+                        fontFamily: 'Unbounded, sans-serif'
+                    }}>
+                        EU Guidelines
+                    </h3>
+                    
+                    <p style={{
+                        color: 'rgba(255,255,255,0.7)',
+                        textAlign: 'center',
+                        maxWidth: '300px',
+                        margin: 0
+                    }}>
+                        Documento completo con specifiche EU, griglie e applicazioni
+                    </p>
+                    
+                    <motion.a
+                        href={file}
+                        download
+                        style={{
+                            padding: '15px 40px',
+                            background: '#ff6b42',
+                            color: 'white',
+                            textDecoration: 'none',
+                            borderRadius: '40px',
+                            fontWeight: 600,
+                            fontSize: '1.1rem',
+                            border: 'none',
+                            cursor: 'pointer',
+                            marginTop: '10px',
+                            boxShadow: '0 10px 20px rgba(255,107,66,0.3)'
+                        }}
+                        whileHover={{ 
+                            scale: 1.05,
+                            background: '#ff8259',
+                            boxShadow: '0 15px 30px rgba(255,107,66,0.4)'
+                        }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        {t['download-pdf']} ↓
+                    </motion.a>
+                    
+                    <p style={{
+                        color: 'rgba(255,255,255,0.4)',
+                        fontSize: '0.8rem',
+                        marginTop: '10px'
+                    }}>
+                        {t['flip-hint']} per tornare
+                    </p>
+                </motion.div>
+            </motion.div>
+            
+            {/* Indicatore di interazione */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1 }}
+                style={{
+                    marginTop: '20px',
+                    color: 'rgba(255,255,255,0.5)',
+                    fontSize: '0.9rem',
+                    display: 'flex',
+                    gap: '10px',
+                    alignItems: 'center'
+                }}
+            >
+                <span>👆</span>
+                <span>Clicca sul mockup per girarlo</span>
+            </motion.div>
         </div>
     );
 };
@@ -291,11 +473,12 @@ const WhiteRabbit = ({ lang, goBack }) => {
                         <h2 className="section-label" style={{textAlign:'center', width:'100%', display:'block'}}>{t['project-eu']}</h2>
                         <p className="section-desc" style={{textAlign:'center'}}>{t['project-eu-desc']}</p>
                         
-                        {/* Nuova Visualizzazione PDF Orizzontale */}
-                        <div style={{marginTop: '60px', width: '100%'}}>
-                            <h4 style={{marginBottom:'20px', fontFamily:'Unbounded', textTransform:'uppercase', fontSize:'0.9rem', color:'#666'}}>Brand Guidelines Viewer</h4>
-                            <PdfViewer file={EU_PDF_FILE} />
-                        </div>
+                        {/* SOSTITUITO CON IL NUOVO MOCKUP 3D */}
+                        <BrandGuidelines3D 
+                            file={EU_PDF_FILE} 
+                            coverImg={EU_COVER_IMG}
+                            t={t}
+                        />
 
                         <div className="credits-section" style={{marginTop: '80px'}}>
                             <h4 className="credits-title-small">{t['credits-title']}</h4>
