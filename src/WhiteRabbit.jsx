@@ -134,24 +134,39 @@ const PromptSimulator = ({ t }) => {
     );
 };
 
+// --- PDF VIEWER SISTEMATO ---
 const PdfViewer = ({ file }) => {
     return (
-        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '40px' }}>
+        <div style={{ 
+            width: '100%', 
+            display: 'flex', 
+            flexDirection: 'column', 
+            alignItems: 'center', 
+            marginTop: '40px' 
+        }}>
             <div style={{
                 width: '100%',
-                height: '600px',
-                border: '1px solid rgba(0,0,0,0.1)',
-                borderRadius: '12px',
-                overflow: 'hidden',
-                boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
-                backgroundColor: '#f5f5f7'
+                maxWidth: '900px',
+                height: '75vh', // Altezza proporzionata alla viewport
+                borderRadius: '16px',
+                overflow: 'hidden', // Taglia via le barre esterne
+                boxShadow: '0 30px 60px rgba(0,0,0,0.2)',
+                backgroundColor: '#fff',
+                position: 'relative',
+                border: '1px solid rgba(0,0,0,0.05)'
             }}>
                 <iframe 
-                    src={`${file}#toolbar=0&navpanes=0&scrollbar=0`} 
+                    // Il parametro #view=FitH forza la larghezza della pagina al contenitore
+                    src={`${file}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`} 
                     width="100%" 
                     height="100%" 
-                    style={{ border: 'none' }}
-                    title="PanAfGeo EU Branding PDF"
+                    style={{ 
+                        border: 'none',
+                        // Questo "zoom" virtuale aiuta a nascondere i bordi neri di alcuni browser
+                        transform: 'scale(1.02)', 
+                        transformOrigin: 'top center'
+                    }}
+                    title="Visual Content PDF"
                 />
             </div>
         </div>
@@ -283,6 +298,7 @@ const WhiteRabbit = ({ lang, goBack }) => {
 
                         <div style={{marginTop: '60px', width: '100%'}}>
                             <h4 style={{marginBottom:'20px', fontFamily:'Unbounded', textTransform:'uppercase', fontSize:'0.9rem', color:'#666'}}>Brand Guidelines Viewer</h4>
+                            {/* Il nuovo PdfViewer con i fix estetici */}
                             <PdfViewer file={EU_PDF_FILE} />
                         </div>
 
