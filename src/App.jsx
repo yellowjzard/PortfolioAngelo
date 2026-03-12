@@ -39,6 +39,8 @@ const LANG_DATA = {
         'bio-philosophy': 'Credo in un design che non sia solo guardato, ma vissuto. Un approccio dove la tecnologia non sostituisce l\'umano, ma ne amplifica le possibilità.',
 
         'btn-cv': 'SCARICA CV (PDF)',
+        'btn-read-more': 'LEGGI DI PIÙ',
+        'btn-read-less': 'MOSTRA MENO',
         'works-title': 'Selected Works',
         'contact-title': 'CONTACT ME',
         'form-name': 'Nome', 'form-name-ph': 'Il tuo nome',
@@ -66,6 +68,8 @@ const LANG_DATA = {
         'bio-philosophy': 'I believe in design that is not just seen, but lived. An approach where technology amplifies human potential rather than replacing it.',
 
         'btn-cv': 'DOWNLOAD CV (PDF)',
+        'btn-read-more': 'READ MORE',
+        'btn-read-less': 'SHOW LESS',
         'works-title': 'Selected Works',
         'contact-title': 'CONTACT ME',
         'form-name': 'Name', 'form-name-ph': 'Your Name',
@@ -146,7 +150,8 @@ const FooterSocialBtn = ({ icon, link }) => {
 
 function App() {
     const [lang, setLang] = useState('it');
-    const [view, setView] = useState('home'); 
+    const [view, setView] = useState('home');
+    const [showFullBio, setShowFullBio] = useState(false);
 
     const { scrollY } = useScroll();
     const introOpacity = useTransform(scrollY, [0, 400], [1, 0]);
@@ -178,7 +183,7 @@ function App() {
             <div className="content-scroll-layer">
                 <header><button onClick={toggleLang} className="lang-btn">{lang === 'it' ? 'EN' : 'IT'}</button></header>
 
-                {/* BIO SECTION AGGIORNATA */}
+                {/* BIO SECTION CON LEGGI DI PIÙ */}
                 <section className="glass-section bio-section">
                     <Reveal>
                         <div className="bio-content-wrapper">
@@ -192,45 +197,92 @@ function App() {
                                     <span className="bio-highlight">{LANG_DATA[lang]['bio-sub']}</span>
                                 </h1>
                                 
-                                {/* Intro Paragraphs */}
-                                {LANG_DATA[lang]['bio-intro'].map((paragraph, index) => (
-                                    <p key={index} className="bio-text" style={{ marginBottom: '20px' }}>
-                                        {paragraph}
-                                    </p>
-                                ))}
-
-                                {/* Skills List */}
-                                <div style={{ marginBottom: '30px', marginTop: '10px' }}>
-                                    <h4 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '15px', color: '#111' }}>
-                                        {LANG_DATA[lang]['bio-skills-title']}
-                                    </h4>
-                                    <ul style={{ listStyle: 'none', padding: 0 }}>
-                                        {LANG_DATA[lang]['bio-skills-list'].map((skill, index) => (
-                                            <li key={index} style={{ marginBottom: '12px', fontSize: '1rem', color: '#444', lineHeight: '1.5' }}>
-                                                <span style={{ fontWeight: 700, color: '#2563eb' }}>• {skill.title}</span> {skill.desc}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-
-                                {/* Philosophy */}
-                                <p className="bio-text" style={{ fontStyle: 'italic', color: '#555', borderLeft: '3px solid #ccc', paddingLeft: '15px' }}>
-                                    {LANG_DATA[lang]['bio-philosophy']}
+                                {/* Primo paragrafo (sempre visibile) */}
+                                <p className="bio-text" style={{ marginBottom: '20px' }}>
+                                    {LANG_DATA[lang]['bio-intro'][0]}
                                 </p>
-                                
-                                <motion.a 
-                                    href="/Curriculum_Angelo_Russo.pdf" 
-                                    download="Curriculum_Angelo_Russo"
-                                    className="cv-download-btn"
-                                    whileHover={{ scale: 1.05, backgroundColor: "#111", color: "#fff" }}
-                                    whileTap={{ scale: 0.95 }}
-                                    style={{ marginTop: '30px' }}
+
+                                {/* Contenuto espandibile */}
+                                <motion.div
+                                    initial={false}
+                                    animate={{ height: showFullBio ? 'auto' : 0, opacity: showFullBio ? 1 : 0 }}
+                                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                                    style={{ overflow: 'hidden' }}
                                 >
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight:'10px'}}>
-                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
-                                    </svg>
-                                    {LANG_DATA[lang]['btn-cv']}
-                                </motion.a>
+                                    {/* Secondo paragrafo */}
+                                    <p className="bio-text" style={{ marginBottom: '20px' }}>
+                                        {LANG_DATA[lang]['bio-intro'][1]}
+                                    </p>
+
+                                    {/* Skills List */}
+                                    <div style={{ marginBottom: '30px', marginTop: '10px' }}>
+                                        <h4 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '15px', color: '#111' }}>
+                                            {LANG_DATA[lang]['bio-skills-title']}
+                                        </h4>
+                                        <ul style={{ listStyle: 'none', padding: 0 }}>
+                                            {LANG_DATA[lang]['bio-skills-list'].map((skill, index) => (
+                                                <li key={index} style={{ marginBottom: '12px', fontSize: '1rem', color: '#444', lineHeight: '1.5' }}>
+                                                    <span style={{ fontWeight: 700, color: '#2563eb' }}>• {skill.title}</span> {skill.desc}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+
+                                    {/* Philosophy */}
+                                    <p className="bio-text" style={{ fontStyle: 'italic', color: '#555', borderLeft: '3px solid #ccc', paddingLeft: '15px' }}>
+                                        {LANG_DATA[lang]['bio-philosophy']}
+                                    </p>
+                                </motion.div>
+
+                                {/* Pulsanti */}
+                                <div style={{ display: 'flex', gap: '15px', marginTop: '30px', flexWrap: 'wrap' }}>
+                                    <motion.button
+                                        onClick={() => setShowFullBio(!showFullBio)}
+                                        className="read-more-btn"
+                                        whileHover={{ scale: 1.05, backgroundColor: "#2563eb", color: "#fff" }}
+                                        whileTap={{ scale: 0.95 }}
+                                        style={{
+                                            padding: '12px 24px',
+                                            backgroundColor: showFullBio ? '#2563eb' : 'transparent',
+                                            color: showFullBio ? '#fff' : '#2563eb',
+                                            border: '2px solid #2563eb',
+                                            borderRadius: '30px',
+                                            fontSize: '0.9rem',
+                                            fontWeight: 600,
+                                            cursor: 'pointer',
+                                            transition: 'all 0.3s ease'
+                                        }}
+                                    >
+                                        {showFullBio ? LANG_DATA[lang]['btn-read-less'] : LANG_DATA[lang]['btn-read-more']}
+                                    </motion.button>
+
+                                    <motion.a
+                                        href="/Curriculum_Angelo_Russo.pdf"
+                                        download="Curriculum_Angelo_Russo"
+                                        className="cv-download-btn"
+                                        whileHover={{ scale: 1.05, backgroundColor: "#111", color: "#fff" }}
+                                        whileTap={{ scale: 0.95 }}
+                                        style={{
+                                            padding: '12px 24px',
+                                            backgroundColor: '#111',
+                                            color: '#fff',
+                                            border: 'none',
+                                            borderRadius: '30px',
+                                            fontSize: '0.9rem',
+                                            fontWeight: 600,
+                                            cursor: 'pointer',
+                                            textDecoration: 'none',
+                                            display: 'inline-flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center'
+                                        }}
+                                    >
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight:'10px'}}>
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+                                        </svg>
+                                        {LANG_DATA[lang]['btn-cv']}
+                                    </motion.a>
+                                </div>
                             </div>
                         </div>
                     </Reveal>
