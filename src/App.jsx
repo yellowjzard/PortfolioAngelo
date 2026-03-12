@@ -25,49 +25,48 @@ const LANG_DATA = {
         'scroll-hint': 'Scorri per entrare',
         
         'bio-title': 'Angelo Russo.',
-        'bio-sub': 'Creative Designer & AI Specialist a Afragola.',
+        'bio-sub': 'New Media Artist & AI Specialist.',
         
-        // BIO STRUTTURATA - Ottimizzata SEO Napoli/Afragola
         'bio-intro': [
-            `Il mio approccio al design è agnostico rispetto agli strumenti: non parto dalla tecnologia, ma dall'idea. Come Creative Designer operante tra Afragola e Napoli, considero i software non come vincoli, ma come mezzi flessibili per orchestrare la soluzione più efficace per ogni brand.`,
-            `Dall'esperienza internazionale a Bruxelles presso White Rabbit, dove ho ingegnerizzato workflow creativi con modelli AI avanzati, fino alle radici nell'arte relazionale napoletana con #CUOREDINAPOLI, unisco sensibilità artistica e precisione operativa per massimizzare il ROI aziendale.`
+            `Il mio approccio al design è agnostico rispetto agli strumenti: non parto dalla tecnologia, ma dall'idea. Come New Media Artist, considero i software non come vincoli, ma come mezzi flessibili da orchestrare per trovare la soluzione più efficace. La mia missione è trasformare la complessità tecnologica in narrazioni visive potenti, garantendo che la tecnica sia sempre al servizio del concept.`,
+            `Dall'esperienza internazionale a Bruxelles presso White Rabbit, dove ho ingegnerizzato workflow creativi integrando modelli avanzati come Higgsfield e Agenti Gemini, fino alle radici nell'arte relazionale con #CUOREDINAPOLI, ho imparato a muovermi fluidamente tra mondi diversi. Unisco il rigore del graphic design tradizionale alla sperimentazione generativa, fondendo sensibilità artistica e precisione operativa.`
         ],
-        'bio-skills-title': 'Competenze Strategiche:',
+        'bio-skills-title': 'Cosa porto nei progetti:',
         'bio-skills-list': [
-            { title: 'Graphic Design Afragola:', desc: 'Comunicazione visiva d\'impatto e branding professionale per aziende del territorio campano e internazionale.' },
-            { title: 'AI Pipeline Architecture:', desc: 'Ottimizzazione dei processi creativi tramite Generative AI per ridurre i costi di produzione (fino al -94% dimostrato in GCerti).' },
-            { title: 'Creative Problem Solving:', desc: 'Un mindset ibrido che supera i limiti tecnici per esaltare l\'identità digitale del cliente.' }
+            { title: 'Versatilità Strategica:', desc: 'Capacità di selezionare il medium ideale per ogni progetto, dal print design al video editing, fino alle installazioni interattive.' },
+            { title: 'AI Pipeline Architecture:', desc: 'Ottimizzazione dei processi creativi tramite l\'uso mirato di Generative AI per ridurre i tempi di produzione mantenendo alta la qualità autoriale.' },
+            { title: 'Creative Problem Solving:', desc: 'Un mindset che supera i limiti tecnici dei software, esplorando soluzioni ibride per esaltare l\'idea originale.' }
         ],
-        'bio-philosophy': 'Credo in un design che non sia solo guardato, ma vissuto. Una tecnologia che amplifica il potenziale umano a Napoli e nel mondo.',
+        'bio-philosophy': 'Credo in un design che non sia solo guardato, ma vissuto. Un approccio dove la tecnologia non sostituisce l\'essere umano, ma ne amplifica le possibilità.',
 
         'btn-cv': 'SCARICA CV (PDF)',
-        'btn-read-more': 'SCOPRI IL MIO PROFILO',
+        'btn-read-more': 'LEGGI DI PIÙ',
         'btn-read-less': 'MOSTRA MENO',
         'works-title': 'Selected Works',
-        'contact-title': 'CONTATTAMI AD AFRAGOLA',
+        'contact-title': 'CONTATTAMI',
         'form-name': 'Nome', 'form-name-ph': 'Il tuo nome',
         'form-email': 'Email', 'form-email-ph': 'tua@email.com',
-        'form-msg': 'Messaggio', 'form-msg-ph': 'Come posso aiutarti per il tuo progetto a Napoli?',
+        'form-msg': 'Messaggio', 'form-msg-ph': 'Come posso aiutarti?',
         'form-btn': 'INVIA MESSAGGIO'
     },
     en: {
         'welcome': 'WELCOME', 
-        'scroll-hint': 'Scroll to enter',
+        'scroll-hint': 'Scroll to explore',
         
         'bio-title': 'Angelo Russo.',
         'bio-sub': 'New Media Artist & AI Specialist.',
         
         'bio-intro': [
-            `My approach to design is tool-agnostic: I start with the idea. As a Creative Designer based in Naples, Italy, I see software as a flexible means to transform technological complexity into powerful visual narratives.`,
-            `From international experience in Brussels at White Rabbit to my roots in relational art with #CUOREDINAPOLI, I transition fluidly between the rigor of traditional graphic design and generative AI experimentation.`
+            `My approach to design is tool-agnostic: I focus on the idea rather than the technology. As a New Media Artist, I view software not as a constraint, but as a flexible tool to be orchestrated into the most effective solution. My mission is to translate technological complexity into compelling visual narratives, ensuring that technique always serves the concept.`,
+            `From my international experience in Brussels at White Rabbit—where I engineered creative workflows by integrating advanced models such as Higgsfield and Gemini Agents—to my roots in relational art with #CUOREDINAPOLI, I have learned to navigate fluidly between diverse worlds. I bridge the gap between rigorous traditional graphic design and generative experimentation, blending artistic sensitivity with operational precision.`
         ],
-        'bio-skills-title': 'What I bring to projects:',
+        'bio-skills-title': 'Core Competencies:',
         'bio-skills-list': [
-            { title: 'Strategic Versatility:', desc: 'Ability to select the perfect medium, ranging from print design to interactive AI installations.' },
-            { title: 'AI Pipeline Architecture:', desc: 'Optimizing creative processes through targeted Generative AI use to reduce production times and marketing costs.' },
-            { title: 'Creative Problem Solving:', desc: 'A hybrid mindset exploring solutions to enhance the original brand idea.' }
+            { title: 'Strategic Versatility:', desc: 'Ability to select the perfect medium for any project, ranging from print design and video editing to interactive installations.' },
+            { title: 'AI Pipeline Architecture:', desc: 'Optimizing creative workflows through targeted Generative AI to reduce production time without compromising authorial quality.' },
+            { title: 'Creative Problem Solving:', desc: 'A mindset that transcends technical software limits, exploring hybrid solutions to enhance the original vision.' }
         ],
-        'bio-philosophy': 'I believe in design that is not just seen, but lived. An approach where technology amplifies human potential.',
+        'bio-philosophy': 'I believe in design that is not just seen, but experienced. An approach where technology amplifies human potential rather than replacing it.',
 
         'btn-cv': 'DOWNLOAD CV (PDF)',
         'btn-read-more': 'READ MORE',
@@ -103,12 +102,12 @@ const FolderItem = ({ title, type, onClick }) => {
 
     const renderIcon = () => {
         switch (type) {
-            case 'gcerti': return <motion.img src={GCERTI_ICON} alt="GCERTI Italy Results" className="folder-pop-icon" variants={iconVariants} style={{ objectFit: 'contain' }} />;
-            case 'whiterabbit': return <motion.img src={WR_ICON} alt="AI Specialist Brussels" className="folder-pop-icon" variants={iconVariants} style={{ objectFit: 'contain' }} />;
+            case 'gcerti': return <motion.img src={GCERTI_ICON} alt="GCERTI Italy - Brand Identity" className="folder-pop-icon" variants={iconVariants} style={{ objectFit: 'contain' }} />;
+            case 'whiterabbit': return <motion.img src={WR_ICON} alt="White Rabbit Agency - AI Strategy" className="folder-pop-icon" variants={iconVariants} style={{ objectFit: 'contain' }} />;
             case 'nero': return <motion.svg viewBox="0 0 100 100" className="folder-pop-icon" variants={iconVariants}><path d="M30 40 L 30 70 Q 30 85 50 85 Q 70 85 70 70 L 70 40 Z" fill="#4b3621" /><path d="M70 50 Q 85 50 85 60 Q 85 70 70 70" fill="none" stroke="#4b3621" strokeWidth="3" /></motion.svg>;
-            case 'cuore': return <motion.img src={CUORE_ICON} alt="Arte Relazionale Napoli" className="folder-pop-icon" variants={iconVariants} style={{ objectFit: 'contain' }} />;
-            case 'noiumani': return <motion.img src={NTA_ICON} alt="New Media Artist" className="folder-pop-icon" variants={iconVariants} style={{ objectFit: 'contain' }} />;
-            case 'procida': return <motion.img src={NTA_ICON} alt="Design per Procida" className="folder-pop-icon" variants={iconVariants} style={{ objectFit: 'contain' }} />;
+            case 'cuore': return <motion.img src={CUORE_ICON} alt="#CuorediNapoli Art Project" className="folder-pop-icon" variants={iconVariants} style={{ objectFit: 'contain' }} />;
+            case 'noiumani': return <motion.img src={NTA_ICON} alt="Noi Umani - New Media Art" className="folder-pop-icon" variants={iconVariants} style={{ objectFit: 'contain' }} />;
+            case 'procida': return <motion.img src={NTA_ICON} alt="Procida Project" className="folder-pop-icon" variants={iconVariants} style={{ objectFit: 'contain' }} />;
             case 'freelance': return <motion.svg viewBox="0 0 100 100" className="folder-pop-icon" variants={iconVariants}><path d="M50 15 L 60 40 L 90 40 L 65 60 L 75 85 L 50 70 L 25 85 L 35 60 L 10 40 L 40 40 Z" fill="#facc15" stroke="#eab308" strokeWidth="2" /></motion.svg>;
             default: return null;
         }
@@ -143,8 +142,8 @@ const Reveal = ({ children }) => {
 
 const FooterSocialBtn = ({ icon, link }) => {
     return (
-        <motion.a href={link} target="_blank" style={{ display: 'inline-flex', width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(255,255,255,0.5)', justifyContent: 'center', alignItems: 'center', border: '1px solid rgba(0,0,0,0.1)', margin: '0 10px' }} whileHover={{ scale: 1.1, backgroundColor: '#fff' }} whileTap={{ scale: 0.95 }}>
-            <img src={icon} alt="Social" style={{ width: '20px', height: '20px', objectFit: 'contain' }} />
+        <motion.a href={link} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(255,255,255,0.5)', justifyContent: 'center', alignItems: 'center', border: '1px solid rgba(0,0,0,0.1)', margin: '0 10px' }} whileHover={{ scale: 1.1, backgroundColor: '#fff' }} whileTap={{ scale: 0.95 }}>
+            <img src={icon} alt="Social Link" style={{ width: '20px', height: '20px', objectFit: 'contain' }} />
         </motion.a>
     );
 };
@@ -191,11 +190,11 @@ function App() {
                     <Reveal>
                         <div className="bio-content-wrapper">
                             <div className="bio-image-col">
-                                <img src={PROFILE_IMG} alt="Angelo Russo Creative Designer Afragola" className="profile-photo" />
+                                <img src={PROFILE_IMG} alt="Angelo Russo - AI Specialist & New Media Artist" className="profile-photo" />
                             </div>
 
                             <div className="bio-text-col">
-                                <h2 className="bio-headline" style={{ fontSize: '2.5rem', marginBottom: '10px' }}>
+                                <h2 className="bio-headline" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 800 }}>
                                     {LANG_DATA[lang]['bio-title']} <br />
                                     <span className="bio-highlight">{LANG_DATA[lang]['bio-sub']}</span>
                                 </h2>
@@ -287,7 +286,7 @@ function App() {
 
                 <section className="glass-section works-section">
                     <Reveal>
-                        <div className="section-label">01 / {LANG_DATA[lang]['works-title']}</div>
+                        <h2 className="section-label">01 / {LANG_DATA[lang]['works-title']}</h2>
                         <div className="folders-grid">
                             <FolderItem title="GCERTI Italy" type="gcerti" onClick={() => navigateTo('gcerti')} />
                             <FolderItem title="White Rabbit" type="whiterabbit" onClick={() => navigateTo('whiterabbit')} />
@@ -302,7 +301,7 @@ function App() {
 
                 <section className="glass-section contact-section">
                     <Reveal>
-                        <div className="section-label" style={{textAlign:'center', width:'100%'}}>02 / {LANG_DATA[lang]['contact-title']}</div>
+                        <h2 className="section-label" style={{textAlign:'center', width:'100%'}}>02 / {LANG_DATA[lang]['contact-title']}</h2>
                         <form action="https://formspree.io/f/mrbnlyyl" method="POST" className="contact-form">
                             <div className="form-group"><label>{LANG_DATA[lang]['form-name']}</label><input type="text" name="name" placeholder={LANG_DATA[lang]['form-name-ph']} required className="form-input" /></div>
                             <div className="form-group"><label>{LANG_DATA[lang]['form-email']}</label><input type="email" name="email" placeholder={LANG_DATA[lang]['form-email-ph']} required className="form-input" /></div>
@@ -317,7 +316,7 @@ function App() {
                         <FooterSocialBtn icon={ICON_LN} link="https://www.linkedin.com/in/angelo-russo-0964a8183" />
                         <FooterSocialBtn icon={ICON_IG} link="https://www.instagram.com/yellowjzard" />
                     </div>
-                    <p style={{opacity: 0.6}}>© 2026 Angelo Russo | Creative Designer Afragola. All rights reserved.</p>
+                    <p style={{opacity: 0.6}}>© 2026 Angelo Russo. All rights reserved.</p>
                 </footer>
             </div>
         </div>
@@ -325,7 +324,7 @@ function App() {
 }
 
 function WaterGradient() {
-    return <ShaderGradient animate="on" axesHelper="off" bgColor1="#000000" bgColor2="#000000" brightness={1.2} cAzimuthAngle={180} cDistance={2.9} cPolarAngle={120} cameraZoom={1} color1="#ebedff" color2="#f3f2f8" color3="#dbf8ff" destination="onCanvas" embedMode="off" envPreset="city" format="gif" fov={45} frameRate={10} gizmoHelper="hide" grain="off" lightType="3d" pixelDensity={1} positionX={0} positionY={1.8} positionZ={0} range="disabled" rangeEnd={40} rangeStart={0} reflection={0.1} rotationX={0} rotationY={0} rotationZ={-90} shader="defaults" type="waterPlane" uAmplitude={0} uDensity={1} uFrequency={5.5} uSpeed={0.3} uStrength={3} uTime={0.2} wireframe={false} />;
+    return <ShaderGradient animate="on" axesHelper="off" bgColor1="#000000" bgColor2="#000000" brightness={1.2} cAzimuthAngle={180} cDistance={2.9} cPolarAngle={120} cameraZoom={1} color1="#ebedff" color2="#f3f2f8" color3="#dbf8ff" destination="onCanvas" embedMode="off" envPreset="city" format="gif" fov={45} frameRate={10} gizmoHelper="hide" grain="off" lightType="3d" pixelDensity={1} positionX={0} positionY={1.8} positionZ={0} range="disabled" reflection={0.1} rotationX={0} rotationY={0} rotationZ={-90} shader="defaults" type="waterPlane" uAmplitude={0} uDensity={1} uFrequency={5.5} uSpeed={0.3} uStrength={3} uTime={0.2} wireframe={false} />;
 }
 
 export default App;
