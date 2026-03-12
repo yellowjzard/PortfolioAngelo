@@ -126,24 +126,26 @@ const Typewriter = ({ text }) => {
 
 const Reveal = ({ children }) => <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-10%" }} transition={{ duration: 0.8 }}>{children}</motion.div>;
 
-// --- METRIC CARD SISTEMATA PER LEGGIBILITÀ ---
+const SocialIconOnly = ({ type, link }) => { 
+    const renderIcon = () => { 
+        if(type === 'web') return <img src={ICON_WEB} alt="Corporate Website" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
+        if(type === 'ig') return <img src={ICON_IG} alt="Instagram Feed" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
+        if(type === 'ln') return <img src={ICON_LN} alt="LinkedIn Profile" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
+        return null; 
+    }; 
+    if (!link) return null;
+    return (
+        <motion.a href={link} target="_blank" rel="noopener noreferrer" className="social-btn-circle" whileHover={{ scale: 1.1, backgroundColor: "#fff" }} whileTap={{ scale: 0.95 }} style={{padding: '10px', pointerEvents: 'auto', position: 'relative', zIndex: 50, margin: '0 5px'}}>
+            {renderIcon()}
+        </motion.a>
+    ); 
+};
+
 const MetricCard = ({ value, label, sub }) => (
-    <motion.div 
-        className="metric-card" 
-        whileHover={{ scale: 1.05, backgroundColor: 'rgba(37, 99, 235, 0.15)' }} 
-        style={{ 
-            padding: '2.5rem 1.5rem', 
-            borderRadius: '24px', 
-            background: 'rgba(255,255,255,0.4)', // Vetro più opaco per leggere meglio
-            border: '1px solid rgba(255,255,255,0.2)', 
-            textAlign: 'center', 
-            backdropFilter: 'blur(15px)',
-            boxShadow: '0 10px 30px rgba(0,0,0,0.05)'
-        }}
-    >
-        <div style={{ fontSize: '2.6rem', fontWeight: 800, color: '#2563eb', marginBottom: '0.5rem' }}>{value}</div>
-        <div style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.6rem', color: '#111' }}>{label}</div>
-        <div style={{ fontSize: '0.9rem', opacity: 0.8, color: '#333', lineHeight: '1.4', fontWeight: 500 }}>{sub}</div>
+    <motion.div className="metric-card" whileHover={{ scale: 1.05, backgroundColor: 'rgba(37, 99, 235, 0.12)' }} style={{ padding: '2rem', borderRadius: '16px', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', textAlign: 'center', backdropFilter: 'blur(10px)' }}>
+        <div style={{ fontSize: '2.4rem', fontWeight: 800, color: '#2563eb', marginBottom: '0.5rem' }}>{value}</div>
+        <div style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '0.5rem', color: '#111' }}>{label}</div>
+        <div style={{ fontSize: '0.85rem', opacity: 0.7, color: '#444', lineHeight: '1.4' }}>{sub}</div>
     </motion.div>
 );
 
@@ -213,11 +215,11 @@ const GCerti = ({ lang, goBack }) => {
                     </Reveal>
                 </section>
 
-                {/* SEZIONE RISULTATI CON CARD GLASS COERENTI */}
-                <section className="glass-section" style={{ background: 'transparent', backdropFilter: 'none', boxShadow: 'none' }}>
+                {/* RISULTATI TANGIBILI: Ripristinato lo sfondo glass coerente */}
+                <section className="glass-section" style={{ background: 'rgba(255,255,255,0.4)', backdropFilter: 'blur(15px)' }}>
                     <Reveal>
-                        <h2 className="section-label" style={{ color: '#111', width: '100%', textAlign: 'center', marginBottom: '30px' }}>{t['results-title']}</h2>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '25px', marginTop: '10px' }}>
+                        <h2 className="section-label" style={{ color: '#111', width: '100%', textAlign: 'center' }}>{t['results-title']}</h2>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '25px', marginTop: '30px' }}>
                             {t['results-stats'].map((stat, index) => (
                                 <MetricCard key={index} {...stat} />
                             ))}
@@ -225,7 +227,7 @@ const GCerti = ({ lang, goBack }) => {
                     </Reveal>
                 </section>
 
-                <section className="glass-section" style={{ background: 'rgba(255,255,255,0.5)', backdropFilter: 'blur(20px)' }}>
+                <section className="glass-section" style={{ background: 'rgba(255,255,255,0.4)', backdropFilter: 'blur(20px)' }}>
                     <Reveal>
                         <h2 className="section-label">{t['takeaway-title']}</h2>
                         <div style={{ padding: '40px', background: 'rgba(37,99,235,0.05)', borderRadius: '24px', border: '1px solid rgba(37,99,235,0.1)', marginTop: '20px', position: 'relative' }}>
