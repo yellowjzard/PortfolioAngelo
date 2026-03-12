@@ -14,7 +14,7 @@ const PROMPT_IMG_RAW = "Reference_Edgar_raw.webp";
 const PROMPT_IMG_GEN = "Reference_Edgar_Gen.webp";
 const WR_VIDEO = "WR-RP-Endurance.mp4"; 
 const EU_PDF_FILE = "PanAfGeo_Branding.pdf"; 
-const EU_COVER_IMG = "panafgeocover.jpg";
+const EU_COVER_IMG = "eu_guidelines_cover.webp"; // 1080px di larghezza
 
 // --- ICONE SOCIAL ---
 const ICON_IG = "Icona_instagram.webp";
@@ -77,7 +77,8 @@ const WR_LANG = {
         'collab-name': 'Gennaro Grieco', 
         'collab-role': 'Graphic Designer | UI/UX ',
         'download-pdf': 'SCARICA BRAND BOOK (PDF)',
-        'flip-hint': 'Clicca per girare'
+        'flip-hint': 'Clicca per girare',
+        'explore-hint': 'Clicca sul mockup per esplorare il brand book'
     },
     en: {
         'back': '← BACK', 
@@ -122,7 +123,8 @@ const WR_LANG = {
         'collab-name': 'Gennaro Grieco', 
         'collab-role': 'Graphic Designer | UI/UX',
         'download-pdf': 'DOWNLOAD BRAND BOOK (PDF)',
-        'flip-hint': 'Click to flip'
+        'flip-hint': 'Click to flip',
+        'explore-hint': 'Click on the mockup to explore the brand book'
     }
 };
 
@@ -192,7 +194,7 @@ const BrandGuidelines3D = ({ file, coverImg, t }) => {
             <motion.div
                 style={{
                     width: '100%',
-                    maxWidth: '800px',
+                    maxWidth: '900px', // Leggermente più grande per 1080px
                     aspectRatio: '16/11',
                     position: 'relative',
                     transformStyle: 'preserve-3d',
@@ -203,7 +205,7 @@ const BrandGuidelines3D = ({ file, coverImg, t }) => {
                 onClick={() => setIsFlipped(!isFlipped)}
                 whileHover={{ scale: 1.02 }}
             >
-                {/* Fronte - Copertina del PDF */}
+                {/* Fronte - Copertina del PDF a 1080px */}
                 <motion.div
                     style={{
                         position: 'absolute',
@@ -212,8 +214,8 @@ const BrandGuidelines3D = ({ file, coverImg, t }) => {
                         backfaceVisibility: 'hidden',
                         borderRadius: '20px',
                         overflow: 'hidden',
-                        boxShadow: '0 30px 60px rgba(0,0,0,0.3)',
-                        border: '1px solid rgba(255,255,255,0.1)'
+                        boxShadow: '0 30px 60px rgba(0,0,0,0.4)',
+                        border: '1px solid rgba(255,255,255,0.15)'
                     }}
                 >
                     <img
@@ -231,38 +233,43 @@ const BrandGuidelines3D = ({ file, coverImg, t }) => {
                         }}
                     />
                     
-                    {/* Overlay con titolo */}
+                    {/* Overlay con titolo - Più leggibile */}
                     <div style={{
                         position: 'absolute',
                         bottom: 0,
                         left: 0,
                         right: 0,
-                        padding: '30px',
-                        background: 'linear-gradient(to top, rgba(0,0,0,0.9), transparent)',
+                        padding: '35px',
+                        background: 'linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.4) 60%, transparent)',
                         color: 'white'
                     }}>
                         <h3 style={{
                             margin: 0,
-                            fontSize: 'clamp(1.2rem, 2vw, 1.8rem)',
+                            fontSize: 'clamp(1.3rem, 2.2vw, 2rem)',
                             fontWeight: 700,
-                            fontFamily: 'Unbounded, sans-serif'
+                            fontFamily: 'Unbounded, sans-serif',
+                            textShadow: '0 2px 10px rgba(0,0,0,0.5)',
+                            letterSpacing: '-0.02em'
                         }}>
                             {t['eu-pdf-title']}
                         </h3>
                     </div>
                     
-                    {/* Hint visivo per girare */}
+                    {/* Hint visivo per girare - Più leggibile */}
                     <div style={{
                         position: 'absolute',
                         top: '20px',
                         right: '20px',
-                        background: 'rgba(255,255,255,0.2)',
-                        backdropFilter: 'blur(10px)',
-                        padding: '8px 15px',
-                        borderRadius: '30px',
+                        background: 'rgba(0,0,0,0.6)',
+                        backdropFilter: 'blur(8px)',
+                        padding: '10px 18px',
+                        borderRadius: '40px',
                         color: 'white',
-                        fontSize: '0.8rem',
-                        border: '1px solid rgba(255,255,255,0.3)'
+                        fontSize: '0.9rem',
+                        fontWeight: 500,
+                        border: '1px solid rgba(255,255,255,0.25)',
+                        boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
+                        letterSpacing: '0.3px'
                     }}>
                         {t['flip-hint']} ↻
                     </div>
@@ -276,31 +283,31 @@ const BrandGuidelines3D = ({ file, coverImg, t }) => {
                         height: '100%',
                         backfaceVisibility: 'hidden',
                         transform: 'rotateY(180deg)',
-                        background: 'linear-gradient(135deg, #1a1a1a, #2d2d2d)',
+                        background: 'linear-gradient(135deg, #1e1e1e, #2a2a2a)',
                         borderRadius: '20px',
-                        border: '1px solid rgba(255,255,255,0.2)',
+                        border: '1px solid rgba(255,255,255,0.15)',
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'center',
                         alignItems: 'center',
-                        gap: '15px',
-                        padding: '30px',
-                        boxShadow: '0 30px 60px rgba(0,0,0,0.3)'
+                        gap: '18px',
+                        padding: '35px',
+                        boxShadow: '0 30px 60px rgba(0,0,0,0.4)'
                     }}
                 >
                     {/* Icona PDF animata */}
                     <motion.div
                         animate={{ 
-                            y: [0, -10, 0],
+                            y: [0, -12, 0],
                         }}
                         transition={{
-                            duration: 2,
+                            duration: 2.5,
                             repeat: Infinity,
                             ease: "easeInOut"
                         }}
                         style={{
-                            fontSize: '4rem',
-                            filter: 'drop-shadow(0 10px 20px rgba(255,107,66,0.3))'
+                            fontSize: '4.5rem',
+                            filter: 'drop-shadow(0 15px 25px rgba(255,107,66,0.4))'
                         }}
                     >
                         📄
@@ -309,20 +316,23 @@ const BrandGuidelines3D = ({ file, coverImg, t }) => {
                     <h3 style={{
                         color: 'white',
                         margin: 0,
-                        fontSize: '1.5rem',
+                        fontSize: '1.7rem',
                         fontFamily: 'Unbounded, sans-serif',
-                        textAlign: 'center'
+                        textAlign: 'center',
+                        fontWeight: 600,
+                        letterSpacing: '-0.02em'
                     }}>
                         {t['eu-pdf-title']}
                     </h3>
                     
                     <p style={{
-                        color: 'rgba(255,255,255,0.8)',
+                        color: 'rgba(255,255,255,0.9)',
                         textAlign: 'center',
-                        maxWidth: '400px',
+                        maxWidth: '500px',
                         margin: '5px 0',
-                        lineHeight: '1.6',
-                        fontSize: '0.95rem'
+                        lineHeight: '1.7',
+                        fontSize: '1rem',
+                        fontWeight: 400
                     }}>
                         {t['eu-pdf-description']}
                     </p>
@@ -331,59 +341,69 @@ const BrandGuidelines3D = ({ file, coverImg, t }) => {
                         href={file}
                         download
                         style={{
-                            padding: '14px 35px',
+                            padding: '16px 40px',
                             background: '#ff6b42',
                             color: 'white',
                             textDecoration: 'none',
-                            borderRadius: '40px',
+                            borderRadius: '50px',
                             fontWeight: 600,
-                            fontSize: '1rem',
+                            fontSize: '1.1rem',
                             border: 'none',
                             cursor: 'pointer',
                             marginTop: '10px',
-                            boxShadow: '0 10px 20px rgba(255,107,66,0.3)',
+                            boxShadow: '0 15px 30px rgba(255,107,66,0.4)',
                             display: 'inline-flex',
                             alignItems: 'center',
-                            gap: '8px'
+                            gap: '10px',
+                            letterSpacing: '0.5px'
                         }}
                         whileHover={{ 
                             scale: 1.05,
                             background: '#ff8259',
-                            boxShadow: '0 15px 30px rgba(255,107,66,0.4)'
+                            boxShadow: '0 20px 35px rgba(255,107,66,0.5)'
                         }}
                         whileTap={{ scale: 0.95 }}
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <span>↓</span>
+                        <span style={{ fontSize: '1.2rem' }}>↓</span>
                         {t['download-pdf']}
                     </motion.a>
                     
                     <p style={{
-                        color: 'rgba(255,255,255,0.3)',
-                        fontSize: '0.8rem',
-                        marginTop: '10px'
+                        color: 'rgba(255,255,255,0.4)',
+                        fontSize: '0.85rem',
+                        marginTop: '10px',
+                        fontWeight: 400
                     }}>
                         {t['flip-hint']} per tornare
                     </p>
                 </motion.div>
             </motion.div>
             
-            {/* Indicatore di interazione */}
+            {/* Indicatore di interazione - TESTO LEGGIBILE */}
             <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1 }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1, duration: 0.5 }}
                 style={{
-                    marginTop: '20px',
-                    color: 'rgba(255,255,255,0.5)',
-                    fontSize: '0.9rem',
+                    marginTop: '25px',
+                    color: 'white',
+                    fontSize: '1rem',
+                    fontWeight: 500,
                     display: 'flex',
-                    gap: '10px',
-                    alignItems: 'center'
+                    gap: '12px',
+                    alignItems: 'center',
+                    background: 'rgba(0,0,0,0.4)',
+                    backdropFilter: 'blur(8px)',
+                    padding: '12px 24px',
+                    borderRadius: '50px',
+                    border: '1px solid rgba(255,255,255,0.2)',
+                    boxShadow: '0 8px 20px rgba(0,0,0,0.2)',
+                    letterSpacing: '0.3px'
                 }}
             >
-                <span>👆</span>
-                <span>Clicca sul mockup per esplorare</span>
+                <span style={{ fontSize: '1.3rem' }}>👆</span>
+                <span>{t['explore-hint']}</span>
             </motion.div>
         </div>
     );
@@ -505,7 +525,7 @@ const WhiteRabbit = ({ lang, goBack }) => {
                         <h2 className="section-label" style={{textAlign:'center', width:'100%', display:'block'}}>{t['project-eu']}</h2>
                         <p className="section-desc" style={{textAlign:'center'}}>{t['project-eu-desc']}</p>
                         
-                        {/* Mockup 3D con testo corretto per PanAfGeo */}
+                        {/* Mockup 3D con cover a 1080px e testo leggibile */}
                         <BrandGuidelines3D 
                             file={EU_PDF_FILE} 
                             coverImg={EU_COVER_IMG}
