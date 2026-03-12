@@ -134,39 +134,41 @@ const PromptSimulator = ({ t }) => {
     );
 };
 
-// --- PDF VIEWER SISTEMATO ---
+// --- PDF VIEWER RISOLUTIVO (Slides-only view) ---
 const PdfViewer = ({ file }) => {
     return (
         <div style={{ 
             width: '100%', 
             display: 'flex', 
-            flexDirection: 'column', 
-            alignItems: 'center', 
+            justifyContent: 'center',
             marginTop: '40px' 
         }}>
             <div style={{
                 width: '100%',
-                maxWidth: '900px',
-                height: '75vh', // Altezza proporzionata alla viewport
-                borderRadius: '16px',
-                overflow: 'hidden', // Taglia via le barre esterne
-                boxShadow: '0 30px 60px rgba(0,0,0,0.2)',
-                backgroundColor: '#fff',
+                maxWidth: '1000px',
+                aspectRatio: '16/10.5', // Rapporto perfetto per PDF orizzontali
+                borderRadius: '20px',
+                overflow: 'hidden',
+                boxShadow: '0 40px 100px rgba(0,0,0,0.2)',
+                backgroundColor: '#000',
                 position: 'relative',
-                border: '1px solid rgba(0,0,0,0.05)'
+                border: '1px solid rgba(255,255,255,0.1)'
             }}>
                 <iframe 
-                    // Il parametro #view=FitH forza la larghezza della pagina al contenitore
-                    src={`${file}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`} 
+                    /* TRUCCO: 
+                       #view=Fit - adatta la pagina al contenitore
+                       #pagemode=none - nasconde le miniature laterali
+                       #scrollbar=0 - nasconde le barre (dove possibile)
+                       &navpanes=0 - nasconde il pannello navigazione
+                    */
+                    src={`${file}#view=Fit&pagemode=none&navpanes=0&toolbar=0`} 
                     width="100%" 
                     height="100%" 
                     style={{ 
                         border: 'none',
-                        // Questo "zoom" virtuale aiuta a nascondere i bordi neri di alcuni browser
-                        transform: 'scale(1.02)', 
-                        transformOrigin: 'top center'
+                        display: 'block'
                     }}
-                    title="Visual Content PDF"
+                    title="PanAfGeo Branding Guidelines"
                 />
             </div>
         </div>
@@ -288,21 +290,14 @@ const WhiteRabbit = ({ lang, goBack }) => {
                     <Reveal>
                         <h2 className="section-label" style={{textAlign:'center', width:'100%', display:'block'}}>{t['project-eu']}</h2>
                         <p className="section-desc" style={{textAlign:'center'}}>{t['project-eu-desc']}</p>
-                        <div className="process-pipeline">
-                            <div className="process-step"><div className="process-thumb-container"><img src={CASE_IMAGES.eu_step1} alt="Guideline Analysis" className="process-thumb" /><span className="step-badge">01</span></div><h4>{t['eu-s1-t']}</h4><p>{t['eu-s1-d']}</p></div>
-                            <div className="process-arrow">→</div>
-                            <div className="process-step"><div className="process-thumb-container"><img src={CASE_IMAGES.eu_step2} alt="Brochure Design" className="process-thumb" /><span className="step-badge">02</span></div><h4>{t['eu-s2-t']}</h4><p>{t['eu-s2-d']}</p></div>
-                            <div className="process-arrow">→</div>
-                            <div className="process-step"><div className="process-thumb-container"><img src={CASE_IMAGES.eu_step3} alt="Merchandising" className="process-thumb" /><span className="step-badge">03</span></div><h4>{t['eu-s3-t']}</h4><p>{t['eu-s3-d']}</p></div>
-                        </div>
-
+                        
+                        {/* Nuova Visualizzazione PDF Orizzontale */}
                         <div style={{marginTop: '60px', width: '100%'}}>
                             <h4 style={{marginBottom:'20px', fontFamily:'Unbounded', textTransform:'uppercase', fontSize:'0.9rem', color:'#666'}}>Brand Guidelines Viewer</h4>
-                            {/* Il nuovo PdfViewer con i fix estetici */}
                             <PdfViewer file={EU_PDF_FILE} />
                         </div>
 
-                        <div className="credits-section">
+                        <div className="credits-section" style={{marginTop: '80px'}}>
                             <h4 className="credits-title-small">{t['credits-title']}</h4>
                             <motion.div className="collaborator-card" whileHover={{ scale: 1.02 }}>
                                 <img src={CASE_IMAGES.collab_avatar} alt="Gennaro Grieco" className="collab-avatar" />
