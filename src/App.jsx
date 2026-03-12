@@ -6,6 +6,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import WhiteRabbit from './WhiteRabbit';
 import NeroEspresso from './NeroEspresso';
 import Freelance from './Freelance';
+import GCerrti from './Gcerti';
 
 // --- ASSET STATICI ---
 const PROFILE_IMG = "Portrait-Angelo-Russo.webp"; 
