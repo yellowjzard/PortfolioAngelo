@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://yellowjzard.github.io/PortfolioAngelo",
+  "homepage": "https://www.angelorusso.eu",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
