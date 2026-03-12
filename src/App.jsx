@@ -253,8 +253,8 @@ function App() {
                                     </motion.button>
 
                                     <motion.a
-                                        href="/Curriculum_Angelo_Russo.pdf"
-                                        download="Curriculum_Angelo_Russo"
+                                        href="/Cv_Angelo_Russo.pdf"
+                                        download="Cv_Angelo_Russo"
                                         className="cv-download-btn"
                                         whileHover={{ scale: 1.05, backgroundColor: "#111", color: "#fff" }}
                                         whileTap={{ scale: 0.95 }}
