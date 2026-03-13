@@ -14,7 +14,7 @@ const PROMPT_IMG_RAW = "Reference_Edgar_raw.webp";
 const PROMPT_IMG_GEN = "Reference_Edgar_Gen.webp";
 const WR_VIDEO = "WR-RP-Endurance.mp4"; 
 const EU_PDF_FILE = "PanAfGeo_Branding.pdf"; 
-const EU_COVER_IMG = "panafgeocover.jpg"; // 1080px di larghezza
+const EU_COVER_IMG = "panafgeocover.jpg"; 
 
 // --- ICONE SOCIAL ---
 const ICON_IG = "Icona_instagram.webp";
@@ -77,8 +77,8 @@ const WR_LANG = {
         'collab-name': 'Gennaro Grieco', 
         'collab-role': 'Graphic Designer | UI/UX ',
         'download-pdf': 'SCARICA BRAND BOOK (PDF)',
-        'flip-hint': 'Clicca per girare',
-        'explore-hint': 'Clicca sul mockup per esplorare il brand book'
+        'flip-hint': 'Gira',
+        'explore-hint': 'Tocca per esplorare'
     },
     en: {
         'back': '← BACK', 
@@ -123,8 +123,8 @@ const WR_LANG = {
         'collab-name': 'Gennaro Grieco', 
         'collab-role': 'Graphic Designer | UI/UX',
         'download-pdf': 'DOWNLOAD BRAND BOOK (PDF)',
-        'flip-hint': 'Click to flip',
-        'explore-hint': 'Click on the mockup to explore the brand book'
+        'flip-hint': 'Flip',
+        'explore-hint': 'Tap to explore'
     }
 };
 
@@ -177,44 +177,56 @@ const PromptSimulator = ({ t }) => {
     );
 };
 
-// --- MOCKUP 3D PER PANAFGEO ---
+// --- MOCKUP 3D PER PANAFGEO - OTTIMIZZATO PER MOBILE ---
 const BrandGuidelines3D = ({ file, coverImg, t }) => {
     const [isFlipped, setIsFlipped] = useState(false);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+    
+    // Rileva il ridimensionamento della finestra
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
     
     return (
         <div style={{
             perspective: '2000px',
-            marginTop: '40px',
-            marginBottom: '20px',
+            marginTop: isMobile ? '20px' : '40px',
+            marginBottom: '10px',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            flexDirection: 'column'
+            flexDirection: 'column',
+            width: '100%'
         }}>
             <motion.div
                 style={{
                     width: '100%',
-                    maxWidth: '900px', // Leggermente più grande per 1080px
+                    maxWidth: isMobile ? '400px' : '900px',
                     aspectRatio: '16/11',
                     position: 'relative',
                     transformStyle: 'preserve-3d',
                     cursor: 'pointer'
                 }}
                 animate={{ rotateY: isFlipped ? 180 : 0 }}
-                transition={{ duration: 0.8, type: 'spring', stiffness: 100 }}
+                transition={{ duration: 0.6, type: 'spring', stiffness: 100 }}
                 onClick={() => setIsFlipped(!isFlipped)}
-                whileHover={{ scale: 1.02 }}
+                whileHover={!isMobile ? { scale: 1.02 } : {}}
+                whileTap={isMobile ? { scale: 0.98 } : {}}
             >
-                {/* Fronte - Copertina del PDF a 1080px */}
+                {/* Fronte - Copertina del PDF */}
                 <motion.div
                     style={{
                         position: 'absolute',
                         width: '100%',
                         height: '100%',
                         backfaceVisibility: 'hidden',
-                        borderRadius: '20px',
+                        borderRadius: isMobile ? '16px' : '20px',
                         overflow: 'hidden',
-                        boxShadow: '0 30px 60px rgba(0,0,0,0.4)',
+                        boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
                         border: '1px solid rgba(255,255,255,0.15)'
                     }}
                 >
@@ -233,39 +245,40 @@ const BrandGuidelines3D = ({ file, coverImg, t }) => {
                         }}
                     />
                     
-                    {/* Overlay con titolo - Più leggibile */}
+                    {/* Overlay con titolo - Adattato per mobile */}
                     <div style={{
                         position: 'absolute',
                         bottom: 0,
                         left: 0,
                         right: 0,
-                        padding: '35px',
+                        padding: isMobile ? '20px' : '35px',
                         background: 'linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.4) 60%, transparent)',
                         color: 'white'
                     }}>
                         <h3 style={{
                             margin: 0,
-                            fontSize: 'clamp(1.3rem, 2.2vw, 2rem)',
+                            fontSize: isMobile ? '1.1rem' : 'clamp(1.3rem, 2.2vw, 2rem)',
                             fontWeight: 700,
                             fontFamily: 'Unbounded, sans-serif',
                             textShadow: '0 2px 10px rgba(0,0,0,0.5)',
-                            letterSpacing: '-0.02em'
+                            letterSpacing: '-0.02em',
+                            lineHeight: 1.3
                         }}>
                             {t['eu-pdf-title']}
                         </h3>
                     </div>
                     
-                    {/* Hint visivo per girare - Più leggibile */}
+                    {/* Hint visivo per girare - Più compatto su mobile */}
                     <div style={{
                         position: 'absolute',
-                        top: '20px',
-                        right: '20px',
+                        top: isMobile ? '12px' : '20px',
+                        right: isMobile ? '12px' : '20px',
                         background: 'rgba(0,0,0,0.6)',
                         backdropFilter: 'blur(8px)',
-                        padding: '10px 18px',
+                        padding: isMobile ? '6px 12px' : '10px 18px',
                         borderRadius: '40px',
                         color: 'white',
-                        fontSize: '0.9rem',
+                        fontSize: isMobile ? '0.75rem' : '0.9rem',
                         fontWeight: 500,
                         border: '1px solid rgba(255,255,255,0.25)',
                         boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
@@ -275,7 +288,7 @@ const BrandGuidelines3D = ({ file, coverImg, t }) => {
                     </div>
                 </motion.div>
                 
-                {/* Retro - Download con descrizione specifica PanAfGeo */}
+                {/* Retro - Download con descrizione - Adattato per mobile */}
                 <motion.div
                     style={{
                         position: 'absolute',
@@ -284,21 +297,21 @@ const BrandGuidelines3D = ({ file, coverImg, t }) => {
                         backfaceVisibility: 'hidden',
                         transform: 'rotateY(180deg)',
                         background: 'linear-gradient(135deg, #1e1e1e, #2a2a2a)',
-                        borderRadius: '20px',
+                        borderRadius: isMobile ? '16px' : '20px',
                         border: '1px solid rgba(255,255,255,0.15)',
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'center',
                         alignItems: 'center',
-                        gap: '18px',
-                        padding: '35px',
-                        boxShadow: '0 30px 60px rgba(0,0,0,0.4)'
+                        gap: isMobile ? '12px' : '18px',
+                        padding: isMobile ? '20px' : '35px',
+                        boxShadow: '0 20px 40px rgba(0,0,0,0.4)'
                     }}
                 >
-                    {/* Icona PDF animata */}
+                    {/* Icona PDF animata - Più piccola su mobile */}
                     <motion.div
                         animate={{ 
-                            y: [0, -12, 0],
+                            y: [0, -8, 0],
                         }}
                         transition={{
                             duration: 2.5,
@@ -306,8 +319,8 @@ const BrandGuidelines3D = ({ file, coverImg, t }) => {
                             ease: "easeInOut"
                         }}
                         style={{
-                            fontSize: '4.5rem',
-                            filter: 'drop-shadow(0 15px 25px rgba(255,107,66,0.4))'
+                            fontSize: isMobile ? '3rem' : '4.5rem',
+                            filter: 'drop-shadow(0 10px 20px rgba(255,107,66,0.4))'
                         }}
                     >
                         📄
@@ -316,7 +329,7 @@ const BrandGuidelines3D = ({ file, coverImg, t }) => {
                     <h3 style={{
                         color: 'white',
                         margin: 0,
-                        fontSize: '1.7rem',
+                        fontSize: isMobile ? '1.2rem' : '1.7rem',
                         fontFamily: 'Unbounded, sans-serif',
                         textAlign: 'center',
                         fontWeight: 600,
@@ -325,54 +338,57 @@ const BrandGuidelines3D = ({ file, coverImg, t }) => {
                         {t['eu-pdf-title']}
                     </h3>
                     
+                    {/* Descrizione - Su mobile mostriamo solo una versione breve */}
                     <p style={{
                         color: 'rgba(255,255,255,0.9)',
                         textAlign: 'center',
-                        maxWidth: '500px',
+                        maxWidth: isMobile ? '280px' : '500px',
                         margin: '5px 0',
-                        lineHeight: '1.7',
-                        fontSize: '1rem',
+                        lineHeight: isMobile ? 1.5 : 1.7,
+                        fontSize: isMobile ? '0.85rem' : '1rem',
                         fontWeight: 400
                     }}>
-                        {t['eu-pdf-description']}
+                        {isMobile 
+                            ? 'Brand book PanAfGeo: linee guida EU complete.' 
+                            : t['eu-pdf-description']}
                     </p>
                     
                     <motion.a
                         href={file}
                         download
                         style={{
-                            padding: '16px 40px',
+                            padding: isMobile ? '12px 24px' : '16px 40px',
                             background: '#ff6b42',
                             color: 'white',
                             textDecoration: 'none',
                             borderRadius: '50px',
                             fontWeight: 600,
-                            fontSize: '1.1rem',
+                            fontSize: isMobile ? '0.9rem' : '1.1rem',
                             border: 'none',
                             cursor: 'pointer',
-                            marginTop: '10px',
-                            boxShadow: '0 15px 30px rgba(255,107,66,0.4)',
+                            marginTop: isMobile ? '5px' : '10px',
+                            boxShadow: '0 10px 20px rgba(255,107,66,0.4)',
                             display: 'inline-flex',
                             alignItems: 'center',
-                            gap: '10px',
+                            gap: '8px',
                             letterSpacing: '0.5px'
                         }}
-                        whileHover={{ 
+                        whileHover={!isMobile ? { 
                             scale: 1.05,
                             background: '#ff8259',
-                            boxShadow: '0 20px 35px rgba(255,107,66,0.5)'
-                        }}
+                            boxShadow: '0 15px 30px rgba(255,107,66,0.5)'
+                        } : {}}
                         whileTap={{ scale: 0.95 }}
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <span style={{ fontSize: '1.2rem' }}>↓</span>
-                        {t['download-pdf']}
+                        <span style={{ fontSize: isMobile ? '1rem' : '1.2rem' }}>↓</span>
+                        {isMobile ? 'PDF' : t['download-pdf']}
                     </motion.a>
                     
                     <p style={{
-                        color: 'rgba(255,255,255,0.4)',
-                        fontSize: '0.85rem',
-                        marginTop: '10px',
+                        color: 'rgba(255,255,255,0.3)',
+                        fontSize: isMobile ? '0.7rem' : '0.85rem',
+                        marginTop: '5px',
                         fontWeight: 400
                     }}>
                         {t['flip-hint']} per tornare
@@ -380,29 +396,29 @@ const BrandGuidelines3D = ({ file, coverImg, t }) => {
                 </motion.div>
             </motion.div>
             
-            {/* Indicatore di interazione - TESTO LEGGIBILE */}
+            {/* Indicatore di interazione - Ottimizzato per mobile */}
             <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1, duration: 0.5 }}
+                transition={{ delay: 0.8, duration: 0.5 }}
                 style={{
-                    marginTop: '25px',
+                    marginTop: isMobile ? '15px' : '25px',
                     color: 'white',
-                    fontSize: '1rem',
+                    fontSize: isMobile ? '0.85rem' : '1rem',
                     fontWeight: 500,
                     display: 'flex',
-                    gap: '12px',
+                    gap: isMobile ? '8px' : '12px',
                     alignItems: 'center',
                     background: 'rgba(0,0,0,0.4)',
                     backdropFilter: 'blur(8px)',
-                    padding: '12px 24px',
+                    padding: isMobile ? '8px 16px' : '12px 24px',
                     borderRadius: '50px',
                     border: '1px solid rgba(255,255,255,0.2)',
                     boxShadow: '0 8px 20px rgba(0,0,0,0.2)',
                     letterSpacing: '0.3px'
                 }}
             >
-                <span style={{ fontSize: '1.3rem' }}>👆</span>
+                <span style={{ fontSize: isMobile ? '1.1rem' : '1.3rem' }}>👆</span>
                 <span>{t['explore-hint']}</span>
             </motion.div>
         </div>
@@ -525,7 +541,7 @@ const WhiteRabbit = ({ lang, goBack }) => {
                         <h2 className="section-label" style={{textAlign:'center', width:'100%', display:'block'}}>{t['project-eu']}</h2>
                         <p className="section-desc" style={{textAlign:'center'}}>{t['project-eu-desc']}</p>
                         
-                        {/* Mockup 3D con cover a 1080px e testo leggibile */}
+                        {/* Mockup 3D ottimizzato per mobile */}
                         <BrandGuidelines3D 
                             file={EU_PDF_FILE} 
                             coverImg={EU_COVER_IMG}
