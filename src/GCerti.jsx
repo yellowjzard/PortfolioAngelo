@@ -247,8 +247,51 @@ const GCerti = ({ lang, goBack }) => {
     );
 };
 
+// --- FUNZIONE WATERGRADIENT CORRETTA (IDENTICA ALLE ALTRE PAGINE) ---
 function WaterGradient() {
-    return <ShaderGradient animate="on" axesHelper="off" bgColor1="#ffffff" bgColor2="#f0f4f8" brightness={1.1} cAzimuthAngle={180} cDistance={3} cPolarAngle={120} cameraZoom={1} color1="#e0e7ff" color2="#f8fafc" color3="#dbeafe" destination="onCanvas" embedMode="off" envPreset="city" fov={45} frameRate={10} gizmoHelper="hide" grain="off" lightType="3d" pixelDensity={1} positionX={0} positionY={1.8} positionZ={0} range="disabled" reflection={0.1} rotationX={0} rotationY={0} rotationZ={-90} shader="defaults" type="waterPlane" uAmplitude={0} uDensity={1} uFrequency={5.5} uSpeed={0.2} uStrength={2} uTime={0.2} wireframe={false} />;
+    return <ShaderGradient 
+        animate="on" 
+        axesHelper="off" 
+        bgColor1="#000000" 
+        bgColor2="#000000" 
+        brightness={1.2} 
+        cAzimuthAngle={180} 
+        cDistance={2.9} 
+        cPolarAngle={120} 
+        cameraZoom={1} 
+        color1="#ebedff" 
+        color2="#f3f2f8" 
+        color3="#dbf8ff" 
+        destination="onCanvas" 
+        embedMode="off" 
+        envPreset="city" 
+        format="gif" 
+        fov={45} 
+        frameRate={10} 
+        gizmoHelper="hide" 
+        grain="off" 
+        lightType="3d" 
+        pixelDensity={1} 
+        positionX={0} 
+        positionY={1.8} 
+        positionZ={0} 
+        range="disabled" 
+        rangeEnd={40} 
+        rangeStart={0} 
+        reflection={0.1} 
+        rotationX={0} 
+        rotationY={0} 
+        rotationZ={-90} 
+        shader="defaults" 
+        type="waterPlane" 
+        uAmplitude={0} 
+        uDensity={1} 
+        uFrequency={5.5} 
+        uSpeed={0.3} 
+        uStrength={3} 
+        uTime={0.2} 
+        wireframe={false} 
+    />;
 }
 
 export default GCerti;
