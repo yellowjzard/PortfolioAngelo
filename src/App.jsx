@@ -58,7 +58,7 @@ const LANG_DATA = {
         
         'bio-intro': [
             `My approach to design is tool-agnostic: I focus on the idea rather than the technology. As a New Media Artist, I view software not as a constraint, but as a flexible tool to be orchestrated into the most effective solution. My mission is to translate technological complexity into compelling visual narratives, ensuring that technique always serves the concept.`,
-            `From my international experience in Brussels at White Rabbit—where I engineered creative workflows by integrating advanced models such as Higgsfield and Gemini Agents—to my roots in relational art with #CUOREDINAPOLI, I have learned to navigate fluidly between diverse worlds. I bridge the gap between rigorous traditional graphic design and generative experimentation, blending artistic sensitivity with operational precision.`
+            `From my international experience in Brussels at White Rabbit where I engineered creative workflows by integrating advanced models such as Higgsfield and Gemini Agents to my roots in relational art with #CUOREDINAPOLI, I have learned to navigate fluidly between diverse worlds. I bridge the gap between rigorous traditional graphic design and generative experimentation, blending artistic sensitivity with operational precision.`
         ],
         'bio-skills-title': 'Core Competencies:',
         'bio-skills-list': [
