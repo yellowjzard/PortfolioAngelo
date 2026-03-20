@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ShaderGradientCanvas, ShaderGradient } from '@shadergradient/react';
-import { motion, useScroll, useTransform } from 'framer-motion'; 
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'; 
 
 // Import delle Pagine Progetti Interne
 import WhiteRabbit from './WhiteRabbit';
@@ -28,16 +28,17 @@ const LANG_DATA = {
         'bio-sub': 'Creative Designer | AI Strategy & Visual Production',
         
         'bio-intro': [
-            `Il mio approccio al design è agnostico rispetto agli strumenti: non parto dalla tecnologia, ma dall'idea. Come New Media Artist, considero i software non come vincoli, ma come mezzi flessibili da orchestrare per trovare la soluzione più efficace. La mia missione è trasformare la complessità tecnologica in narrazioni visive potenti, garantendo che la tecnica sia sempre al servizio del concept.`,
-            `Dall'esperienza internazionale a Bruxelles presso White Rabbit, dove ho ingegnerizzato workflow creativi integrando modelli avanzati come Higgsfield e Agenti Gemini, fino alle radici nell'arte relazionale con #CUOREDINAPOLI, ho imparato a muovermi fluidamente tra mondi diversi. Unisco il rigore del graphic design tradizionale alla sperimentazione generativa, fondendo sensibilità artistica e precisione operativa.`
+            `Il mio approccio al design è tecnologicamente agnostico: la tecnologia non è il punto di partenza, ma l'orchestra al servizio dell'idea. Come Dottore Magistrale in Nuove Tecnologie dell'Arte, considero i software non come vincoli, ma come mezzi flessibili per ingegnerizzare soluzioni visive ad alto impatto. La mia missione è tradurre la complessità dell'Intelligenza Artificiale in narrazioni potenti, garantendo che la tecnica sia sempre il braccio operativo del concept.`,
+            `Dall'esperienza internazionale a Bruxelles presso White Rabbit — dove ho progettato workflow creativi integrando modelli avanzati come Higgsfield e Agenti Gemini — fino al mio attuale ruolo di Marketing Specialist presso GCERTI Italy, ho imparato a muovermi fluidamente tra rigore istituzionale e sperimentazione generativa. La mia carriera è segnata da una crescita rapida, guidata dalla capacità di ottimizzare i processi tramite pipeline AI proprietarie.`
         ],
-        'bio-skills-title': 'Cosa porto nei progetti:',
+        'bio-skills-title': 'Valore Strategico & Competenze:',
         'bio-skills-list': [
-            { title: 'Versatilità Strategica:', desc: 'Capacità di selezionare il medium ideale per ogni progetto, dal print design al video editing, fino alle installazioni interattive.' },
-            { title: 'AI Pipeline Architecture:', desc: 'Ottimizzazione dei processi creativi tramite l\'uso mirato di Generative AI per ridurre i tempi di produzione mantenendo alta la qualità autoriale.' },
-            { title: 'Creative Problem Solving:', desc: 'Un mindset che supera i limiti tecnici dei software, esplorando soluzioni ibride per esaltare l\'idea originale.' }
+            { title: 'AI Pipeline Architecture:', desc: 'Progettazione di flussi di lavoro "AI-Augmented" per abbattere i tempi di produzione mantenendo il controllo autoriale e la coerenza del brand.' },
+            { title: 'Institutional Visual Branding:', desc: 'Esperienza nella gestione di identità visive complesse, conformi alle rigorose EU Guidelines e standard internazionali.' },
+            { title: 'Creative Problem Solving:', desc: 'Un mindset analitico che supera i limiti tecnici dei software, esplorando soluzioni ibride tra graphic design e flussi video neurali.' },
+            { title: 'Versatilità Multidisciplinare:', desc: 'Capacità di orchestrare progetti su larga scala, dal print design alle installazioni interattive, fondendo sensibilità artistica e precisione operativa.' }
         ],
-        'bio-philosophy': 'Credo in un design che non sia solo guardato, ma vissuto. Un approccio dove la tecnologia non sostituisce l\'essere umano, ma ne amplifica le possibilità.',
+        'bio-philosophy': 'Credo in un design che non sia solo guardato, ma vissuto. Un ecosistema dove la tecnologia non sostituisce l\'essere umano, ma ne amplifica esponenzialmente le possibilità creative.',
 
         'btn-cv': 'SCARICA CV (PDF)',
         'btn-read-more': 'LEGGI DI PIÙ',
@@ -54,19 +55,20 @@ const LANG_DATA = {
         'scroll-hint': 'Scroll to explore',
         
         'bio-title': 'Angelo Russo.',
-        'bio-sub': 'New Media Artist & AI Specialist.',
+        'bio-sub': 'Creative Designer | AI Strategy & Visual Production',
         
         'bio-intro': [
-            `My approach to design is tool-agnostic: I focus on the idea rather than the technology. As a New Media Artist, I view software not as a constraint, but as a flexible tool to be orchestrated into the most effective solution. My mission is to translate technological complexity into compelling visual narratives, ensuring that technique always serves the concept.`,
-            `From my international experience in Brussels at White Rabbit where I engineered creative workflows by integrating advanced models such as Higgsfield and Gemini Agents to my roots in relational art with #CUOREDINAPOLI, I have learned to navigate fluidly between diverse worlds. I bridge the gap between rigorous traditional graphic design and generative experimentation, blending artistic sensitivity with operational precision.`
+            `My approach to design is technologically agnostic: technology is not the starting point, but the orchestra at the service of the idea. As a Master of Arts (M.A.) in New Technologies for Arts, I view software not as a constraint, but as a flexible medium for engineering high-impact visual solutions. My mission is to translate the complexity of Artificial Intelligence into powerful narratives, ensuring that technique remains the operational arm of the concept.`,
+            `From my international experience in Brussels at White Rabbit — where I designed creative workflows integrating advanced models like Higgsfield and Gemini Agents — to my current role as a Marketing Specialist at GCERTI Italy, I have learned to navigate fluidly between institutional rigor and generative experimentation. My career is defined by rapid growth, driven by the ability to optimize processes through proprietary AI pipelines.`
         ],
-        'bio-skills-title': 'Core Competencies:',
+        'bio-skills-title': 'Strategic Value & Core Competencies:',
         'bio-skills-list': [
-            { title: 'Strategic Versatility:', desc: 'Ability to select the perfect medium for any project, ranging from print design and video editing to interactive installations.' },
-            { title: 'AI Pipeline Architecture:', desc: 'Optimizing creative workflows through targeted Generative AI to reduce production time without compromising authorial quality.' },
-            { title: 'Creative Problem Solving:', desc: 'A mindset that transcends technical software limits, exploring hybrid solutions to enhance the original vision.' }
+            { title: 'AI Pipeline Architecture:', desc: 'Designing "AI-Augmented" workflows to significantly reduce production times while maintaining authorial control and brand consistency.' },
+            { title: 'Institutional Visual Branding:', desc: 'Proven experience in managing complex visual identities compliant with rigorous EU Guidelines and international standards.' },
+            { title: 'Creative Problem Solving:', desc: 'An analytical mindset that transcends technical software limits, exploring hybrid solutions between traditional graphic design and neural video streams.' },
+            { title: 'Multidisciplinary Versatility:', desc: 'Ability to orchestrate large-scale projects, from print design to interactive installations, blending artistic sensitivity with operational precision.' }
         ],
-        'bio-philosophy': 'I believe in design that is not just seen, but experienced. An approach where technology amplifies human potential rather than replacing it.',
+        'bio-philosophy': 'I believe in design that is not just seen, but experienced. An ecosystem where technology does not replace the human element, but exponentially amplifies creative possibilities.',
 
         'btn-cv': 'DOWNLOAD CV (PDF)',
         'btn-read-more': 'READ MORE',
@@ -190,7 +192,7 @@ function App() {
                     <Reveal>
                         <div className="bio-content-wrapper">
                             <div className="bio-image-col">
-                                <img src={PROFILE_IMG} alt="Angelo Russo - AI Specialist & New Media Artist" className="profile-photo" />
+                                <img src={PROFILE_IMG} alt="Angelo Russo - AI Specialist & Creative Designer" className="profile-photo" />
                             </div>
 
                             <div className="bio-text-col">
@@ -198,7 +200,6 @@ function App() {
                                     {LANG_DATA[lang]['bio-title']}
                                 </h1>
                                 
-                                {/* SOTTOTITOLO RIDIMENSIONATO - PIÙ PICCOLO E MINIMAL */}
                                 <h2 style={{ 
                                     fontSize: 'clamp(1rem, 1.5vw, 1.25rem)', 
                                     fontWeight: 400, 
