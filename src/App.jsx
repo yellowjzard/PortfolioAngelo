@@ -146,8 +146,25 @@ const Reveal = ({ children }) => {
 
 const FooterSocialBtn = ({ icon, link }) => {
     return (
-        <motion.a href={link} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(255,255,255,0.5)', justifyContent: 'center', alignItems: 'center', border: '1px solid rgba(0,0,0,0.1)', margin: '0 10px' }} whileHover={{ scale: 1.1, backgroundColor: '#fff' }} whileTap={{ scale: 0.95 }}>
-            <img loading="lazy" decoding="async" src={icon} alt="Social Link" style={{ width: '20px', height: '20px', objectFit: 'contain' }} />
+        <motion.a 
+            href={link} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            style={{ 
+                display: 'inline-flex', 
+                width: 'clamp(44px, 10vw, 50px)', // Ottimizzato per Touch Mobile
+                height: 'clamp(44px, 10vw, 50px)', 
+                borderRadius: '50%', 
+                background: 'rgba(255,255,255,0.5)', 
+                justifyContent: 'center', 
+                alignItems: 'center', 
+                border: '1px solid rgba(0,0,0,0.1)', 
+                margin: '0 8px' 
+            }} 
+            whileHover={{ scale: 1.1, backgroundColor: '#fff' }} 
+            whileTap={{ scale: 0.95 }}
+        >
+            <img loading="lazy" decoding="async" src={icon} alt="Social Link" style={{ width: '22px', height: '22px', objectFit: 'contain' }} />
         </motion.a>
     );
 };
@@ -178,7 +195,7 @@ function App() {
                             </ShaderGradientCanvas>
                         </div>
                         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, yoyo: Infinity }} style={{ zIndex: 10, background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(10px)', padding: 'clamp(15px, 4vw, 20px) clamp(20px, 5vw, 40px)', borderRadius: '30px' }}>
-                            <h2 style={{ color: '#111', fontSize: '1.5rem', fontWeight: 600, margin: 0 }}>Caricamento...</h2>
+                            <h2 style={{ color: '#111', fontSize: 'clamp(1.2rem, 3vw, 1.5rem)', fontWeight: 600, margin: 0 }}>Caricamento...</h2>
                         </motion.div>
                     </div>
                 }>
@@ -207,7 +224,10 @@ function App() {
             </motion.div>
 
             <div className="content-scroll-layer">
-                <header><button onClick={toggleLang} className="lang-btn">{lang === 'it' ? 'EN' : 'IT'}</button></header>
+                {/* Header Adattivo su Mobile */}
+                <header style={{ position: 'fixed', top: 'clamp(15px, 4vw, 30px)', right: 'clamp(15px, 4vw, 30px)', zIndex: 100 }}>
+                    <button onClick={toggleLang} className="lang-btn">{lang === 'it' ? 'EN' : 'IT'}</button>
+                </header>
 
                 <section className="glass-section bio-section">
                     <Reveal>
@@ -217,12 +237,12 @@ function App() {
                             </div>
 
                             <div className="bio-text-col">
-                                <h1 className="bio-headline" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 800, marginBottom: '0.25rem' }}>
+                                <h1 className="bio-headline" style={{ fontSize: 'clamp(1.8rem, 8vw, 4rem)', fontWeight: 800, marginBottom: '0.25rem' }}>
                                     {LANG_DATA[lang]['bio-title']}
                                 </h1>
                                 
                                 <h2 style={{ 
-                                    fontSize: 'clamp(1rem, 1.5vw, 1.25rem)', 
+                                    fontSize: 'clamp(0.9rem, 3vw, 1.25rem)', 
                                     fontWeight: 400, 
                                     color: 'rgba(0,0,0,0.6)', 
                                     letterSpacing: '0.3px',
@@ -232,7 +252,7 @@ function App() {
                                     {LANG_DATA[lang]['bio-sub']}
                                 </h2>
                                 
-                                <p className="bio-text" style={{ marginBottom: '20px' }}>
+                                <p className="bio-text" style={{ fontSize: 'clamp(0.9rem, 2.5vw, 1rem)', lineHeight: '1.6', marginBottom: '20px' }}>
                                     {LANG_DATA[lang]['bio-intro'][0]}
                                 </p>
 
@@ -242,44 +262,53 @@ function App() {
                                     transition={{ duration: 0.5, ease: "easeInOut" }}
                                     style={{ overflow: 'hidden' }}
                                 >
-                                    <p className="bio-text" style={{ marginBottom: '20px' }}>
+                                    <p className="bio-text" style={{ fontSize: 'clamp(0.9rem, 2.5vw, 1rem)', lineHeight: '1.6', marginBottom: '20px' }}>
                                         {LANG_DATA[lang]['bio-intro'][1]}
                                     </p>
 
                                     <div style={{ marginBottom: '30px', marginTop: '10px' }}>
-                                        <h3 style={{ fontSize: '1.2rem', fontWeight: 700, marginBottom: '15px', color: '#111' }}>
+                                        <h3 style={{ fontSize: 'clamp(1.1rem, 3vw, 1.2rem)', fontWeight: 700, marginBottom: '15px', color: '#111' }}>
                                             {LANG_DATA[lang]['bio-skills-title']}
                                         </h3>
                                         <ul style={{ listStyle: 'none', padding: 0 }}>
                                             {LANG_DATA[lang]['bio-skills-list'].map((skill, index) => (
-                                                <li key={index} style={{ marginBottom: '12px', fontSize: '1rem', color: '#444', lineHeight: '1.5' }}>
+                                                <li key={index} style={{ marginBottom: '12px', fontSize: 'clamp(0.85rem, 2.5vw, 1rem)', color: '#444', lineHeight: '1.5' }}>
                                                     <span style={{ fontWeight: 700, color: '#2563eb' }}>• {skill.title}</span> {skill.desc}
                                                 </li>
                                             ))}
                                         </ul>
                                     </div>
 
-                                    <p className="bio-text" style={{ fontStyle: 'italic', color: '#555', borderLeft: '3px solid #ccc', paddingLeft: '15px' }}>
+                                    <p className="bio-text" style={{ fontSize: 'clamp(0.85rem, 2.5vw, 1rem)', fontStyle: 'italic', color: '#555', borderLeft: '3px solid #ccc', paddingLeft: '15px' }}>
                                         {LANG_DATA[lang]['bio-philosophy']}
                                     </p>
                                 </motion.div>
 
-                                <div style={{ display: 'flex', gap: '15px', marginTop: '30px', flexWrap: 'wrap' }}>
+                                {/* Contenitore Pulsanti Ottimizzato Mobile */}
+                                <div style={{ 
+                                    display: 'flex', 
+                                    gap: 'clamp(10px, 2vw, 15px)', 
+                                    marginTop: '30px', 
+                                    flexWrap: 'wrap',
+                                    width: '100%' 
+                                }}>
                                     <motion.button
                                         onClick={() => setShowFullBio(!showFullBio)}
                                         className="read-more-btn"
                                         whileHover={{ scale: 1.05, backgroundColor: "#2563eb", color: "#fff" }}
                                         whileTap={{ scale: 0.95 }}
                                         style={{
-                                            padding: '12px 24px',
+                                            flex: '1 1 200px', // Si espande su mobile, resta fianco a fianco su desktop
+                                            padding: 'clamp(10px, 2.5vw, 12px) clamp(16px, 4vw, 24px)',
                                             backgroundColor: showFullBio ? '#2563eb' : 'transparent',
                                             color: showFullBio ? '#fff' : '#2563eb',
                                             border: '2px solid #2563eb',
                                             borderRadius: '30px',
-                                            fontSize: '0.9rem',
+                                            fontSize: 'clamp(0.85rem, 2vw, 0.9rem)',
                                             fontWeight: 600,
                                             cursor: 'pointer',
-                                            transition: 'all 0.3s ease'
+                                            transition: 'all 0.3s ease',
+                                            textAlign: 'center'
                                         }}
                                     >
                                         {showFullBio ? LANG_DATA[lang]['btn-read-less'] : LANG_DATA[lang]['btn-read-more']}
@@ -292,21 +321,23 @@ function App() {
                                         whileHover={{ scale: 1.05, backgroundColor: "#111", color: "#fff" }}
                                         whileTap={{ scale: 0.95 }}
                                         style={{
-                                            padding: '12px 24px',
+                                            flex: '1 1 200px', // Stesso comportamento responsive
+                                            padding: 'clamp(10px, 2.5vw, 12px) clamp(16px, 4vw, 24px)',
                                             backgroundColor: '#111',
                                             color: '#fff',
                                             border: 'none',
                                             borderRadius: '30px',
-                                            fontSize: '0.9rem',
+                                            fontSize: 'clamp(0.85rem, 2vw, 0.9rem)',
                                             fontWeight: 600,
                                             cursor: 'pointer',
                                             textDecoration: 'none',
                                             display: 'inline-flex',
                                             alignItems: 'center',
-                                            justifyContent: 'center'
+                                            justifyContent: 'center',
+                                            textAlign: 'center'
                                         }}
                                     >
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight:'10px'}}>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight:'8px'}}>
                                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
                                         </svg>
                                         {LANG_DATA[lang]['btn-cv']}
@@ -336,20 +367,20 @@ function App() {
                     <Reveal>
                         <h2 className="section-label" style={{textAlign:'center', width:'100%'}}>02 / {LANG_DATA[lang]['contact-title']}</h2>
                         <form action="https://formspree.io/f/mrbnlyyl" method="POST" className="contact-form">
-                            <div className="form-group"><label>{LANG_DATA[lang]['form-name']}</label><input type="text" name="name" placeholder={LANG_DATA[lang]['form-name-ph']} required className="form-input" /></div>
-                            <div className="form-group"><label>{LANG_DATA[lang]['form-email']}</label><input type="email" name="email" placeholder={LANG_DATA[lang]['form-email-ph']} required className="form-input" /></div>
-                            <div className="form-group"><label>{LANG_DATA[lang]['form-msg']}</label><textarea name="message" rows="5" placeholder={LANG_DATA[lang]['form-msg-ph']} required className="form-input"></textarea></div>
-                            <motion.button type="submit" className="form-submit-btn" whileHover={{ scale: 1.02, backgroundColor: "#111", color: "#fff" }} whileTap={{ scale: 0.95 }}>{LANG_DATA[lang]['form-btn']}</motion.button>
+                            <div className="form-group"><label style={{fontSize: 'clamp(0.85rem, 2vw, 0.9rem)'}}>{LANG_DATA[lang]['form-name']}</label><input type="text" name="name" placeholder={LANG_DATA[lang]['form-name-ph']} required className="form-input" /></div>
+                            <div className="form-group"><label style={{fontSize: 'clamp(0.85rem, 2vw, 0.9rem)'}}>{LANG_DATA[lang]['form-email']}</label><input type="email" name="email" placeholder={LANG_DATA[lang]['form-email-ph']} required className="form-input" /></div>
+                            <div className="form-group"><label style={{fontSize: 'clamp(0.85rem, 2vw, 0.9rem)'}}>{LANG_DATA[lang]['form-msg']}</label><textarea name="message" rows="5" placeholder={LANG_DATA[lang]['form-msg-ph']} required className="form-input"></textarea></div>
+                            <motion.button type="submit" className="form-submit-btn" style={{ fontSize: 'clamp(0.85rem, 2vw, 0.9rem)', padding: 'clamp(12px, 3vw, 15px)' }} whileHover={{ scale: 1.02, backgroundColor: "#111", color: "#fff" }} whileTap={{ scale: 0.95 }}>{LANG_DATA[lang]['form-btn']}</motion.button>
                         </form>
                     </Reveal>
                 </section>
 
-                <footer style={{textAlign: 'center', padding: 'clamp(3rem, 8vw, 6rem) 2rem', opacity: 0.8}}>
-                    <div style={{marginBottom: '20px'}}>
+                <footer style={{textAlign: 'center', padding: 'clamp(3rem, 8vw, 6rem) clamp(1rem, 4vw, 2rem)', opacity: 0.8}}>
+                    <div style={{marginBottom: '20px', display: 'flex', justifyContent: 'center', flexWrap: 'wrap'}}>
                         <FooterSocialBtn icon={ICON_LN} link="https://www.linkedin.com/in/angelo-russo-0964a8183" />
                         <FooterSocialBtn icon={ICON_IG} link="https://www.instagram.com/yellowjzard" />
                     </div>
-                    <p style={{opacity: 0.6}}>© 2026 Angelo Russo. All rights reserved.</p>
+                    <p style={{opacity: 0.6, fontSize: 'clamp(0.8rem, 2vw, 0.9rem)'}}>© 2026 Angelo Russo. All rights reserved.</p>
                 </footer>
             </div>
         </div>
