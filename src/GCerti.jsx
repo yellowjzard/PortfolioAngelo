@@ -41,7 +41,7 @@ const Typewriter = ({ text }) => {
     const container = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.1 } } };
     const child = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100 } } };
     return (
-        <motion.h1 className="intro-text" variants={container} initial="hidden" animate="visible">
+        <motion.h1 className="intro-text" variants={container} initial="hidden" animate="visible" style={{ textAlign: 'center', width: '100%', padding: '0 10px' }}>
             {letters.map((char, index) => <motion.span key={index} variants={child}>{char}</motion.span>)}
         </motion.h1>
     );
@@ -55,7 +55,7 @@ const Reveal = ({ children, delay = 0 }) => (
     <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-15%" }}
+        viewport={{ once: true, margin: "-10%" }}
         transition={{ duration: 0.8, delay: delay, ease: [0.25, 0.1, 0.25, 1] }}
     >
         {children}
@@ -85,10 +85,10 @@ const SocialIconOnly = ({ type, link }) => {
 };
 
 const AnimatedBarChart = ({ label, value, percentage, color = "#085257" }) => (
-    <div style={{ marginBottom: '30px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '10px' }}>
-            <span style={{ fontSize: '1rem', fontWeight: 600, color: '#333', fontFamily: 'Inter, sans-serif' }}>{label}</span>
-            <span style={{ fontSize: '1.8rem', fontWeight: 800, color: color, fontFamily: 'Unbounded, sans-serif' }}>{value}</span>
+    <div style={{ marginBottom: 'clamp(20px, 4vw, 30px)' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '10px', flexWrap: 'wrap' }}>
+            <span style={{ fontSize: 'clamp(0.85rem, 2vw, 1rem)', fontWeight: 600, color: '#333', fontFamily: 'Inter, sans-serif' }}>{label}</span>
+            <span style={{ fontSize: 'clamp(1.4rem, 4vw, 1.8rem)', fontWeight: 800, color: color, fontFamily: 'Unbounded, sans-serif' }}>{value}</span>
         </div>
         <div style={{ width: '100%', height: '8px', background: 'rgba(0,0,0,0.05)', borderRadius: '10px', overflow: 'hidden' }}>
             <motion.div
@@ -107,9 +107,9 @@ const AnimatedCircleChart = ({ label, percentageValue, textValue }) => {
     const circumference = 2 * Math.PI * circleRadius;
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '15px' }}>
-            <div style={{ position: 'relative', width: '120px', height: '120px' }}>
-                <svg width="120" height="120" viewBox="0 0 100 100" style={{ transform: 'rotate(-90deg)' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
+            <div style={{ position: 'relative', width: '100px', height: '100px' }}>
+                <svg width="100" height="100" viewBox="0 0 100 100" style={{ transform: 'rotate(-90deg)' }}>
                     <circle cx="50" cy="50" r={circleRadius} fill="none" stroke="rgba(0,0,0,0.05)" strokeWidth="8" />
                     <motion.circle
                         cx="50" cy="50" r={circleRadius} fill="none" stroke="#085257" strokeWidth="8" strokeLinecap="round"
@@ -121,10 +121,10 @@ const AnimatedCircleChart = ({ label, percentageValue, textValue }) => {
                     />
                 </svg>
                 <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <span style={{ fontFamily: 'Unbounded, sans-serif', fontSize: '1.2rem', fontWeight: 800, color: '#085257' }}>{textValue}</span>
+                    <span style={{ fontFamily: 'Unbounded, sans-serif', fontSize: '1rem', fontWeight: 800, color: '#085257' }}>{textValue}</span>
                 </div>
             </div>
-            <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.9rem', fontWeight: 600, color: '#555', textAlign: 'center' }}>{label}</span>
+            <span style={{ fontFamily: 'Inter, sans-serif', fontSize: 'clamp(0.8rem, 2vw, 0.9rem)', fontWeight: 600, color: '#555', textAlign: 'center' }}>{label}</span>
         </div>
     );
 };
@@ -151,7 +151,7 @@ const GCerti = ({ lang = 'it', goBack }) => {
     }, []);
 
     return (
-        <div className="app-container">
+        <div className="app-container" style={{ overflowX: 'hidden' }}>
             <div className="gradient-bg" style={{ pointerEvents: 'none' }}>
                 <ShaderGradientCanvas style={{ width: '100%', height: '100%', pointerEvents: 'none' }} pixelDensity={1}>
                     <WaterGradient />
@@ -159,63 +159,63 @@ const GCerti = ({ lang = 'it', goBack }) => {
             </div>
 
             <header>
-                <button onClick={goBack} className="lang-btn" style={{ position: 'fixed', left: '30px', zIndex: 100 }}>
+                <button onClick={goBack} className="lang-btn" style={{ position: 'fixed', top: 'clamp(15px, 4vw, 30px)', left: 'clamp(15px, 4vw, 30px)', zIndex: 100 }}>
                     {t['back']}
                 </button>
             </header>
 
-            <motion.div className="fixed-intro-layer" style={{ opacity: introOpacity, filter: introBlur, scale: introScale, zIndex: 5 }}>
+            <motion.div className="fixed-intro-layer" style={{ opacity: introOpacity, filter: introBlur, scale: introScale, zIndex: 5, padding: '0 20px' }}>
                 <Typewriter text={t['title']} />
-                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '1.2rem', fontWeight: 500, color: '#444', marginTop: '20px', letterSpacing: '-0.01em', textAlign: 'center' }}>
+                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 'clamp(1rem, 3vw, 1.2rem)', fontWeight: 500, color: '#444', marginTop: '20px', letterSpacing: '-0.01em', textAlign: 'center' }}>
                     {t['role-sub']}
                 </p>
             </motion.div>
 
             <div className="content-scroll-layer" style={{ zIndex: 10 }}>
 
-                <section style={{ maxWidth: '900px', margin: '0 auto 100px auto', padding: '0 20px', textAlign: 'center' }}>
+                <section style={{ maxWidth: '900px', margin: '0 auto clamp(60px, 10vw, 100px) auto', padding: '0 20px', textAlign: 'center' }}>
                     <Reveal>
-                        <h2 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 'clamp(2rem, 4vw, 3.5rem)', color: '#111', lineHeight: 1.2, marginBottom: '20px' }}>
+                        <h2 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 'clamp(1.8rem, 6vw, 3.5rem)', color: '#111', lineHeight: 1.2, marginBottom: '20px' }}>
                             {t['role-title']}
                         </h2>
-                        <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '1.2rem', color: '#555', lineHeight: 1.6, maxWidth: '700px', margin: '0 auto' }}>
+                        <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 'clamp(1rem, 3vw, 1.2rem)', color: '#555', lineHeight: 1.6, maxWidth: '700px', margin: '0 auto' }}>
                             {t['slogan']}
                         </p>
                     </Reveal>
                 </section>
 
-                <section className="glass-section" style={{ background: 'rgba(255,255,255,0.7)', padding: '60px', borderRadius: '40px', maxWidth: '1000px', margin: '0 auto' }}>
+                <section className="glass-section" style={{ background: 'rgba(255,255,255,0.7)', padding: 'clamp(30px, 6vw, 60px)', borderRadius: '40px', maxWidth: '1000px', margin: '0 auto', width: '92%' }}>
                     <Reveal>
-                        <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '2px', color: '#085257', marginBottom: '40px', fontWeight: 700 }}>{t['problem-title']}</h3>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '30px' }}>
+                        <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: 'clamp(0.8rem, 2vw, 0.9rem)', textTransform: 'uppercase', letterSpacing: '2px', color: '#085257', marginBottom: 'clamp(20px, 5vw, 40px)', fontWeight: 700 }}>{t['problem-title']}</h3>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 'clamp(20px, 4vw, 30px)' }}>
 
-                            <motion.div whileHover={{ scale: 1.02 }} style={{ background: '#fff', padding: '40px', borderRadius: '30px', boxShadow: '0 20px 40px rgba(0,0,0,0.04)', border: '1px solid rgba(0,0,0,0.02)' }}>
+                            <motion.div whileHover={{ scale: 1.02 }} style={{ background: '#fff', padding: 'clamp(25px, 5vw, 40px)', borderRadius: '30px', boxShadow: '0 20px 40px rgba(0,0,0,0.04)', border: '1px solid rgba(0,0,0,0.02)' }}>
                                 <div style={{ fontSize: '2.5rem', marginBottom: '15px' }}>🗣️</div>
-                                <h4 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: '1.2rem', marginBottom: '10px' }}>Consultant Trap</h4>
-                                <p style={{ fontFamily: 'Inter, sans-serif', color: '#666', fontSize: '0.95rem', lineHeight: 1.6 }}>Sovrapposizione del tono di voce istituzionale con quello dei consulenti, perdendo l'autorevolezza di Ente Terzo.</p>
+                                <h4 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 'clamp(1.1rem, 3vw, 1.2rem)', marginBottom: '10px' }}>Consultant Trap</h4>
+                                <p style={{ fontFamily: 'Inter, sans-serif', color: '#666', fontSize: 'clamp(0.85rem, 2.5vw, 0.95rem)', lineHeight: 1.6 }}>Sovrapposizione del tono di voce istituzionale con quello dei consulenti, perdendo l'autorevolezza di Ente Terzo.</p>
                             </motion.div>
 
-                            <motion.div whileHover={{ scale: 1.02 }} style={{ background: '#fff', padding: '40px', borderRadius: '30px', boxShadow: '0 20px 40px rgba(0,0,0,0.04)', border: '1px solid rgba(0,0,0,0.02)' }}>
+                            <motion.div whileHover={{ scale: 1.02 }} style={{ background: '#fff', padding: 'clamp(25px, 5vw, 40px)', borderRadius: '30px', boxShadow: '0 20px 40px rgba(0,0,0,0.04)', border: '1px solid rgba(0,0,0,0.02)' }}>
                                 <div style={{ fontSize: '2.5rem', marginBottom: '15px' }}>💸</div>
-                                <h4 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: '1.2rem', marginBottom: '10px' }}>Budget Bleed</h4>
-                                <p style={{ fontFamily: 'Inter, sans-serif', color: '#666', fontSize: '0.95rem', lineHeight: 1.6 }}>Approccio "generalista" su Google Ads. Le parole chiave generiche bruciavano budget senza generare conversioni qualificate.</p>
+                                <h4 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 'clamp(1.1rem, 3vw, 1.2rem)', marginBottom: '10px' }}>Budget Bleed</h4>
+                                <p style={{ fontFamily: 'Inter, sans-serif', color: '#666', fontSize: 'clamp(0.85rem, 2.5vw, 0.95rem)', lineHeight: 1.6 }}>Approccio "generalista" su Google Ads. Le parole chiave generiche bruciavano budget senza generare conversioni qualificate.</p>
                             </motion.div>
 
                         </div>
                     </Reveal>
                 </section>
 
-                <section style={{ maxWidth: '1000px', margin: '100px auto', padding: '0 20px' }}>
+                <section style={{ maxWidth: '1000px', margin: 'clamp(60px, 10vw, 100px) auto', padding: '0 20px' }}>
                     <Reveal>
-                        <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '2px', color: '#085257', marginBottom: '40px', fontWeight: 700, textAlign: 'center' }}>{t['results-title']}</h3>
+                        <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: 'clamp(0.8rem, 2vw, 0.9rem)', textTransform: 'uppercase', letterSpacing: '2px', color: '#085257', marginBottom: 'clamp(30px, 6vw, 40px)', fontWeight: 700, textAlign: 'center' }}>{t['results-title']}</h3>
 
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px' }}>
-                            <div style={{ background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(20px)', padding: '50px', borderRadius: '40px', border: '1px solid rgba(255,255,255,0.5)', boxShadow: '0 20px 60px rgba(0,0,0,0.05)' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 'clamp(20px, 5vw, 40px)' }}>
+                            <div style={{ background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(20px)', padding: 'clamp(30px, 6vw, 50px)', borderRadius: '40px', border: '1px solid rgba(255,255,255,0.5)', boxShadow: '0 20px 60px rgba(0,0,0,0.05)' }}>
                                 <AnimatedBarChart label="Instagram Engagement" value="+542%" percentage="85%" color="#085257" />
                                 <AnimatedBarChart label="Ottimizzazione CPC (Ads)" value="-24.3%" percentage="75%" color="#e6683c" />
                             </div>
 
-                            <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', flexWrap: 'wrap', gap: '30px', background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(20px)', padding: '50px', borderRadius: '40px', border: '1px solid rgba(255,255,255,0.5)', boxShadow: '0 20px 60px rgba(0,0,0,0.05)' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', flexWrap: 'wrap', gap: '30px', background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(20px)', padding: 'clamp(30px, 6vw, 50px)', borderRadius: '40px', border: '1px solid rgba(255,255,255,0.5)', boxShadow: '0 20px 60px rgba(0,0,0,0.05)' }}>
                                 <AnimatedCircleChart label="LinkedIn Clicks / Day" percentageValue={100} textValue="465" />
                                 <AnimatedCircleChart label="Budget Protection" percentageValue={100} textValue="100%" />
                             </div>
@@ -223,55 +223,55 @@ const GCerti = ({ lang = 'it', goBack }) => {
                     </Reveal>
                 </section>
 
-                <section className="glass-section" style={{ background: 'rgba(255,255,255,0.7)', padding: '60px', borderRadius: '40px', maxWidth: '1000px', margin: '0 auto' }}>
+                <section className="glass-section" style={{ background: 'rgba(255,255,255,0.7)', padding: 'clamp(30px, 6vw, 60px)', borderRadius: '40px', maxWidth: '1000px', margin: '0 auto', width: '92%' }}>
                     <Reveal>
-                        <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '2px', color: '#085257', marginBottom: '40px', fontWeight: 700 }}>{t['strategy-title']}</h3>
+                        <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: 'clamp(0.8rem, 2vw, 0.9rem)', textTransform: 'uppercase', letterSpacing: '2px', color: '#085257', marginBottom: 'clamp(30px, 6vw, 40px)', fontWeight: 700 }}>{t['strategy-title']}</h3>
 
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
                             <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
                                 <div style={{ background: '#085257', color: 'white', fontFamily: 'Unbounded, sans-serif', width: '50px', height: '50px', borderRadius: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', flexShrink: 0 }}>01</div>
                                 <div>
-                                    <h4 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: '1.3rem', marginBottom: '10px', color: '#111' }}>Zero-Click Repositioning</h4>
-                                    <p style={{ fontFamily: 'Inter, sans-serif', color: '#555', lineHeight: 1.6, fontSize: '1rem' }}>Trasformazione di direttive complesse in Caroselli LinkedIn ad alto valore informativo e zero attrito per l'utente.</p>
+                                    <h4 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 'clamp(1.1rem, 3vw, 1.3rem)', marginBottom: '10px', color: '#111' }}>Zero-Click Repositioning</h4>
+                                    <p style={{ fontFamily: 'Inter, sans-serif', color: '#555', lineHeight: 1.6, fontSize: 'clamp(0.9rem, 2.5vw, 1rem)' }}>Trasformazione di direttive complesse in Caroselli LinkedIn ad alto valore informativo e zero attrito per l'utente.</p>
                                 </div>
                             </div>
                             <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
                                 <div style={{ background: '#085257', color: 'white', fontFamily: 'Unbounded, sans-serif', width: '50px', height: '50px', borderRadius: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', flexShrink: 0 }}>02</div>
                                 <div>
-                                    <h4 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: '1.3rem', marginBottom: '10px', color: '#111' }}>AI Visual Authority</h4>
-                                    <p style={{ fontFamily: 'Inter, sans-serif', color: '#555', lineHeight: 1.6, fontSize: '1rem' }}>Prompt Engineering avanzato per asset visivi "3D glossy photorealistic". Creatività corporate scalabili, costi abbattuti.</p>
+                                    <h4 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 'clamp(1.1rem, 3vw, 1.3rem)', marginBottom: '10px', color: '#111' }}>AI Visual Authority</h4>
+                                    <p style={{ fontFamily: 'Inter, sans-serif', color: '#555', lineHeight: 1.6, fontSize: 'clamp(0.9rem, 2.5vw, 1rem)' }}>Prompt Engineering avanzato per asset visivi "3D glossy photorealistic". Creatività corporate scalabili, costi abbattuti.</p>
                                 </div>
                             </div>
                             <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
                                 <div style={{ background: '#085257', color: 'white', fontFamily: 'Unbounded, sans-serif', width: '50px', height: '50px', borderRadius: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', flexShrink: 0 }}>03</div>
                                 <div>
-                                    <h4 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: '1.3rem', marginBottom: '10px', color: '#111' }}>Multichannel Perfect Trap</h4>
-                                    <p style={{ fontFamily: 'Inter, sans-serif', color: '#555', lineHeight: 1.6, fontSize: '1rem' }}>Search (esatta/frase) per domanda consapevole + Performance Max per retargeting visivo e creazione del bisogno.</p>
+                                    <h4 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 'clamp(1.1rem, 3vw, 1.3rem)', marginBottom: '10px', color: '#111' }}>Multichannel Perfect Trap</h4>
+                                    <p style={{ fontFamily: 'Inter, sans-serif', color: '#555', lineHeight: 1.6, fontSize: 'clamp(0.9rem, 2.5vw, 1rem)' }}>Search (esatta/frase) per domanda consapevole + Performance Max per retargeting visivo e creazione del bisogno.</p>
                                 </div>
                             </div>
                         </div>
                     </Reveal>
                 </section>
 
-                <section style={{ maxWidth: '800px', margin: '100px auto', padding: '0 20px', textAlign: 'center' }}>
+                <section style={{ maxWidth: '800px', margin: 'clamp(60px, 10vw, 100px) auto', padding: '0 20px', textAlign: 'center' }}>
                     <Reveal>
-                        <div className="glass-section" style={{ background: 'rgba(255,255,255,0.8)', padding: '50px', borderRadius: '30px', border: '1px solid rgba(8,82,87,0.1)', boxShadow: '0 20px 40px rgba(0,0,0,0.03)' }}>
-                            <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '3px', color: '#085257', marginBottom: '20px', fontWeight: 700 }}>Key Takeaway</h3>
-                            <p style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 'clamp(1.2rem, 2.5vw, 1.8rem)', color: '#222', lineHeight: 1.5, margin: 0 }}>
+                        <div className="glass-section" style={{ background: 'rgba(255,255,255,0.8)', padding: 'clamp(30px, 6vw, 50px)', borderRadius: '30px', border: '1px solid rgba(8,82,87,0.1)', boxShadow: '0 20px 40px rgba(0,0,0,0.03)', width: '100%', maxWidth: '92%', margin: '0 auto' }}>
+                            <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: 'clamp(0.8rem, 2vw, 0.9rem)', textTransform: 'uppercase', letterSpacing: '3px', color: '#085257', marginBottom: '20px', fontWeight: 700 }}>Key Takeaway</h3>
+                            <p style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 'clamp(1rem, 4vw, 1.8rem)', color: '#222', lineHeight: 1.5, margin: 0 }}>
                                 "{t['takeaway-desc']}"
                             </p>
                         </div >
                     </Reveal>
                 </section>
 
-                <section style={{ display: 'flex', justifyContent: 'center', gap: '15px', padding: '20px', marginTop: '20px' }}>
+                <section style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '15px', padding: '20px', marginTop: '20px' }}>
                     <SocialIconOnly type="web" link={SOCIAL_LINKS.web} />
                     <SocialIconOnly type="ig" link={SOCIAL_LINKS.ig} />
                     <SocialIconOnly type="ln" link={SOCIAL_LINKS.ln} />
                 </section>
 
                 <footer style={{ textAlign: 'center', padding: '2rem 2rem 4rem', opacity: 0.5 }}>
-                    <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.85rem', fontWeight: 600 }}>© 2026 Angelo Russo — Strategic B2B Branding</p>
+                    <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 'clamp(0.75rem, 2vw, 0.85rem)', fontWeight: 600 }}>© 2026 Angelo Russo — Strategic B2B Branding</p>
                 </footer>
             </div>
         </div>
