@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { ShaderGradientCanvas, ShaderGradient } from '@shadergradient/react';
-import { motion, useScroll, useTransform, AnimatePresence, useMotionValue, useSpring } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
-// --- CONFIGURAZIONE LINK ---
+// --- CONFIGURAZIONE ---
 const SOCIAL_LINKS = {
     ig: "https://www.instagram.com/gcerti.italy/",
     ln: "https://www.linkedin.com/company/gcerti-italy/",
@@ -11,7 +11,7 @@ const SOCIAL_LINKS = {
 
 const GCERTI_LANG = {
     it: {
-        'back': '← HOME',
+        'back': '← TORNA',
         'title': 'GCERTI ITALY',
         'role-title': 'Da "Spesa Marketing" a Motore di Acquisizione B2B & B2C.',
         'subtitle': 'Strategia di Riposizionamento Brand, AI Creative Direction e Performance Marketing per Ente di Certificazione.',
@@ -45,243 +45,141 @@ const GCERTI_LANG = {
         ],
         'takeaway-title': 'Key Takeaway',
         'takeaway-desc': 'Interpretare le complesse direttive di legge, trasformarle in ganci visivi generati tramite AI e distribuirle su ecosistemi Google Ads blindati, ha permesso a GCERTI Italy di smettere di "comprare clic" e iniziare a costruire un asset finanziario scalabile.'
+        'role-title': 'Da "Spesa" a Motore B2B.',
+        'role-sub': 'Performance Marketing & AI Creative Direction',
+        'slogan': 'Abbiamo reingegnerizzato l\'autorevolezza: ottimizzazione chirurgica del budget Ads e design generativo per una Lead Generation implacabile.',
+        'problem-title': 'La Sfida',
+        'strategy-title': 'L\'Ecosistema',
+        'execution-title': 'Infrastruttura',
+        'results-title': 'Impatto Numerico',
+        'takeaway-desc': 'Interpretare direttive legali complesse, trasformarle in ganci visivi AI e blindare il budget su ecosistemi Google ad alta intenzione d\'acquisto.',
     },
     en: {
         'back': '← HOME',
+        'back': '← BACK',
         'title': 'GCERTI ITALY',
-        'role-title': 'From "Marketing Expense" to B2B Acquisition Engine.',
-        'subtitle': 'Brand Repositioning Strategy, AI Creative Direction and Performance Marketing for a Certification Body.',
-        'slogan': 'Ads Budget Optimization, Brand Authority, Generative Design and Qualified Lead Generation.',
-        'problem-title': 'The Problem',
-        'problem-desc': 'Budget dispersion and institutional voice overlap.',
-        'problem-content': [
-            { icon: '🔴', title: 'Consultant Trap', body: 'Corporate voice overlapped with external consultants, undermining authority as an Independent Third Party.' },
-            { icon: '📋', title: 'Bureaucratic Content', body: 'Communication relied on dry regulatory lists, failing to engage high-level Decision Makers.' },
-            { icon: '💸', title: 'Ads Budget Hemorrhage', body: 'Generic "spray and pray" approach with broad-match keywords burning budget without conversions.' }
-        ],
-        'strategy-title': 'The Strategy',
-        'strategy-name': '3 Strategic Pillars',
-        'strategy-pillars': [
-            { num: '01', title: 'Zero-Click Repositioning', body: 'Transforming complex legal directives into high-value LinkedIn Carousels with zero friction.' },
-            { num: '02', title: 'AI Visual Authority', body: 'Advanced Prompt Engineering for 3D glossy photorealistic assets. Premium corporate creatives at scale, slashing production costs.' },
-            { num: '03', title: 'Multichannel Perfect Trap', body: 'Combined ecosystem: Search (exact/phrase) for conscious demand + Performance Max for visual retargeting and need creation.' }
-        ],
-        'execution-title': 'Execution',
-        'execution-items': [
-            { step: 'Step 01', title: 'Editorial & Event Strategy', body: 'Massive production of 32 assets in 28 days and live coverage for LetExpo Verona and Richmond HR Forum Rimini.' },
-            { step: 'Step 02', title: 'B2B vs B2C Agility', body: 'Parallel funnels: surgical high-spend targeting for CEOs (ISO 9001, Gender Equality) and "Fear vs Safety" campaigns for mass market (DigComp 2.2).' },
-            { step: 'Step 03', title: 'Tracking & Data Clean-Up', body: 'Stopping wasted spend, implementing advanced conversion tracking via 123FormBuilder/Google Tag and protecting budget with controlled Pilot Tests.' }
-        ],
-        'results-title': 'Results',
-        'results-stats': [
-            { value: '+542.8%', label: 'Instagram Engagement', sub: 'Stable organic interaction growth', progress: 0.85 },
-            { value: '465', label: 'LinkedIn Clicks / Day', sub: 'Historical B2B peak', progress: 1.0 },
-            { value: '-24.3%', label: 'CPC Optimization', sub: 'Reduced cost per qualified click', progress: 0.75 },
-            { value: '100%', label: 'Budget Protection', sub: 'Investment routed on purchase-intent queries or tracked lead forms', progress: 1.0 }
-        ],
-        'takeaway-title': 'Key Takeaway',
-        'takeaway-desc': 'By translating complex legal directives into AI-generated visual hooks and distributing them across locked-down Google Ads ecosystems, GCERTI Italy stopped buying clicks and started building a scalable financial asset.'
+        'role-title': 'From "Expense" to B2B Engine.',
+        'role-sub': 'Performance Marketing & AI Creative Direction',
+        'slogan': 'We re-engineered authority: surgical Ads budget optimization and generative design for relentless Lead Generation.',
+        'problem-title': 'The Challenge',
+        'strategy-title': 'The Ecosystem',
+        'execution-title': 'Infrastructure',
+        'results-title': 'Numerical Impact',
+        'takeaway-desc': 'Translating complex legal directives into AI visual hooks and locking the budget onto high-intent Google ecosystems.',
     }
 };
 
-// --- CURSOR PERSONALIZZATO ---
-const CustomCursor = () => {
-    const cursorX = useMotionValue(-100);
-    const cursorY = useMotionValue(-100);
-    const springX = useSpring(cursorX, { stiffness: 500, damping: 28 });
-    const springY = useSpring(cursorY, { stiffness: 500, damping: 28 });
-    const [isHovering, setIsHovering] = useState(false);
+// --- COMPONENTI INTERNI ---
 
-    useEffect(() => {
-        const move = (e) => { cursorX.set(e.clientX); cursorY.set(e.clientY); };
-        const over = (e) => { if (e.target.closest('button, a, [data-hover]')) setIsHovering(true); };
-        const out = () => setIsHovering(false);
-        window.addEventListener('mousemove', move);
-        window.addEventListener('mouseover', over);
-        window.addEventListener('mouseout', out);
-        return () => { window.removeEventListener('mousemove', move); window.removeEventListener('mouseover', over); window.removeEventListener('mouseout', out); };
-    }, []);
-
-    return (
-        <motion.div style={{ x: springX, y: springY, position: 'fixed', top: -12, left: -12, width: 24, height: 24, borderRadius: '50%', background: isHovering ? 'rgba(8,82,87,0.8)' : 'rgba(8,82,87,0.4)', border: '1.5px solid rgba(8,82,87,0.6)', pointerEvents: 'none', zIndex: 9999, mixBlendMode: 'multiply', scale: isHovering ? 1.8 : 1, transition: 'background 0.2s, scale 0.2s' }} />
-    );
-};
-
-// --- TYPEWRITER ANIMATO ---
+// Effetto Macchina da Scrivere (Identico a WhiteRabbit / Home)
 const Typewriter = ({ text }) => {
-    const words = text.split(" ");
+    const letters = text.split("");
+    const container = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.1 } } };
+    const child = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100 } } };
     return (
-        <motion.h1 style={{ fontSize: 'clamp(3rem, 10vw, 8rem)', fontWeight: 900, letterSpacing: '-3px', color: '#085257', lineHeight: 1, textAlign: 'center', fontFamily: '"Playfair Display", serif', margin: 0 }}>
-            {words.map((word, wi) => (
-                <motion.span key={wi} style={{ display: 'inline-block', marginRight: '0.25em' }} initial={{ opacity: 0, y: 60, rotateX: -40 }} animate={{ opacity: 1, y: 0, rotateX: 0 }} transition={{ delay: wi * 0.15, duration: 0.8, ease: [0.215, 0.61, 0.355, 1.0] }}>
-                    {word}
-                </motion.span>
-            ))}
+        <motion.h1 className="intro-text" variants={container} initial="hidden" animate="visible">
+            {letters.map((char, index) => <motion.span key={index} variants={child}>{char}</motion.span>)}
         </motion.h1>
     );
 };
 
-// --- REVEAL AL SCROLL ---
+// Sfondo ESATTAMENTE identico alla Home (App.jsx)
+function WaterGradient() {
+    return <ShaderGradient animate="on" axesHelper="off" bgColor1="#000000" bgColor2="#000000" brightness={1.2} cAzimuthAngle={180} cDistance={2.9} cPolarAngle={120} cameraZoom={1} color1="#ebedff" color2="#f3f2f8" color3="#dbf8ff" destination="onCanvas" embedMode="off" envPreset="city" format="gif" fov={45} frameRate={10} gizmoHelper="hide" grain="off" lightType="3d" pixelDensity={1} positionX={0} positionY={1.8} positionZ={0} range="disabled" reflection={0.1} rotationX={0} rotationY={0} rotationZ={-90} shader="defaults" type="waterPlane" uAmplitude={0} uDensity={1} uFrequency={5.5} uSpeed={0.3} uStrength={3} uTime={0.2} wireframe={false} />;
+}
+
+// Rivelazione fluida dal basso
 const Reveal = ({ children, delay = 0 }) => (
-    <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.7, ease: "easeOut", delay }}>
+    <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-15%" }}
+        transition={{ duration: 0.8, delay: delay, ease: [0.25, 0.1, 0.25, 1] }}
+    >
         {children}
     </motion.div>
 );
 
-// --- METRIC CARD INTERATTIVA ---
-const MetricCard = ({ value, label, sub, progress, index }) => {
-    const [hovered, setHovered] = useState(false);
+// Componente per le Icone Social (Identico a WhiteRabbit)
+const SocialIconOnly = ({ type, link }) => {
+    const renderIcon = () => {
+        if (type === 'web') return <img loading="lazy" decoding="async" src="Icona_site.webp" alt="Agency Website" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />;
+        if (type === 'ig') return <img loading="lazy" decoding="async" src="Icona_instagram.webp" alt="Instagram Profile" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />;
+        if (type === 'ln') return <img loading="lazy" decoding="async" src="Icona_linkedin.webp" alt="LinkedIn Profile" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />;
+        return null;
+    };
     return (
-        <motion.div
-            data-hover
-            onHoverStart={() => setHovered(true)}
-            onHoverEnd={() => setHovered(false)}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.12, duration: 0.5 }}
-            whileHover={{ y: -8, boxShadow: '0 30px 60px -10px rgba(8,82,87,0.25)' }}
-            style={{ padding: 'clamp(1.5rem, 4vw, 2.5rem) clamp(1rem, 3vw, 2rem)', borderRadius: '20px', background: hovered ? 'rgba(8,82,87,0.06)' : 'rgba(255,255,255,0.7)', border: `1px solid ${hovered ? 'rgba(8,82,87,0.3)' : 'rgba(255,255,255,0.9)'}`, backdropFilter: 'blur(12px)', cursor: 'default', transition: 'background 0.3s, border 0.3s', position: 'relative', overflow: 'hidden' }}
+        <motion.a
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="social-btn-circle"
+            whileHover={{ scale: 1.1, backgroundColor: "#fff" }}
+            whileTap={{ scale: 0.95 }}
+            style={{ padding: '10px', pointerEvents: 'auto', position: 'relative', zIndex: 999 }}
         >
-            {/* glow di sfondo */}
-            <motion.div animate={{ opacity: hovered ? 1 : 0 }} style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 30% 30%, rgba(8,82,87,0.08), transparent 70%)', pointerEvents: 'none' }} />
-
-            <div style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 900, color: '#085257', letterSpacing: '-2px', fontFamily: '"Playfair Display", serif', lineHeight: 1.1 }}>{value}</div>
-
-            <div style={{ margin: '14px 0', height: '3px', background: 'rgba(8,82,87,0.1)', borderRadius: '2px', overflow: 'hidden' }}>
-                <motion.div initial={{ width: 0 }} whileInView={{ width: `${progress * 100}%` }} viewport={{ once: true }} transition={{ delay: 0.4 + index * 0.1, duration: 1.2, ease: "easeOut" }} style={{ height: '100%', background: 'linear-gradient(90deg, #085257, #20b8c4)', borderRadius: '2px', position: 'relative' }}>
-                    <motion.div animate={{ x: ['0%', '100%'] }} transition={{ repeat: Infinity, duration: 1.5, ease: 'linear', delay: 1.5 }} style={{ position: 'absolute', top: 0, left: '-30%', width: '30%', height: '100%', background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent)' }} />
-                </motion.div>
-            </div>
-
-            <div style={{ fontWeight: 700, color: '#111', marginBottom: '6px', fontSize: '1rem', letterSpacing: '0.02em' }}>{label}</div>
-            <div style={{ fontSize: '0.88rem', color: '#666', lineHeight: 1.5 }}>{sub}</div>
-        </motion.div>
+            {renderIcon()}
+        </motion.a>
     );
 };
 
-// --- PILLAR CARD INTERATTIVA ---
-const PillarCard = ({ num, title, body, index }) => {
-    const [flipped, setFlipped] = useState(false);
-    return (
-        <motion.div
-            data-hover
-            onClick={() => setFlipped(!flipped)}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.15 }}
-            style={{ cursor: 'pointer', perspective: '1000px', height: '220px' }}
-            title="Click to flip"
-        >
-            <motion.div animate={{ rotateY: flipped ? 180 : 0 }} transition={{ duration: 0.6, ease: [0.215, 0.61, 0.355, 1.0] }} style={{ width: '100%', height: '100%', transformStyle: 'preserve-3d', position: 'relative' }}>
-                {/* Front */}
-                <div style={{ position: 'absolute', inset: 0, backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden', background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(12px)', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.9)', padding: 'clamp(1.2rem, 3vw, 2rem)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxShadow: '0 8px 30px rgba(0,0,0,0.05)' }}>
-                    <span style={{ fontSize: '3rem', fontWeight: 900, color: 'rgba(8,82,87,0.12)', fontFamily: '"Playfair Display", serif', lineHeight: 1 }}>{num}</span>
-                    <div>
-                        <div style={{ fontWeight: 800, fontSize: '1.1rem', color: '#085257', marginBottom: '8px' }}>{title}</div>
-                        <div style={{ fontSize: '0.8rem', color: '#085257', opacity: 0.6, fontWeight: 500 }}>Click per dettagli →</div>
-                    </div>
-                </div>
-                {/* Back */}
-                <div style={{ position: 'absolute', inset: 0, backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden', transform: 'rotateY(180deg)', background: 'linear-gradient(135deg, #085257, #0d7a82)', borderRadius: '20px', padding: 'clamp(1.2rem, 3vw, 2rem)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <p style={{ color: 'white', fontSize: '0.95rem', lineHeight: 1.7, margin: 0, fontWeight: 500 }}>{body}</p>
-                </div>
-            </motion.div>
-        </motion.div>
-    );
-};
-
-// --- TIMELINE ESECUZIONE ---
-const ExecutionTimeline = ({ items }) => (
-    <div style={{ position: 'relative', paddingLeft: '24px' }}>
-        <div style={{ position: 'absolute', top: 10, left: '36px', width: '2px', height: 'calc(100% - 20px)', background: 'linear-gradient(180deg, #085257, rgba(8,82,87,0.1))' }} />
-        {items.map((item, index) => (
-            <motion.div key={index} initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.2, type: 'spring', stiffness: 60 }}
-                style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '28px', position: 'relative' }}>
-                <motion.div initial={{ scale: 0 }} whileInView={{ scale: 1 }} viewport={{ once: true }} transition={{ delay: index * 0.2 + 0.2, type: 'spring' }}
-                    style={{ minWidth: '26px', height: '26px', borderRadius: '50%', background: '#085257', border: '3px solid #fff', boxShadow: '0 0 0 3px rgba(8,82,87,0.2)', zIndex: 2, marginTop: '16px' }} />
-                <motion.div data-hover whileHover={{ x: 6 }} style={{ marginLeft: '22px', background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(10px)', padding: 'clamp(1rem, 3vw, 1.4rem) clamp(1.2rem, 3.5vw, 1.8rem)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.9)', flex: 1, boxShadow: '0 4px 20px rgba(0,0,0,0.04)', cursor: 'default' }}>
-                    <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#085257', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '6px' }}>{item.step}</div>
-                    <div style={{ fontWeight: 800, color: '#111', marginBottom: '8px', fontSize: '1.05rem' }}>{item.title}</div>
-                    <p style={{ margin: 0, color: '#444', lineHeight: 1.65, fontSize: '0.95rem' }}>{item.body}</p>
-                </motion.div>
-            </motion.div>
-        ))}
-    </div>
-);
-
-// --- SECTION LABEL ---
-const SectionLabel = ({ children, color = '#085257' }) => (
-    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
-        <div style={{ width: '32px', height: '2px', background: color }} />
-        <span style={{ fontSize: '0.75rem', fontWeight: 700, color, letterSpacing: '3px', textTransform: 'uppercase' }}>{children}</span>
-    </div>
-);
-
-// --- PROBLEM CARD CON HOVER ---
-const ProblemCard = ({ icon, title, body, index }) => (
-    <motion.div data-hover initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.15 }}
-        whileHover={{ x: 8, backgroundColor: 'rgba(239,68,68,0.08)' }}
-        style={{ padding: 'clamp(1.2rem, 3vw, 1.8rem) clamp(1.2rem, 3vw, 2rem)', background: 'rgba(239,68,68,0.04)', borderRadius: '16px', borderLeft: '4px solid #ef4444', cursor: 'default', transition: 'background 0.3s' }}>
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '14px' }}>
-            <span style={{ fontSize: '1.5rem', lineHeight: 1 }}>{icon}</span>
-            <div>
-                <div style={{ fontWeight: 800, color: '#111', marginBottom: '6px', fontSize: '1.05rem' }}>{title}</div>
-                <p style={{ margin: 0, color: '#444', lineHeight: 1.6, fontSize: '0.95rem' }}>{body}</p>
-            </div>
+// Grafico a Barra Animato
+const AnimatedBarChart = ({ label, value, percentage, color = "#085257" }) => (
+    <div style={{ marginBottom: '30px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '10px' }}>
+            <span style={{ fontSize: '1rem', fontWeight: 600, color: '#333', fontFamily: 'Inter, sans-serif' }}>{label}</span>
+            <span style={{ fontSize: '1.8rem', fontWeight: 800, color: color, fontFamily: 'Unbounded, sans-serif' }}>{value}</span>
         </div>
-    </motion.div>
+        <div style={{ width: '100%', height: '8px', background: 'rgba(0,0,0,0.05)', borderRadius: '10px', overflow: 'hidden' }}>
+            <motion.div
+                initial={{ width: 0 }}
+                whileInView={{ width: percentage }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
+                style={{ height: '100%', background: color, borderRadius: '10px' }}
+            />
+        </div>
+    </div>
 );
 
-// --- SCROLL PROGRESS BAR ---
-const ScrollProgress = () => {
-    const { scrollYProgress } = useScroll();
+// Grafico Circolare Animato
+const AnimatedCircleChart = ({ label, percentageValue, textValue }) => {
+    const circleRadius = 45;
+    const circumference = 2 * Math.PI * circleRadius;
+
     return (
-        <motion.div style={{ position: 'fixed', top: 0, left: 0, height: '3px', background: 'linear-gradient(90deg, #085257, #20b8c4)', transformOrigin: 'left', scaleX: scrollYProgress, zIndex: 200 }} />
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '15px' }}>
+            <div style={{ position: 'relative', width: '120px', height: '120px' }}>
+                <svg width="120" height="120" viewBox="0 0 100 100" style={{ transform: 'rotate(-90deg)' }}>
+                    <circle cx="50" cy="50" r={circleRadius} fill="none" stroke="rgba(0,0,0,0.05)" strokeWidth="8" />
+                    <motion.circle
+                        cx="50" cy="50" r={circleRadius} fill="none" stroke="#085257" strokeWidth="8" strokeLinecap="round"
+                        strokeDasharray={circumference}
+                        initial={{ strokeDashoffset: circumference }}
+                        whileInView={{ strokeDashoffset: circumference - (percentageValue / 100) * circumference }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 2, ease: "easeOut", delay: 0.3 }}
+                    />
+                </svg>
+                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <span style={{ fontFamily: 'Unbounded, sans-serif', fontSize: '1.2rem', fontWeight: 800, color: '#085257' }}>{textValue}</span>
+                </div>
+            </div>
+            <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.9rem', fontWeight: 600, color: '#555', textAlign: 'center' }}>{label}</span>
+        </div>
     );
 };
 
-// --- SFONDO SHADER ---
-function WaterGradient() {
-    return <ShaderGradient
-        animate="on" axesHelper="off" bgColor1="#000000" bgColor2="#000000"
-        brightness={1.2} cAzimuthAngle={180} cDistance={2.9} cPolarAngle={120}
-        cameraZoom={1} color1="#ebedff" color2="#f3f2f8" color3="#dbf8ff"
-        destination="onCanvas" embedMode="off" envPreset="city" format="gif"
-        fov={45} frameRate={10} gizmoHelper="hide" grain="off" lightType="3d"
-        pixelDensity={1} positionX={0} positionY={1.8} positionZ={0}
-        range="disabled" rangeEnd={40} rangeStart={0} reflection={0.1}
-        rotationX={0} rotationY={0} rotationZ={-90} shader="defaults"
-        type="waterPlane" uAmplitude={0} uDensity={1} uFrequency={5.5}
-        uSpeed={0.3} uStrength={3} uTime={0.2} wireframe={false}
-    />;
-}
+// --- COMPONENTE PRINCIPALE ---
 
-// --- LANGUAGE TOGGLE ---
-const LangToggle = ({ lang, setLang }) => (
-    <motion.div whileHover={{ scale: 1.05 }} style={{ display: 'flex', gap: '4px', background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(10px)', borderRadius: '30px', padding: '4px', border: '1px solid rgba(255,255,255,0.9)' }}>
-        {['it', 'en'].map(l => (
-            <button key={l} data-hover onClick={() => setLang(l)}
-                style={{ padding: '7px 16px', borderRadius: '24px', border: 'none', background: lang === l ? '#085257' : 'transparent', color: lang === l ? '#fff' : '#085257', fontWeight: 700, fontSize: '0.8rem', letterSpacing: '1px', cursor: 'pointer', transition: 'all 0.2s', textTransform: 'uppercase' }}>
-                {l}
-            </button>
-        ))}
-    </motion.div>
-);
-
-// ============================================================
-// COMPONENTE PRINCIPALE
-// ============================================================
-const GCerti = ({ lang: initialLang = 'it', goBack }) => {
-    const [lang, setLang] = useState(initialLang);
+const GCerti = ({ lang = 'it', goBack }) => {
     const t = GCERTI_LANG[lang];
     const { scrollY } = useScroll();
 
-    const introOpacity = useTransform(scrollY, [0, 380], [1, 0]);
-    const introBlur = useTransform(scrollY, [0, 380], ["blur(0px)", "blur(16px)"]);
-    const introScale = useTransform(scrollY, [0, 380], [1, 0.94]);
-    const introY = useTransform(scrollY, [0, 380], [0, -40]);
+    // Effetti parallasse Hero
+    const introOpacity = useTransform(scrollY, [0, 500], [1, 0]);
+    const introBlur = useTransform(scrollY, [0, 500], ["blur(0px)", "blur(20px)"]);
+    const introScale = useTransform(scrollY, [0, 500], [1, 0.95]);
 
     useEffect(() => { window.scrollTo(0, 0); }, []);
 
@@ -296,131 +194,140 @@ const GCerti = ({ lang: initialLang = 'it', goBack }) => {
     }, []);
 
     return (
-        <div style={{ fontFamily: '"DM Sans", sans-serif', minHeight: '100vh' }}>
-            <style>{`
-                * { box-sizing: border-box; }
-                ::selection { background: rgba(8,82,87,0.2); }
-                ::-webkit-scrollbar { width: 6px; }
-                ::-webkit-scrollbar-track { background: transparent; }
-                ::-webkit-scrollbar-thumb { background: rgba(8,82,87,0.3); border-radius: 3px; }
-            `}</style>
-
-            <CustomCursor />
-            <ScrollProgress />
-
-            {/* SFONDO FISSO */}
-            <div style={{ pointerEvents: 'none', position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: -1 }}>
+        <div className="app-container">
+            {/* SFONDO ESATTO DELLA HOME */}
+            <div className="gradient-bg" style={{ pointerEvents: 'none' }}>
                 <ShaderGradientCanvas style={{ width: '100%', height: '100%', pointerEvents: 'none' }} pixelDensity={1}>
                     <WaterGradient />
                 </ShaderGradientCanvas>
             </div>
 
-            {/* HEADER FISSO */}
-            <motion.header initial={{ y: -60, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.3, duration: 0.6 }}
-                style={{ position: 'fixed', top: 0, width: '100%', zIndex: 100, padding: '16px 28px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <button data-hover onClick={goBack} style={{ background: 'rgba(255,255,255,0.75)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.9)', padding: '9px 20px', borderRadius: '30px', fontWeight: 700, fontSize: '0.8rem', cursor: 'none', color: '#085257', letterSpacing: '0.5px', boxShadow: '0 4px 16px rgba(0,0,0,0.05)', transition: 'box-shadow 0.2s' }}>
+            {/* HEADER FISSO CORRETTO - Stesso di WhiteRabbit */}
+            <header>
+                <button onClick={goBack} className="lang-btn" style={{ position: 'fixed', left: '30px', zIndex: 100 }}>
                     {t['back']}
                 </button>
-                <LangToggle lang={lang} setLang={setLang} />
-            </motion.header>
+            </header>
 
-            {/* HERO ANIMATO */}
-            <motion.div style={{ opacity: introOpacity, filter: introBlur, scale: introScale, y: introY, height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '24px', padding: '0 24px', position: 'relative', zIndex: 5 }}>
-                <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }}
-                    style={{ fontSize: '0.72rem', fontWeight: 700, color: '#085257', letterSpacing: '4px', textTransform: 'uppercase', background: 'rgba(8,82,87,0.08)', padding: '7px 18px', borderRadius: '20px', border: '1px solid rgba(8,82,87,0.15)' }}>
-                    Case Study
-                </motion.div>
+            {/* HERO TYPOGRAPHY (Stile Originale con Typewriter) */}
+            <motion.div className="fixed-intro-layer" style={{ opacity: introOpacity, filter: introBlur, scale: introScale, zIndex: 5 }}>
                 <Typewriter text={t['title']} />
-                <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8, duration: 0.6 }}
-                    style={{ maxWidth: '580px', textAlign: 'center', fontSize: '1.05rem', color: '#444', lineHeight: 1.7, margin: 0 }}>
-                    {t['subtitle']}
-                </motion.p>
-                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }} style={{ position: 'absolute', bottom: '40px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-                    <span style={{ fontSize: '0.7rem', letterSpacing: '2px', color: '#085257', opacity: 0.5, textTransform: 'uppercase' }}>Scroll</span>
-                    <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 1.5 }} style={{ width: '1px', height: '40px', background: 'linear-gradient(180deg, #085257, transparent)' }} />
-                </motion.div>
+                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '1.2rem', fontWeight: 500, color: '#444', marginTop: '20px', letterSpacing: '-0.01em', textAlign: 'center' }}>
+                    {t['role-sub']}
+                </p>
             </motion.div>
 
-            {/* CONTENUTO SCROLL */}
-            <div style={{ position: 'relative', zIndex: 10, paddingBottom: '120px' }}>
+            {/* CONTENUTO SCORREVOLE */}
+            <div className="content-scroll-layer" style={{ zIndex: 10 }}>
 
-                {/* TAGLINE */}
-                <section style={{ maxWidth: '1000px', margin: '0 auto 50px auto', padding: '4rem 2rem' }}>
+                {/* HEADLINE STATEMENT */}
+                <section style={{ maxWidth: '900px', margin: '0 auto 100px auto', padding: '0 20px', textAlign: 'center' }}>
                     <Reveal>
-                        <div style={{ textAlign: 'center', background: 'rgba(255,255,255,0.65)', backdropFilter: 'blur(20px)', borderRadius: '28px', padding: 'clamp(2rem, 5vw, 4rem) clamp(1.5rem, 4vw, 3rem)', border: '1px solid rgba(255,255,255,0.9)', boxShadow: '0 20px 60px rgba(0,0,0,0.05)' }}>
-                            <h2 style={{ fontSize: 'clamp(1.6rem, 4vw, 2.8rem)', fontWeight: 900, color: '#085257', fontFamily: '"Playfair Display", serif', letterSpacing: '-1px', marginBottom: '16px', lineHeight: 1.2 }}>{t['role-title']}</h2>
-                            <p style={{ fontSize: '1.1rem', color: '#555', lineHeight: 1.7, maxWidth: '700px', margin: '0 auto' }}>{t['slogan']}</p>
+                        <h2 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 'clamp(2rem, 4vw, 3.5rem)', color: '#111', lineHeight: 1.2, marginBottom: '20px' }}>
+                            {t['role-title']}
+                        </h2>
+                        <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '1.2rem', color: '#555', lineHeight: 1.6, maxWidth: '700px', margin: '0 auto' }}>
+                            {t['slogan']}
+                        </p>
+                    </Reveal>
+                </section>
+
+                {/* THE PROBLEM - APPLE STYLE GRID */}
+                <section className="glass-section" style={{ background: 'rgba(255,255,255,0.7)', padding: '60px', borderRadius: '40px', maxWidth: '1000px', margin: '0 auto' }}>
+                    <Reveal>
+                        <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '2px', color: '#085257', marginBottom: '40px', fontWeight: 700 }}>{t['problem-title']}</h3>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '30px' }}>
+
+                            <motion.div whileHover={{ scale: 1.02 }} style={{ background: '#fff', padding: '40px', borderRadius: '30px', boxShadow: '0 20px 40px rgba(0,0,0,0.04)', border: '1px solid rgba(0,0,0,0.02)' }}>
+                                <div style={{ fontSize: '2.5rem', marginBottom: '15px' }}>🗣️</div>
+                                <h4 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: '1.2rem', marginBottom: '10px' }}>Consultant Trap</h4>
+                                <p style={{ fontFamily: 'Inter, sans-serif', color: '#666', fontSize: '0.95rem', lineHeight: 1.6 }}>Sovrapposizione del tono di voce istituzionale con quello dei consulenti, perdendo l'autorevolezza di Ente Terzo.</p>
+                            </motion.div>
+
+                            <motion.div whileHover={{ scale: 1.02 }} style={{ background: '#fff', padding: '40px', borderRadius: '30px', boxShadow: '0 20px 40px rgba(0,0,0,0.04)', border: '1px solid rgba(0,0,0,0.02)' }}>
+                                <div style={{ fontSize: '2.5rem', marginBottom: '15px' }}>💸</div>
+                                <h4 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: '1.2rem', marginBottom: '10px' }}>Budget Bleed</h4>
+                                <p style={{ fontFamily: 'Inter, sans-serif', color: '#666', fontSize: '0.95rem', lineHeight: 1.6 }}>Approccio "generalista" su Google Ads. Le parole chiave generiche bruciavano budget senza generare conversioni qualificate.</p>
+                            </motion.div>
+
                         </div>
                     </Reveal>
                 </section>
 
-                {/* PROBLEMA */}
-                <section style={{ maxWidth: '1000px', margin: '0 auto 50px auto', padding: '0 2rem' }}>
-                    <div style={{ background: 'rgba(255,255,255,0.65)', backdropFilter: 'blur(20px)', borderRadius: '28px', padding: 'clamp(1.5rem, 5vw, 3.5rem)', border: '1px solid rgba(255,255,255,0.9)', boxShadow: '0 20px 60px rgba(0,0,0,0.05)' }}>
-                        <Reveal>
-                            <SectionLabel color="#ef4444">{t['problem-title']}</SectionLabel>
-                            <h3 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.2rem)', fontWeight: 900, color: '#111', fontFamily: '"Playfair Display", serif', letterSpacing: '-0.5px', marginBottom: '2rem', marginTop: '8px' }}>{t['problem-desc']}</h3>
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-                                {t['problem-content'].map((item, i) => <ProblemCard key={i} {...item} index={i} />)}
-                            </div>
-                        </Reveal>
-                    </div>
-                </section>
-
-                {/* STRATEGIA — CARD FLIPPABILI */}
-                <section style={{ maxWidth: '1000px', margin: '0 auto 50px auto', padding: '0 2rem' }}>
-                    <div style={{ background: 'rgba(255,255,255,0.65)', backdropFilter: 'blur(20px)', borderRadius: '28px', padding: 'clamp(1.5rem, 5vw, 3.5rem)', border: '1px solid rgba(255,255,255,0.9)', boxShadow: '0 20px 60px rgba(0,0,0,0.05)' }}>
-                        <Reveal>
-                            <SectionLabel>{t['strategy-title']}</SectionLabel>
-                            <h3 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.2rem)', fontWeight: 900, color: '#111', fontFamily: '"Playfair Display", serif', letterSpacing: '-0.5px', marginBottom: '10px', marginTop: '8px' }}>{t['strategy-name']}</h3>
-                            <p style={{ fontSize: '0.85rem', color: '#085257', opacity: 0.6, marginBottom: '2rem', letterSpacing: '0.5px' }}>← Click su ogni card per i dettagli</p>
-                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '18px' }}>
-                                {t['strategy-pillars'].map((p, i) => <PillarCard key={i} {...p} index={i} />)}
-                            </div>
-                        </Reveal>
-                    </div>
-                </section>
-
-                {/* ESECUZIONE */}
-                <section style={{ maxWidth: '1000px', margin: '0 auto 50px auto', padding: '0 2rem' }}>
-                    <div style={{ background: 'rgba(255,255,255,0.65)', backdropFilter: 'blur(20px)', borderRadius: '28px', padding: 'clamp(1.5rem, 5vw, 3.5rem)', border: '1px solid rgba(255,255,255,0.9)', boxShadow: '0 20px 60px rgba(0,0,0,0.05)' }}>
-                        <Reveal>
-                            <SectionLabel>{t['execution-title']}</SectionLabel>
-                            <ExecutionTimeline items={t['execution-items']} />
-                        </Reveal>
-                    </div>
-                </section>
-
-                {/* RISULTATI */}
-                <section style={{ maxWidth: '1000px', margin: '0 auto 50px auto', padding: '0 2rem' }}>
-                    <div style={{ background: 'rgba(255,255,255,0.65)', backdropFilter: 'blur(20px)', borderRadius: '28px', padding: 'clamp(1.5rem, 5vw, 3.5rem)', border: '1px solid rgba(255,255,255,0.9)', boxShadow: '0 20px 60px rgba(0,0,0,0.05)' }}>
-                        <Reveal>
-                            <SectionLabel>{t['results-title']}</SectionLabel>
-                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '18px', marginTop: '2rem' }}>
-                                {t['results-stats'].map((stat, i) => <MetricCard key={i} {...stat} index={i} />)}
-                            </div>
-                        </Reveal>
-                    </div>
-                </section>
-
-                {/* KEY TAKEAWAY */}
-                <section style={{ maxWidth: '1000px', margin: '0 auto 50px auto', padding: '0 2rem' }}>
+                {/* ANIMATED CHARTS - RESULTS SECTION */}
+                <section style={{ maxWidth: '1000px', margin: '100px auto', padding: '0 20px' }}>
                     <Reveal>
-                        <motion.div data-hover whileHover={{ scale: 1.01 }} style={{ background: 'linear-gradient(135deg, #085257 0%, #0d8a94 100%)', borderRadius: '28px', padding: 'clamp(2rem, 5vw, 4rem) clamp(1.5rem, 5vw, 3.5rem)', position: 'relative', overflow: 'hidden', cursor: 'default' }}>
-                            {/* Decorazioni */}
-                            <div style={{ position: 'absolute', top: -40, right: -40, width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(255,255,255,0.05)' }} />
-                            <div style={{ position: 'absolute', bottom: -20, left: '20%', width: '120px', height: '120px', borderRadius: '50%', background: 'rgba(255,255,255,0.04)' }} />
-                            <SectionLabel color="rgba(255,255,255,0.6)">{t['takeaway-title']}</SectionLabel>
-                            <p style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.4rem)', lineHeight: 1.8, fontStyle: 'italic', color: 'rgba(255,255,255,0.92)', fontWeight: 500, margin: '16px 0 0 0', position: 'relative', zIndex: 2 }}>
+                        <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '2px', color: '#085257', marginBottom: '40px', fontWeight: 700, textAlign: 'center' }}>{t['results-title']}</h3>
+
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px' }}>
+                            {/* Bar Charts */}
+                            <div style={{ background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(20px)', padding: '50px', borderRadius: '40px', border: '1px solid rgba(255,255,255,0.5)', boxShadow: '0 20px 60px rgba(0,0,0,0.05)' }}>
+                                <AnimatedBarChart label="Instagram Engagement" value="+542%" percentage="85%" color="#085257" />
+                                <AnimatedBarChart label="Ottimizzazione CPC (Ads)" value="-24.3%" percentage="75%" color="#e6683c" />
+                            </div>
+
+                            {/* Circular Charts */}
+                            <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', flexWrap: 'wrap', gap: '30px', background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(20px)', padding: '50px', borderRadius: '40px', border: '1px solid rgba(255,255,255,0.5)', boxShadow: '0 20px 60px rgba(0,0,0,0.05)' }}>
+                                <AnimatedCircleChart label="LinkedIn Clicks / Day" percentageValue={100} textValue="465" />
+                                <AnimatedCircleChart label="Budget Protection" percentageValue={100} textValue="100%" />
+                            </div>
+                        </div>
+                    </Reveal>
+                </section>
+
+                {/* STRATEGY - MINIMAL LIST */}
+                <section className="glass-section" style={{ background: 'rgba(255,255,255,0.7)', padding: '60px', borderRadius: '40px', maxWidth: '1000px', margin: '0 auto' }}>
+                    <Reveal>
+                        <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '2px', color: '#085257', marginBottom: '40px', fontWeight: 700 }}>{t['strategy-title']}</h3>
+
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
+                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
+                                <div style={{ background: '#085257', color: 'white', fontFamily: 'Unbounded, sans-serif', width: '50px', height: '50px', borderRadius: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', flexShrink: 0 }}>01</div>
+                                <div>
+                                    <h4 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: '1.3rem', marginBottom: '10px', color: '#111' }}>Zero-Click Repositioning</h4>
+                                    <p style={{ fontFamily: 'Inter, sans-serif', color: '#555', lineHeight: 1.6, fontSize: '1rem' }}>Trasformazione di direttive complesse in Caroselli LinkedIn ad alto valore informativo e zero attrito per l'utente.</p>
+                                </div>
+                            </div>
+                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
+                                <div style={{ background: '#085257', color: 'white', fontFamily: 'Unbounded, sans-serif', width: '50px', height: '50px', borderRadius: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', flexShrink: 0 }}>02</div>
+                                <div>
+                                    <h4 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: '1.3rem', marginBottom: '10px', color: '#111' }}>AI Visual Authority</h4>
+                                    <p style={{ fontFamily: 'Inter, sans-serif', color: '#555', lineHeight: 1.6, fontSize: '1rem' }}>Prompt Engineering avanzato per asset visivi "3D glossy photorealistic". Creatività corporate scalabili, costi abbattuti.</p>
+                                </div>
+                            </div>
+                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
+                                <div style={{ background: '#085257', color: 'white', fontFamily: 'Unbounded, sans-serif', width: '50px', height: '50px', borderRadius: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', flexShrink: 0 }}>03</div>
+                                <div>
+                                    <h4 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: '1.3rem', marginBottom: '10px', color: '#111' }}>Multichannel Perfect Trap</h4>
+                                    <p style={{ fontFamily: 'Inter, sans-serif', color: '#555', lineHeight: 1.6, fontSize: '1rem' }}>Search (esatta/frase) per domanda consapevole + Performance Max per retargeting visivo e creazione del bisogno.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </Reveal>
+                </section>
+
+                {/* TAKEAWAY FINALE (Clean Glassmorphism) */}
+                <section style={{ maxWidth: '800px', margin: '100px auto', padding: '0 20px', textAlign: 'center' }}>
+                    <Reveal>
+                        <div className="glass-section" style={{ background: 'rgba(255,255,255,0.8)', padding: '50px', borderRadius: '30px', border: '1px solid rgba(8,82,87,0.1)', boxShadow: '0 20px 40px rgba(0,0,0,0.03)' }}>
+                            <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '3px', color: '#085257', marginBottom: '20px', fontWeight: 700 }}>Key Takeaway</h3>
+                            <p style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 'clamp(1.2rem, 2.5vw, 1.8rem)', color: '#222', lineHeight: 1.5, margin: 0 }}>
                                 "{t['takeaway-desc']}"
                             </p>
                         </motion.div>
                     </Reveal>
                 </section>
 
+                {/* SOCIAL LINKS */}
+                <section style={{ display: 'flex', justifyContent: 'center', gap: '15px', padding: '20px', marginTop: '20px' }}>
+                    <SocialIconOnly type="web" link={SOCIAL_LINKS.web} />
+                    <SocialIconOnly type="ig" link={SOCIAL_LINKS.ig} />
+                    <SocialIconOnly type="ln" link={SOCIAL_LINKS.ln} />
+                </section>
+
                 {/* FOOTER */}
-                <footer style={{ textAlign: 'center', padding: 'clamp(2rem, 5vw, 4rem) 2rem 2rem', opacity: 0.5 }}>
-                    <p style={{ color: '#085257', fontWeight: 600, letterSpacing: '1px', fontSize: '0.85rem' }}>© 2026 Angelo Russo — Strategic B2B Branding</p>
+                <footer style={{ textAlign: 'center', padding: '2rem 2rem 4rem', opacity: 0.5 }}>
+                    <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.85rem', fontWeight: 600 }}>© 2026 Angelo Russo — Strategic B2B Branding</p>
                 </footer>
             </div>
         </div>
