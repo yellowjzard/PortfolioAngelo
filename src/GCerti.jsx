@@ -3,153 +3,246 @@ import { ShaderGradientCanvas, ShaderGradient } from '@shadergradient/react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 // --- CONFIGURAZIONE ---
-const SOCIAL_LINKS = {
-    ig: "https://www.instagram.com/gcerti.italy/",
-    ln: "https://www.linkedin.com/company/gcerti-italy/",
-    web: "https://www.gcerti.it/"
-};
-
 const GCERTI_LANG = {
     it: {
-        'back': '← TORNA',
+        'back': '← TORNA ALLA HOME',
         'title': 'GCERTI ITALY',
-        'role-title': 'Da "Marketing Expense" a Asset Scalabile.',
+        'role-title': 'Da "Spesa" a Motore B2B.',
         'role-sub': 'Performance Marketing & AI Creative Direction',
-        'slogan': 'Abbiamo trasformato la comunicazione istituzionale in una macchina di acquisizione B2B chirurgica.',
-        'problem-title': 'IL PROBLEMA',
-        'strategy-title': 'LA STRATEGIA',
-        'results-title': 'KEY METRICS',
-        'takeaway-desc': 'Interpretare direttive legali complesse, trasformarle in asset visivi generati via AI e blindare il budget su query ad alta intenzione d\'acquisto.',
+        'slogan': 'Abbiamo reingegnerizzato l\'autorevolezza: ottimizzazione chirurgica del budget Ads e design generativo per una Lead Generation implacabile.',
+        'problem-title': 'La Sfida',
+        'strategy-title': 'L\'Ecosistema',
+        'execution-title': 'Infrastruttura',
+        'results-title': 'Impatto Numerico',
+        'takeaway-desc': 'Interpretare direttive legali complesse, trasformarle in ganci visivi AI e blindare il budget su ecosistemi Google ad alta intenzione d\'acquisto.',
     },
     en: {
-        'back': '← BACK',
+        'back': '← BACK TO HOME',
         'title': 'GCERTI ITALY',
-        'role-title': 'From "Marketing Expense" to Scalable Asset.',
+        'role-title': 'From "Expense" to B2B Engine.',
         'role-sub': 'Performance Marketing & AI Creative Direction',
-        'slogan': 'Transforming institutional communication into a surgical B2B acquisition engine.',
-        'problem-title': 'THE PROBLEM',
-        'strategy-title': 'THE STRATEGY',
-        'results-title': 'KEY METRICS',
-        'takeaway-desc': 'Translating complex legal directives into AI-generated visual assets and locking the budget on high-intent purchase queries.',
+        'slogan': 'We re-engineered authority: surgical Ads budget optimization and generative design for relentless Lead Generation.',
+        'problem-title': 'The Challenge',
+        'strategy-title': 'The Ecosystem',
+        'execution-title': 'Infrastructure',
+        'results-title': 'Numerical Impact',
+        'takeaway-desc': 'Translating complex legal directives into AI visual hooks and locking the budget onto high-intent Google ecosystems.',
     }
 };
 
-// --- COMPONENTI INTERNI ---
+// --- COMPONENTI INTERNI (STILE APPLE) ---
 
-const Reveal = ({ children }) => (
-    <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-10%" }} transition={{ duration: 0.8 }}>
+// Sfondo ESATTAMENTE identico alla Home (App.jsx)
+function WaterGradient() {
+    return <ShaderGradient animate="on" axesHelper="off" bgColor1="#000000" bgColor2="#000000" brightness={1.2} cAzimuthAngle={180} cDistance={2.9} cPolarAngle={120} cameraZoom={1} color1="#ebedff" color2="#f3f2f8" color3="#dbf8ff" destination="onCanvas" embedMode="off" envPreset="city" format="gif" fov={45} frameRate={10} gizmoHelper="hide" grain="off" lightType="3d" pixelDensity={1} positionX={0} positionY={1.8} positionZ={0} range="disabled" reflection={0.1} rotationX={0} rotationY={0} rotationZ={-90} shader="defaults" type="waterPlane" uAmplitude={0} uDensity={1} uFrequency={5.5} uSpeed={0.3} uStrength={3} uTime={0.2} wireframe={false} />;
+}
+
+// Rivelazione fluida dal basso
+const Reveal = ({ children, delay = 0 }) => (
+    <motion.div 
+        initial={{ opacity: 0, y: 40 }} 
+        whileInView={{ opacity: 1, y: 0 }} 
+        viewport={{ once: true, margin: "-15%" }} 
+        transition={{ duration: 0.8, delay: delay, ease: [0.25, 0.1, 0.25, 1] }}
+    >
         {children}
     </motion.div>
 );
 
-const StatCard = ({ label, value, sub }) => (
-    <motion.div 
-        className="bento-card" 
-        whileHover={{ y: -5, backgroundColor: "rgba(255,255,255,0.8)" }}
-        style={{ textAlign: 'center', padding: '30px', background: 'rgba(255,255,255,0.4)', border: '1px solid rgba(0,0,0,0.05)' }}
-    >
-        <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#666', marginBottom: '10px', textTransform: 'uppercase' }}>{label}</div>
-        <div style={{ fontSize: '2.5rem', fontWeight: 800, color: '#085257', fontFamily: 'Unbounded, sans-serif' }}>{value}</div>
-        <div style={{ fontSize: '0.9rem', color: '#444', marginTop: '5px' }}>{sub}</div>
-    </motion.div>
+// Grafico a Barra Animato
+const AnimatedBarChart = ({ label, value, percentage, color = "#085257" }) => (
+    <div style={{ marginBottom: '30px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '10px' }}>
+            <span style={{ fontSize: '1rem', fontWeight: 600, color: '#333', fontFamily: 'Inter, sans-serif' }}>{label}</span>
+            <span style={{ fontSize: '1.8rem', fontWeight: 800, color: color, fontFamily: 'Unbounded, sans-serif' }}>{value}</span>
+        </div>
+        <div style={{ width: '100%', height: '8px', background: 'rgba(0,0,0,0.05)', borderRadius: '10px', overflow: 'hidden' }}>
+            <motion.div 
+                initial={{ width: 0 }} 
+                whileInView={{ width: percentage }} 
+                viewport={{ once: true }}
+                transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
+                style={{ height: '100%', background: color, borderRadius: '10px' }}
+            />
+        </div>
+    </div>
 );
+
+// Grafico Circolare Animato
+const AnimatedCircleChart = ({ label, percentageValue, textValue }) => {
+    const circleRadius = 45;
+    const circumference = 2 * Math.PI * circleRadius;
+    
+    return (
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '15px' }}>
+            <div style={{ position: 'relative', width: '120px', height: '120px' }}>
+                <svg width="120" height="120" viewBox="0 0 100 100" style={{ transform: 'rotate(-90deg)' }}>
+                    <circle cx="50" cy="50" r={circleRadius} fill="none" stroke="rgba(0,0,0,0.05)" strokeWidth="8" />
+                    <motion.circle 
+                        cx="50" cy="50" r={circleRadius} fill="none" stroke="#085257" strokeWidth="8" strokeLinecap="round"
+                        strokeDasharray={circumference}
+                        initial={{ strokeDashoffset: circumference }}
+                        whileInView={{ strokeDashoffset: circumference - (percentageValue / 100) * circumference }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 2, ease: "easeOut", delay: 0.3 }}
+                    />
+                </svg>
+                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <span style={{ fontFamily: 'Unbounded, sans-serif', fontSize: '1.2rem', fontWeight: 800, color: '#085257' }}>{textValue}</span>
+                </div>
+            </div>
+            <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.9rem', fontWeight: 600, color: '#555', textAlign: 'center' }}>{label}</span>
+        </div>
+    );
+};
+
+// --- COMPONENTE PRINCIPALE ---
 
 const GCerti = ({ lang = 'it', goBack }) => {
     const t = GCERTI_LANG[lang];
     const { scrollY } = useScroll();
 
-    const introOpacity = useTransform(scrollY, [0, 400], [1, 0]);
-    const introBlur = useTransform(scrollY, [0, 400], ["blur(0px)", "blur(20px)"]);
-    const introScale = useTransform(scrollY, [0, 400], [1, 0.9]);
+    // Effetti parallasse Hero
+    const introOpacity = useTransform(scrollY, [0, 500], [1, 0]);
+    const introBlur = useTransform(scrollY, [0, 500], ["blur(0px)", "blur(20px)"]);
+    const introScale = useTransform(scrollY, [0, 500], [1, 0.95]);
+    const introY = useTransform(scrollY, [0, 500], [0, 100]);
 
     useEffect(() => { window.scrollTo(0, 0); }, []);
 
     return (
         <div className="app-container">
-            {/* SFONDO COERENTE CON IL PORTFOLIO */}
-            <div className="gradient-bg">
-                <ShaderGradientCanvas style={{ width: '100%', height: '100%' }} pixelDensity={1}>
-                    <ShaderGradient 
-                        animate="on" axesHelper="off" bgColor1="#000000" bgColor2="#000000" brightness={1.2} 
-                        cAzimuthAngle={180} cDistance={2.9} cPolarAngle={120} cameraZoom={1} 
-                        color1="#ebedff" color2="#f3f2f8" color3="#dbf8ff" 
-                        type="waterPlane" uSpeed={0.3} uStrength={3}
-                    />
+            {/* SFONDO ESATTO DELLA HOME */}
+            <div className="gradient-bg" style={{ pointerEvents: 'none' }}>
+                <ShaderGradientCanvas style={{ width: '100%', height: '100%', pointerEvents: 'none' }} pixelDensity={1}>
+                    <WaterGradient />
                 </ShaderGradientCanvas>
             </div>
 
             {/* HEADER FISSO */}
-            <header style={{ left: '30px', right: 'auto' }}>
-                <button onClick={goBack} className="lang-btn">{t['back']}</button>
+            <header style={{ position: 'fixed', top: '30px', left: '30px', right: 'auto', zIndex: 100 }}>
+                <button onClick={goBack} className="lang-btn" style={{ background: 'rgba(255,255,255,0.8)', border: 'none', boxShadow: '0 4px 15px rgba(0,0,0,0.05)', borderRadius: '30px', padding: '10px 20px', fontSize: '0.85rem' }}>
+                    {t['back']}
+                </button>
             </header>
 
-            {/* HERO SECTION */}
-            <motion.div className="fixed-intro-layer" style={{ opacity: introOpacity, filter: introBlur, scale: introScale }}>
-                <h1 className="intro-text" style={{ color: '#085257' }}>{t['title']}</h1>
-                <div className="scroll-hint" style={{ color: '#085257', opacity: 0.8 }}>{t['role-sub']}</div>
+            {/* HERO TYPOGRAPHY (Stile Apple: Pulito, Gigante, Centrale) */}
+            <motion.div className="fixed-intro-layer" style={{ opacity: introOpacity, filter: introBlur, scale: introScale, y: introY, zIndex: 5 }}>
+                <h1 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 'clamp(3rem, 8vw, 7rem)', fontWeight: 800, letterSpacing: '-0.04em', color: '#085257', margin: 0, textAlign: 'center', lineHeight: 1 }}>
+                    GCERTI <br/><span style={{ color: 'transparent', WebkitTextStroke: '2px #085257' }}>ITALY</span>
+                </h1>
+                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '1.2rem', fontWeight: 500, color: '#444', marginTop: '20px', letterSpacing: '-0.01em' }}>
+                    {t['role-sub']}
+                </p>
             </motion.div>
 
-            {/* CONTENT LAYER */}
-            <div className="content-scroll-layer">
+            {/* CONTENUTO SCORREVOLE */}
+            <div className="content-scroll-layer" style={{ zIndex: 10 }}>
                 
-                {/* MISSION SECTION */}
-                <section className="glass-section">
+                {/* HEADLINE STATEMENT */}
+                <section style={{ maxWidth: '900px', margin: '0 auto 100px auto', padding: '0 20px', textAlign: 'center' }}>
                     <Reveal>
-                        <h2 className="bio-headline" style={{ textAlign: 'center', marginBottom: '20px' }}>{t['role-title']}</h2>
-                        <p className="bio-text" style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto 40px auto' }}>
+                        <h2 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 'clamp(2rem, 4vw, 3.5rem)', color: '#111', lineHeight: 1.2, marginBottom: '20px' }}>
+                            {t['role-title']}
+                        </h2>
+                        <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '1.2rem', color: '#555', lineHeight: 1.6, maxWidth: '700px', margin: '0 auto' }}>
                             {t['slogan']}
                         </p>
-                        <div className="social-row">
-                            <motion.a href={SOCIAL_LINKS.web} target="_blank" className="social-btn-circle" whileHover={{ scale: 1.1 }}><img src="Icona_site.webp" width="20" alt="Web" /></motion.a>
-                            <motion.a href={SOCIAL_LINKS.ln} target="_blank" className="social-btn-circle" whileHover={{ scale: 1.1 }}><img src="Icona_linkedin.webp" width="20" alt="LinkedIn" /></motion.a>
+                    </Reveal>
+                </section>
+
+                {/* THE PROBLEM - APPLE STYLE GRID */}
+                <section className="glass-section" style={{ background: 'rgba(255,255,255,0.7)', padding: '60px', borderRadius: '40px' }}>
+                    <Reveal>
+                        <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '2px', color: '#085257', marginBottom: '40px', fontWeight: 700 }}>{t['problem-title']}</h3>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '30px' }}>
+                            
+                            <motion.div whileHover={{ scale: 1.02 }} style={{ background: '#fff', padding: '40px', borderRadius: '30px', boxShadow: '0 20px 40px rgba(0,0,0,0.04)', border: '1px solid rgba(0,0,0,0.02)' }}>
+                                <div style={{ fontSize: '2.5rem', marginBottom: '15px' }}>🗣️</div>
+                                <h4 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: '1.2rem', marginBottom: '10px' }}>Consultant Trap</h4>
+                                <p style={{ fontFamily: 'Inter, sans-serif', color: '#666', fontSize: '0.95rem', lineHeight: 1.6 }}>Sovrapposizione del tono di voce istituzionale con quello dei consulenti, perdendo l'autorevolezza di Ente Terzo.</p>
+                            </motion.div>
+
+                            <motion.div whileHover={{ scale: 1.02 }} style={{ background: '#fff', padding: '40px', borderRadius: '30px', boxShadow: '0 20px 40px rgba(0,0,0,0.04)', border: '1px solid rgba(0,0,0,0.02)' }}>
+                                <div style={{ fontSize: '2.5rem', marginBottom: '15px' }}>💸</div>
+                                <h4 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: '1.2rem', marginBottom: '10px' }}>Budget Bleed</h4>
+                                <p style={{ fontFamily: 'Inter, sans-serif', color: '#666', fontSize: '0.95rem', lineHeight: 1.6 }}>Approccio "generalista" su Google Ads. Le parole chiave generiche bruciavano budget senza generare conversioni qualificate.</p>
+                            </motion.div>
+
                         </div>
                     </Reveal>
                 </section>
 
-                {/* RESULTS BENTO GRID */}
-                <section className="glass-section story-section">
+                {/* ANIMATED CHARTS - RESULTS SECTION */}
+                <section style={{ maxWidth: '1000px', margin: '100px auto', padding: '0 20px' }}>
                     <Reveal>
-                        <h2 className="section-label">{t['results-title']}</h2>
-                        <div className="results-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px' }}>
-                            <StatCard label="Instagram" value="+542%" sub="Interazioni organiche" />
-                            <StatCard label="LinkedIn" value="465" sub="Click B2B al giorno" />
-                            <StatCard label="Ads Cost" value="-24.3%" sub="Ottimizzazione CPC" />
-                            <StatCard label="Tracking" value="100%" sub="Data precision" />
-                        </div>
-                    </Reveal>
-                </section>
-
-                {/* STRATEGY SECTION */}
-                <section className="glass-section">
-                    <Reveal>
-                        <h2 className="section-label">{t['strategy-title']}</h2>
-                        <div className="bento-grid">
-                            <div className="bento-card solution-card">
-                                <div className="card-icon">🎯</div>
-                                <h3>Zero-Click Repositioning</h3>
-                                <p>Trasformazione di normative complesse in caroselli LinkedIn ad alto valore informativo per Decision Maker.</p>
+                        <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '2px', color: '#085257', marginBottom: '40px', fontWeight: 700, textAlign: 'center' }}>{t['results-title']}</h3>
+                        
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '60px' }}>
+                            {/* Bar Charts */}
+                            <div style={{ background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(20px)', padding: '50px', borderRadius: '40px', border: '1px solid rgba(255,255,255,0.5)', boxShadow: '0 20px 60px rgba(0,0,0,0.05)' }}>
+                                <AnimatedBarChart label="Instagram Engagement" value="+542%" percentage="85%" color="#085257" />
+                                <AnimatedBarChart label="Ottimizzazione CPC (Ads)" value="-24.3%" percentage="75%" color="#e6683c" />
                             </div>
-                            <div className="bento-card solution-card">
-                                <div className="card-icon">🤖</div>
-                                <h3>AI Visual Authority</h3>
-                                <p>Asset visivi premium 3D generati con Midjourney/Magnific per abbattere i costi di produzione e scalare il brand.</p>
+
+                            {/* Circular Charts */}
+                            <div style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', gap: '40px', background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(20px)', padding: '50px', borderRadius: '40px', border: '1px solid rgba(255,255,255,0.5)', boxShadow: '0 20px 60px rgba(0,0,0,0.05)' }}>
+                                <AnimatedCircleChart label="LinkedIn Clicks / Day" percentageValue={100} textValue="465" />
+                                <AnimatedCircleChart label="Budget Protection" percentageValue={100} textValue="100%" />
                             </div>
                         </div>
                     </Reveal>
                 </section>
 
-                {/* TAKEAWAY FINALE */}
-                <section className="glass-section results-bar" style={{ background: '#085257', color: 'white' }}>
+                {/* STRATEGY - MINIMAL LIST */}
+                <section className="glass-section" style={{ background: 'rgba(255,255,255,0.7)', padding: '60px', borderRadius: '40px' }}>
                     <Reveal>
-                        <h3 className="bar-title" style={{ color: 'rgba(255,255,255,0.6)', borderBottomColor: 'rgba(255,255,255,0.1)' }}>KEY TAKEAWAY</h3>
-                        <p style={{ fontSize: '1.2rem', lineHeight: 1.7, textAlign: 'center', fontWeight: 500 }}>
-                            "{t['takeaway-desc']}"
-                        </p>
+                        <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '2px', color: '#085257', marginBottom: '40px', fontWeight: 700 }}>{t['strategy-title']}</h3>
+                        
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
+                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
+                                <div style={{ background: '#085257', color: 'white', fontFamily: 'Unbounded, sans-serif', width: '50px', height: '50px', borderRadius: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', flexShrink: 0 }}>01</div>
+                                <div>
+                                    <h4 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: '1.3rem', marginBottom: '10px', color: '#111' }}>Zero-Click Repositioning</h4>
+                                    <p style={{ fontFamily: 'Inter, sans-serif', color: '#555', lineHeight: 1.6, fontSize: '1rem' }}>Trasformazione di direttive complesse in Caroselli LinkedIn ad alto valore informativo e zero attrito per l'utente.</p>
+                                </div>
+                            </div>
+                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
+                                <div style={{ background: '#085257', color: 'white', fontFamily: 'Unbounded, sans-serif', width: '50px', height: '50px', borderRadius: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', flexShrink: 0 }}>02</div>
+                                <div>
+                                    <h4 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: '1.3rem', marginBottom: '10px', color: '#111' }}>AI Visual Authority</h4>
+                                    <p style={{ fontFamily: 'Inter, sans-serif', color: '#555', lineHeight: 1.6, fontSize: '1rem' }}>Prompt Engineering avanzato per asset visivi "3D glossy photorealistic". Creatività corporate scalabili, costi abbattuti.</p>
+                                </div>
+                            </div>
+                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
+                                <div style={{ background: '#085257', color: 'white', fontFamily: 'Unbounded, sans-serif', width: '50px', height: '50px', borderRadius: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', flexShrink: 0 }}>03</div>
+                                <div>
+                                    <h4 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: '1.3rem', marginBottom: '10px', color: '#111' }}>Multichannel Perfect Trap</h4>
+                                    <p style={{ fontFamily: 'Inter, sans-serif', color: '#555', lineHeight: 1.6, fontSize: '1rem' }}>Search (esatta/frase) per domanda consapevole + Performance Max per retargeting visivo e creazione del bisogno.</p>
+                                </div>
+                            </div>
+                        </div>
                     </Reveal>
                 </section>
 
+                {/* TAKEAWAY FINALE (STILE QUOTE APPLE) */}
+                <section style={{ maxWidth: '1000px', margin: '100px auto', padding: '0 20px', textAlign: 'center' }}>
+                    <Reveal>
+                        <div style={{ background: 'linear-gradient(135deg, #085257 0%, #0d7a82 100%)', borderRadius: '40px', padding: '80px 40px', boxShadow: '0 30px 60px rgba(8,82,87,0.2)', position: 'relative', overflow: 'hidden' }}>
+                            <div style={{ position: 'absolute', top: '-50px', left: '-50px', width: '200px', height: '200px', background: 'rgba(255,255,255,0.05)', borderRadius: '50%' }} />
+                            <div style={{ position: 'absolute', bottom: '-80px', right: '-20px', width: '300px', height: '300px', background: 'rgba(255,255,255,0.05)', borderRadius: '50%' }} />
+                            
+                            <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '3px', color: 'rgba(255,255,255,0.6)', marginBottom: '30px', fontWeight: 700 }}>Key Takeaway</h3>
+                            <p style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 'clamp(1.2rem, 3vw, 2rem)', color: '#fff', lineHeight: 1.5, position: 'relative', zIndex: 2 }}>
+                                "{t['takeaway-desc']}"
+                            </p>
+                        </div>
+                    </Reveal>
+                </section>
+
+                {/* FOOTER */}
                 <footer style={{ textAlign: 'center', padding: '4rem 2rem', opacity: 0.5 }}>
-                    <p style={{ fontSize: '0.8rem' }}>© 2026 Angelo Russo — Case Study: GCERTI ITALY</p>
+                    <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.85rem', fontWeight: 600 }}>© 2026 Angelo Russo — Strategic B2B Branding</p>
                 </footer>
             </div>
         </div>
