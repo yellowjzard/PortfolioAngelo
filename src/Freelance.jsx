@@ -153,7 +153,7 @@ const Freelance = ({ lang, goBack }) => {
                     ))}
                 </section>
 
-                <footer style={{textAlign: 'center', padding: '6rem 2rem', opacity: 0.5}}>
+                <footer style={{textAlign: 'center', padding: 'clamp(3rem, 8vw, 6rem) 2rem', opacity: 0.5}}>
                     <p>© 2026 Angelo Russo | Creative Tech Freelance Projects.</p>
                 </footer>
             </div>

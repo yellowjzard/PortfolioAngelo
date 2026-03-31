@@ -515,3 +515,44 @@ header { position: fixed; top: 30px; right: 30px; z-index: 100; }
         grid-template-columns: 1fr;
     }
 }
+
+/* =========================================
+   MOBILE RESPONSIVENESS OVERRIDES
+   ========================================= */
+@media (max-width: 600px) {
+    .bento-card {
+        padding: 20px !important;
+    }
+    .results-bar {
+        padding: 20px !important;
+    }
+    .process-step {
+        padding: 15px !important;
+    }
+    .collaborator-card {
+        padding: 10px 15px !important;
+        flex-direction: column;
+        text-align: center;
+    }
+    .collab-info {
+        margin-right: 0 !important;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    .collab-links {
+        justify-content: center;
+    }
+    .card-content {
+        padding: 15px !important;
+    }
+    .ig-phone-mockup {
+        width: 100% !important;
+        max-width: 300px;
+    }
+    .eu-showcase-container {
+        gap: 20px !important;
+    }
+    .eu-rollup {
+        display: none; /* Hide confusing element on mobile if too complex, or scale it */
+    }
+}

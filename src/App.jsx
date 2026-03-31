@@ -177,7 +177,7 @@ function App() {
                                 <WaterGradient />
                             </ShaderGradientCanvas>
                         </div>
-                        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, yoyo: Infinity }} style={{ zIndex: 10, background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(10px)', padding: '20px 40px', borderRadius: '30px' }}>
+                        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, yoyo: Infinity }} style={{ zIndex: 10, background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(10px)', padding: 'clamp(15px, 4vw, 20px) clamp(20px, 5vw, 40px)', borderRadius: '30px' }}>
                             <h2 style={{ color: '#111', fontSize: '1.5rem', fontWeight: 600, margin: 0 }}>Caricamento...</h2>
                         </motion.div>
                     </div>
@@ -344,7 +344,7 @@ function App() {
                     </Reveal>
                 </section>
 
-                <footer style={{textAlign: 'center', padding: '6rem 2rem', opacity: 0.8}}>
+                <footer style={{textAlign: 'center', padding: 'clamp(3rem, 8vw, 6rem) 2rem', opacity: 0.8}}>
                     <div style={{marginBottom: '20px'}}>
                         <FooterSocialBtn icon={ICON_LN} link="https://www.linkedin.com/in/angelo-russo-0964a8183" />
                         <FooterSocialBtn icon={ICON_IG} link="https://www.instagram.com/yellowjzard" />

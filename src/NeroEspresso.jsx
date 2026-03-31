@@ -233,7 +233,7 @@ const NeroEspresso = ({ lang, goBack }) => {
                     </Reveal>
                 </section>
 
-                <footer style={{textAlign: 'center', padding: '6rem 2rem', opacity: 0.5}}>
+                <footer style={{textAlign: 'center', padding: 'clamp(3rem, 8vw, 6rem) 2rem', opacity: 0.5}}>
                     <p>© 2026 Nero Espresso Case Study | Brand Identity by Angelo Russo.</p>
                 </footer>
 
