@@ -3,6 +3,12 @@ import { ShaderGradientCanvas, ShaderGradient } from '@shadergradient/react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 // --- CONFIGURAZIONE ---
+const SOCIAL_LINKS = {
+    ig: "https://www.instagram.com/gcerti.italy/",
+    ln: "https://www.linkedin.com/company/gcerti-italy/",
+    web: "https://www.gcerti.it/"
+};
+
 const GCERTI_LANG = {
     it: {
         'back': '← TORNA ALLA HOME',
@@ -30,7 +36,19 @@ const GCERTI_LANG = {
     }
 };
 
-// --- COMPONENTI INTERNI (STILE APPLE) ---
+// --- COMPONENTI INTERNI ---
+
+// Effetto Macchina da Scrivere (Identico a WhiteRabbit / Home)
+const Typewriter = ({ text }) => {
+    const letters = text.split("");
+    const container = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.1 } } };
+    const child = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100 } } };
+    return (
+        <motion.h1 className="intro-text" variants={container} initial="hidden" animate="visible">
+            {letters.map((char, index) => <motion.span key={index} variants={child}>{char}</motion.span>)}
+        </motion.h1>
+    );
+};
 
 // Sfondo ESATTAMENTE identico alla Home (App.jsx)
 function WaterGradient() {
@@ -48,6 +66,29 @@ const Reveal = ({ children, delay = 0 }) => (
         {children}
     </motion.div>
 );
+
+// Componente per le Icone Social (Identico a WhiteRabbit)
+const SocialIconOnly = ({ type, link }) => { 
+    const renderIcon = () => { 
+        if(type === 'web') return <img loading="lazy" decoding="async" src="Icona_site.webp" alt="Agency Website" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
+        if(type === 'ig') return <img loading="lazy" decoding="async" src="Icona_instagram.webp" alt="Instagram Profile" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
+        if(type === 'ln') return <img loading="lazy" decoding="async" src="Icona_linkedin.webp" alt="LinkedIn Profile" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
+        return null; 
+    }; 
+    return (
+        <motion.a 
+            href={link} 
+            target="_blank"
+            rel="noopener noreferrer" 
+            className="social-btn-circle" 
+            whileHover={{ scale: 1.1, backgroundColor: "#fff" }} 
+            whileTap={{ scale: 0.95 }}
+            style={{ padding: '10px', pointerEvents: 'auto', position: 'relative', zIndex: 999 }} 
+        >
+            {renderIcon()}
+        </motion.a>
+    ); 
+};
 
 // Grafico a Barra Animato
 const AnimatedBarChart = ({ label, value, percentage, color = "#085257" }) => (
@@ -106,7 +147,6 @@ const GCerti = ({ lang = 'it', goBack }) => {
     const introOpacity = useTransform(scrollY, [0, 500], [1, 0]);
     const introBlur = useTransform(scrollY, [0, 500], ["blur(0px)", "blur(20px)"]);
     const introScale = useTransform(scrollY, [0, 500], [1, 0.95]);
-    const introY = useTransform(scrollY, [0, 500], [0, 100]);
 
     useEffect(() => { window.scrollTo(0, 0); }, []);
 
@@ -126,12 +166,10 @@ const GCerti = ({ lang = 'it', goBack }) => {
                 </button>
             </header>
 
-            {/* HERO TYPOGRAPHY (Stile Apple: Pulito, Gigante, Centrale) */}
-            <motion.div className="fixed-intro-layer" style={{ opacity: introOpacity, filter: introBlur, scale: introScale, y: introY, zIndex: 5 }}>
-                <h1 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 'clamp(3rem, 8vw, 7rem)', fontWeight: 800, letterSpacing: '-0.04em', color: '#085257', margin: 0, textAlign: 'center', lineHeight: 1 }}>
-                    GCERTI <br/><span style={{ color: 'transparent', WebkitTextStroke: '2px #085257' }}>ITALY</span>
-                </h1>
-                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '1.2rem', fontWeight: 500, color: '#444', marginTop: '20px', letterSpacing: '-0.01em' }}>
+            {/* HERO TYPOGRAPHY (Stile Originale con Typewriter) */}
+            <motion.div className="fixed-intro-layer" style={{ opacity: introOpacity, filter: introBlur, scale: introScale, zIndex: 5 }}>
+                <Typewriter text={t['title']} />
+                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '1.2rem', fontWeight: 500, color: '#444', marginTop: '20px', letterSpacing: '-0.01em', textAlign: 'center' }}>
                     {t['role-sub']}
                 </p>
             </motion.div>
@@ -152,7 +190,7 @@ const GCerti = ({ lang = 'it', goBack }) => {
                 </section>
 
                 {/* THE PROBLEM - APPLE STYLE GRID */}
-                <section className="glass-section" style={{ background: 'rgba(255,255,255,0.7)', padding: '60px', borderRadius: '40px' }}>
+                <section className="glass-section" style={{ background: 'rgba(255,255,255,0.7)', padding: '60px', borderRadius: '40px', maxWidth: '1000px', margin: '0 auto' }}>
                     <Reveal>
                         <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '2px', color: '#085257', marginBottom: '40px', fontWeight: 700 }}>{t['problem-title']}</h3>
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '30px' }}>
@@ -178,7 +216,7 @@ const GCerti = ({ lang = 'it', goBack }) => {
                     <Reveal>
                         <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '2px', color: '#085257', marginBottom: '40px', fontWeight: 700, textAlign: 'center' }}>{t['results-title']}</h3>
                         
-                        <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '60px' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px' }}>
                             {/* Bar Charts */}
                             <div style={{ background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(20px)', padding: '50px', borderRadius: '40px', border: '1px solid rgba(255,255,255,0.5)', boxShadow: '0 20px 60px rgba(0,0,0,0.05)' }}>
                                 <AnimatedBarChart label="Instagram Engagement" value="+542%" percentage="85%" color="#085257" />
@@ -186,7 +224,7 @@ const GCerti = ({ lang = 'it', goBack }) => {
                             </div>
 
                             {/* Circular Charts */}
-                            <div style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', gap: '40px', background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(20px)', padding: '50px', borderRadius: '40px', border: '1px solid rgba(255,255,255,0.5)', boxShadow: '0 20px 60px rgba(0,0,0,0.05)' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', flexWrap: 'wrap', gap: '30px', background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(20px)', padding: '50px', borderRadius: '40px', border: '1px solid rgba(255,255,255,0.5)', boxShadow: '0 20px 60px rgba(0,0,0,0.05)' }}>
                                 <AnimatedCircleChart label="LinkedIn Clicks / Day" percentageValue={100} textValue="465" />
                                 <AnimatedCircleChart label="Budget Protection" percentageValue={100} textValue="100%" />
                             </div>
@@ -195,7 +233,7 @@ const GCerti = ({ lang = 'it', goBack }) => {
                 </section>
 
                 {/* STRATEGY - MINIMAL LIST */}
-                <section className="glass-section" style={{ background: 'rgba(255,255,255,0.7)', padding: '60px', borderRadius: '40px' }}>
+                <section className="glass-section" style={{ background: 'rgba(255,255,255,0.7)', padding: '60px', borderRadius: '40px', maxWidth: '1000px', margin: '0 auto' }}>
                     <Reveal>
                         <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '2px', color: '#085257', marginBottom: '40px', fontWeight: 700 }}>{t['strategy-title']}</h3>
                         
@@ -225,23 +263,27 @@ const GCerti = ({ lang = 'it', goBack }) => {
                     </Reveal>
                 </section>
 
-                {/* TAKEAWAY FINALE (STILE QUOTE APPLE) */}
-                <section style={{ maxWidth: '1000px', margin: '100px auto', padding: '0 20px', textAlign: 'center' }}>
+                {/* TAKEAWAY FINALE (Clean Glassmorphism) */}
+                <section style={{ maxWidth: '800px', margin: '100px auto', padding: '0 20px', textAlign: 'center' }}>
                     <Reveal>
-                        <div style={{ background: 'linear-gradient(135deg, #085257 0%, #0d7a82 100%)', borderRadius: '40px', padding: '80px 40px', boxShadow: '0 30px 60px rgba(8,82,87,0.2)', position: 'relative', overflow: 'hidden' }}>
-                            <div style={{ position: 'absolute', top: '-50px', left: '-50px', width: '200px', height: '200px', background: 'rgba(255,255,255,0.05)', borderRadius: '50%' }} />
-                            <div style={{ position: 'absolute', bottom: '-80px', right: '-20px', width: '300px', height: '300px', background: 'rgba(255,255,255,0.05)', borderRadius: '50%' }} />
-                            
-                            <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '3px', color: 'rgba(255,255,255,0.6)', marginBottom: '30px', fontWeight: 700 }}>Key Takeaway</h3>
-                            <p style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 'clamp(1.2rem, 3vw, 2rem)', color: '#fff', lineHeight: 1.5, position: 'relative', zIndex: 2 }}>
+                        <div className="glass-section" style={{ background: 'rgba(255,255,255,0.8)', padding: '50px', borderRadius: '30px', border: '1px solid rgba(8,82,87,0.1)', boxShadow: '0 20px 40px rgba(0,0,0,0.03)' }}>
+                            <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '3px', color: '#085257', marginBottom: '20px', fontWeight: 700 }}>Key Takeaway</h3>
+                            <p style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 'clamp(1.2rem, 2.5vw, 1.8rem)', color: '#222', lineHeight: 1.5, margin: 0 }}>
                                 "{t['takeaway-desc']}"
                             </p>
                         </div>
                     </Reveal>
                 </section>
 
+                {/* SOCIAL LINKS (Identici alle altre pagine) */}
+                <section style={{ display: 'flex', justifyContent: 'center', gap: '15px', padding: '20px', marginTop: '20px' }}>
+                    <SocialIconOnly type="web" link={SOCIAL_LINKS.web} />
+                    <SocialIconOnly type="ig" link={SOCIAL_LINKS.ig} />
+                    <SocialIconOnly type="ln" link={SOCIAL_LINKS.ln} />
+                </section>
+
                 {/* FOOTER */}
-                <footer style={{ textAlign: 'center', padding: '4rem 2rem', opacity: 0.5 }}>
+                <footer style={{ textAlign: 'center', padding: '2rem 2rem 4rem', opacity: 0.5 }}>
                     <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.85rem', fontWeight: 600 }}>© 2026 Angelo Russo — Strategic B2B Branding</p>
                 </footer>
             </div>
