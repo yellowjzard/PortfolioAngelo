@@ -1,6 +1,6 @@
 import React, { useState, lazy, Suspense } from 'react';
 import { ShaderGradientCanvas, ShaderGradient } from '@shadergradient/react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'; 
+import { motion, useScroll, useTransform } from 'framer-motion'; 
 
 import ErrorBoundary from './ErrorBoundary';
 
