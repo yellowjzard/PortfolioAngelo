@@ -13,49 +13,15 @@ const GCERTI_LANG = {
     it: {
         'back': '← TORNA',
         'title': 'GCERTI ITALY',
-        'role-title': 'Da "Spesa Marketing" a Motore di Acquisizione B2B & B2C.',
-        'subtitle': 'Strategia di Riposizionamento Brand, AI Creative Direction e Performance Marketing per Ente di Certificazione.',
-        'slogan': 'Ottimizzazione Budget Ads, Brand Authority, Design Generativo e Lead Generation chirurgica.',
-        'problem-title': 'Il Problema',
-        'problem-desc': 'Dispersione del budget e sovrapposizione del tono di voce istituzionale.',
-        'problem-content': [
-            { icon: '🔴', title: 'Trappola del Consulente', body: 'Il tono di voce aziendale si sovrapponeva a quello dei consulenti esterni, diluendo l\'autorevolezza come Ente Terzo Indipendente.' },
-            { icon: '📋', title: 'Contenuti Burocratici', body: 'La comunicazione era basata su elenchi normativi noiosi, ignorati dai Decision Maker.' },
-            { icon: '💸', title: 'Emorragia di Budget Ads', body: 'Un approccio "generalista" su Google Ads con parole chiave a corrispondenza generica bruciava budget senza conversioni.' }
-        ],
-        'strategy-title': 'La Strategia',
-        'strategy-name': 'I 3 Pilastri Strategici',
-        'strategy-pillars': [
-            { num: '01', title: 'Zero-Click Repositioning', body: 'Trasformazione di direttive complesse in Caroselli LinkedIn ad alto valore informativo e zero attrito.' },
-            { num: '02', title: 'AI Visual Authority', body: 'Prompt Engineering avanzato per asset visivi "3D glossy photorealistic". Creatività corporate premium scalabili, costi di produzione abbattuti.' },
-            { num: '03', title: 'Multichannel Perfect Trap', body: 'Ecosistema combinato: Search (esatta/frase) per domanda consapevole + Performance Max per retargeting visivo e creazione del bisogno.' }
-        ],
-        'execution-title': 'Esecuzione',
-        'execution-items': [
-            { step: 'Step 01', title: 'Editorial & Event Strategy', body: 'Produzione massiva di 32 asset in 28 giorni e copertura live per LetExpo Verona e Richmond HR Forum Rimini.' },
-            { step: 'Step 02', title: 'Agilità B2B vs B2C', body: 'Funnel paralleli: targeting chirurgico alto-spendente per CEO (ISO 9001, Parità di Genere) e campagne "Fear vs Safety" per il mercato di massa (DigComp 2.2).' },
-            { step: 'Step 03', title: 'Tracking & Data Clean-Up', body: 'Chiusura dei rubinetti degli sprechi, tracking conversioni avanzato via 123FormBuilder/Tag Google e protezione budget con Test Pilota controllati.' }
-        ],
-        'results-title': 'Risultati',
-        'results-stats': [
-            { value: '+542,8%', label: 'Instagram Engagement', sub: 'Crescita organica delle interazioni stabili', progress: 0.85 },
-            { value: '465', label: 'LinkedIn Clicks / Giorno', sub: 'Picco storico B2B', progress: 1.0 },
-            { value: '-24,3%', label: 'Ottimizzazione CPC', sub: 'Riduzione costo per clic qualificato', progress: 0.75 },
-            { value: '100%', label: 'Budget Protection', sub: 'Investimento veicolato su query di acquisto o lead form tracciati', progress: 1.0 }
-        ],
-        'takeaway-title': 'Key Takeaway',
-        'takeaway-desc': 'Interpretare le complesse direttive di legge, trasformarle in ganci visivi generati tramite AI e distribuirle su ecosistemi Google Ads blindati, ha permesso a GCERTI Italy di smettere di "comprare clic" e iniziare a costruire un asset finanziario scalabile.'
         'role-title': 'Da "Spesa" a Motore B2B.',
         'role-sub': 'Performance Marketing & AI Creative Direction',
         'slogan': 'Abbiamo reingegnerizzato l\'autorevolezza: ottimizzazione chirurgica del budget Ads e design generativo per una Lead Generation implacabile.',
         'problem-title': 'La Sfida',
         'strategy-title': 'L\'Ecosistema',
-        'execution-title': 'Infrastruttura',
         'results-title': 'Impatto Numerico',
-        'takeaway-desc': 'Interpretare direttive legali complesse, trasformarle in ganci visivi AI e blindare il budget su ecosistemi Google ad alta intenzione d\'acquisto.',
+        'takeaway-desc': 'Interpretare direttive legali complesse, trasformarle in ganci visivi AI e blindare il budget su ecosistemi Google ad alta intenzione d\'acquisto.'
     },
     en: {
-        'back': '← HOME',
         'back': '← BACK',
         'title': 'GCERTI ITALY',
         'role-title': 'From "Expense" to B2B Engine.',
@@ -63,15 +29,13 @@ const GCERTI_LANG = {
         'slogan': 'We re-engineered authority: surgical Ads budget optimization and generative design for relentless Lead Generation.',
         'problem-title': 'The Challenge',
         'strategy-title': 'The Ecosystem',
-        'execution-title': 'Infrastructure',
         'results-title': 'Numerical Impact',
-        'takeaway-desc': 'Translating complex legal directives into AI visual hooks and locking the budget onto high-intent Google ecosystems.',
+        'takeaway-desc': 'Translating complex legal directives into AI visual hooks and locking the budget onto high-intent Google ecosystems.'
     }
 };
 
 // --- COMPONENTI INTERNI ---
 
-// Effetto Macchina da Scrivere (Identico a WhiteRabbit / Home)
 const Typewriter = ({ text }) => {
     const letters = text.split("");
     const container = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.1 } } };
@@ -83,12 +47,10 @@ const Typewriter = ({ text }) => {
     );
 };
 
-// Sfondo ESATTAMENTE identico alla Home (App.jsx)
 function WaterGradient() {
     return <ShaderGradient animate="on" axesHelper="off" bgColor1="#000000" bgColor2="#000000" brightness={1.2} cAzimuthAngle={180} cDistance={2.9} cPolarAngle={120} cameraZoom={1} color1="#ebedff" color2="#f3f2f8" color3="#dbf8ff" destination="onCanvas" embedMode="off" envPreset="city" format="gif" fov={45} frameRate={10} gizmoHelper="hide" grain="off" lightType="3d" pixelDensity={1} positionX={0} positionY={1.8} positionZ={0} range="disabled" reflection={0.1} rotationX={0} rotationY={0} rotationZ={-90} shader="defaults" type="waterPlane" uAmplitude={0} uDensity={1} uFrequency={5.5} uSpeed={0.3} uStrength={3} uTime={0.2} wireframe={false} />;
 }
 
-// Rivelazione fluida dal basso
 const Reveal = ({ children, delay = 0 }) => (
     <motion.div
         initial={{ opacity: 0, y: 40 }}
@@ -100,7 +62,6 @@ const Reveal = ({ children, delay = 0 }) => (
     </motion.div>
 );
 
-// Componente per le Icone Social (Identico a WhiteRabbit)
 const SocialIconOnly = ({ type, link }) => {
     const renderIcon = () => {
         if (type === 'web') return <img loading="lazy" decoding="async" src="Icona_site.webp" alt="Agency Website" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />;
@@ -123,7 +84,6 @@ const SocialIconOnly = ({ type, link }) => {
     );
 };
 
-// Grafico a Barra Animato
 const AnimatedBarChart = ({ label, value, percentage, color = "#085257" }) => (
     <div style={{ marginBottom: '30px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '10px' }}>
@@ -142,7 +102,6 @@ const AnimatedBarChart = ({ label, value, percentage, color = "#085257" }) => (
     </div>
 );
 
-// Grafico Circolare Animato
 const AnimatedCircleChart = ({ label, percentageValue, textValue }) => {
     const circleRadius = 45;
     const circumference = 2 * Math.PI * circleRadius;
@@ -176,14 +135,12 @@ const GCerti = ({ lang = 'it', goBack }) => {
     const t = GCERTI_LANG[lang];
     const { scrollY } = useScroll();
 
-    // Effetti parallasse Hero
     const introOpacity = useTransform(scrollY, [0, 500], [1, 0]);
     const introBlur = useTransform(scrollY, [0, 500], ["blur(0px)", "blur(20px)"]);
     const introScale = useTransform(scrollY, [0, 500], [1, 0.95]);
 
     useEffect(() => { window.scrollTo(0, 0); }, []);
 
-    // Inietta Google Fonts
     useEffect(() => {
         const link = document.createElement('link');
         link.rel = 'stylesheet';
@@ -195,21 +152,18 @@ const GCerti = ({ lang = 'it', goBack }) => {
 
     return (
         <div className="app-container">
-            {/* SFONDO ESATTO DELLA HOME */}
             <div className="gradient-bg" style={{ pointerEvents: 'none' }}>
                 <ShaderGradientCanvas style={{ width: '100%', height: '100%', pointerEvents: 'none' }} pixelDensity={1}>
                     <WaterGradient />
                 </ShaderGradientCanvas>
             </div>
 
-            {/* HEADER FISSO CORRETTO - Stesso di WhiteRabbit */}
             <header>
                 <button onClick={goBack} className="lang-btn" style={{ position: 'fixed', left: '30px', zIndex: 100 }}>
                     {t['back']}
                 </button>
             </header>
 
-            {/* HERO TYPOGRAPHY (Stile Originale con Typewriter) */}
             <motion.div className="fixed-intro-layer" style={{ opacity: introOpacity, filter: introBlur, scale: introScale, zIndex: 5 }}>
                 <Typewriter text={t['title']} />
                 <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '1.2rem', fontWeight: 500, color: '#444', marginTop: '20px', letterSpacing: '-0.01em', textAlign: 'center' }}>
@@ -217,10 +171,8 @@ const GCerti = ({ lang = 'it', goBack }) => {
                 </p>
             </motion.div>
 
-            {/* CONTENUTO SCORREVOLE */}
             <div className="content-scroll-layer" style={{ zIndex: 10 }}>
 
-                {/* HEADLINE STATEMENT */}
                 <section style={{ maxWidth: '900px', margin: '0 auto 100px auto', padding: '0 20px', textAlign: 'center' }}>
                     <Reveal>
                         <h2 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 'clamp(2rem, 4vw, 3.5rem)', color: '#111', lineHeight: 1.2, marginBottom: '20px' }}>
@@ -232,7 +184,6 @@ const GCerti = ({ lang = 'it', goBack }) => {
                     </Reveal>
                 </section>
 
-                {/* THE PROBLEM - APPLE STYLE GRID */}
                 <section className="glass-section" style={{ background: 'rgba(255,255,255,0.7)', padding: '60px', borderRadius: '40px', maxWidth: '1000px', margin: '0 auto' }}>
                     <Reveal>
                         <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '2px', color: '#085257', marginBottom: '40px', fontWeight: 700 }}>{t['problem-title']}</h3>
@@ -254,19 +205,16 @@ const GCerti = ({ lang = 'it', goBack }) => {
                     </Reveal>
                 </section>
 
-                {/* ANIMATED CHARTS - RESULTS SECTION */}
                 <section style={{ maxWidth: '1000px', margin: '100px auto', padding: '0 20px' }}>
                     <Reveal>
                         <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '2px', color: '#085257', marginBottom: '40px', fontWeight: 700, textAlign: 'center' }}>{t['results-title']}</h3>
 
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px' }}>
-                            {/* Bar Charts */}
                             <div style={{ background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(20px)', padding: '50px', borderRadius: '40px', border: '1px solid rgba(255,255,255,0.5)', boxShadow: '0 20px 60px rgba(0,0,0,0.05)' }}>
                                 <AnimatedBarChart label="Instagram Engagement" value="+542%" percentage="85%" color="#085257" />
                                 <AnimatedBarChart label="Ottimizzazione CPC (Ads)" value="-24.3%" percentage="75%" color="#e6683c" />
                             </div>
 
-                            {/* Circular Charts */}
                             <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', flexWrap: 'wrap', gap: '30px', background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(20px)', padding: '50px', borderRadius: '40px', border: '1px solid rgba(255,255,255,0.5)', boxShadow: '0 20px 60px rgba(0,0,0,0.05)' }}>
                                 <AnimatedCircleChart label="LinkedIn Clicks / Day" percentageValue={100} textValue="465" />
                                 <AnimatedCircleChart label="Budget Protection" percentageValue={100} textValue="100%" />
@@ -275,7 +223,6 @@ const GCerti = ({ lang = 'it', goBack }) => {
                     </Reveal>
                 </section>
 
-                {/* STRATEGY - MINIMAL LIST */}
                 <section className="glass-section" style={{ background: 'rgba(255,255,255,0.7)', padding: '60px', borderRadius: '40px', maxWidth: '1000px', margin: '0 auto' }}>
                     <Reveal>
                         <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '2px', color: '#085257', marginBottom: '40px', fontWeight: 700 }}>{t['strategy-title']}</h3>
@@ -306,7 +253,6 @@ const GCerti = ({ lang = 'it', goBack }) => {
                     </Reveal>
                 </section>
 
-                {/* TAKEAWAY FINALE (Clean Glassmorphism) */}
                 <section style={{ maxWidth: '800px', margin: '100px auto', padding: '0 20px', textAlign: 'center' }}>
                     <Reveal>
                         <div className="glass-section" style={{ background: 'rgba(255,255,255,0.8)', padding: '50px', borderRadius: '30px', border: '1px solid rgba(8,82,87,0.1)', boxShadow: '0 20px 40px rgba(0,0,0,0.03)' }}>
@@ -314,18 +260,16 @@ const GCerti = ({ lang = 'it', goBack }) => {
                             <p style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 'clamp(1.2rem, 2.5vw, 1.8rem)', color: '#222', lineHeight: 1.5, margin: 0 }}>
                                 "{t['takeaway-desc']}"
                             </p>
-                        </motion.div>
+                        </div >
                     </Reveal>
                 </section>
 
-                {/* SOCIAL LINKS */}
                 <section style={{ display: 'flex', justifyContent: 'center', gap: '15px', padding: '20px', marginTop: '20px' }}>
                     <SocialIconOnly type="web" link={SOCIAL_LINKS.web} />
                     <SocialIconOnly type="ig" link={SOCIAL_LINKS.ig} />
                     <SocialIconOnly type="ln" link={SOCIAL_LINKS.ln} />
                 </section>
 
-                {/* FOOTER */}
                 <footer style={{ textAlign: 'center', padding: '2rem 2rem 4rem', opacity: 0.5 }}>
                     <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.85rem', fontWeight: 600 }}>© 2026 Angelo Russo — Strategic B2B Branding</p>
                 </footer>
