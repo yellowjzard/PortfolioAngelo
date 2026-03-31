@@ -55,7 +55,7 @@ const Reveal = ({ children, delay = 0 }) => (
     <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-10%" }}
+        viewport={{ once: true, margin: "-15%" }}
         transition={{ duration: 0.8, delay: delay, ease: [0.25, 0.1, 0.25, 1] }}
     >
         {children}
@@ -146,8 +146,8 @@ const GCerti = ({ lang = 'it', goBack }) => {
         link.rel = 'stylesheet';
         link.href = 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;700;800&display=swap';
         document.head.appendChild(link);
-        document.body.style.cursor = 'none';
-        return () => { document.body.style.cursor = ''; };
+
+        // IL CURSORE È STATO RIPRISTINATO RIMUOVENDO document.body.style.cursor = 'none';
     }, []);
 
     return (
