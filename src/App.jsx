@@ -152,7 +152,7 @@ const FooterSocialBtn = ({ icon, link }) => {
             rel="noopener noreferrer" 
             style={{ 
                 display: 'inline-flex', 
-                width: 'clamp(44px, 10vw, 50px)', // Ottimizzato per Touch Mobile
+                width: 'clamp(44px, 10vw, 50px)', 
                 height: 'clamp(44px, 10vw, 50px)', 
                 borderRadius: '50%', 
                 background: 'rgba(255,255,255,0.5)', 
@@ -188,12 +188,7 @@ function App() {
         return (
             <ErrorBoundary goBack={() => setView('home')}>
                 <Suspense fallback={
-                    <div className="app-container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <div className="gradient-bg">
-                            <ShaderGradientCanvas style={{ width: '100%', height: '100%', pointerEvents: 'none' }} pixelDensity={1}>
-                                <WaterGradient />
-                            </ShaderGradientCanvas>
-                        </div>
+                    <div className="app-container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100dvh' }}>
                         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, yoyo: Infinity }} style={{ zIndex: 10, background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(10px)', padding: 'clamp(15px, 4vw, 20px) clamp(20px, 5vw, 40px)', borderRadius: '30px' }}>
                             <h2 style={{ color: '#111', fontSize: 'clamp(1.2rem, 3vw, 1.5rem)', fontWeight: 600, margin: 0 }}>Caricamento...</h2>
                         </motion.div>
@@ -224,7 +219,6 @@ function App() {
             </motion.div>
 
             <div className="content-scroll-layer">
-                {/* Header Adattivo su Mobile */}
                 <header style={{ position: 'fixed', top: 'clamp(15px, 4vw, 30px)', right: 'clamp(15px, 4vw, 30px)', zIndex: 100 }}>
                     <button onClick={toggleLang} className="lang-btn">{lang === 'it' ? 'EN' : 'IT'}</button>
                 </header>
@@ -284,7 +278,6 @@ function App() {
                                     </p>
                                 </motion.div>
 
-                                {/* Contenitore Pulsanti Ottimizzato Mobile */}
                                 <div style={{ 
                                     display: 'flex', 
                                     gap: 'clamp(10px, 2vw, 15px)', 
@@ -298,7 +291,7 @@ function App() {
                                         whileHover={{ scale: 1.05, backgroundColor: "#2563eb", color: "#fff" }}
                                         whileTap={{ scale: 0.95 }}
                                         style={{
-                                            flex: '1 1 200px', // Si espande su mobile, resta fianco a fianco su desktop
+                                            flex: '1 1 200px',
                                             padding: 'clamp(10px, 2.5vw, 12px) clamp(16px, 4vw, 24px)',
                                             backgroundColor: showFullBio ? '#2563eb' : 'transparent',
                                             color: showFullBio ? '#fff' : '#2563eb',
@@ -321,7 +314,7 @@ function App() {
                                         whileHover={{ scale: 1.05, backgroundColor: "#111", color: "#fff" }}
                                         whileTap={{ scale: 0.95 }}
                                         style={{
-                                            flex: '1 1 200px', // Stesso comportamento responsive
+                                            flex: '1 1 200px',
                                             padding: 'clamp(10px, 2.5vw, 12px) clamp(16px, 4vw, 24px)',
                                             backgroundColor: '#111',
                                             color: '#fff',
