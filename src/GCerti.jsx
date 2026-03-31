@@ -11,7 +11,7 @@ const SOCIAL_LINKS = {
 
 const GCERTI_LANG = {
     it: {
-        'back': '← TORNA ALLA HOME',
+        'back': '← TORNA',
         'title': 'GCERTI ITALY',
         'role-title': 'Da "Spesa" a Motore B2B.',
         'role-sub': 'Performance Marketing & AI Creative Direction',
@@ -23,7 +23,7 @@ const GCERTI_LANG = {
         'takeaway-desc': 'Interpretare direttive legali complesse, trasformarle in ganci visivi AI e blindare il budget su ecosistemi Google ad alta intenzione d\'acquisto.',
     },
     en: {
-        'back': '← BACK TO HOME',
+        'back': '← BACK',
         'title': 'GCERTI ITALY',
         'role-title': 'From "Expense" to B2B Engine.',
         'role-sub': 'Performance Marketing & AI Creative Direction',
@@ -159,9 +159,9 @@ const GCerti = ({ lang = 'it', goBack }) => {
                 </ShaderGradientCanvas>
             </div>
 
-            {/* HEADER FISSO */}
-            <header style={{ position: 'fixed', top: '30px', left: '30px', right: 'auto', zIndex: 100 }}>
-                <button onClick={goBack} className="lang-btn" style={{ background: 'rgba(255,255,255,0.8)', border: 'none', boxShadow: '0 4px 15px rgba(0,0,0,0.05)', borderRadius: '30px', padding: '10px 20px', fontSize: '0.85rem' }}>
+            {/* HEADER FISSO CORRETTO - Stesso di WhiteRabbit */}
+            <header>
+                <button onClick={goBack} className="lang-btn" style={{position:'fixed', left:'30px', zIndex:100}}>
                     {t['back']}
                 </button>
             </header>
@@ -275,7 +275,7 @@ const GCerti = ({ lang = 'it', goBack }) => {
                     </Reveal>
                 </section>
 
-                {/* SOCIAL LINKS (Identici alle altre pagine) */}
+                {/* SOCIAL LINKS */}
                 <section style={{ display: 'flex', justifyContent: 'center', gap: '15px', padding: '20px', marginTop: '20px' }}>
                     <SocialIconOnly type="web" link={SOCIAL_LINKS.web} />
                     <SocialIconOnly type="ig" link={SOCIAL_LINKS.ig} />
