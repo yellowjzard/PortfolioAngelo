@@ -80,9 +80,9 @@ const Reveal = ({ children }) => <motion.div initial={{ opacity: 0, y: 50 }} whi
 
 const SocialIconOnly = ({ type, link }) => { 
     const renderIcon = () => { 
-        if(type === 'web') return <img src={ICON_WEB} alt="Website" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
-        if(type === 'ig') return <img src={ICON_IG} alt="Instagram" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
-        if(type === 'ln') return <img src={ICON_LN} alt="LinkedIn" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
+        if(type === 'web') return <img loading="lazy" decoding="async" src={ICON_WEB} alt="Website" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
+        if(type === 'ig') return <img loading="lazy" decoding="async" src={ICON_IG} alt="Instagram" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
+        if(type === 'ln') return <img loading="lazy" decoding="async" src={ICON_LN} alt="LinkedIn" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
         return null; 
     }; 
     
@@ -225,7 +225,7 @@ const NeroEspresso = ({ lang, goBack }) => {
                         <div className="horizontal-gallery-track">
                             {[NE_ASSETS.proto1, NE_ASSETS.proto2, NE_ASSETS.proto3, NE_ASSETS.proto4].map((img, i) => (
                                 <div key={i} className="gallery-item-proto">
-                                    <img src={img} alt={`Nero Espresso Technical Prototype ${i + 1}`} />
+                                    <img loading="lazy" decoding="async" src={img} alt={`Nero Espresso Technical Prototype ${i + 1}`} />
                                     <span className="item-badge">TECH SPEC {i+1}</span>
                                 </div>
                             ))}
@@ -277,7 +277,7 @@ const NeroEspresso = ({ lang, goBack }) => {
                             </button>
 
                             {activePost.type === 'video' ? (
-                                <video 
+                                <video preload="metadata" 
                                     src={activePost.src} 
                                     controls 
                                     autoPlay 

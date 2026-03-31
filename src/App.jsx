@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import { ShaderGradientCanvas, ShaderGradient } from '@shadergradient/react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'; 
 
-// Import delle Pagine Progetti Interne
-import WhiteRabbit from './WhiteRabbit';
-import NeroEspresso from './NeroEspresso';
-import Freelance from './Freelance';
-import GCerti from './GCerti'; 
+import ErrorBoundary from './ErrorBoundary';
+
+// Import delle Pagine Progetti Interne (Lazy Loading)
+const WhiteRabbit = lazy(() => import('./WhiteRabbit'));
+const NeroEspresso = lazy(() => import('./NeroEspresso'));
+const Freelance = lazy(() => import('./Freelance'));
+const GCerti = lazy(() => import('./GCerti')); 
 
 // --- ASSET STATICI ---
 const PROFILE_IMG = "Portrait-Angelo-Russo.webp"; 
@@ -104,12 +106,12 @@ const FolderItem = ({ title, type, onClick }) => {
 
     const renderIcon = () => {
         switch (type) {
-            case 'gcerti': return <motion.img src={GCERTI_ICON} alt="GCERTI Italy - Brand Identity" className="folder-pop-icon" variants={iconVariants} style={{ objectFit: 'contain' }} />;
-            case 'whiterabbit': return <motion.img src={WR_ICON} alt="White Rabbit Agency - AI Strategy" className="folder-pop-icon" variants={iconVariants} style={{ objectFit: 'contain' }} />;
+            case 'gcerti': return <motion.img loading="lazy" decoding="async" src={GCERTI_ICON} alt="GCERTI Italy - Brand Identity" className="folder-pop-icon" variants={iconVariants} style={{ objectFit: 'contain' }} />;
+            case 'whiterabbit': return <motion.img loading="lazy" decoding="async" src={WR_ICON} alt="White Rabbit Agency - AI Strategy" className="folder-pop-icon" variants={iconVariants} style={{ objectFit: 'contain' }} />;
             case 'nero': return <motion.svg viewBox="0 0 100 100" className="folder-pop-icon" variants={iconVariants}><path d="M30 40 L 30 70 Q 30 85 50 85 Q 70 85 70 70 L 70 40 Z" fill="#4b3621" /><path d="M70 50 Q 85 50 85 60 Q 85 70 70 70" fill="none" stroke="#4b3621" strokeWidth="3" /></motion.svg>;
-            case 'cuore': return <motion.img src={CUORE_ICON} alt="#CuorediNapoli Art Project" className="folder-pop-icon" variants={iconVariants} style={{ objectFit: 'contain' }} />;
-            case 'noiumani': return <motion.img src={NTA_ICON} alt="Noi Umani - New Media Art" className="folder-pop-icon" variants={iconVariants} style={{ objectFit: 'contain' }} />;
-            case 'procida': return <motion.img src={NTA_ICON} alt="Procida Project" className="folder-pop-icon" variants={iconVariants} style={{ objectFit: 'contain' }} />;
+            case 'cuore': return <motion.img loading="lazy" decoding="async" src={CUORE_ICON} alt="#CuorediNapoli Art Project" className="folder-pop-icon" variants={iconVariants} style={{ objectFit: 'contain' }} />;
+            case 'noiumani': return <motion.img loading="lazy" decoding="async" src={NTA_ICON} alt="Noi Umani - New Media Art" className="folder-pop-icon" variants={iconVariants} style={{ objectFit: 'contain' }} />;
+            case 'procida': return <motion.img loading="lazy" decoding="async" src={NTA_ICON} alt="Procida Project" className="folder-pop-icon" variants={iconVariants} style={{ objectFit: 'contain' }} />;
             case 'freelance': return <motion.svg viewBox="0 0 100 100" className="folder-pop-icon" variants={iconVariants}><path d="M50 15 L 60 40 L 90 40 L 65 60 L 75 85 L 50 70 L 25 85 L 35 60 L 10 40 L 40 40 Z" fill="#facc15" stroke="#eab308" strokeWidth="2" /></motion.svg>;
             default: return null;
         }
@@ -145,7 +147,7 @@ const Reveal = ({ children }) => {
 const FooterSocialBtn = ({ icon, link }) => {
     return (
         <motion.a href={link} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(255,255,255,0.5)', justifyContent: 'center', alignItems: 'center', border: '1px solid rgba(0,0,0,0.1)', margin: '0 10px' }} whileHover={{ scale: 1.1, backgroundColor: '#fff' }} whileTap={{ scale: 0.95 }}>
-            <img src={icon} alt="Social Link" style={{ width: '20px', height: '20px', objectFit: 'contain' }} />
+            <img loading="lazy" decoding="async" src={icon} alt="Social Link" style={{ width: '20px', height: '20px', objectFit: 'contain' }} />
         </motion.a>
     );
 };
@@ -165,10 +167,29 @@ function App() {
     const toggleLang = () => setLang(prev => prev === 'it' ? 'en' : 'it');
     const navigateTo = (pageName) => setView(pageName);
 
-    if (view === 'whiterabbit') return <WhiteRabbit lang={lang} goBack={() => setView('home')} />;
-    if (view === 'nero') return <NeroEspresso lang={lang} goBack={() => setView('home')} />;
-    if (view === 'freelance') return <Freelance lang={lang} goBack={() => setView('home')} />;
-    if (view === 'gcerti') return <GCerti lang={lang} goBack={() => setView('home')} />; 
+    if (view !== 'home') {
+        return (
+            <ErrorBoundary goBack={() => setView('home')}>
+                <Suspense fallback={
+                    <div className="app-container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <div className="gradient-bg">
+                            <ShaderGradientCanvas style={{ width: '100%', height: '100%', pointerEvents: 'none' }} pixelDensity={1}>
+                                <WaterGradient />
+                            </ShaderGradientCanvas>
+                        </div>
+                        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, yoyo: Infinity }} style={{ zIndex: 10, background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(10px)', padding: '20px 40px', borderRadius: '30px' }}>
+                            <h2 style={{ color: '#111', fontSize: '1.5rem', fontWeight: 600, margin: 0 }}>Caricamento...</h2>
+                        </motion.div>
+                    </div>
+                }>
+                    {view === 'whiterabbit' && <WhiteRabbit lang={lang} goBack={() => setView('home')} />}
+                    {view === 'nero' && <NeroEspresso lang={lang} goBack={() => setView('home')} />}
+                    {view === 'freelance' && <Freelance lang={lang} goBack={() => setView('home')} />}
+                    {view === 'gcerti' && <GCerti lang={lang} goBack={() => setView('home')} />}
+                </Suspense>
+            </ErrorBoundary>
+        );
+    } 
 
     return (
         <div className="app-container">
@@ -192,7 +213,7 @@ function App() {
                     <Reveal>
                         <div className="bio-content-wrapper">
                             <div className="bio-image-col">
-                                <img src={PROFILE_IMG} alt="Angelo Russo - AI Specialist & Creative Designer" className="profile-photo" />
+                                <img loading="lazy" decoding="async" src={PROFILE_IMG} alt="Angelo Russo - AI Specialist & Creative Designer" className="profile-photo" />
                             </div>
 
                             <div className="bio-text-col">

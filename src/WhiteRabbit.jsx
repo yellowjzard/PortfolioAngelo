@@ -140,9 +140,9 @@ const Reveal = ({ children }) => <motion.div initial={{ opacity: 0, y: 50 }} whi
 
 const SocialIconOnly = ({ type, link }) => { 
     const renderIcon = () => { 
-        if(type === 'web') return <img src={ICON_WEB} alt="Agency Website" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
-        if(type === 'ig') return <img src={ICON_IG} alt="Instagram Profile" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
-        if(type === 'ln') return <img src={ICON_LN} alt="LinkedIn Profile" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
+        if(type === 'web') return <img loading="lazy" decoding="async" src={ICON_WEB} alt="Agency Website" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
+        if(type === 'ig') return <img loading="lazy" decoding="async" src={ICON_IG} alt="Instagram Profile" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
+        if(type === 'ln') return <img loading="lazy" decoding="async" src={ICON_LN} alt="LinkedIn Profile" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
         return null; 
     }; 
     return (
@@ -475,11 +475,11 @@ const WhiteRabbit = ({ lang, goBack }) => {
                         <div className="bento-grid">
                             <div className="bento-card challenge-card">
                                 <div className="card-content-wrap"><div className="card-icon">⚠️</div><h3>{t['challenge-t']}</h3><p>{t['challenge-d']}</p></div>
-                                <img src={CASE_IMAGES.challenge_thumb} alt="The Challenge" className="floating-card-img" />
+                                <img loading="lazy" decoding="async" src={CASE_IMAGES.challenge_thumb} alt="The Challenge" className="floating-card-img" />
                             </div>
                             <div className="bento-card solution-card">
                                 <div className="card-content-wrap"><div className="card-icon">⚡️</div><h3 style={{color: '#ff6b42'}}>{t['solution-t']}</h3><p>{t['solution-d']}</p></div>
-                                <img src={CASE_IMAGES.solution_thumb} alt="The AI Solution" className="floating-card-img" />
+                                <img loading="lazy" decoding="async" src={CASE_IMAGES.solution_thumb} alt="The AI Solution" className="floating-card-img" />
                             </div>
                             <div className="bento-card results-bar"><h3 className="bar-title">{t['results-t']}</h3><div className="results-grid"><div className="result-item"><span className="check-icon">✓</span> {t['res-1']}</div><div className="result-item"><span className="check-icon">✓</span> {t['res-2']}</div><div className="result-item"><span className="check-icon">✓</span> {t['res-3']}</div><div className="result-item"><span className="check-icon">✓</span> {t['res-4']}</div></div></div>
                         </div>
@@ -491,11 +491,11 @@ const WhiteRabbit = ({ lang, goBack }) => {
                         <h2 className="section-label" style={{textAlign:'center', width:'100%', display:'block'}}>{t['project-endurance']}</h2>
                         <p className="section-desc" style={{textAlign:'center'}}>{t['project-desc']}</p>
                         <div className="process-pipeline">
-                            <div className="process-step"><div className="process-thumb-container"><img src={CASE_IMAGES.process_step1} alt="AI Generation" className="process-thumb" /><span className="step-badge">01</span></div><h4>{t['step-1-t']}</h4><p>{t['step-1-d']}</p></div>
+                            <div className="process-step"><div className="process-thumb-container"><img loading="lazy" decoding="async" src={CASE_IMAGES.process_step1} alt="AI Generation" className="process-thumb" /><span className="step-badge">01</span></div><h4>{t['step-1-t']}</h4><p>{t['step-1-d']}</p></div>
                             <div className="process-arrow">→</div>
-                            <div className="process-step"><div className="process-thumb-container"><img src={CASE_IMAGES.process_step2} alt="Hybrid Editing" className="process-thumb" /><span className="step-badge">02</span></div><h4>{t['step-2-t']}</h4><p>{t['step-2-d']}</p></div>
+                            <div className="process-step"><div className="process-thumb-container"><img loading="lazy" decoding="async" src={CASE_IMAGES.process_step2} alt="Hybrid Editing" className="process-thumb" /><span className="step-badge">02</span></div><h4>{t['step-2-t']}</h4><p>{t['step-2-d']}</p></div>
                             <div className="process-arrow">→</div>
-                            <div className="process-step"><div className="process-thumb-container"><img src={CASE_IMAGES.process_step3} alt="Sonic Branding" className="process-thumb" /><span className="step-badge">03</span></div><h4>{t['step-3-t']}</h4><p>{t['step-3-d']}</p></div>
+                            <div className="process-step"><div className="process-thumb-container"><img loading="lazy" decoding="async" src={CASE_IMAGES.process_step3} alt="Sonic Branding" className="process-thumb" /><span className="step-badge">03</span></div><h4>{t['step-3-t']}</h4><p>{t['step-3-d']}</p></div>
                         </div>
                         <div className="cinema-container">
                             <motion.video src={WR_VIDEO} controls poster={CASE_IMAGES.process_step1} style={{width:'100%', borderRadius:'12px', boxShadow:'0 30px 60px rgba(0,0,0,0.3)', border:'1px solid #333', backgroundColor:'#000'}} initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} />
@@ -508,11 +508,11 @@ const WhiteRabbit = ({ lang, goBack }) => {
                         <h2 className="section-label" style={{textAlign:'center', width:'100%', display:'block'}}>{t['project-uk']}</h2>
                         <p className="section-desc" style={{textAlign:'center'}}>{t['project-uk-desc']}</p>
                         <div className="process-pipeline">
-                            <div className="process-step"><div className="process-thumb-container"><img src={CASE_IMAGES.uk_step1} alt="Editorial Planning" className="process-thumb" /><span className="step-badge">01</span></div><h4>{t['uk-s1-t']}</h4><p>{t['uk-s1-d']}</p></div>
+                            <div className="process-step"><div className="process-thumb-container"><img loading="lazy" decoding="async" src={CASE_IMAGES.uk_step1} alt="Editorial Planning" className="process-thumb" /><span className="step-badge">01</span></div><h4>{t['uk-s1-t']}</h4><p>{t['uk-s1-d']}</p></div>
                             <div className="process-arrow">→</div>
-                            <div className="process-step"><div className="process-thumb-container"><img src={CASE_IMAGES.uk_step2} alt="Content Creation" className="process-thumb" /><span className="step-badge">02</span></div><h4>{t['uk-s2-t']}</h4><p>{t['uk-s2-d']}</p></div>
+                            <div className="process-step"><div className="process-thumb-container"><img loading="lazy" decoding="async" src={CASE_IMAGES.uk_step2} alt="Content Creation" className="process-thumb" /><span className="step-badge">02</span></div><h4>{t['uk-s2-t']}</h4><p>{t['uk-s2-d']}</p></div>
                             <div className="process-arrow">→</div>
-                            <div className="process-step"><div className="process-thumb-container"><img src={CASE_IMAGES.uk_step3} alt="Community Growth" className="process-thumb" /><span className="step-badge">03</span></div><h4>{t['uk-s3-t']}</h4><p>{t['uk-s3-d']}</p></div>
+                            <div className="process-step"><div className="process-thumb-container"><img loading="lazy" decoding="async" src={CASE_IMAGES.uk_step3} alt="Community Growth" className="process-thumb" /><span className="step-badge">03</span></div><h4>{t['uk-s3-t']}</h4><p>{t['uk-s3-d']}</p></div>
                         </div>
                         <div className="uk-grid-showcase">
                             <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
@@ -524,7 +524,7 @@ const WhiteRabbit = ({ lang, goBack }) => {
                                     <div className="ig-grid">
                                         {IG_CONTENT.map((post) => (
                                             <motion.div key={post.id} className="ig-post" style={{position: 'relative'}} whileHover={{ filter: "brightness(0.8)" }} onClick={() => setActivePost(post)}>
-                                                <img src={post.thumb} alt={`Urban Kong Post ${post.id}`} style={{width: '100%', height: '100%', objectFit: 'cover'}} onError={(e) => {e.target.style.display='none'; e.target.parentElement.style.backgroundColor='#eee'}} />
+                                                <img loading="lazy" decoding="async" src={post.thumb} alt={`Urban Kong Post ${post.id}`} style={{width: '100%', height: '100%', objectFit: 'cover'}} onError={(e) => {e.target.style.display='none'; e.target.parentElement.style.backgroundColor='#eee'}} />
                                                 {post.type === 'video' && (<div style={{position:'absolute', top:5, right:5, color:'white', textShadow:'0 0 5px rgba(0,0,0,0.5)'}}>▶</div>)}
                                             </motion.div>
                                         ))}
@@ -551,7 +551,7 @@ const WhiteRabbit = ({ lang, goBack }) => {
                         <div className="credits-section" style={{marginTop: '80px'}}>
                             <h4 className="credits-title-small">{t['credits-title']}</h4>
                             <motion.div className="collaborator-card" whileHover={{ scale: 1.02 }}>
-                                <img src={CASE_IMAGES.collab_avatar} alt="Gennaro Grieco" className="collab-avatar" />
+                                <img loading="lazy" decoding="async" src={CASE_IMAGES.collab_avatar} alt="Gennaro Grieco" className="collab-avatar" />
                                 <div className="collab-info"><span className="collab-name">{t['collab-name']}</span><span className="collab-role">{t['collab-role']}</span></div>
                                 <div className="collab-links"><SocialIconOnly type="ig" link="https://www.instagram.com/_gennygrieco_?igsh=MTljcmR6bnprY2dkZg==" /><SocialIconOnly type="ln" link="https://www.linkedin.com/in/gennaro-grieco/" /></div>
                             </motion.div>
@@ -600,7 +600,7 @@ const WhiteRabbit = ({ lang, goBack }) => {
                             </button>
 
                             {activePost.type === 'video' ? (
-                                <video 
+                                <video preload="metadata" 
                                     src={activePost.src} 
                                     controls 
                                     autoPlay 

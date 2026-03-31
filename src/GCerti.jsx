@@ -128,9 +128,9 @@ const Reveal = ({ children }) => <motion.div initial={{ opacity: 0, y: 40 }} whi
 
 const SocialIconOnly = ({ type, link }) => { 
     const renderIcon = () => { 
-        if(type === 'web') return <img src={ICON_WEB} alt="Corporate Website" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
-        if(type === 'ig') return <img src={ICON_IG} alt="Instagram Feed" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
-        if(type === 'ln') return <img src={ICON_LN} alt="LinkedIn Profile" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
+        if(type === 'web') return <img loading="lazy" decoding="async" src={ICON_WEB} alt="Corporate Website" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
+        if(type === 'ig') return <img loading="lazy" decoding="async" src={ICON_IG} alt="Instagram Feed" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
+        if(type === 'ln') return <img loading="lazy" decoding="async" src={ICON_LN} alt="LinkedIn Profile" style={{width:'100%', height:'100%', objectFit:'contain'}} />;
         return null; 
     }; 
     if (!link) return null;

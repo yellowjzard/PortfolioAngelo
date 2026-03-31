@@ -78,9 +78,9 @@ const ProjectCard = ({ project }) => {
         >
             <div className="card-media-wrapper">
                 {project.mediaType === 'video' ? (
-                    <video src={project.mediaSrc} autoPlay loop muted playsInline className="card-media" />
+                    <video preload="metadata" src={project.mediaSrc} autoPlay loop muted playsInline className="card-media" />
                 ) : (
-                    <img src={project.mediaSrc} alt={`Progetto Freelance: ${project.title}`} className="card-media" />
+                    <img loading="lazy" decoding="async" src={project.mediaSrc} alt={`Progetto Freelance: ${project.title}`} className="card-media" />
                 )}
                 <div className="card-overlay">
                     <a href={project.link} target="_blank" rel="noopener noreferrer" className="card-link-btn">
