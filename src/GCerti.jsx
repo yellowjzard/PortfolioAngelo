@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ShaderGradientCanvas, ShaderGradient } from '@shadergradient/react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 // --- CONFIGURAZIONE ---
 const SOCIAL_LINKS = {
@@ -9,11 +9,11 @@ const SOCIAL_LINKS = {
     web: "https://www.gcerti.it/"
 };
 
-// Immagini segnaposto (sostituisci con i tuoi asset reali)
+// Asset (usando le icone già caricate nel tuo progetto dove possibile)
 const ASSETS = {
     ai_raw: "gcerti_prompt_before.jpg", 
     ai_gen: "gcerti_prompt_after.jpg",
-    strategy_icon: "strategy_icon.png",
+    gcerti_icon: "Icona_gcerti.webp",
     execution_step1: "step1_editorial.jpg",
     execution_step2: "step2_funnel.jpg",
     execution_step3: "step3_data.jpg",
@@ -28,10 +28,9 @@ const GCERTI_LANG = {
         'slogan': 'Ingegnerizzare l’autorevolezza: ottimizzazione budget Ads e design generativo per la lead generation.',
         'prompt-text': '/imagine prompt: corporate office building, 3d glossy architectural style, teal color palette, photorealistic --v 6.0',
         'btn-generate': 'GENERA ASSET AI',
-        'problem-title': 'IL PROBLEMA',
-        'strategy-title': 'I 3 PILASTRI',
-        'execution-title': 'ESECUZIONE',
-        'results-title': 'IMPATTO & RISULTATI',
+        'problem-title': '01 / IL PROBLEMA',
+        'strategy-title': '02 / I 3 PILASTRI',
+        'execution-title': '03 / ESECUZIONE',
         'takeaway-title': 'KEY TAKEAWAY',
         'takeaway-desc': 'Interpretare le leggi, trasformarle in ganci visivi AI e distribuirle su ecosistemi Google blindati.',
     },
@@ -43,10 +42,9 @@ const GCERTI_LANG = {
         'slogan': 'Engineering authority: Ads budget optimization and generative design for lead generation.',
         'prompt-text': '/imagine prompt: corporate office building, 3d glossy architectural style, teal color palette, photorealistic --v 6.0',
         'btn-generate': 'GENERATE AI ASSET',
-        'problem-title': 'THE PROBLEM',
-        'strategy-title': '3 PILLARS',
-        'execution-title': 'EXECUTION',
-        'results-title': 'IMPACT & RESULTS',
+        'problem-title': '01 / THE PROBLEM',
+        'strategy-title': '02 / 3 PILLARS',
+        'execution-title': '03 / EXECUTION',
         'takeaway-title': 'KEY TAKEAWAY',
         'takeaway-desc': 'Translating regulations into AI visual hooks and distributing them via locked Google ecosystems.',
     }
@@ -56,21 +54,17 @@ const GCERTI_LANG = {
 
 const Typewriter = ({ text }) => {
     const letters = text.split("");
+    const container = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.1 } } };
+    const child = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100 } } };
     return (
-        <motion.h1 
-            style={{ fontSize: 'clamp(2.5rem, 8vw, 6rem)', fontWeight: 900, color: '#085257', fontFamily: '"Playfair Display", serif', margin: 0, letterSpacing: '-2px' }}
-            initial="hidden" animate="visible"
-            variants={{ visible: { transition: { staggerChildren: 0.05 } } }}
-        >
-            {letters.map((char, i) => (
-                <motion.span key={i} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>{char}</motion.span>
-            ))}
+        <motion.h1 className="intro-text" variants={container} initial="hidden" animate="visible" style={{ color: '#085257' }}>
+            {letters.map((char, index) => <motion.span key={index} variants={child}>{char}</motion.span>)}
         </motion.h1>
     );
 };
 
 const Reveal = ({ children }) => (
-    <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
+    <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-10%" }} transition={{ duration: 0.8 }}>
         {children}
     </motion.div>
 );
@@ -78,18 +72,20 @@ const Reveal = ({ children }) => (
 const PromptSimulator = ({ t }) => {
     const [isGenerated, setIsGenerated] = useState(false);
     return (
-        <div style={{ background: 'rgba(255,255,255,0.4)', padding: '15px', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.6)', backdropFilter: 'blur(10px)' }}>
-            <div style={{ position: 'relative', width: '100%', aspectRatio: '1/1', borderRadius: '15px', overflow: 'hidden', backgroundColor: '#eee' }}>
-                <motion.img src={ASSETS.ai_raw} alt="Before" style={{ position: 'absolute', width: '100%', height: '100%', objectFit: 'cover' }} animate={{ opacity: isGenerated ? 0 : 1 }} />
-                <motion.img src={ASSETS.ai_gen} alt="After" style={{ position: 'absolute', width: '100%', height: '100%', objectFit: 'cover' }} animate={{ opacity: isGenerated ? 1 : 0 }} />
+        <div className="prompt-box-container" style={{ border: '1px solid rgba(8,82,87,0.2)' }}>
+            <div className="prompt-image-viewport">
+                <motion.img src={ASSETS.ai_raw} alt="Before" className="prompt-img" animate={{ opacity: isGenerated ? 0 : 1 }} />
+                <motion.img src={ASSETS.ai_gen} alt="After" className="prompt-img absolute-img" animate={{ opacity: isGenerated ? 1 : 0 }} />
+                {isGenerated && <motion.div className="scan-line" style={{ background: '#085257', boxShadow: '0 0 15px #085257' }} initial={{ top: "0%" }} animate={{ top: "100%" }} transition={{ duration: 1.5, ease: "easeInOut" }} />}
             </div>
-            <div style={{ marginTop: '15px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                <div style={{ fontFamily: 'monospace', fontSize: '0.8rem', color: '#085257', background: 'rgba(255,255,255,0.5)', padding: '10px', borderRadius: '10px' }}>
+            <div className="prompt-controls">
+                <div className="prompt-input" style={{ color: '#085257' }}>
                     <span style={{ opacity: 0.5 }}>{t['prompt-text']}</span>
                 </div>
                 <button 
+                    className={`prompt-btn ${isGenerated ? 'active' : ''}`} 
                     onClick={() => setIsGenerated(!isGenerated)}
-                    style={{ background: '#085257', color: 'white', border: 'none', padding: '12px', borderRadius: '12px', fontWeight: 700, cursor: 'pointer' }}
+                    style={{ background: isGenerated ? '#085257' : '#111' }}
                 >
                     {isGenerated ? 'RESET' : t['btn-generate']}
                 </button>
@@ -105,22 +101,17 @@ const GCerti = ({ lang = 'it', goBack }) => {
     const { scrollY } = useScroll();
 
     const introOpacity = useTransform(scrollY, [0, 400], [1, 0]);
-    const introScale = useTransform(scrollY, [0, 400], [1, 0.95]);
+    const introScale = useTransform(scrollY, [0, 400], [1, 0.9]);
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        const link = document.createElement('link');
-        link.href = 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=DM+Sans:wght@400;500;700&display=swap';
-        link.rel = 'stylesheet';
-        document.head.appendChild(link);
     }, []);
 
     return (
-        <div style={{ fontFamily: '"DM Sans", sans-serif', backgroundColor: '#f8f9fa', color: '#333', overflowX: 'hidden' }}>
-            
-            {/* BACKGROUND */}
-            <div style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
-                <ShaderGradientCanvas>
+        <div className="app-container">
+            {/* SFONDO ANIMATO */}
+            <div className="gradient-bg">
+                <ShaderGradientCanvas style={{ width: '100%', height: '100%', pointerEvents: 'none' }} pixelDensity={1}>
                     <ShaderGradient 
                         animate="on" bgColor1="#ffffff" bgColor2="#f0f0f0" 
                         color1="#e0f2f1" color2="#ffffff" color3="#b2dfdb"
@@ -129,91 +120,125 @@ const GCerti = ({ lang = 'it', goBack }) => {
                 </ShaderGradientCanvas>
             </div>
 
-            {/* HEADER */}
-            <header style={{ position: 'fixed', top: 20, left: 30, zIndex: 100 }}>
-                <button onClick={goBack} style={{ background: 'rgba(255,255,255,0.8)', border: '1px solid rgba(8,82,87,0.2)', padding: '10px 20px', borderRadius: '30px', color: '#085257', fontWeight: 700, cursor: 'pointer', backdropFilter: 'blur(10px)' }}>
+            {/* HEADER FISSO */}
+            <header style={{ left: '30px', right: 'auto' }}>
+                <button onClick={goBack} className="lang-btn">
                     {t['back']}
                 </button>
             </header>
 
             {/* HERO SECTION */}
-            <motion.section style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: introOpacity, scale: introScale, position: 'relative', zIndex: 1, padding: '0 5%' }}>
-                <div style={{ textAlign: 'center' }}>
-                    <Typewriter text={t['title']} />
-                    <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }} style={{ fontSize: '1.2rem', marginTop: '20px', color: '#555', maxWidth: '600px', marginLeft: 'auto', marginRight: 'auto' }}>
-                        {t['role-sub']}
-                    </motion.p>
-                </div>
-            </motion.section>
+            <motion.div className="fixed-intro-layer" style={{ opacity: introOpacity, scale: introScale }}>
+                <Typewriter text={t['title']} />
+                <motion.div 
+                    initial={{ opacity: 0 }} 
+                    animate={{ opacity: 1 }} 
+                    transition={{ delay: 1 }} 
+                    className="scroll-hint"
+                    style={{ color: '#085257' }}
+                >
+                    {t['role-sub']}
+                </motion.div>
+            </motion.div>
 
             {/* CONTENT LAYER */}
-            <div style={{ position: 'relative', zIndex: 2, maxWidth: '1100px', margin: '0 auto', padding: '0 20px' }}>
+            <div className="content-scroll-layer">
                 
-                {/* INTRO GRID (Simile a White Rabbit) */}
-                <section style={{ background: 'rgba(255,255,255,0.6)', backdropFilter: 'blur(20px)', borderRadius: '40px', padding: '50px', border: '1px solid white', marginBottom: '40px' }}>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px', alignItems: 'center' }}>
-                        <div>
-                            <h2 style={{ fontSize: '2.5rem', color: '#085257', fontFamily: '"Playfair Display", serif', marginBottom: '20px' }}>{t['role-title']}</h2>
-                            <p style={{ fontSize: '1.1rem', lineHeight: 1.8, color: '#444' }}>{t['slogan']}</p>
-                        </div>
-                        <PromptSimulator t={t} />
-                    </div>
-                </section>
-
-                {/* BENTO GRID - PROBLEMI */}
-                <section style={{ marginBottom: '40px' }}>
+                {/* INTRO SECTION */}
+                <section className="glass-section">
                     <Reveal>
-                        <h3 style={{ textAlign: 'center', fontSize: '0.8rem', letterSpacing: '3px', color: '#085257', marginBottom: '30px' }}>{t['problem-title']}</h3>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' }}>
-                            <div style={{ background: '#fff', padding: '30px', borderRadius: '24px', borderLeft: '5px solid #ef4444', boxShadow: '0 10px 30px rgba(0,0,0,0.05)' }}>
-                                <span style={{ fontSize: '2rem' }}>🔴</span>
-                                <h4 style={{ margin: '15px 0 10px 0' }}>Consultant Trap</h4>
-                                <p style={{ fontSize: '0.9rem', opacity: 0.8 }}>Tono di voce sovrapposto ai consulenti esterni.</p>
-                            </div>
-                            <div style={{ background: '#fff', padding: '30px', borderRadius: '24px', borderLeft: '5px solid #ef4444', boxShadow: '0 10px 30px rgba(0,0,0,0.05)' }}>
-                                <span style={{ fontSize: '2rem' }}>📋</span>
-                                <h4 style={{ margin: '15px 0 10px 0' }}>Contenuti Burocratici</h4>
-                                <p style={{ fontSize: '0.9rem', opacity: 0.8 }}>Comunicazione basata su noiosi elenchi normativi.</p>
-                            </div>
-                            <div style={{ background: '#fff', padding: '30px', borderRadius: '24px', borderLeft: '5px solid #ef4444', boxShadow: '0 10px 30px rgba(0,0,0,0.05)' }}>
-                                <span style={{ fontSize: '2rem' }}>💸</span>
-                                <h4 style={{ margin: '15px 0 10px 0' }}>Budget Burn</h4>
-                                <p style={{ fontSize: '0.9rem', opacity: 0.8 }}>Corrispondenze generiche che bruciavano budget.</p>
-                            </div>
-                        </div>
-                    </Reveal>
-                </section>
-
-                {/* PIPELINE - ESECUZIONE (Stile White Rabbit) */}
-                <section style={{ background: 'rgba(255,255,255,0.6)', backdropFilter: 'blur(20px)', borderRadius: '40px', padding: '50px', border: '1px solid white', marginBottom: '40px' }}>
-                    <Reveal>
-                        <h3 style={{ textAlign: 'center', fontSize: '0.8rem', letterSpacing: '3px', color: '#085257', marginBottom: '40px' }}>{t['execution-title']}</h3>
-                        <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', justifyContent: 'center' }}>
-                            {[1, 2, 3].map((step) => (
-                                <div key={step} style={{ flex: '1', minWidth: '250px', textAlign: 'center' }}>
-                                    <div style={{ position: 'relative', height: '180px', borderRadius: '20px', overflow: 'hidden', marginBottom: '15px' }}>
-                                        <img src={ASSETS[`execution_step${step}`]} alt={`Step ${step}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                                        <div style={{ position: 'absolute', top: 10, left: 10, background: '#085257', color: 'white', width: 30, height: 30, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700 }}>{step}</div>
-                                    </div>
-                                    <h4 style={{ color: '#085257' }}>Step 0{step}</h4>
+                        <div className="wr-hero-grid">
+                            <div className="wr-text-col">
+                                <h2 className="bio-headline" style={{ color: '#085257' }}>{t['role-title']}</h2>
+                                <p className="bio-text" style={{ marginBottom: '30px' }}>{t['slogan']}</p>
+                                <div className="social-row">
+                                    <motion.a href={SOCIAL_LINKS.web} target="_blank" className="social-btn-circle" whileHover={{ scale: 1.1 }}><img src="Icona_site.webp" width="20" alt="Web" /></motion.a>
+                                    <motion.a href={SOCIAL_LINKS.ln} target="_blank" className="social-btn-circle" whileHover={{ scale: 1.1 }}><img src="Icona_linkedin.webp" width="20" alt="LinkedIn" /></motion.a>
                                 </div>
-                            ))}
+                            </div>
+                            <div className="wr-demo-col">
+                                <PromptSimulator t={t} />
+                            </div>
                         </div>
                     </Reveal>
                 </section>
 
-                {/* KEY TAKEAWAY FINALE */}
-                <section style={{ textAlign: 'center', padding: '60px 0' }}>
+                {/* PROBLEMA - BENTO GRID STYLE */}
+                <section className="glass-section story-section">
                     <Reveal>
-                        <div style={{ background: 'linear-gradient(135deg, #085257 0%, #0d7a82 100%)', padding: '60px', borderRadius: '40px', color: 'white' }}>
-                            <h3 style={{ fontSize: '0.8rem', letterSpacing: '3px', opacity: 0.7, marginBottom: '20px' }}>{t['takeaway-title']}</h3>
-                            <p style={{ fontSize: '1.5rem', fontFamily: '"Playfair Display", serif', fontStyle: 'italic' }}>"{t['takeaway-desc']}"</p>
+                        <h2 className="section-label">{t['problem-title']}</h2>
+                        <div className="bento-grid">
+                            <div className="bento-card challenge-card" style={{ borderLeft: '4px solid #ef4444' }}>
+                                <div className="card-icon">🔴</div>
+                                <h3>Consultant Trap</h3>
+                                <p>Il tono di voce aziendale si sovrapponeva a quello dei consulenti, diluendo l'autorevolezza come Ente Terzo Indipendente.</p>
+                            </div>
+                            <div className="bento-card challenge-card" style={{ borderLeft: '4px solid #ef4444' }}>
+                                <div className="card-icon">📋</div>
+                                <h3>Bureaucracy</h3>
+                                <p>Comunicazione basata su elenchi normativi noiosi, ignorati dai Decision Maker ad alto livello.</p>
+                            </div>
+                            <div className="bento-card results-bar" style={{ background: '#085257' }}>
+                                <div className="results-grid">
+                                    <div className="result-item"><span className="check-icon">✓</span> +542% Engagement</div>
+                                    <div className="result-item"><span className="check-icon">✓</span> -24% CPC Ads</div>
+                                    <div className="result-item"><span className="check-icon">✓</span> 465 Clicks/Day</div>
+                                    <div className="result-item"><span className="check-icon">✓</span> 100% Tracking</div>
+                                </div>
+                            </div>
                         </div>
                     </Reveal>
                 </section>
 
-                <footer style={{ textAlign: 'center', padding: '40px', opacity: 0.4, fontSize: '0.8rem' }}>
-                    © 2026 Angelo Russo | GCERTI ITALY Case Study
+                {/* ESECUZIONE - PIPELINE STYLE */}
+                <section className="glass-section">
+                    <Reveal>
+                        <h2 className="section-label">{t['execution-title']}</h2>
+                        <div className="process-pipeline">
+                            <div className="process-step">
+                                <div className="process-thumb-container">
+                                    <img src={ASSETS.execution_step1} className="process-thumb" alt="Editorial" />
+                                    <span className="step-badge">01</span>
+                                </div>
+                                <h4>Editorial Strategy</h4>
+                                <p>Produzione massiva di asset visuali premium in tempi record tramite AI.</p>
+                            </div>
+                            <div className="process-arrow">→</div>
+                            <div className="process-step">
+                                <div className="process-thumb-container">
+                                    <img src={ASSETS.execution_step2} className="process-thumb" alt="Funnel" />
+                                    <span className="step-badge">02</span>
+                                </div>
+                                <h4>Surgical Targeting</h4>
+                                <p>Campagne differenziate per CEO (ISO 9001) e mercato di massa.</p>
+                            </div>
+                            <div className="process-arrow">→</div>
+                            <div className="process-step">
+                                <div className="process-thumb-container">
+                                    <img src={ASSETS.execution_step3} className="process-thumb" alt="Data" />
+                                    <span className="step-badge">03</span>
+                                0</div>
+                                <h4>Data Protection</h4>
+                                <p>Tracking avanzato delle conversioni e ottimizzazione costante del budget.</p>
+                            </div>
+                        </div>
+                    </Reveal>
+                </section>
+
+                {/* TAKEAWAY FINALE */}
+                <section className="glass-section" style={{ background: 'transparent', border: 'none', boxShadow: 'none' }}>
+                    <Reveal>
+                        <div className="results-bar" style={{ background: 'linear-gradient(135deg, #085257 0%, #0d7a82 100%)', borderRadius: '30px' }}>
+                            <h3 className="bar-title" style={{ borderBottomColor: 'rgba(255,255,255,0.1)', color: '#fff' }}>{t['takeaway-title']}</h3>
+                            <p style={{ fontSize: '1.2rem', lineHeight: 1.6, textAlign: 'center', fontStyle: 'italic', maxWidth: '800px', margin: '0 auto' }}>
+                                "{t['takeaway-desc']}"
+                            </p>
+                        </div>
+                    </Reveal>
+                </section>
+
+                <footer style={{ textAlign: 'center', padding: '4rem 2rem', opacity: 0.5 }}>
+                    <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.8rem' }}>© 2026 Angelo Russo — Case Study: GCERTI ITALY</p>
                 </footer>
             </div>
         </div>
