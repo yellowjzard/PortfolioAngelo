@@ -211,13 +211,13 @@ const GCerti = ({ lang = 'it', goBack }) => {
 
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 'clamp(20px, 5vw, 40px)' }}>
                             <div style={{ background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(20px)', padding: 'clamp(30px, 6vw, 50px)', borderRadius: '40px', border: '1px solid rgba(255,255,255,0.5)', boxShadow: '0 20px 60px rgba(0,0,0,0.05)' }}>
-                                <AnimatedBarChart label="Instagram Engagement" value="+542%" percentage="85%" color="#085257" />
-                                <AnimatedBarChart label="Ottimizzazione CPC (Ads)" value="-24.3%" percentage="75%" color="#e6683c" />
+                                <AnimatedBarChart label="Budget Ads Ottimizzato (Proiezione Annua)" value="~€54.000" percentage="100%" color="#085257" />
+                                <AnimatedBarChart label="Traffico B2B Generato (Q1-Q2)" value="21.000+ Click" percentage="85%" color="#e6683c" />
                             </div>
 
                             <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', flexWrap: 'wrap', gap: '30px', background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(20px)', padding: 'clamp(30px, 6vw, 50px)', borderRadius: '40px', border: '1px solid rgba(255,255,255,0.5)', boxShadow: '0 20px 60px rgba(0,0,0,0.05)' }}>
-                                <AnimatedCircleChart label="LinkedIn Clicks / Day" percentageValue={100} textValue="465" />
-                                <AnimatedCircleChart label="Budget Protection" percentageValue={100} textValue="100%" />
+                                <AnimatedCircleChart label="Classi Academy Sold-Out" percentageValue={100} textValue="3" />
+                                <AnimatedCircleChart label="Data-Driven Setup" percentageValue={100} textValue="100%" />
                             </div>
                         </div>
                     </Reveal>
