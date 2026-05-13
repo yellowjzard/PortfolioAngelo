@@ -27,11 +27,11 @@ const LANG_DATA = {
         'scroll-hint': 'Scorri per entrare',
         
         'bio-title': 'Angelo Russo.',
-        'bio-sub': 'Creative Designer | AI Strategy & Visual Production',
+        'bio-sub': 'Digital Marketing Manager & Creative Lead | AI Strategy',
         
         'bio-intro': [
             `Il mio approccio al design è tecnologicamente agnostico: la tecnologia non è il punto di partenza, ma l'orchestra al servizio dell'idea. Come Dottore Magistrale in Nuove Tecnologie dell'Arte, considero i software non come vincoli, ma come mezzi flessibili per ingegnerizzare soluzioni visive ad alto impatto. La mia missione è tradurre la complessità dell'Intelligenza Artificiale in narrazioni potenti, garantendo che la tecnica sia sempre il braccio operativo del concept.`,
-            `Dall'esperienza internazionale a Bruxelles presso White Rabbit — dove ho progettato workflow creativi integrando modelli avanzati come Higgsfield e Agenti Gemini — fino al mio attuale ruolo di Marketing Specialist presso GCERTI Italy, ho imparato a muovermi fluidamente tra rigore istituzionale e sperimentazione generativa. La mia carriera è segnata da una crescita rapida, guidata dalla capacità di ottimizzare i processi tramite pipeline AI proprietarie.`
+            `Dall'esperienza internazionale a Bruxelles presso White Rabbit — dove ho progettato workflow creativi integrando modelli avanzati (Higgsfield, Gemini Agents) — fino al mio ruolo di Digital Marketing Manager & Creative Lead presso GCERTI Italy. Mi muovo fluidamente tra rigore istituzionale e innovazione generativa, ottimizzando budget complessi e architetture visive per massimizzare il ROI aziendale.`
         ],
         'bio-skills-title': 'Valore Strategico & Competenze:',
         'bio-skills-list': [
@@ -57,11 +57,11 @@ const LANG_DATA = {
         'scroll-hint': 'Scroll to explore',
         
         'bio-title': 'Angelo Russo.',
-        'bio-sub': 'Creative Designer | AI Strategy & Visual Production',
+        'bio-sub': 'Digital Marketing Manager & Creative Lead | AI Strategy',
         
         'bio-intro': [
             `My approach to design is technologically agnostic: technology is not the starting point, but the orchestra at the service of the idea. As a Master of Arts (M.A.) in New Technologies for Arts, I view software not as a constraint, but as a flexible medium for engineering high-impact visual solutions. My mission is to translate the complexity of Artificial Intelligence into powerful narratives, ensuring that technique remains the operational arm of the concept.`,
-            `From my international experience in Brussels at White Rabbit — where I designed creative workflows integrating advanced models like Higgsfield and Gemini Agents — to my current role as a Marketing Specialist at GCERTI Italy, I have learned to navigate fluidly between institutional rigor and generative experimentation. My career is defined by rapid growth, driven by the ability to optimize processes through proprietary AI pipelines.`
+            `From my international experience in Brussels at White Rabbit — where I designed creative workflows integrating advanced models (Higgsfield, Gemini Agents) — to my role as Digital Marketing Manager & Creative Lead at GCERTI Italy. I fluidly navigate between institutional rigor and generative innovation, optimizing complex budgets and visual architectures to maximize corporate ROI.`
         ],
         'bio-skills-title': 'Strategic Value & Core Competencies:',
         'bio-skills-list': [
