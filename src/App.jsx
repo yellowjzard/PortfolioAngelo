@@ -28,13 +28,32 @@ const LANG_DATA = {
         'discover-tag': 'ESPLORA IL PORTFOLIO / SEZIONE SCOPRI',
         'discover-title': 'In evidenza oggi',
         'discover-btn-refresh': 'Mostra un altro lavoro ↻',
-        'btn-cv': 'SCARICA CV (PDF)',
         
         'projects-data': [
-            { id: 'gcerti', title: 'GCERTI Italy', desc: 'Direzione artistica, ottimizzazione workflow istituzionali e rebranding corporate con palette Deep Teal.' },
-            { id: 'whiterabbit', title: 'White Rabbit', desc: 'Sviluppo di asset in motion graphics e ingegnerizzazione di pipeline video generative con modelli AI avanzati.' },
-            { id: 'nero', title: 'Nero Espresso', desc: 'Progettazione e sviluppo dell\'identità visiva coordinata, prototipi strutturali e design insegne commerciali.' },
-            { id: 'freelance', title: 'Studio Legale & Digital Transformation', desc: 'Strategia di digital branding multi-lingua e implementazione del modello di comunicazione Hub-Satellite.' }
+            { 
+                id: 'gcerti', 
+                title: 'GCERTI Italy', 
+                desc: 'Direzione artistica, ottimizzazione workflow istituzionali e rebranding corporate con palette Deep Teal.',
+                image: 'brochure.005.png'
+            },
+            { 
+                id: 'whiterabbit', 
+                title: 'White Rabbit', 
+                desc: 'Sviluppo di asset in motion graphics e ingegnerizzazione di pipeline video generative con modelli AI avanzati.',
+                image: 'agentai.webp'
+            },
+            { 
+                id: 'nero', 
+                title: 'Nero Espresso', 
+                desc: 'Progettazione e sviluppo dell\'identità visiva coordinata, prototipi strutturali e design insegne commerciali.',
+                image: 'NE-prerender-insegna.png'
+            },
+            { 
+                id: 'freelance', 
+                title: 'Studio Legale & Digital Transformation', 
+                desc: 'Strategia di digital branding multi-lingua e implementazione del modello di comunicazione Hub-Satellite.',
+                image: 'copertina uko.webp'
+            }
         ],
 
         'works-title': 'Selected Works',
@@ -51,13 +70,32 @@ const LANG_DATA = {
         'discover-tag': 'EXPLORE PORTFOLIO / DISCOVER SECTION',
         'discover-title': 'Featured today',
         'discover-btn-refresh': 'Show another work ↻',
-        'btn-cv': 'DOWNLOAD CV (PDF)',
         
         'projects-data': [
-            { id: 'gcerti', title: 'GCERTI Italy', desc: 'Art direction, institutional workflow optimization, and corporate rebranding using Deep Teal palettes.' },
-            { id: 'whiterabbit', title: 'White Rabbit', desc: 'Motion graphics development and advanced generative video pipeline engineering using state-of-the-art AI models.' },
-            { id: 'nero', title: 'Nero Espresso', desc: 'Comprehensive brand identity design, architectural structural prototyping, and commercial signage development.' },
-            { id: 'freelance', title: 'Legal Studio & Digital Transformation', desc: 'Multi-lingual digital branding strategy and deployment of a custom Hub-Satellite communication model.' }
+            { 
+                id: 'gcerti', 
+                title: 'GCERTI Italy', 
+                desc: 'Art direction, institutional workflow optimization, and corporate rebranding using Deep Teal palettes.',
+                image: 'brochure.005.png'
+            },
+            { 
+                id: 'whiterabbit', 
+                title: 'White Rabbit', 
+                desc: 'Motion graphics development and advanced generative video pipeline engineering using state-of-the-art AI models.',
+                image: 'agentai.webp'
+            },
+            { 
+                id: 'nero', 
+                title: 'Nero Espresso', 
+                desc: 'Comprehensive brand identity design, architectural structural prototyping, and commercial signage development.',
+                image: 'NE-prerender-insegna.png'
+            },
+            { 
+                id: 'freelance', 
+                title: 'Legal Studio & Digital Transformation', 
+                desc: 'Multi-lingual digital branding strategy and deployment of a custom Hub-Satellite communication model.',
+                image: 'copertina uko.webp'
+            }
         ],
 
         'works-title': 'Selected Works',
@@ -169,7 +207,6 @@ function App() {
     const toggleLang = () => setLang(prev => prev === 'it' ? 'en' : 'it');
     const navigateTo = (pageName) => setView(pageName);
 
-    // Gestione selezione randomica dei lavori (Evita ripetizioni consecutive dirette)
     const selectRandomProject = () => {
         const projectsLength = LANG_DATA[lang]['projects-data'].length;
         if (projectsLength <= 1) return;
@@ -180,7 +217,6 @@ function App() {
         setCurrentIndex(nextIndex);
     };
 
-    // Inizializzazione index randomico nativo al montaggio
     useEffect(() => {
         const randomIndex = Math.floor(Math.random() * LANG_DATA[lang]['projects-data'].length);
         setCurrentIndex(randomIndex);
@@ -227,7 +263,7 @@ function App() {
                     <button onClick={toggleLang} className="lang-btn">{lang === 'it' ? 'EN' : 'IT'}</button>
                 </header>
 
-                {/* NUOVA SEZIONE HERO "SCOPRI" RANDOMICA (Sostituisce la vecchia Bio/CV estesa) */}
+                {/* SEZIONE HERO "SCOPRI" CON IMMAGINI / MULTIMEDIA (No CV) */}
                 <section className="glass-section discover-section">
                     <Reveal>
                         <div className="discover-content-wrapper" style={{ padding: 'clamp(10px, 2vw, 20px) 0', width: '100%' }}>
@@ -239,50 +275,65 @@ function App() {
                                 {LANG_DATA[lang]['discover-title']}
                             </h1>
 
-                            <div className="discover-dynamic-card" style={{ background: 'rgba(255,255,255,0.25)', backdropFilter: 'blur(15px)', WebkitBackdropFilter: 'blur(15px)', border: '1px solid rgba(255,255,255,0.4)', padding: 'clamp(20px, 5vw, 40px)', borderRadius: '24px', transition: 'all 0.3s ease', boxShadow: '0 8px 32px 0 rgba(0,0,0,0.05)' }}>
-                                <h2 style={{ fontSize: 'clamp(1.4rem, 4vw, 2.2rem)', color: '#085257', marginBottom: '15px', fontWeight: 700 }}>
-                                    {activeProject.title}
-                                </h2>
-                                <p className="bio-text" style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.15rem)', lineHeight: '1.6', color: '#111', marginBottom: '30px', maxWidth: '750px' }}>
-                                    {activeProject.desc}
-                                </p>
+                            <div className="discover-dynamic-card" style={{ background: 'rgba(255,255,255,0.25)', backdropFilter: 'blur(15px)', WebkitBackdropFilter: 'blur(15px)', border: '1px solid rgba(255,255,255,0.4)', padding: 'clamp(20px, 4vw, 35px)', borderRadius: '24px', transition: 'all 0.3s ease', boxShadow: '0 8px 32px 0 rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column', gap: '25px' }}>
                                 
-                                <motion.button
-                                    onClick={() => navigateTo(activeProject.id)}
-                                    whileHover={{ scale: 1.03, backgroundColor: "#085257", color: "#fff" }}
-                                    whileTap={{ scale: 0.98 }}
-                                    style={{
-                                        padding: '12px 28px',
-                                        backgroundColor: 'transparent',
-                                        color: '#085257',
-                                        border: '2px solid #085257',
-                                        borderRadius: '30px',
-                                        fontSize: 'clamp(0.85rem, 2vw, 0.9rem)',
-                                        fontWeight: 700,
-                                        cursor: 'pointer',
-                                        transition: 'all 0.2s ease'
-                                    }}
-                                >
-                                    {lang === 'it' ? 'Apri Progetto →' : 'Open Project →'}
-                                </motion.button>
+                                {/* CONTENITORE PREVIEW VISIVA (IMMAGINE AD IMPATTO RAPIDO) */}
+                                {activeProject.image && (
+                                    <div style={{ width: '100%', maxHeight: '380px', borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.3)', background: 'rgba(0,0,0,0.05)' }}>
+                                        <img 
+                                            src={activeProject.image} 
+                                            alt={activeProject.title} 
+                                            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                                            loading="eager"
+                                        />
+                                    </div>
+                                )}
+
+                                <div>
+                                    <h2 style={{ fontSize: 'clamp(1.4rem, 4vw, 2.2rem)', color: '#085257', marginBottom: '12px', fontWeight: 700 }}>
+                                        {activeProject.title}
+                                    </h2>
+                                    <p className="bio-text" style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.1rem)', lineHeight: '1.6', color: '#111', marginBottom: '25px', maxWidth: '800px' }}>
+                                        {activeProject.desc}
+                                    </p>
+                                    
+                                    <motion.button
+                                        onClick={() => navigateTo(activeProject.id)}
+                                        whileHover={{ scale: 1.03, backgroundColor: "#085257", color: "#fff" }}
+                                        whileTap={{ scale: 0.98 }}
+                                        style={{
+                                            padding: '12px 28px',
+                                            backgroundColor: 'transparent',
+                                            color: '#085257',
+                                            border: '2px solid #085257',
+                                            borderRadius: '30px',
+                                            fontSize: 'clamp(0.85rem, 2vw, 0.9rem)',
+                                            fontWeight: 700,
+                                            cursor: 'pointer',
+                                            transition: 'all 0.2s ease'
+                                        }}
+                                    >
+                                        {lang === 'it' ? 'Apri Progetto →' : 'Open Project →'}
+                                    </motion.button>
+                                </div>
                             </div>
 
-                            {/* CONTROLLI DI INTERAZIONE INTERFACCIA */}
-                            <div style={{ display: 'flex', gap: 'clamp(10px, 2vw, 15px)', marginTop: '35px', flexWrap: 'wrap', width: '100%' }}>
+                            {/* CONTROLLO GENERAZIONE RANDOMICA */}
+                            <div style={{ marginTop: '25px', width: '100%' }}>
                                 <motion.button
                                     onClick={selectRandomProject}
                                     className="read-more-btn"
-                                    whileHover={{ scale: 1.05, backgroundColor: "#2563eb", color: "#fff", borderColor: "#2563eb" }}
-                                    whileTap={{ scale: 0.95 }}
+                                    whileHover={{ scale: 1.02, backgroundColor: "#2563eb", color: "#fff", borderColor: "#2563eb" }}
+                                    whileTap={{ scale: 0.98 }}
                                     style={{
-                                        flex: '1 1 200px',
-                                        padding: 'clamp(10px, 2.5vw, 12px) clamp(16px, 4vw, 24px)',
+                                        width: '100%',
+                                        padding: 'clamp(12px, 2.5vw, 14px)',
                                         backgroundColor: 'transparent',
                                         color: '#2563eb',
                                         border: '2px solid #2563eb',
                                         borderRadius: '30px',
-                                        fontSize: 'clamp(0.85rem, 2vw, 0.9rem)',
-                                        fontWeight: 600,
+                                        fontSize: 'clamp(0.9rem, 2vw, 0.95rem)',
+                                        fontWeight: 700,
                                         cursor: 'pointer',
                                         transition: 'all 0.3s ease',
                                         textAlign: 'center'
@@ -290,41 +341,12 @@ function App() {
                                 >
                                     {LANG_DATA[lang]['discover-btn-refresh']}
                                 </motion.button>
-
-                                <motion.a
-                                    href="/Cv_Angelo_Russo.pdf"
-                                    download="Cv_Angelo_Russo"
-                                    className="cv-download-btn"
-                                    whileHover={{ scale: 1.05, backgroundColor: "#111", color: "#fff" }}
-                                    whileTap={{ scale: 0.95 }}
-                                    style={{
-                                        flex: '1 1 200px',
-                                        padding: 'clamp(10px, 2.5vw, 12px) clamp(16px, 4vw, 24px)',
-                                        backgroundColor: '#111',
-                                        color: '#fff',
-                                        border: 'none',
-                                        borderRadius: '30px',
-                                        fontSize: 'clamp(0.85rem, 2vw, 0.9rem)',
-                                        fontWeight: 600,
-                                        cursor: 'pointer',
-                                        textDecoration: 'none',
-                                        display: 'inline-flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        textAlign: 'center'
-                                    }}
-                                >
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '8px' }}>
-                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
-                                    </svg>
-                                    {LANG_DATA[lang]['btn-cv']}
-                                </motion.a>
                             </div>
                         </div>
                     </Reveal>
                 </section>
 
-                {/* ARCHITETTURA GRIGLIA COMPLETA (SELECTED WORKS) */}
+                {/* SEZIONE COMPLETA SELECTED WORKS */}
                 <section className="glass-section works-section">
                     <Reveal>
                         <h2 className="section-label">01 / {LANG_DATA[lang]['works-title']}</h2>
