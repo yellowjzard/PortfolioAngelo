@@ -1,4 +1,4 @@
-import React, { useState, lazy, Suspense } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { ShaderGradientCanvas, ShaderGradient } from '@shadergradient/react';
 import { motion, useScroll, useTransform } from 'framer-motion'; 
 
@@ -11,7 +11,6 @@ const Freelance = lazy(() => import('./Freelance'));
 const GCerti = lazy(() => import('./GCerti')); 
 
 // --- ASSET STATICI ---
-const PROFILE_IMG = "Portrait-Angelo-Russo.webp"; 
 const WR_ICON = "Icona_whiterabbit.webp"; 
 const CUORE_ICON = "Icona_cuoredinapoli.webp";
 const NTA_ICON = "Icona_NTA.webp"; 
@@ -26,25 +25,18 @@ const LANG_DATA = {
         'welcome': 'BENVENUTI',
         'scroll-hint': 'Scorri per entrare',
         
-        'bio-title': 'Angelo Russo.',
-        'bio-sub': 'Digital Marketing Manager & Creative Lead | AI Strategy',
-        
-        'bio-intro': [
-            `Il mio approccio al design è tecnologicamente agnostico: la tecnologia non è il punto di partenza, ma l'orchestra al servizio dell'idea. Come Dottore Magistrale in Nuove Tecnologie dell'Arte, considero i software non come vincoli, ma come mezzi flessibili per ingegnerizzare soluzioni visive ad alto impatto. La mia missione è tradurre la complessità dell'Intelligenza Artificiale in narrazioni potenti, garantendo che la tecnica sia sempre il braccio operativo del concept.`,
-            `Dall'esperienza internazionale a Bruxelles presso White Rabbit — dove ho progettato workflow creativi integrando modelli avanzati (Higgsfield, Gemini Agents) — fino al mio ruolo di Digital Marketing Manager & Creative Lead presso GCERTI Italy. Mi muovo fluidamente tra rigore istituzionale e innovazione generativa, ottimizzando budget complessi e architetture visive per massimizzare il ROI aziendale.`
-        ],
-        'bio-skills-title': 'Valore Strategico & Competenze:',
-        'bio-skills-list': [
-            { title: 'AI Pipeline Architecture:', desc: 'Progettazione di flussi di lavoro "AI-Augmented" per abbattere i tempi di produzione mantenendo il controllo autoriale e la coerenza del brand.' },
-            { title: 'Institutional Visual Branding:', desc: 'Esperienza nella gestione di identità visive complesse, conformi alle rigorose EU Guidelines e standard internazionali.' },
-            { title: 'Creative Problem Solving:', desc: 'Un mindset analitico che supera i limiti tecnici dei software, esplorando soluzioni ibride tra graphic design e flussi video neurali.' },
-            { title: 'Versatilità Multidisciplinare:', desc: 'Capacità di orchestrare progetti su larga scala, dal print design alle installazioni interattive, fondendo sensibilità artistica e precisione operativa.' }
-        ],
-        'bio-philosophy': 'Credo in un design che non sia solo guardato, ma vissuto. Un ecosistema dove la tecnologia non sostituisce l\'essere umano, ma ne amplifica esponenzialmente le possibilità creative.',
-
+        'discover-tag': 'ESPLORA IL PORTFOLIO / SEZIONE SCOPRI',
+        'discover-title': 'In evidenza oggi',
+        'discover-btn-refresh': 'Mostra un altro lavoro ↻',
         'btn-cv': 'SCARICA CV (PDF)',
-        'btn-read-more': 'LEGGI DI PIÙ',
-        'btn-read-less': 'MOSTRA MENO',
+        
+        'projects-data': [
+            { id: 'gcerti', title: 'GCERTI Italy', desc: 'Direzione artistica, ottimizzazione workflow istituzionali e rebranding corporate con palette Deep Teal.' },
+            { id: 'whiterabbit', title: 'White Rabbit', desc: 'Sviluppo di asset in motion graphics e ingegnerizzazione di pipeline video generative con modelli AI avanzati.' },
+            { id: 'nero', title: 'Nero Espresso', desc: 'Progettazione e sviluppo dell\'identità visiva coordinata, prototipi strutturali e design insegne commerciali.' },
+            { id: 'freelance', title: 'Studio Legale & Digital Transformation', desc: 'Strategia di digital branding multi-lingua e implementazione del modello di comunicazione Hub-Satellite.' }
+        ],
+
         'works-title': 'Selected Works',
         'contact-title': 'CONTATTAMI',
         'form-name': 'Nome', 'form-name-ph': 'Il tuo nome',
@@ -56,25 +48,18 @@ const LANG_DATA = {
         'welcome': 'WELCOME', 
         'scroll-hint': 'Scroll to explore',
         
-        'bio-title': 'Angelo Russo.',
-        'bio-sub': 'Digital Marketing Manager & Creative Lead | AI Strategy',
-        
-        'bio-intro': [
-            `My approach to design is technologically agnostic: technology is not the starting point, but the orchestra at the service of the idea. As a Master of Arts (M.A.) in New Technologies for Arts, I view software not as a constraint, but as a flexible medium for engineering high-impact visual solutions. My mission is to translate the complexity of Artificial Intelligence into powerful narratives, ensuring that technique remains the operational arm of the concept.`,
-            `From my international experience in Brussels at White Rabbit — where I designed creative workflows integrating advanced models (Higgsfield, Gemini Agents) — to my role as Digital Marketing Manager & Creative Lead at GCERTI Italy. I fluidly navigate between institutional rigor and generative innovation, optimizing complex budgets and visual architectures to maximize corporate ROI.`
-        ],
-        'bio-skills-title': 'Strategic Value & Core Competencies:',
-        'bio-skills-list': [
-            { title: 'AI Pipeline Architecture:', desc: 'Designing "AI-Augmented" workflows to significantly reduce production times while maintaining authorial control and brand consistency.' },
-            { title: 'Institutional Visual Branding:', desc: 'Proven experience in managing complex visual identities compliant with rigorous EU Guidelines and international standards.' },
-            { title: 'Creative Problem Solving:', desc: 'An analytical mindset that transcends technical software limits, exploring hybrid solutions between traditional graphic design and neural video streams.' },
-            { title: 'Multidisciplinary Versatility:', desc: 'Ability to orchestrate large-scale projects, from print design to interactive installations, blending artistic sensitivity with operational precision.' }
-        ],
-        'bio-philosophy': 'I believe in design that is not just seen, but experienced. An ecosystem where technology does not replace the human element, but exponentially amplifies creative possibilities.',
-
+        'discover-tag': 'EXPLORE PORTFOLIO / DISCOVER SECTION',
+        'discover-title': 'Featured today',
+        'discover-btn-refresh': 'Show another work ↻',
         'btn-cv': 'DOWNLOAD CV (PDF)',
-        'btn-read-more': 'READ MORE',
-        'btn-read-less': 'SHOW LESS',
+        
+        'projects-data': [
+            { id: 'gcerti', title: 'GCERTI Italy', desc: 'Art direction, institutional workflow optimization, and corporate rebranding using Deep Teal palettes.' },
+            { id: 'whiterabbit', title: 'White Rabbit', desc: 'Motion graphics development and advanced generative video pipeline engineering using state-of-the-art AI models.' },
+            { id: 'nero', title: 'Nero Espresso', desc: 'Comprehensive brand identity design, architectural structural prototyping, and commercial signage development.' },
+            { id: 'freelance', title: 'Legal Studio & Digital Transformation', desc: 'Multi-lingual digital branding strategy and deployment of a custom Hub-Satellite communication model.' }
+        ],
+
         'works-title': 'Selected Works',
         'contact-title': 'CONTACT ME',
         'form-name': 'Name', 'form-name-ph': 'Your Name',
@@ -174,7 +159,7 @@ const FooterSocialBtn = ({ icon, link }) => {
 function App() {
     const [lang, setLang] = useState('it');
     const [view, setView] = useState('home');
-    const [showFullBio, setShowFullBio] = useState(false);
+    const [currentIndex, setCurrentIndex] = useState(0);
 
     const { scrollY } = useScroll();
     const introOpacity = useTransform(scrollY, [0, 400], [1, 0]);
@@ -184,12 +169,29 @@ function App() {
     const toggleLang = () => setLang(prev => prev === 'it' ? 'en' : 'it');
     const navigateTo = (pageName) => setView(pageName);
 
+    // Gestione selezione randomica dei lavori (Evita ripetizioni consecutive dirette)
+    const selectRandomProject = () => {
+        const projectsLength = LANG_DATA[lang]['projects-data'].length;
+        if (projectsLength <= 1) return;
+        let nextIndex;
+        do {
+            nextIndex = Math.floor(Math.random() * projectsLength);
+        } while (nextIndex === currentIndex);
+        setCurrentIndex(nextIndex);
+    };
+
+    // Inizializzazione index randomico nativo al montaggio
+    useEffect(() => {
+        const randomIndex = Math.floor(Math.random() * LANG_DATA[lang]['projects-data'].length);
+        setCurrentIndex(randomIndex);
+    }, []);
+
     if (view !== 'home') {
         return (
             <ErrorBoundary goBack={() => setView('home')}>
                 <Suspense fallback={
                     <div className="app-container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100dvh' }}>
-                        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, yoyo: Infinity }} style={{ zIndex: 10, background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(10px)', padding: 'clamp(15px, 4vw, 20px) clamp(20px, 5vw, 40px)', borderRadius: '30px' }}>
+                        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, repeat: Infinity, repeatType: "reverse" }} style={{ zIndex: 10, background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(10px)', padding: 'clamp(15px, 4vw, 20px) clamp(20px, 5vw, 40px)', borderRadius: '30px' }}>
                             <h2 style={{ color: '#111', fontSize: 'clamp(1.2rem, 3vw, 1.5rem)', fontWeight: 600, margin: 0 }}>Caricamento...</h2>
                         </motion.div>
                     </div>
@@ -202,6 +204,8 @@ function App() {
             </ErrorBoundary>
         );
     } 
+
+    const activeProject = LANG_DATA[lang]['projects-data'][currentIndex] || LANG_DATA[lang]['projects-data'][0];
 
     return (
         <div className="app-container">
@@ -223,124 +227,104 @@ function App() {
                     <button onClick={toggleLang} className="lang-btn">{lang === 'it' ? 'EN' : 'IT'}</button>
                 </header>
 
-                <section className="glass-section bio-section">
+                {/* NUOVA SEZIONE HERO "SCOPRI" RANDOMICA (Sostituisce la vecchia Bio/CV estesa) */}
+                <section className="glass-section discover-section">
                     <Reveal>
-                        <div className="bio-content-wrapper">
-                            <div className="bio-image-col">
-                                <img loading="lazy" decoding="async" src={PROFILE_IMG} alt="Angelo Russo - AI Specialist & Creative Designer" className="profile-photo" />
+                        <div className="discover-content-wrapper" style={{ padding: 'clamp(10px, 2vw, 20px) 0', width: '100%' }}>
+                            <span style={{ textTransform: 'uppercase', letterSpacing: '2px', color: '#DE7E00', fontSize: 'clamp(0.75rem, 2vw, 0.85rem)', fontWeight: 'bold', display: 'block', marginBottom: '10px' }}>
+                                {LANG_DATA[lang]['discover-tag']}
+                            </span>
+                            
+                            <h1 className="bio-headline" style={{ fontSize: 'clamp(1.8rem, 6vw, 3.5rem)', fontWeight: 800, marginBottom: '2rem', lineHeight: '1.1' }}>
+                                {LANG_DATA[lang]['discover-title']}
+                            </h1>
+
+                            <div className="discover-dynamic-card" style={{ background: 'rgba(255,255,255,0.25)', backdropFilter: 'blur(15px)', WebkitBackdropFilter: 'blur(15px)', border: '1px solid rgba(255,255,255,0.4)', padding: 'clamp(20px, 5vw, 40px)', borderRadius: '24px', transition: 'all 0.3s ease', boxShadow: '0 8px 32px 0 rgba(0,0,0,0.05)' }}>
+                                <h2 style={{ fontSize: 'clamp(1.4rem, 4vw, 2.2rem)', color: '#085257', marginBottom: '15px', fontWeight: 700 }}>
+                                    {activeProject.title}
+                                </h2>
+                                <p className="bio-text" style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.15rem)', lineHeight: '1.6', color: '#111', marginBottom: '30px', maxWidth: '750px' }}>
+                                    {activeProject.desc}
+                                </p>
+                                
+                                <motion.button
+                                    onClick={() => navigateTo(activeProject.id)}
+                                    whileHover={{ scale: 1.03, backgroundColor: "#085257", color: "#fff" }}
+                                    whileTap={{ scale: 0.98 }}
+                                    style={{
+                                        padding: '12px 28px',
+                                        backgroundColor: 'transparent',
+                                        color: '#085257',
+                                        border: '2px solid #085257',
+                                        borderRadius: '30px',
+                                        fontSize: 'clamp(0.85rem, 2vw, 0.9rem)',
+                                        fontWeight: 700,
+                                        cursor: 'pointer',
+                                        transition: 'all 0.2s ease'
+                                    }}
+                                >
+                                    {lang === 'it' ? 'Apri Progetto →' : 'Open Project →'}
+                                </motion.button>
                             </div>
 
-                            <div className="bio-text-col">
-                                <h1 className="bio-headline" style={{ fontSize: 'clamp(1.8rem, 8vw, 4rem)', fontWeight: 800, marginBottom: '0.25rem' }}>
-                                    {LANG_DATA[lang]['bio-title']}
-                                </h1>
-                                
-                                <h2 style={{ 
-                                    fontSize: 'clamp(0.9rem, 3vw, 1.25rem)', 
-                                    fontWeight: 400, 
-                                    color: 'rgba(0,0,0,0.6)', 
-                                    letterSpacing: '0.3px',
-                                    marginTop: 0,
-                                    marginBottom: '1.5rem'
-                                }}>
-                                    {LANG_DATA[lang]['bio-sub']}
-                                </h2>
-                                
-                                <p className="bio-text" style={{ fontSize: 'clamp(0.9rem, 2.5vw, 1rem)', lineHeight: '1.6', marginBottom: '20px' }}>
-                                    {LANG_DATA[lang]['bio-intro'][0]}
-                                </p>
-
-                                <motion.div
-                                    initial={false}
-                                    animate={{ height: showFullBio ? 'auto' : 0, opacity: showFullBio ? 1 : 0 }}
-                                    transition={{ duration: 0.5, ease: "easeInOut" }}
-                                    style={{ overflow: 'hidden' }}
+                            {/* CONTROLLI DI INTERAZIONE INTERFACCIA */}
+                            <div style={{ display: 'flex', gap: 'clamp(10px, 2vw, 15px)', marginTop: '35px', flexWrap: 'wrap', width: '100%' }}>
+                                <motion.button
+                                    onClick={selectRandomProject}
+                                    className="read-more-btn"
+                                    whileHover={{ scale: 1.05, backgroundColor: "#2563eb", color: "#fff", borderColor: "#2563eb" }}
+                                    whileTap={{ scale: 0.95 }}
+                                    style={{
+                                        flex: '1 1 200px',
+                                        padding: 'clamp(10px, 2.5vw, 12px) clamp(16px, 4vw, 24px)',
+                                        backgroundColor: 'transparent',
+                                        color: '#2563eb',
+                                        border: '2px solid #2563eb',
+                                        borderRadius: '30px',
+                                        fontSize: 'clamp(0.85rem, 2vw, 0.9rem)',
+                                        fontWeight: 600,
+                                        cursor: 'pointer',
+                                        transition: 'all 0.3s ease',
+                                        textAlign: 'center'
+                                    }}
                                 >
-                                    <p className="bio-text" style={{ fontSize: 'clamp(0.9rem, 2.5vw, 1rem)', lineHeight: '1.6', marginBottom: '20px' }}>
-                                        {LANG_DATA[lang]['bio-intro'][1]}
-                                    </p>
+                                    {LANG_DATA[lang]['discover-btn-refresh']}
+                                </motion.button>
 
-                                    <div style={{ marginBottom: '30px', marginTop: '10px' }}>
-                                        <h3 style={{ fontSize: 'clamp(1.1rem, 3vw, 1.2rem)', fontWeight: 700, marginBottom: '15px', color: '#111' }}>
-                                            {LANG_DATA[lang]['bio-skills-title']}
-                                        </h3>
-                                        <ul style={{ listStyle: 'none', padding: 0 }}>
-                                            {LANG_DATA[lang]['bio-skills-list'].map((skill, index) => (
-                                                <li key={index} style={{ marginBottom: '12px', fontSize: 'clamp(0.85rem, 2.5vw, 1rem)', color: '#444', lineHeight: '1.5' }}>
-                                                    <span style={{ fontWeight: 700, color: '#2563eb' }}>• {skill.title}</span> {skill.desc}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-
-                                    <p className="bio-text" style={{ fontSize: 'clamp(0.85rem, 2.5vw, 1rem)', fontStyle: 'italic', color: '#555', borderLeft: '3px solid #ccc', paddingLeft: '15px' }}>
-                                        {LANG_DATA[lang]['bio-philosophy']}
-                                    </p>
-                                </motion.div>
-
-                                <div style={{ 
-                                    display: 'flex', 
-                                    gap: 'clamp(10px, 2vw, 15px)', 
-                                    marginTop: '30px', 
-                                    flexWrap: 'wrap',
-                                    width: '100%' 
-                                }}>
-                                    <motion.button
-                                        onClick={() => setShowFullBio(!showFullBio)}
-                                        className="read-more-btn"
-                                        whileHover={{ scale: 1.05, backgroundColor: "#2563eb", color: "#fff" }}
-                                        whileTap={{ scale: 0.95 }}
-                                        style={{
-                                            flex: '1 1 200px',
-                                            padding: 'clamp(10px, 2.5vw, 12px) clamp(16px, 4vw, 24px)',
-                                            backgroundColor: showFullBio ? '#2563eb' : 'transparent',
-                                            color: showFullBio ? '#fff' : '#2563eb',
-                                            border: '2px solid #2563eb',
-                                            borderRadius: '30px',
-                                            fontSize: 'clamp(0.85rem, 2vw, 0.9rem)',
-                                            fontWeight: 600,
-                                            cursor: 'pointer',
-                                            transition: 'all 0.3s ease',
-                                            textAlign: 'center'
-                                        }}
-                                    >
-                                        {showFullBio ? LANG_DATA[lang]['btn-read-less'] : LANG_DATA[lang]['btn-read-more']}
-                                    </motion.button>
-
-                                    <motion.a
-                                        href="/Cv_Angelo_Russo.pdf"
-                                        download="Cv_Angelo_Russo"
-                                        className="cv-download-btn"
-                                        whileHover={{ scale: 1.05, backgroundColor: "#111", color: "#fff" }}
-                                        whileTap={{ scale: 0.95 }}
-                                        style={{
-                                            flex: '1 1 200px',
-                                            padding: 'clamp(10px, 2.5vw, 12px) clamp(16px, 4vw, 24px)',
-                                            backgroundColor: '#111',
-                                            color: '#fff',
-                                            border: 'none',
-                                            borderRadius: '30px',
-                                            fontSize: 'clamp(0.85rem, 2vw, 0.9rem)',
-                                            fontWeight: 600,
-                                            cursor: 'pointer',
-                                            textDecoration: 'none',
-                                            display: 'inline-flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center',
-                                            textAlign: 'center'
-                                        }}
-                                    >
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight:'8px'}}>
-                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
-                                        </svg>
-                                        {LANG_DATA[lang]['btn-cv']}
-                                    </motion.a>
-                                </div>
+                                <motion.a
+                                    href="/Cv_Angelo_Russo.pdf"
+                                    download="Cv_Angelo_Russo"
+                                    className="cv-download-btn"
+                                    whileHover={{ scale: 1.05, backgroundColor: "#111", color: "#fff" }}
+                                    whileTap={{ scale: 0.95 }}
+                                    style={{
+                                        flex: '1 1 200px',
+                                        padding: 'clamp(10px, 2.5vw, 12px) clamp(16px, 4vw, 24px)',
+                                        backgroundColor: '#111',
+                                        color: '#fff',
+                                        border: 'none',
+                                        borderRadius: '30px',
+                                        fontSize: 'clamp(0.85rem, 2vw, 0.9rem)',
+                                        fontWeight: 600,
+                                        cursor: 'pointer',
+                                        textDecoration: 'none',
+                                        display: 'inline-flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        textAlign: 'center'
+                                    }}
+                                >
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '8px' }}>
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+                                    </svg>
+                                    {LANG_DATA[lang]['btn-cv']}
+                                </motion.a>
                             </div>
                         </div>
                     </Reveal>
                 </section>
 
+                {/* ARCHITETTURA GRIGLIA COMPLETA (SELECTED WORKS) */}
                 <section className="glass-section works-section">
                     <Reveal>
                         <h2 className="section-label">01 / {LANG_DATA[lang]['works-title']}</h2>
@@ -358,22 +342,22 @@ function App() {
 
                 <section className="glass-section contact-section">
                     <Reveal>
-                        <h2 className="section-label" style={{textAlign:'center', width:'100%'}}>02 / {LANG_DATA[lang]['contact-title']}</h2>
+                        <h2 className="section-label" style={{ textAlign: 'center', width: '100%' }}>02 / {LANG_DATA[lang]['contact-title']}</h2>
                         <form action="https://formspree.io/f/mrbnlyyl" method="POST" className="contact-form">
-                            <div className="form-group"><label style={{fontSize: 'clamp(0.85rem, 2vw, 0.9rem)'}}>{LANG_DATA[lang]['form-name']}</label><input type="text" name="name" placeholder={LANG_DATA[lang]['form-name-ph']} required className="form-input" /></div>
-                            <div className="form-group"><label style={{fontSize: 'clamp(0.85rem, 2vw, 0.9rem)'}}>{LANG_DATA[lang]['form-email']}</label><input type="email" name="email" placeholder={LANG_DATA[lang]['form-email-ph']} required className="form-input" /></div>
-                            <div className="form-group"><label style={{fontSize: 'clamp(0.85rem, 2vw, 0.9rem)'}}>{LANG_DATA[lang]['form-msg']}</label><textarea name="message" rows="5" placeholder={LANG_DATA[lang]['form-msg-ph']} required className="form-input"></textarea></div>
+                            <div className="form-group"><label style={{ fontSize: 'clamp(0.85rem, 2vw, 0.9rem)' }}>{LANG_DATA[lang]['form-name']}</label><input type="text" name="name" placeholder={LANG_DATA[lang]['form-name-ph']} required className="form-input" /></div>
+                            <div className="form-group"><label style={{ fontSize: 'clamp(0.85rem, 2vw, 0.9rem)' }}>{LANG_DATA[lang]['form-email']}</label><input type="email" name="email" placeholder={LANG_DATA[lang]['form-email-ph']} required className="form-input" /></div>
+                            <div className="form-group"><label style={{ fontSize: 'clamp(0.85rem, 2vw, 0.9rem)' }}>{LANG_DATA[lang]['form-msg']}</label><textarea name="message" rows="5" placeholder={LANG_DATA[lang]['form-msg-ph']} required className="form-input"></textarea></div>
                             <motion.button type="submit" className="form-submit-btn" style={{ fontSize: 'clamp(0.85rem, 2vw, 0.9rem)', padding: 'clamp(12px, 3vw, 15px)' }} whileHover={{ scale: 1.02, backgroundColor: "#111", color: "#fff" }} whileTap={{ scale: 0.95 }}>{LANG_DATA[lang]['form-btn']}</motion.button>
                         </form>
                     </Reveal>
                 </section>
 
-                <footer style={{textAlign: 'center', padding: 'clamp(3rem, 8vw, 6rem) clamp(1rem, 4vw, 2rem)', opacity: 0.8}}>
-                    <div style={{marginBottom: '20px', display: 'flex', justifyContent: 'center', flexWrap: 'wrap'}}>
+                <footer style={{ textAlign: 'center', padding: 'clamp(3rem, 8vw, 6rem) clamp(1rem, 4vw, 2rem)', opacity: 0.8 }}>
+                    <div style={{ marginBottom: '20px', display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
                         <FooterSocialBtn icon={ICON_LN} link="https://www.linkedin.com/in/angelo-russo-0964a8183" />
                         <FooterSocialBtn icon={ICON_IG} link="https://www.instagram.com/yellowjzard" />
                     </div>
-                    <p style={{opacity: 0.6, fontSize: 'clamp(0.8rem, 2vw, 0.9rem)'}}>© 2026 Angelo Russo. All rights reserved.</p>
+                    <p style={{ opacity: 0.6, fontSize: 'clamp(0.8rem, 2vw, 0.9rem)' }}>© 2026 Angelo Russo. All rights reserved.</p>
                 </footer>
             </div>
         </div>
