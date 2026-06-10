@@ -1,4 +1,4 @@
-import React, { useState, useEffect, lazy, Suspense } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import { ShaderGradientCanvas, ShaderGradient } from '@shadergradient/react';
 import { motion, useScroll, useTransform } from 'framer-motion'; 
 
@@ -24,8 +24,6 @@ const LANG_DATA = {
     it: {
         'welcome': 'BENVENUTI',
         'scroll-hint': 'Scorri per entrare',
-        'discover-tag': 'IN EVIDENZA OGGI / DISCOVER',
-        'discover-btn-refresh': 'Mostra altri contenuti ↻',
         'works-title': 'Selected Works',
         'contact-title': 'CONTATTAMI',
         'form-name': 'Nome', 'form-name-ph': 'Il tuo nome',
@@ -36,8 +34,6 @@ const LANG_DATA = {
     en: {
         'welcome': 'WELCOME', 
         'scroll-hint': 'Scroll to explore',
-        'discover-tag': 'FEATURED TODAY / DISCOVER',
-        'discover-btn-refresh': 'Shuffle content ↻',
         'works-title': 'Selected Works',
         'contact-title': 'CONTACT ME',
         'form-name': 'Name', 'form-name-ph': 'Your Name',
@@ -46,14 +42,6 @@ const LANG_DATA = {
         'form-btn': 'SEND MESSAGE'
     }
 };
-
-// --- DATASET COPERTINE STILE NETFLIX ---
-const NETFLIX_ITEMS = [
-    { id: 'gcerti', title: 'GCERTI Italy', image: 'brochure.005.png' },
-    { id: 'whiterabbit', title: 'White Rabbit', image: 'agentai.webp' },
-    { id: 'nero', title: 'Nero Espresso', image: 'NE-prerender-insegna.png' },
-    { id: 'freelance', title: 'Studio Legale Identity', image: 'copertina uko.webp' }
-];
 
 // --- COMPONENTI UI ---
 
@@ -145,7 +133,6 @@ const FooterSocialBtn = ({ icon, link }) => {
 function App() {
     const [lang, setLang] = useState('it');
     const [view, setView] = useState('home');
-    const [displayItems, setDisplayItems] = useState(NETFLIX_ITEMS);
 
     const { scrollY } = useScroll();
     const introOpacity = useTransform(scrollY, [0, 400], [1, 0]);
@@ -154,11 +141,6 @@ function App() {
 
     const toggleLang = () => setLang(prev => prev === 'it' ? 'en' : 'it');
     const navigateTo = (pageName) => setView(pageName);
-
-    // Funzione di ordinamento casuale degli elementi (Mescola l'ordine come suggerito dallo stile catalogo dinamico)
-    const shuffleItems = () => {
-        setDisplayItems(prev => [...prev].sort(() => Math.random() - 0.5));
-    };
 
     if (view !== 'home') {
         return (
@@ -199,85 +181,8 @@ function App() {
                     <button onClick={toggleLang} className="lang-btn">{lang === 'it' ? 'EN' : 'IT'}</button>
                 </header>
 
-                {/* SEZIONE IN EVIDENZA: STILE NETFLIX GRID MULTIMEDIALE */}
-                <section className="glass-section discover-section" style={{ minHeight: 'auto', paddingBottom: '40px' }}>
-                    <Reveal>
-                        <div className="discover-content-wrapper" style={{ width: '100%' }}>
-                            <span style={{ textTransform: 'uppercase', letterSpacing: '2px', color: '#DE7E00', fontSize: 'clamp(0.75rem, 2vw, 0.85rem)', fontWeight: 'bold', display: 'block', marginBottom: '15px' }}>
-                                {LANG_DATA[lang]['discover-tag']}
-                            </span>
-
-                            {/* ROW CAROUSEL/GRID DI COPERTINE NETFLIX STYLE */}
-                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '20px', margin: '20px 0' }}>
-                                {displayItems.map((item) => (
-                                    <motion.div 
-                                        key={item.id}
-                                        onClick={() => navigateTo(item.id)}
-                                        whileHover={{ scale: 1.04, y: -5 }}
-                                        whileTap={{ scale: 0.98 }}
-                                        style={{ 
-                                            position: 'relative',
-                                            aspectRatio: '16/10',
-                                            borderRadius: '12px',
-                                            overflow: 'hidden',
-                                            cursor: 'pointer',
-                                            backgroundColor: 'rgba(0,0,0,0.2)',
-                                            border: '1px solid rgba(255,255,255,0.2)',
-                                            boxShadow: '0 10px 25px rgba(0,0,0,0.15)'
-                                        }}
-                                    >
-                                        <img 
-                                            src={item.image} 
-                                            alt={item.title} 
-                                            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                                            loading="eager"
-                                        />
-                                        {/* Overlay Sfumato Inferiore con Titolo */}
-                                        <div style={{
-                                            position: 'absolute',
-                                            bottom: 0,
-                                            left: 0,
-                                            width: '100%',
-                                            padding: '30px 15px 15px 15px',
-                                            background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 60%, transparent 100%)',
-                                            display: 'flex',
-                                            alignItems: 'flex-end'
-                                        }}>
-                                            <h3 style={{ margin: 0, fontSize: 'clamp(1rem, 2.5vw, 1.25rem)', fontWeight: 700, color: '#fff', textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>
-                                                {item.title}
-                                            </h3>
-                                        </div>
-                                    </motion.div>
-                                ))}
-                            </div>
-
-                            {/* CONTROLLO INTERAZIONE SHUFFLE */}
-                            <div style={{ width: '100%', textAlign: 'right', marginTop: '15px' }}>
-                                <motion.button
-                                    onClick={shuffleItems}
-                                    whileHover={{ scale: 1.03, color: '#2563eb', borderColor: '#2563eb' }}
-                                    whileTap={{ scale: 0.97 }}
-                                    style={{
-                                        padding: '8px 20px',
-                                        backgroundColor: 'transparent',
-                                        color: 'rgba(0,0,0,0.6)',
-                                        border: '1px solid rgba(0,0,0,0.2)',
-                                        borderRadius: '20px',
-                                        fontSize: '0.85rem',
-                                        fontWeight: 600,
-                                        cursor: 'pointer',
-                                        transition: 'all 0.2s ease'
-                                    }}
-                                >
-                                    {LANG_DATA[lang]['discover-btn-refresh']}
-                                </motion.button>
-                            </div>
-                        </div>
-                    </Reveal>
-                </section>
-
-                {/* SEZIONE COMPLETA SELECTED WORKS */}
-                <section className="glass-section works-section">
+                {/* SEZIONE GRIGLIA COMPLETA (SELECTED WORKS) */}
+                <section className="glass-section works-section" style={{ marginTop: '100dvh' }}>
                     <Reveal>
                         <h2 className="section-label">01 / {LANG_DATA[lang]['works-title']}</h2>
                         <div className="folders-grid">
