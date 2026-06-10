@@ -24,38 +24,8 @@ const LANG_DATA = {
     it: {
         'welcome': 'BENVENUTI',
         'scroll-hint': 'Scorri per entrare',
-        
-        'discover-tag': 'ESPLORA IL PORTFOLIO / SEZIONE SCOPRI',
-        'discover-title': 'In evidenza oggi',
-        'discover-btn-refresh': 'Mostra un altro lavoro ↻',
-        
-        'projects-data': [
-            { 
-                id: 'gcerti', 
-                title: 'GCERTI Italy', 
-                desc: 'Direzione artistica, ottimizzazione workflow istituzionali e rebranding corporate con palette Deep Teal.',
-                image: 'brochure.005.png'
-            },
-            { 
-                id: 'whiterabbit', 
-                title: 'White Rabbit', 
-                desc: 'Sviluppo di asset in motion graphics e ingegnerizzazione di pipeline video generative con modelli AI avanzati.',
-                image: 'agentai.webp'
-            },
-            { 
-                id: 'nero', 
-                title: 'Nero Espresso', 
-                desc: 'Progettazione e sviluppo dell\'identità visiva coordinata, prototipi strutturali e design insegne commerciali.',
-                image: 'NE-prerender-insegna.png'
-            },
-            { 
-                id: 'freelance', 
-                title: 'Studio Legale & Digital Transformation', 
-                desc: 'Strategia di digital branding multi-lingua e implementazione del modello di comunicazione Hub-Satellite.',
-                image: 'copertina uko.webp'
-            }
-        ],
-
+        'discover-tag': 'IN EVIDENZA OGGI / DISCOVER',
+        'discover-btn-refresh': 'Mostra altri contenuti ↻',
         'works-title': 'Selected Works',
         'contact-title': 'CONTATTAMI',
         'form-name': 'Nome', 'form-name-ph': 'Il tuo nome',
@@ -66,38 +36,8 @@ const LANG_DATA = {
     en: {
         'welcome': 'WELCOME', 
         'scroll-hint': 'Scroll to explore',
-        
-        'discover-tag': 'EXPLORE PORTFOLIO / DISCOVER SECTION',
-        'discover-title': 'Featured today',
-        'discover-btn-refresh': 'Show another work ↻',
-        
-        'projects-data': [
-            { 
-                id: 'gcerti', 
-                title: 'GCERTI Italy', 
-                desc: 'Art direction, institutional workflow optimization, and corporate rebranding using Deep Teal palettes.',
-                image: 'brochure.005.png'
-            },
-            { 
-                id: 'whiterabbit', 
-                title: 'White Rabbit', 
-                desc: 'Motion graphics development and advanced generative video pipeline engineering using state-of-the-art AI models.',
-                image: 'agentai.webp'
-            },
-            { 
-                id: 'nero', 
-                title: 'Nero Espresso', 
-                desc: 'Comprehensive brand identity design, architectural structural prototyping, and commercial signage development.',
-                image: 'NE-prerender-insegna.png'
-            },
-            { 
-                id: 'freelance', 
-                title: 'Legal Studio & Digital Transformation', 
-                desc: 'Multi-lingual digital branding strategy and deployment of a custom Hub-Satellite communication model.',
-                image: 'copertina uko.webp'
-            }
-        ],
-
+        'discover-tag': 'FEATURED TODAY / DISCOVER',
+        'discover-btn-refresh': 'Shuffle content ↻',
         'works-title': 'Selected Works',
         'contact-title': 'CONTACT ME',
         'form-name': 'Name', 'form-name-ph': 'Your Name',
@@ -106,6 +46,14 @@ const LANG_DATA = {
         'form-btn': 'SEND MESSAGE'
     }
 };
+
+// --- DATASET COPERTINE STILE NETFLIX ---
+const NETFLIX_ITEMS = [
+    { id: 'gcerti', title: 'GCERTI Italy', image: 'brochure.005.png' },
+    { id: 'whiterabbit', title: 'White Rabbit', image: 'agentai.webp' },
+    { id: 'nero', title: 'Nero Espresso', image: 'NE-prerender-insegna.png' },
+    { id: 'freelance', title: 'Studio Legale Identity', image: 'copertina uko.webp' }
+];
 
 // --- COMPONENTI UI ---
 
@@ -197,7 +145,7 @@ const FooterSocialBtn = ({ icon, link }) => {
 function App() {
     const [lang, setLang] = useState('it');
     const [view, setView] = useState('home');
-    const [currentIndex, setCurrentIndex] = useState(0);
+    const [displayItems, setDisplayItems] = useState(NETFLIX_ITEMS);
 
     const { scrollY } = useScroll();
     const introOpacity = useTransform(scrollY, [0, 400], [1, 0]);
@@ -207,20 +155,10 @@ function App() {
     const toggleLang = () => setLang(prev => prev === 'it' ? 'en' : 'it');
     const navigateTo = (pageName) => setView(pageName);
 
-    const selectRandomProject = () => {
-        const projectsLength = LANG_DATA[lang]['projects-data'].length;
-        if (projectsLength <= 1) return;
-        let nextIndex;
-        do {
-            nextIndex = Math.floor(Math.random() * projectsLength);
-        } while (nextIndex === currentIndex);
-        setCurrentIndex(nextIndex);
+    // Funzione di ordinamento casuale degli elementi (Mescola l'ordine come suggerito dallo stile catalogo dinamico)
+    const shuffleItems = () => {
+        setDisplayItems(prev => [...prev].sort(() => Math.random() - 0.5));
     };
-
-    useEffect(() => {
-        const randomIndex = Math.floor(Math.random() * LANG_DATA[lang]['projects-data'].length);
-        setCurrentIndex(randomIndex);
-    }, []);
 
     if (view !== 'home') {
         return (
@@ -240,8 +178,6 @@ function App() {
             </ErrorBoundary>
         );
     } 
-
-    const activeProject = LANG_DATA[lang]['projects-data'][currentIndex] || LANG_DATA[lang]['projects-data'][0];
 
     return (
         <div className="app-container">
@@ -263,80 +199,74 @@ function App() {
                     <button onClick={toggleLang} className="lang-btn">{lang === 'it' ? 'EN' : 'IT'}</button>
                 </header>
 
-                {/* SEZIONE HERO "SCOPRI" CON IMMAGINI / MULTIMEDIA (No CV) */}
-                <section className="glass-section discover-section">
+                {/* SEZIONE IN EVIDENZA: STILE NETFLIX GRID MULTIMEDIALE */}
+                <section className="glass-section discover-section" style={{ minHeight: 'auto', paddingBottom: '40px' }}>
                     <Reveal>
-                        <div className="discover-content-wrapper" style={{ padding: 'clamp(10px, 2vw, 20px) 0', width: '100%' }}>
-                            <span style={{ textTransform: 'uppercase', letterSpacing: '2px', color: '#DE7E00', fontSize: 'clamp(0.75rem, 2vw, 0.85rem)', fontWeight: 'bold', display: 'block', marginBottom: '10px' }}>
+                        <div className="discover-content-wrapper" style={{ width: '100%' }}>
+                            <span style={{ textTransform: 'uppercase', letterSpacing: '2px', color: '#DE7E00', fontSize: 'clamp(0.75rem, 2vw, 0.85rem)', fontWeight: 'bold', display: 'block', marginBottom: '15px' }}>
                                 {LANG_DATA[lang]['discover-tag']}
                             </span>
-                            
-                            <h1 className="bio-headline" style={{ fontSize: 'clamp(1.8rem, 6vw, 3.5rem)', fontWeight: 800, marginBottom: '2rem', lineHeight: '1.1' }}>
-                                {LANG_DATA[lang]['discover-title']}
-                            </h1>
 
-                            <div className="discover-dynamic-card" style={{ background: 'rgba(255,255,255,0.25)', backdropFilter: 'blur(15px)', WebkitBackdropFilter: 'blur(15px)', border: '1px solid rgba(255,255,255,0.4)', padding: 'clamp(20px, 4vw, 35px)', borderRadius: '24px', transition: 'all 0.3s ease', boxShadow: '0 8px 32px 0 rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column', gap: '25px' }}>
-                                
-                                {/* CONTENITORE PREVIEW VISIVA (IMMAGINE AD IMPATTO RAPIDO) */}
-                                {activeProject.image && (
-                                    <div style={{ width: '100%', maxHeight: '380px', borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.3)', background: 'rgba(0,0,0,0.05)' }}>
+                            {/* ROW CAROUSEL/GRID DI COPERTINE NETFLIX STYLE */}
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '20px', margin: '20px 0' }}>
+                                {displayItems.map((item) => (
+                                    <motion.div 
+                                        key={item.id}
+                                        onClick={() => navigateTo(item.id)}
+                                        whileHover={{ scale: 1.04, y: -5 }}
+                                        whileTap={{ scale: 0.98 }}
+                                        style={{ 
+                                            position: 'relative',
+                                            aspectRatio: '16/10',
+                                            borderRadius: '12px',
+                                            overflow: 'hidden',
+                                            cursor: 'pointer',
+                                            backgroundColor: 'rgba(0,0,0,0.2)',
+                                            border: '1px solid rgba(255,255,255,0.2)',
+                                            boxShadow: '0 10px 25px rgba(0,0,0,0.15)'
+                                        }}
+                                    >
                                         <img 
-                                            src={activeProject.image} 
-                                            alt={activeProject.title} 
+                                            src={item.image} 
+                                            alt={item.title} 
                                             style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                                             loading="eager"
                                         />
-                                    </div>
-                                )}
-
-                                <div>
-                                    <h2 style={{ fontSize: 'clamp(1.4rem, 4vw, 2.2rem)', color: '#085257', marginBottom: '12px', fontWeight: 700 }}>
-                                        {activeProject.title}
-                                    </h2>
-                                    <p className="bio-text" style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.1rem)', lineHeight: '1.6', color: '#111', marginBottom: '25px', maxWidth: '800px' }}>
-                                        {activeProject.desc}
-                                    </p>
-                                    
-                                    <motion.button
-                                        onClick={() => navigateTo(activeProject.id)}
-                                        whileHover={{ scale: 1.03, backgroundColor: "#085257", color: "#fff" }}
-                                        whileTap={{ scale: 0.98 }}
-                                        style={{
-                                            padding: '12px 28px',
-                                            backgroundColor: 'transparent',
-                                            color: '#085257',
-                                            border: '2px solid #085257',
-                                            borderRadius: '30px',
-                                            fontSize: 'clamp(0.85rem, 2vw, 0.9rem)',
-                                            fontWeight: 700,
-                                            cursor: 'pointer',
-                                            transition: 'all 0.2s ease'
-                                        }}
-                                    >
-                                        {lang === 'it' ? 'Apri Progetto →' : 'Open Project →'}
-                                    </motion.button>
-                                </div>
+                                        {/* Overlay Sfumato Inferiore con Titolo */}
+                                        <div style={{
+                                            position: 'absolute',
+                                            bottom: 0,
+                                            left: 0,
+                                            width: '100%',
+                                            padding: '30px 15px 15px 15px',
+                                            background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 60%, transparent 100%)',
+                                            display: 'flex',
+                                            alignItems: 'flex-end'
+                                        }}>
+                                            <h3 style={{ margin: 0, fontSize: 'clamp(1rem, 2.5vw, 1.25rem)', fontWeight: 700, color: '#fff', textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>
+                                                {item.title}
+                                            </h3>
+                                        </div>
+                                    </motion.div>
+                                ))}
                             </div>
 
-                            {/* CONTROLLO GENERAZIONE RANDOMICA */}
-                            <div style={{ marginTop: '25px', width: '100%' }}>
+                            {/* CONTROLLO INTERAZIONE SHUFFLE */}
+                            <div style={{ width: '100%', textAlign: 'right', marginTop: '15px' }}>
                                 <motion.button
-                                    onClick={selectRandomProject}
-                                    className="read-more-btn"
-                                    whileHover={{ scale: 1.02, backgroundColor: "#2563eb", color: "#fff", borderColor: "#2563eb" }}
-                                    whileTap={{ scale: 0.98 }}
+                                    onClick={shuffleItems}
+                                    whileHover={{ scale: 1.03, color: '#2563eb', borderColor: '#2563eb' }}
+                                    whileTap={{ scale: 0.97 }}
                                     style={{
-                                        width: '100%',
-                                        padding: 'clamp(12px, 2.5vw, 14px)',
+                                        padding: '8px 20px',
                                         backgroundColor: 'transparent',
-                                        color: '#2563eb',
-                                        border: '2px solid #2563eb',
-                                        borderRadius: '30px',
-                                        fontSize: 'clamp(0.9rem, 2vw, 0.95rem)',
-                                        fontWeight: 700,
+                                        color: 'rgba(0,0,0,0.6)',
+                                        border: '1px solid rgba(0,0,0,0.2)',
+                                        borderRadius: '20px',
+                                        fontSize: '0.85rem',
+                                        fontWeight: 600,
                                         cursor: 'pointer',
-                                        transition: 'all 0.3s ease',
-                                        textAlign: 'center'
+                                        transition: 'all 0.2s ease'
                                     }}
                                 >
                                     {LANG_DATA[lang]['discover-btn-refresh']}
