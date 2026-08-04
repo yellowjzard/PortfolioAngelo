@@ -5,14 +5,14 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 // --- ASSET E LINK ---
 const STAMPATELL_IMG = "stampatell.png"; 
 
-// --- DATI DEI PROGETTI FREELANCE ---
+// --- DATI DEI PROGETTI FREELANCE (R&D & APPLIED TECH) ---
 const FREELANCE_PROJECTS = [
     {
         id: 'stampatell',
         title: 'STAMPATELL',
-        role: 'Brand Identity & Content Creation',
-        desc: 'Progetto focalizzato sulla stampa 3D. Ho curato l\'intero sviluppo della brand identity e la strategia di content creation, coordinando collaborazioni strategiche per eventi e fiere di settore.',
-        skills: ['Brand Design', 'Social Strategy', 'Event Planning'],
+        role: 'Brand Architecture & Content Strategy',
+        desc: 'Progetto di branding e go-to-market focalizzato sul settore della manifattura 3D. Ho curato l\'architettura della brand identity, la strategia di content creation e le partnership commerciali per il posizionamento fieristico.',
+        skills: ['Brand Architecture', 'B2B Go-to-Market', 'Strategic Partnerships'],
         mediaType: 'GIF',
         mediaSrc: 'stampatell.gif', 
         link: 'https://www.instagram.com/stampatell?igsh=dzVvdjBhYWNpNW0=/', 
@@ -20,10 +20,10 @@ const FREELANCE_PROJECTS = [
     },
     {
         id: 'spark-ar-tv',
-        title: 'SOCIAL AR & VIRAL MKTG',
-        role: 'AR Developer & Co-Creator',
-        desc: 'Early Adopter della tecnologia Meta Spark AR dal 2019. Progettazione di filtri interattivi per il personal branding di figure pubbliche televisive, utilizzando la gamification per generare viralità organica su Instagram. Progetto realizzato in collaborazione con Gaetano Romano.',
-        skills: ['Meta Spark AR', '3D Interaction', 'Viral Strategy'],
+        title: 'SOCIAL AR & GAMIFIED VIRALITY',
+        role: 'AR Developer & Interaction Designer',
+        desc: 'Pioniere della tecnologia Meta Spark AR fin dal 2019. Sviluppo di ecosistemi di filtri interattivi per il personal branding televisivo, sfruttando la gamification avanzata per generare viralità organica e engagement su scala di massa in collaborazione con Gaetano Romano.',
+        skills: ['Meta Spark AR Architecture', '3D Interaction Design', 'Viral Loop Engineering'],
         mediaType: 'video',
         mediaSrc: "0110.mp4", 
         link: 'https://youtu.be/YWD7XNna0Gk?si=yua8zYGp_mRCEWCB', 
@@ -31,10 +31,10 @@ const FREELANCE_PROJECTS = [
     },
     {
         id: 'emanuele-jordan',
-        title: 'EMANUELE JORDAN REEL',
-        role: 'AI Video Content Creator',
-        desc: 'Produzione di un reel iper-realistico attraverso un workflow integrale basato su Intelligenza Artificiale. Dalla generazione dei visual fluidi alla sintesi vocale del voiceover, fino al sound design immersivo progettato per massimizzare engagement e credibilità.',
-        skills: ['Generative AI Video', 'Immersive Sound Design', 'Hyper-realism'],
+        title: 'NEURAL VIDEO PRODUCTION',
+        role: 'AI Video Architect & Technologist',
+        desc: 'Sperimentazione avanzata e produzione di un reel iper-realistico tramite pipeline sintetica end-to-end. Dalla generazione dei flussi visivi neurali alla sintesi vocale text-to-speech, fino al sound design immersivo, riducendo drasticamente i tempi di produzione.',
+        skills: ['Generative AI Pipeline', 'Spatial Sound Design', 'Synthetic Media Production'],
         mediaType: 'GIF', 
         mediaSrc: 'jo reel.gif', 
         link: 'https://www.instagram.com/reel/DSDe7CkCOLv/?igsh=MTVhdmk0emNpd2V6Mw==', 
@@ -45,15 +45,15 @@ const FREELANCE_PROJECTS = [
 const LANG = {
     it: {
         back: '← TORNA ALLA HOME',
-        title: 'FREELANCE LAB',
-        subtitle: 'Progetti, Collaborazioni & Sperimentazioni Digitali.',
-        intro: 'Uno spazio dedicato ai miei progetti indipendenti e alle collaborazioni esterne, dove sperimento nuove tecnologie e affino skill trasversali tra design e innovazione.',
+        title: 'APPLIED R&D LAB',
+        subtitle: 'Progetti Indipendenti, Innovazione e Frontiera Digitale.',
+        intro: 'Uno spazio di ricerca e sviluppo applicato: qui sperimento metodologie emergenti, intelligenza artificiale generativa e interazioni immersive, fondendo rigore strategico e visione tecnologica.',
     },
     en: {
         back: '← BACK TO HOME',
-        title: 'FREELANCE LAB',
-        subtitle: 'Projects, Collaborations & Digital Experiments.',
-        intro: 'A creative space dedicated to independent projects and external collaborations, where I test emerging technologies and refine skills across design and innovation.',
+        title: 'APPLIED R&D LAB',
+        subtitle: 'Independent Projects, Innovation & Digital Frontier.',
+        intro: 'An applied research and development space: experimenting with emerging methodologies, generative AI, and immersive interactions, blending strategic rigor with technological vision.',
     }
 };
 
@@ -142,7 +142,7 @@ const Freelance = ({ lang, goBack }) => {
                 
                 <section className="glass-section" style={{ minHeight: 'auto', marginBottom: '4rem' }}>
                     <div className="bio-content-wrapper" style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
-                        <h2 className="section-label" style={{ width:'100%', marginBottom:'20px' }}>INTRO</h2>
+                        <h2 className="section-label" style={{ width:'100%', marginBottom:'20px' }}>R&D FOCUS</h2>
                         <p className="bio-text" style={{ maxWidth: '100%' }}>{t.intro}</p>
                     </div>
                 </section>
@@ -154,7 +154,7 @@ const Freelance = ({ lang, goBack }) => {
                 </section>
 
                 <footer style={{textAlign: 'center', padding: 'clamp(3rem, 8vw, 6rem) 2rem', opacity: 0.5}}>
-                    <p>© 2026 Angelo Russo | Creative Tech Freelance Projects.</p>
+                    <p>© 2026 Angelo Russo | Applied R&D & Creative Technology.</p>
                 </footer>
             </div>
         </div>
