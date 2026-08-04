@@ -13,24 +13,24 @@ const GCERTI_LANG = {
     it: {
         'back': '← TORNA',
         'title': 'GCERTI ITALY',
-        'role-title': 'Da "Spesa" a Motore B2B.',
-        'role-sub': 'Performance Marketing & AI Creative Direction',
-        'slogan': 'Abbiamo reingegnerizzato l\'autorevolezza: ottimizzazione chirurgica del budget Ads e design generativo per una Lead Generation implacabile.',
+        'role-title': 'Il Turnaround Strategico.',
+        'role-sub': 'Head of Digital Strategy, AI & Growth',
+        'slogan': 'Ho smantellato il "Corporate Broadcasting": gestione di team ibridi, ottimizzazione chirurgica del budget e AI design per massimizzare il ROI B2B aziendale.',
         'problem-title': 'La Sfida',
-        'strategy-title': 'L\'Ecosistema',
-        'results-title': 'Impatto Numerico',
-        'takeaway-desc': 'Interpretare direttive legali complesse, trasformarle in ganci visivi AI e blindare il budget su ecosistemi Google ad alta intenzione d\'acquisto.'
+        'strategy-title': 'I Pilastri del Cambiamento',
+        'results-title': 'L\'Impatto Numerico (ROI)',
+        'takeaway-desc': 'Guidare team creativi e tradurre direttive legali complesse in ecosistemi ad alta conversione, trasformando l\'indifferenza del mercato in pipeline commerciale.'
     },
     en: {
         'back': '← BACK',
         'title': 'GCERTI ITALY',
-        'role-title': 'From "Expense" to B2B Engine.',
-        'role-sub': 'Performance Marketing & AI Creative Direction',
-        'slogan': 'We re-engineered authority: surgical Ads budget optimization and generative design for relentless Lead Generation.',
+        'role-title': 'The Strategic Turnaround.',
+        'role-sub': 'Head of Digital Strategy, AI & Growth',
+        'slogan': 'We dismantled "Corporate Broadcasting": hybrid team management, surgical budget optimization, and AI design to maximize B2B ROI.',
         'problem-title': 'The Challenge',
-        'strategy-title': 'The Ecosystem',
-        'results-title': 'Numerical Impact',
-        'takeaway-desc': 'Translating complex legal directives into AI visual hooks and locking the budget onto high-intent Google ecosystems.'
+        'strategy-title': 'The Pillars of Change',
+        'results-title': 'Numerical Impact (ROI)',
+        'takeaway-desc': 'Leading creative teams to translate complex legal directives into high-converting ecosystems, turning market indifference into a commercial pipeline.'
     }
 };
 
@@ -146,8 +146,6 @@ const GCerti = ({ lang = 'it', goBack }) => {
         link.rel = 'stylesheet';
         link.href = 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;700;800&display=swap';
         document.head.appendChild(link);
-
-        // IL CURSORE È STATO RIPRISTINATO RIMUOVENDO document.body.style.cursor = 'none';
     }, []);
 
     return (
@@ -211,13 +209,13 @@ const GCerti = ({ lang = 'it', goBack }) => {
 
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 'clamp(20px, 5vw, 40px)' }}>
                             <div style={{ background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(20px)', padding: 'clamp(30px, 6vw, 50px)', borderRadius: '40px', border: '1px solid rgba(255,255,255,0.5)', boxShadow: '0 20px 60px rgba(0,0,0,0.05)' }}>
-                                <AnimatedBarChart label="Budget Ads Ottimizzato (Proiezione Annua)" value="~€54.000" percentage="100%" color="#085257" />
-                                <AnimatedBarChart label="Traffico B2B Generato (Q1-Q2)" value="21.000+ Click" percentage="85%" color="#e6683c" />
+                                <AnimatedBarChart label="Traffico High-Intent B2B (Clic)" value="+420%" percentage="100%" color="#085257" />
+                                <AnimatedBarChart label="Crescita Reach e Visibilità" value="+314%" percentage="90%" color="#e6683c" />
                             </div>
 
                             <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', flexWrap: 'wrap', gap: '30px', background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(20px)', padding: 'clamp(30px, 6vw, 50px)', borderRadius: '40px', border: '1px solid rgba(255,255,255,0.5)', boxShadow: '0 20px 60px rgba(0,0,0,0.05)' }}>
-                                <AnimatedCircleChart label="Classi Academy Sold-Out" percentageValue={100} textValue="3" />
-                                <AnimatedCircleChart label="Data-Driven Setup" percentageValue={100} textValue="100%" />
+                                <AnimatedCircleChart label="Interaction Rate (da 2.1%)" percentageValue={100} textValue="16.4%" />
+                                <AnimatedCircleChart label="Taglio Sprechi (Budget Ads)" percentageValue={98} textValue="-98%" />
                             </div>
                         </div>
                     </Reveal>
@@ -231,22 +229,22 @@ const GCerti = ({ lang = 'it', goBack }) => {
                             <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
                                 <div style={{ background: '#085257', color: 'white', fontFamily: 'Unbounded, sans-serif', width: '50px', height: '50px', borderRadius: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', flexShrink: 0 }}>01</div>
                                 <div>
-                                    <h4 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 'clamp(1.1rem, 3vw, 1.3rem)', marginBottom: '10px', color: '#111' }}>Zero-Click Repositioning</h4>
-                                    <p style={{ fontFamily: 'Inter, sans-serif', color: '#555', lineHeight: 1.6, fontSize: 'clamp(0.9rem, 2.5vw, 1rem)' }}>Trasformazione di direttive complesse in Caroselli LinkedIn ad alto valore informativo e zero attrito per l'utente.</p>
+                                    <h4 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 'clamp(1.1rem, 3vw, 1.3rem)', marginBottom: '10px', color: '#111' }}>Team Leadership & AI Workflow</h4>
+                                    <p style={{ fontFamily: 'Inter, sans-serif', color: '#555', lineHeight: 1.6, fontSize: 'clamp(0.9rem, 2.5vw, 1rem)' }}>Coordinamento del team creativo e integrazione strutturale dell'Intelligenza Artificiale nei processi aziendali per scalare la produzione di asset B2B abbattendo i tempi.</p>
                                 </div>
                             </div>
                             <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
                                 <div style={{ background: '#085257', color: 'white', fontFamily: 'Unbounded, sans-serif', width: '50px', height: '50px', borderRadius: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', flexShrink: 0 }}>02</div>
                                 <div>
-                                    <h4 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 'clamp(1.1rem, 3vw, 1.3rem)', marginBottom: '10px', color: '#111' }}>AI Visual Authority</h4>
-                                    <p style={{ fontFamily: 'Inter, sans-serif', color: '#555', lineHeight: 1.6, fontSize: 'clamp(0.9rem, 2.5vw, 1rem)' }}>Prompt Engineering avanzato per asset visivi "3D glossy photorealistic". Creatività corporate scalabili, costi abbattuti.</p>
+                                    <h4 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 'clamp(1.1rem, 3vw, 1.3rem)', marginBottom: '10px', color: '#111' }}>Monetizzazione della Compliance</h4>
+                                    <p style={{ fontFamily: 'Inter, sans-serif', color: '#555', lineHeight: 1.6, fontSize: 'clamp(0.9rem, 2.5vw, 1rem)' }}>Abbandono totale della comunicazione "vetrina". Decostruzione delle normative B2B (es. Sgravi INPS) in contenuti che parlano direttamente alle esigenze finanziarie dei CFO.</p>
                                 </div>
                             </div>
                             <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
                                 <div style={{ background: '#085257', color: 'white', fontFamily: 'Unbounded, sans-serif', width: '50px', height: '50px', borderRadius: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', flexShrink: 0 }}>03</div>
                                 <div>
-                                    <h4 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 'clamp(1.1rem, 3vw, 1.3rem)', marginBottom: '10px', color: '#111' }}>Multichannel Perfect Trap</h4>
-                                    <p style={{ fontFamily: 'Inter, sans-serif', color: '#555', lineHeight: 1.6, fontSize: 'clamp(0.9rem, 2.5vw, 1rem)' }}>Search (esatta/frase) per domanda consapevole + Performance Max per retargeting visivo e creazione del bisogno.</p>
+                                    <h4 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 'clamp(1.1rem, 3vw, 1.3rem)', marginBottom: '10px', color: '#111' }}>Efficienza Chirurgica (Ads)</h4>
+                                    <p style={{ fontFamily: 'Inter, sans-serif', color: '#555', lineHeight: 1.6, fontSize: 'clamp(0.9rem, 2.5vw, 1rem)' }}>Ristrutturazione architetturale delle campagne. Stop al traffico mobile a basso intento; budget spostato al 100% sulla ricerca desktop negli orari d'ufficio per intercettare i veri decisori aziendali.</p>
                                 </div>
                             </div>
                         </div>
@@ -271,7 +269,7 @@ const GCerti = ({ lang = 'it', goBack }) => {
                 </section>
 
                 <footer style={{ textAlign: 'center', padding: '2rem 2rem 4rem', opacity: 0.5 }}>
-                    <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 'clamp(0.75rem, 2vw, 0.85rem)', fontWeight: 600 }}>© 2026 Angelo Russo — Strategic B2B Branding</p>
+                    <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 'clamp(0.75rem, 2vw, 0.85rem)', fontWeight: 600 }}>© 2026 Angelo Russo — Strategic B2B Branding & Growth</p>
                 </footer>
             </div>
         </div>
