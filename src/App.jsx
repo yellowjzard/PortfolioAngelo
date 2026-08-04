@@ -22,23 +22,27 @@ const ICON_LN = "Icona_linkedin.webp";
 
 const LANG_DATA = {
     it: {
-        'welcome': 'BENVENUTI',
-        'scroll-hint': 'Scorri per entrare',
-        'works-title': 'Selected Works',
+        'welcome': 'ANGELO RUSSO',
+        'role': 'Head of Digital Strategy, AI & Growth',
+        'scroll-hint': 'Esplora i Casi Studio',
+        'works-title-1': 'Business Growth & ROI',
+        'works-title-2': 'Phygital & Large-Scale Art Direction',
         'contact-title': 'CONTATTAMI',
         'form-name': 'Nome', 'form-name-ph': 'Il tuo nome',
         'form-email': 'Email', 'form-email-ph': 'tua@email.com',
-        'form-msg': 'Messaggio', 'form-msg-ph': 'Come posso aiutarti?',
+        'form-msg': 'Messaggio', 'form-msg-ph': 'Come posso aiutarti a scalare il tuo business?',
         'form-btn': 'INVIA MESSAGGIO'
     },
     en: {
-        'welcome': 'WELCOME', 
-        'scroll-hint': 'Scroll to explore',
-        'works-title': 'Selected Works',
+        'welcome': 'ANGELO RUSSO', 
+        'role': 'Head of Digital Strategy, AI & Growth',
+        'scroll-hint': 'Explore Case Studies',
+        'works-title-1': 'Business Growth & ROI',
+        'works-title-2': 'Phygital & Large-Scale Art Direction',
         'contact-title': 'CONTACT ME',
         'form-name': 'Name', 'form-name-ph': 'Your Name',
         'form-email': 'Email', 'form-email-ph': 'your@email.com',
-        'form-msg': 'Message', 'form-msg-ph': 'How can I help you?',
+        'form-msg': 'Message', 'form-msg-ph': 'How can I help you scale your business?',
         'form-btn': 'SEND MESSAGE'
     }
 };
@@ -50,7 +54,7 @@ const Typewriter = ({ text }) => {
     const container = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.1 } } };
     const child = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100 } } };
     return (
-        <motion.h1 className="intro-text" variants={container} initial="hidden" animate="visible">
+        <motion.h1 className="intro-text" variants={container} initial="hidden" animate="visible" style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 'clamp(2.5rem, 8vw, 5rem)', margin: 0, letterSpacing: '-0.02em', lineHeight: 1.1 }}>
             {letters.map((char, index) => <motion.span key={index} variants={child}>{char}</motion.span>)}
             <span className="cursor"></span>
         </motion.h1>
@@ -85,7 +89,7 @@ const FolderItem = ({ title, type, onClick }) => {
                     <path d="M5 25 L 95 25 L 95 75 L 5 75 Z" fill="#bde0fe" stroke="#219ebc" strokeWidth="1"/>
                 </svg>
             </div>
-            <span className="folder-label">{title}</span>
+            <span className="folder-label" style={{ fontWeight: 600 }}>{title}</span>
         </motion.div>
     );
 };
@@ -171,7 +175,17 @@ function App() {
 
             <motion.div className="fixed-intro-layer" style={{ opacity: introOpacity, filter: introBlur, scale: introScale }}>
                 <Typewriter text={LANG_DATA[lang]['welcome']} />
-                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5 }} className="scroll-hint">
+                
+                <motion.p 
+                    initial={{ opacity: 0, y: 10 }} 
+                    animate={{ opacity: 1, y: 0 }} 
+                    transition={{ delay: 1.2, duration: 0.8 }}
+                    style={{ fontFamily: 'Inter, sans-serif', fontSize: 'clamp(1rem, 3vw, 1.5rem)', fontWeight: 500, color: '#333', marginTop: '10px', textAlign: 'center', letterSpacing: '0.05em', textTransform: 'uppercase' }}
+                >
+                    {LANG_DATA[lang]['role']}
+                </motion.p>
+
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.8 }} className="scroll-hint" style={{ marginTop: '40px', fontWeight: 600 }}>
                     {LANG_DATA[lang]['scroll-hint']}
                 </motion.div>
             </motion.div>
@@ -181,25 +195,35 @@ function App() {
                     <button onClick={toggleLang} className="lang-btn">{lang === 'it' ? 'EN' : 'IT'}</button>
                 </header>
 
-                {/* SEZIONE GRIGLIA COMPLETA (SELECTED WORKS) */}
+                {/* SEZIONE 1: BUSINESS & GROWTH */}
                 <section className="glass-section works-section" style={{ marginTop: '100dvh' }}>
                     <Reveal>
-                        <h2 className="section-label">01 / {LANG_DATA[lang]['works-title']}</h2>
-                        <div className="folders-grid">
+                        <h2 className="section-label">01 / {LANG_DATA[lang]['works-title-1']}</h2>
+                        <div className="folders-grid" style={{ marginBottom: '40px' }}>
                             <FolderItem title="GCERTI Italy" type="gcerti" onClick={() => navigateTo('gcerti')} />
                             <FolderItem title="White Rabbit" type="whiterabbit" onClick={() => navigateTo('whiterabbit')} />
                             <FolderItem title="Nero Espresso" type="nero" onClick={() => navigateTo('nero')} />
-                            <FolderItem title="#CUOREDINAPOLI" type="cuore" onClick={() => window.open('https://cuoredinapoli.net/', '_blank')} />
-                            <FolderItem title="Noi Umani" type="noiumani" onClick={() => window.open('https://www.nuovetecnologiedellarte.it/progetti/noi-umani/', '_blank')} />
-                            <FolderItem title="Non io ma noi" type="procida" onClick={() => window.open('https://www.nuovetecnologiedellarte.it/progetti/scienza-aperta/', '_blank')} />
-                            <FolderItem title="Freelance" type="freelance" onClick={() => navigateTo('freelance')} />
+                            <FolderItem title="Freelance & Consulting" type="freelance" onClick={() => navigateTo('freelance')} />
                         </div>
                     </Reveal>
                 </section>
 
+                {/* SEZIONE 2: PHYGITAL & LARGE-SCALE ART DIRECTION */}
+                <section className="glass-section works-section" style={{ marginTop: '20px' }}>
+                    <Reveal>
+                        <h2 className="section-label">02 / {LANG_DATA[lang]['works-title-2']}</h2>
+                        <div className="folders-grid">
+                            <FolderItem title="#CUOREDINAPOLI" type="cuore" onClick={() => window.open('https://cuoredinapoli.net/', '_blank')} />
+                            <FolderItem title="Noi Umani" type="noiumani" onClick={() => window.open('https://www.nuovetecnologiedellarte.it/progetti/noi-umani/', '_blank')} />
+                            <FolderItem title="Non io ma noi" type="procida" onClick={() => window.open('https://www.nuovetecnologiedellarte.it/progetti/scienza-aperta/', '_blank')} />
+                        </div>
+                    </Reveal>
+                </section>
+
+                {/* SEZIONE 3: CONTATTI */}
                 <section className="glass-section contact-section">
                     <Reveal>
-                        <h2 className="section-label" style={{ textAlign: 'center', width: '100%' }}>02 / {LANG_DATA[lang]['contact-title']}</h2>
+                        <h2 className="section-label" style={{ textAlign: 'center', width: '100%' }}>03 / {LANG_DATA[lang]['contact-title']}</h2>
                         <form action="https://formspree.io/f/mrbnlyyl" method="POST" className="contact-form">
                             <div className="form-group"><label style={{ fontSize: 'clamp(0.85rem, 2vw, 0.9rem)' }}>{LANG_DATA[lang]['form-name']}</label><input type="text" name="name" placeholder={LANG_DATA[lang]['form-name-ph']} required className="form-input" /></div>
                             <div className="form-group"><label style={{ fontSize: 'clamp(0.85rem, 2vw, 0.9rem)' }}>{LANG_DATA[lang]['form-email']}</label><input type="email" name="email" placeholder={LANG_DATA[lang]['form-email-ph']} required className="form-input" /></div>
