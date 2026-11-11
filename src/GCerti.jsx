@@ -2,35 +2,86 @@ import React, { useEffect } from 'react';
 import { ShaderGradientCanvas, ShaderGradient } from '@shadergradient/react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
-// --- CONFIGURAZIONE ---
+// --- CONFIGURAZIONE LINK REALI ---
 const SOCIAL_LINKS = {
-    ig: "https://www.instagram.com/gcerti.italy/",
-    ln: "https://www.linkedin.com/company/gcerti-italy/",
-    web: "https://www.gcerti.it/"
+    ig: "https://www.instagram.com/gcerti_certificazioni/",
+    ln: "https://www.linkedin.com/company/gcerticertificazioni",
+    web: "https://www.gcerti.it/",
+    finder: "https://www.gcerti.it/scegli-il-percorso-di-richiesta-gcerti-italy-sb/"
 };
 
 const GCERTI_LANG = {
     it: {
         'back': '← TORNA',
-        'title': 'GCERTI ITALY',
-        'role-title': 'Il Turnaround Strategico.',
-        'role-sub': 'Head of Digital Strategy, AI & Growth',
-        'slogan': 'Ho smantellato il "Corporate Broadcasting": gestione di team ibridi, ottimizzazione chirurgica del budget e AI design per massimizzare il ROI B2B aziendale.',
-        'problem-title': 'La Sfida',
-        'strategy-title': 'I Pilastri del Cambiamento',
-        'results-title': 'L\'Impatto Numerico (ROI)',
-        'takeaway-desc': 'Guidare team creativi e tradurre direttive legali complesse in ecosistemi ad alta conversione, trasformando l\'indifferenza del mercato in pipeline commerciale.'
+        'title': 'GCERTI ITALY | SB',
+        'role-title': 'Ristrutturazione Funnel B2B, Web & Paid Media.',
+        'role-sub': 'Impiegato Marketing & Digital Operations · Gen 2026 – Presente',
+        'slogan': 'Un intervento trasversale tra riassetto Google & Meta Ads, architettura WordPress da 123 percorsi e produzione visiva AI-assisted nel settore della certificazione accreditata.',
+        'problem-title': 'Contesto & Diagnosi Iniziale (2025 vs 2026)',
+        'p1-t': 'Spesa Dispersiva & Tracking Sporco',
+        'p1-d': 'Nel 2025 l’account Google Ads registrava € 87.631,85 di spesa e oltre 20.000 micro-conversioni miste non equivalenti a lead reali, mentre sui moduli 123form il tasso invii/viste era fermo allo 0,92% (PdR 125) e 0,79% (BIM).',
+        'p2-t': 'Percorsi di Richiesta Frammentati',
+        'p2-d': 'Moduli unici lunghi e collegamenti poco guidati causavano abbandoni, discrepanze tra clic Ads e invii effettivi dei form e oltre 600 URL in 404 rilevati in Search Console.',
+        'results-title': 'Dati Verificati (Febbraio – 10 Novembre 2026)',
+        'results-note': 'Nota metodologica: i dati Google Ads, Meta, MailUp e LinkedIn riflettono l’operatività dell’account condiviso marketing@gcerti.it durante il periodo in azienda; i contenuti WordPress sono assegnati direttamente all’utente angelorusso.',
+        'strategy-title': 'Interventi Eseguiti',
+        's1-t': 'Riassetto Paid & Qualifica Moduli',
+        's1-d': 'Gestione operativa di 10 campagne Search/PMax su schemi normativi (SA8000, ISO 13009, UNI PdR 125/192, BIM, ESCO, PAS 24000) con € 17.870 spesi feb–nov (rilancio fino a € 5.340 a ottobre). A parità di mesi (feb–ott 2026 vs 2025), il tasso invii/viste su PdR 125 è salito dallo 0,92% all’8,32% (148 invii) e su BIM dallo 0,79% al 3,43% (+62% invii assoluti).',
+        's2-t': 'Architettura WordPress & Audit SEO',
+        's2-d': '71 articoli e 12 pagine pubblicate assegnati al mio utente, tra cui la nuova Home di giugno, pagine guidate ISO 13009 / PdR 125 e il Finder Richieste GCERTI (WP ID 40293) da 123 servizi. Audit Search Console su 593 URL con 38 redirect 301 prioritari classificati.',
+        's3-t': 'Webinar, DEM MailUp & AI Media Pipeline',
+        's3-d': '191 invii MailUp feb–nov (invio Webinar PMI: 13.480 consegnate, 26,81% Open Rate); campagna Meta Lead Ads Webinar PMI a € 1,63/contatto (65 lead) per 106 iscritti unici Academy; 151 post LinkedIn (64.069 impressioni), asset visivi su Google Flow e workflow strutturati su Codex, Claude Code e Antigravity (con skill, istruzioni e regolamenti).',
+        'brand-tag': 'Brand Identity & Cambio di Stile',
+        'brand-title': 'Evoluzione Visiva & Produzione Contenuti',
+        'brand-intro': 'Riallineamento dell’identità visiva di GCERTI Italy | SB dalle grafiche 2025 con gradienti saturi e icone vettoriali sovrapposte a un sistema editoriale fotografico coerente, governato da tre varianti cromatiche ufficiali e flussi AI-assisted ancorati al marchio originale.',
+        'legacy-badge': 'Prima · Stile 2025',
+        'legacy-title': 'Gradienti Saturi, Overlay Tinti & Icone Vettoriali',
+        'legacy-desc': 'Comunicazione visiva 2025 basata su sfondi a gradiente viola/rosa o fotografie con velatura gialloverde, icone outline sovrapposte, badge su fascetta bianca verticale e palette non unificata tra i diversi schemi.',
+        'new-badge': 'Dopo · Sistema Editoriale 2026',
+        'new-title': 'Fotografia Full-Bleed & 3 Varianti',
+        'new-desc': 'Copertine 1080×1350 su scatti naturalistici con sfumatura scura inferiore, titolazione in Lato Bold/Black, tag categoria in variante singola e logo circolare GCERTI Italy | SB originale in basso a destra.',
+        'palette-title': 'Palette Ufficiale & Regole del Brand',
+        'palette-rules': 'Un’unica variante cromatica per ogni carosello (C Petrolio, C Bordeaux o D Petrolio e Avorio), interni chiari ad alta leggibilità con pill evidenziatrici e generazione controllata su Google Flow tramite immagini di riferimento ufficiali.',
+        'gallery-title': 'Contenuti Social, Caroselli & Regia Webinar',
+        'gallery-sub': 'Dalla griglia del Piano Editoriale (11 formati 1080×1350) agli interni dei caroselli fino al fondale virtuale 16:9 Studio TV per Google Meet e Webinar Academy. Volumi canali condivisi feb–nov 2026: 151 post LinkedIn (64.069 impr.), 137 Instagram, 71 Facebook.',
+        'live-finder': 'Scopri ↗',
+        'takeaway-desc': 'Portare ordine misurabile in un mercato tecnico regolato: collegare campagne, moduli, pagine web, brand identity e produzione visiva con tracciamento reale.'
     },
     en: {
         'back': '← BACK',
-        'title': 'GCERTI ITALY',
-        'role-title': 'The Strategic Turnaround.',
-        'role-sub': 'Head of Digital Strategy, AI & Growth',
-        'slogan': 'We dismantled "Corporate Broadcasting": hybrid team management, surgical budget optimization, and AI design to maximize B2B ROI.',
-        'problem-title': 'The Challenge',
-        'strategy-title': 'The Pillars of Change',
-        'results-title': 'Numerical Impact (ROI)',
-        'takeaway-desc': 'Leading creative teams to translate complex legal directives into high-converting ecosystems, turning market indifference into a commercial pipeline.'
+        'title': 'GCERTI ITALY | SB',
+        'role-title': 'B2B Funnel Restructuring, Web & Paid Media.',
+        'role-sub': 'Digital Marketing & Operations Specialist · Jan 2026 – Present',
+        'slogan': 'Cross-functional work across Google & Meta Ads restructuring, a 123-service WordPress request architecture, and AI-assisted media production in the TIC sector.',
+        'problem-title': 'Context & Initial Audit (2025 vs 2026)',
+        'p1-t': 'High Spend & Noisy Conversion Tracking',
+        'p1-d': 'In 2025, Google Ads logged €87,631.85 in spend with over 20,000 mixed micro-conversions not reflecting real leads, while 123form completion rates sat at 0.92% (PdR 125) and 0.79% (BIM).',
+        'p2-t': 'Fragmented Request Journeys',
+        'p2-d': 'Long single-step forms and unguided links drove drop-offs, tracking gaps between ad clicks and form submissions, and over 600 404 URLs flagged in Search Console.',
+        'results-title': 'Verified Metrics (Feb 1 – Nov 10, 2026)',
+        'results-note': 'Methodological note: Google Ads, Meta, MailUp, and LinkedIn metrics reflect the shared marketing@gcerti.it team account during my tenure; WordPress items and logs are directly assigned to user angelorusso.',
+        'strategy-title': 'Key Actions Executed',
+        's1-t': 'Paid Media & Form Conversion Uplift',
+        's1-d': 'Operated 10 Search/PMax campaigns across B2B certification frameworks (SA8000, ISO 13009, UNI PdR 125/192, BIM, ESCO, PAS 24000) with €17,870 spend Feb–Nov (scaling to €5,340 in Oct). YoY (Feb–Oct), form conversion rose on PdR 125 from 0.92% to 8.32% (148 submissions) and on BIM from 0.79% to 3.43% (+62% total submissions).',
+        's2-t': 'WordPress Architecture & Technical SEO',
+        's2-d': '71 published articles and 12 pages assigned to my user, including June homepage redesign, Nov guided request pages (ISO 13009 / PdR 125), and the 123-service Request Finder (WP ID 40293). Audited 593 URLs via Search Console with 38 priority 301 redirects mapped.',
+        's3-t': 'Webinars, MailUp & AI Media Pipelines',
+        's3-d': '191 MailUp sends Feb–Nov (Nov 4 SME webinar: 13,480 delivered, 26.81% Open Rate); Meta Lead Ads at €1.63/lead (65 instant leads) contributing to 106 unique Academy registrations; 151 LinkedIn posts (64,069 impressions), Google Flow visual production, and structured workflows on Codex, Claude Code & Antigravity (custom skills, instructions & guardrails).',
+        'brand-tag': 'Brand Identity & Visual Shift',
+        'brand-title': 'Brand Evolution & Content Production',
+        'brand-intro': 'Transitioned GCERTI Italy | SB from 2025 saturated gradient graphics and tinted photo overlays to a cohesive photographic editorial system governed by three official color variants and reference-anchored AI workflows.',
+        'legacy-badge': 'Before · 2025 Legacy Style',
+        'legacy-title': 'Saturated Gradients, Tinted Photos & Vector Icons',
+        'legacy-desc': '2025 visual output relied on heavy purple/pink gradients or yellow-green photo washes, oversized outline icons, white vertical ribbon logo tabs, and inconsistent color palettes across standards.',
+        'new-badge': 'After · Approved Editorial System (2026)',
+        'new-title': 'Full-Bleed Photography & 3 Variants',
+        'new-desc': '1080×1350 covers built on naturalistic scenes with a dark lower fade for contrast, clean Lato Bold/Black typography, single-variant category pills, and the un-recolored circular GCERTI Italy | SB seal.',
+        'palette-title': 'Official Palette & Brand Governance',
+        'palette-rules': 'Strict single-variant rule per carousel (C Petrolio, C Bordeaux, or D Petrolio & Ivory), high-legibility light interior cards with highlighter pills, and controlled Google Flow generation using official brand anchor references.',
+        'gallery-title': 'Social Feed, Carousels & Studio TV Backdrop',
+        'gallery-sub': 'From the 11-piece Editorial Plan grid (1080×1350) and structured carousel interiors to the 16:9 Studio TV virtual stage for Google Meet webinars. Shared-account output Feb–Nov 2026: 151 LinkedIn posts (64,069 impr.), 137 Instagram, 71 Facebook.',
+        'live-finder': 'Discover ↗',
+        'takeaway-desc': 'Bringing measurable clarity to a regulated B2B sector: aligning paid acquisition, form UX, web architecture, brand identity, and AI-assisted visual production.'
     }
 };
 
@@ -38,10 +89,10 @@ const GCERTI_LANG = {
 
 const Typewriter = ({ text }) => {
     const letters = text.split("");
-    const container = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.1 } } };
+    const container = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.08 } } };
     const child = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100 } } };
     return (
-        <motion.h1 className="intro-text" variants={container} initial="hidden" animate="visible" style={{ textAlign: 'center', width: '100%', padding: '0 10px' }}>
+        <motion.h1 className="intro-text" style={{ fontSize: 'clamp(2.4rem, 8vw, 6.8rem)', textAlign: 'center', width: '100%', padding: '0 10px' }} variants={container} initial="hidden" animate="visible">
             {letters.map((char, index) => <motion.span key={index} variants={child}>{char}</motion.span>)}
         </motion.h1>
     );
@@ -64,9 +115,9 @@ const Reveal = ({ children, delay = 0 }) => (
 
 const SocialIconOnly = ({ type, link }) => {
     const renderIcon = () => {
-        if (type === 'web') return <img loading="lazy" decoding="async" src="Icona_site.webp" alt="Agency Website" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />;
-        if (type === 'ig') return <img loading="lazy" decoding="async" src="Icona_instagram.webp" alt="Instagram Profile" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />;
-        if (type === 'ln') return <img loading="lazy" decoding="async" src="Icona_linkedin.webp" alt="LinkedIn Profile" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />;
+        if (type === 'web') return <img loading="lazy" decoding="async" src="Icona_site.webp" alt="GCERTI Website" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />;
+        if (type === 'ig') return <img loading="lazy" decoding="async" src="Icona_instagram.webp" alt="GCERTI Instagram" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />;
+        if (type === 'ln') return <img loading="lazy" decoding="async" src="Icona_linkedin.webp" alt="GCERTI LinkedIn" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />;
         return null;
     };
     return (
@@ -84,50 +135,24 @@ const SocialIconOnly = ({ type, link }) => {
     );
 };
 
-const AnimatedBarChart = ({ label, value, percentage, color = "#085257" }) => (
-    <div style={{ marginBottom: 'clamp(20px, 4vw, 30px)' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '10px', flexWrap: 'wrap' }}>
-            <span style={{ fontSize: 'clamp(0.85rem, 2vw, 1rem)', fontWeight: 600, color: '#333', fontFamily: 'Inter, sans-serif' }}>{label}</span>
-            <span style={{ fontSize: 'clamp(1.4rem, 4vw, 1.8rem)', fontWeight: 800, color: color, fontFamily: 'Unbounded, sans-serif' }}>{value}</span>
+const AnimatedBarChart = ({ label, value, sub, percentage, color = "#085257" }) => (
+    <div style={{ marginBottom: '22px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '6px', gap: '10px', flexWrap: 'wrap' }}>
+            <span style={{ fontSize: '0.9rem', fontWeight: 600, color: '#1F2937' }}>{label}</span>
+            <span style={{ fontSize: '1.35rem', fontWeight: 800, color: color, fontFamily: 'Unbounded, sans-serif' }}>{value}</span>
         </div>
-        <div style={{ width: '100%', height: '8px', background: 'rgba(0,0,0,0.05)', borderRadius: '10px', overflow: 'hidden' }}>
+        {sub && <div style={{ fontSize: '0.78rem', color: '#6B7280', marginBottom: '8px' }}>{sub}</div>}
+        <div style={{ width: '100%', height: '8px', background: 'rgba(0,0,0,0.06)', borderRadius: '10px', overflow: 'hidden' }}>
             <motion.div
                 initial={{ width: 0 }}
                 whileInView={{ width: percentage }}
                 viewport={{ once: true }}
-                transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
+                transition={{ duration: 1.3, ease: "easeOut", delay: 0.15 }}
                 style={{ height: '100%', background: color, borderRadius: '10px' }}
             />
         </div>
     </div>
 );
-
-const AnimatedCircleChart = ({ label, percentageValue, textValue }) => {
-    const circleRadius = 45;
-    const circumference = 2 * Math.PI * circleRadius;
-
-    return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
-            <div style={{ position: 'relative', width: '100px', height: '100px' }}>
-                <svg width="100" height="100" viewBox="0 0 100 100" style={{ transform: 'rotate(-90deg)' }}>
-                    <circle cx="50" cy="50" r={circleRadius} fill="none" stroke="rgba(0,0,0,0.05)" strokeWidth="8" />
-                    <motion.circle
-                        cx="50" cy="50" r={circleRadius} fill="none" stroke="#085257" strokeWidth="8" strokeLinecap="round"
-                        strokeDasharray={circumference}
-                        initial={{ strokeDashoffset: circumference }}
-                        whileInView={{ strokeDashoffset: circumference - (percentageValue / 100) * circumference }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 2, ease: "easeOut", delay: 0.3 }}
-                    />
-                </svg>
-                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <span style={{ fontFamily: 'Unbounded, sans-serif', fontSize: '1rem', fontWeight: 800, color: '#085257' }}>{textValue}</span>
-                </div>
-            </div>
-            <span style={{ fontFamily: 'Inter, sans-serif', fontSize: 'clamp(0.8rem, 2vw, 0.9rem)', fontWeight: 600, color: '#555', textAlign: 'center' }}>{label}</span>
-        </div>
-    );
-};
 
 // --- COMPONENTE PRINCIPALE ---
 
@@ -140,13 +165,6 @@ const GCerti = ({ lang = 'it', goBack }) => {
     const introScale = useTransform(scrollY, [0, 500], [1, 0.95]);
 
     useEffect(() => { window.scrollTo(0, 0); }, []);
-
-    useEffect(() => {
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;700;800&display=swap';
-        document.head.appendChild(link);
-    }, []);
 
     return (
         <div className="app-container" style={{ overflowX: 'hidden' }}>
@@ -164,112 +182,270 @@ const GCerti = ({ lang = 'it', goBack }) => {
 
             <motion.div className="fixed-intro-layer" style={{ opacity: introOpacity, filter: introBlur, scale: introScale, zIndex: 5, padding: '0 20px' }}>
                 <Typewriter text={t['title']} />
-                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 'clamp(1rem, 3vw, 1.2rem)', fontWeight: 500, color: '#444', marginTop: '20px', letterSpacing: '-0.01em', textAlign: 'center' }}>
+                <p style={{ fontSize: 'clamp(0.95rem, 2.2vw, 1.15rem)', fontWeight: 500, color: '#1E3A5F', marginTop: '18px', textAlign: 'center', maxWidth: '880px', padding: '0 24px', lineHeight: 1.45, textWrap: 'balance' }}>
                     {t['role-sub']}
                 </p>
             </motion.div>
 
             <div className="content-scroll-layer" style={{ zIndex: 10 }}>
 
-                <section style={{ maxWidth: '900px', margin: '0 auto clamp(60px, 10vw, 100px) auto', padding: '0 20px', textAlign: 'center' }}>
+                <section style={{ maxWidth: '900px', margin: '0 auto clamp(50px, 8vw, 80px) auto', padding: '0 20px', textAlign: 'center' }}>
                     <Reveal>
-                        <h2 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 'clamp(1.8rem, 6vw, 3.5rem)', color: '#111', lineHeight: 1.2, marginBottom: '20px' }}>
+                        <h2 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 'clamp(1.7rem, 5vw, 3rem)', color: '#111', lineHeight: 1.2, marginBottom: '20px' }}>
                             {t['role-title']}
                         </h2>
-                        <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 'clamp(1rem, 3vw, 1.2rem)', color: '#555', lineHeight: 1.6, maxWidth: '700px', margin: '0 auto' }}>
+                        <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.15rem)', color: '#374151', lineHeight: 1.6, maxWidth: '740px', margin: '0 auto 28px' }}>
                             {t['slogan']}
+                        </p>
+                        <a href={SOCIAL_LINKS.web} target="_blank" rel="noopener noreferrer" className="gcerti-cta-btn">
+                            {t['live-finder']}
+                        </a>
+                    </Reveal>
+                </section>
+
+                {/* CONTESTO & DIAGNOSI */}
+                <section className="glass-section" style={{ background: 'rgba(255,255,255,0.72)', padding: 'clamp(30px, 6vw, 55px)', borderRadius: '32px', maxWidth: '1000px', margin: '0 auto 60px', width: '92%' }}>
+                    <Reveal>
+                        <h3 style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '2px', color: '#085257', marginBottom: '28px', fontWeight: 700 }}>{t['problem-title']}</h3>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '24px' }}>
+                            <motion.div whileHover={{ scale: 1.01 }} style={{ background: '#fff', padding: '28px', borderRadius: '22px', boxShadow: '0 10px 30px rgba(0,0,0,0.04)', border: '1px solid rgba(0,0,0,0.04)' }}>
+                                <h4 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: '1.05rem', marginBottom: '12px', color: '#111' }}>01 · {t['p1-t']}</h4>
+                                <p style={{ color: '#4B5563', fontSize: '0.94rem', lineHeight: 1.6 }}>{t['p1-d']}</p>
+                            </motion.div>
+                            <motion.div whileHover={{ scale: 1.01 }} style={{ background: '#fff', padding: '28px', borderRadius: '22px', boxShadow: '0 10px 30px rgba(0,0,0,0.04)', border: '1px solid rgba(0,0,0,0.04)' }}>
+                                <h4 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: '1.05rem', marginBottom: '12px', color: '#111' }}>02 · {t['p2-t']}</h4>
+                                <p style={{ color: '#4B5563', fontSize: '0.94rem', lineHeight: 1.6 }}>{t['p2-d']}</p>
+                            </motion.div>
+                        </div>
+                    </Reveal>
+                </section>
+
+                {/* IMPATTO NUMERICO REALE */}
+                <section style={{ maxWidth: '1000px', margin: '0 auto 60px', padding: '0 20px' }}>
+                    <Reveal>
+                        <h3 style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '2px', color: '#085257', marginBottom: '24px', fontWeight: 700, textAlign: 'center' }}>{t['results-title']}</h3>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
+                            <div style={{ background: 'rgba(255,255,255,0.75)', backdropFilter: 'blur(20px)', padding: '32px', borderRadius: '28px', border: '1px solid rgba(255,255,255,0.6)', boxShadow: '0 20px 50px rgba(0,0,0,0.05)' }}>
+                                <AnimatedBarChart label="Conversione 123form PdR 125 (Feb–Ott)" value="8,32%" sub="vs 0,92% negli stessi mesi 2025 (148 invii su 1.778 viste)" percentage="83%" color="#085257" />
+                                <AnimatedBarChart label="Invii 123form BIM (Feb–Ott 2026 vs 2025)" value="+62%" sub="47 invii (3,43% tasso) vs 29 invii nel 2025 (0,79%)" percentage="62%" color="#1E3A5F" />
+                                <AnimatedBarChart label="Open Rate DEM Webinar PMI (4 Nov)" value="26,81%" sub="Invio 585 MailUp: 13.480 consegnate, 3.614 aperture" percentage="75%" color="#0f766e" />
+                            </div>
+
+                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px', background: 'rgba(255,255,255,0.75)', backdropFilter: 'blur(20px)', padding: '32px', borderRadius: '28px', border: '1px solid rgba(255,255,255,0.6)', boxShadow: '0 20px 50px rgba(0,0,0,0.05)' }}>
+                                {[
+                                    { v: '€ 17.870', l: 'Spesa Google Ads Feb–10 Nov (13.679 clic)' },
+                                    { v: '71 + 12', l: 'Articoli e Pagine WP utente angelorusso' },
+                                    { v: '123', l: 'Servizi nel Finder Richieste live (ID 40293)' },
+                                    { v: '€ 1,63', l: 'Costo/lead Meta Webinar PMI (65 lead)' },
+                                    { v: '106', l: 'Iscritti unici Academy Webinar PdR 167' },
+                                    { v: '593 URL', l: 'Audit Search Console (38 redirect 301)' }
+                                ].map((m, i) => (
+                                    <div key={i} style={{ background: '#F8FAFC', borderRadius: '16px', padding: '16px', border: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                                        <div style={{ fontFamily: 'Unbounded, sans-serif', fontSize: '1.25rem', fontWeight: 800, color: '#085257' }}>{m.v}</div>
+                                        <div style={{ fontSize: '0.76rem', color: '#4B5563', marginTop: '4px', lineHeight: 1.35 }}>{m.l}</div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        <p style={{ fontSize: '0.8rem', color: '#4B5563', textAlign: 'center', marginTop: '16px', maxWidth: '780px', marginInline: 'auto', lineHeight: 1.5 }}>
+                            {t['results-note']}
                         </p>
                     </Reveal>
                 </section>
 
-                <section className="glass-section" style={{ background: 'rgba(255,255,255,0.7)', padding: 'clamp(30px, 6vw, 60px)', borderRadius: '40px', maxWidth: '1000px', margin: '0 auto', width: '92%' }}>
+                {/* STRATEGIA E INTERVENTI */}
+                <section className="glass-section" style={{ background: 'rgba(255,255,255,0.72)', padding: 'clamp(30px, 6vw, 55px)', borderRadius: '32px', maxWidth: '1000px', margin: '0 auto 60px', width: '92%' }}>
                     <Reveal>
-                        <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: 'clamp(0.8rem, 2vw, 0.9rem)', textTransform: 'uppercase', letterSpacing: '2px', color: '#085257', marginBottom: 'clamp(20px, 5vw, 40px)', fontWeight: 700 }}>{t['problem-title']}</h3>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 'clamp(20px, 4vw, 30px)' }}>
-
-                            <motion.div whileHover={{ scale: 1.02 }} style={{ background: '#fff', padding: 'clamp(25px, 5vw, 40px)', borderRadius: '30px', boxShadow: '0 20px 40px rgba(0,0,0,0.04)', border: '1px solid rgba(0,0,0,0.02)' }}>
-                                <div style={{ fontSize: '2.5rem', marginBottom: '15px' }}>🗣️</div>
-                                <h4 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 'clamp(1.1rem, 3vw, 1.2rem)', marginBottom: '10px' }}>Consultant Trap</h4>
-                                <p style={{ fontFamily: 'Inter, sans-serif', color: '#666', fontSize: 'clamp(0.85rem, 2.5vw, 0.95rem)', lineHeight: 1.6 }}>Sovrapposizione del tono di voce istituzionale con quello dei consulenti, perdendo l'autorevolezza di Ente Terzo.</p>
-                            </motion.div>
-
-                            <motion.div whileHover={{ scale: 1.02 }} style={{ background: '#fff', padding: 'clamp(25px, 5vw, 40px)', borderRadius: '30px', boxShadow: '0 20px 40px rgba(0,0,0,0.04)', border: '1px solid rgba(0,0,0,0.02)' }}>
-                                <div style={{ fontSize: '2.5rem', marginBottom: '15px' }}>💸</div>
-                                <h4 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 'clamp(1.1rem, 3vw, 1.2rem)', marginBottom: '10px' }}>Budget Bleed</h4>
-                                <p style={{ fontFamily: 'Inter, sans-serif', color: '#666', fontSize: 'clamp(0.85rem, 2.5vw, 0.95rem)', lineHeight: 1.6 }}>Approccio "generalista" su Google Ads. Le parole chiave generiche bruciavano budget senza generare conversioni qualificate.</p>
-                            </motion.div>
-
+                        <h3 style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '2px', color: '#085257', marginBottom: '30px', fontWeight: 700 }}>{t['strategy-title']}</h3>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
+                            {[
+                                { n: '01', t: t['s1-t'], d: t['s1-d'] },
+                                { n: '02', t: t['s2-t'], d: t['s2-d'] },
+                                { n: '03', t: t['s3-t'], d: t['s3-d'] }
+                            ].map((step) => (
+                                <div key={step.n} style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
+                                    <div style={{ background: '#085257', color: 'white', fontFamily: 'Unbounded, sans-serif', width: '48px', height: '48px', borderRadius: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.05rem', flexShrink: 0 }}>{step.n}</div>
+                                    <div>
+                                        <h4 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: '1.1rem', marginBottom: '8px', color: '#111' }}>{step.t}</h4>
+                                        <p style={{ color: '#374151', lineHeight: 1.6, fontSize: '0.95rem' }}>{step.d}</p>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                     </Reveal>
                 </section>
 
-                <section style={{ maxWidth: '1000px', margin: 'clamp(60px, 10vw, 100px) auto', padding: '0 20px' }}>
+                {/* BRAND IDENTITY, CAMBIO DI STILE & PRODUZIONE CONTENUTI */}
+                <section className="glass-section" style={{ background: 'rgba(255,255,255,0.78)', padding: 'clamp(28px, 6vw, 55px)', borderRadius: '32px', maxWidth: '1120px', margin: '0 auto 60px', width: '92%' }}>
                     <Reveal>
-                        <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: 'clamp(0.8rem, 2vw, 0.9rem)', textTransform: 'uppercase', letterSpacing: '2px', color: '#085257', marginBottom: 'clamp(30px, 6vw, 40px)', fontWeight: 700, textAlign: 'center' }}>{t['results-title']}</h3>
+                        <div style={{ textAlign: 'center', marginBottom: '36px' }}>
+                            <span className="section-label" style={{ color: '#085257' }}>{t['brand-tag']}</span>
+                            <h2 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 'clamp(1.5rem, 3.8vw, 2.3rem)', margin: '8px 0 14px', color: '#111' }}>{t['brand-title']}</h2>
+                            <p style={{ maxWidth: '780px', margin: '0 auto', color: '#4B5563', fontSize: '0.98rem', lineHeight: 1.65 }}>
+                                {t['brand-intro']}
+                            </p>
+                        </div>
 
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 'clamp(20px, 5vw, 40px)' }}>
-                            <div style={{ background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(20px)', padding: 'clamp(30px, 6vw, 50px)', borderRadius: '40px', border: '1px solid rgba(255,255,255,0.5)', boxShadow: '0 20px 60px rgba(0,0,0,0.05)' }}>
-                                <AnimatedBarChart label="Traffico High-Intent B2B (Clic)" value="+420%" percentage="100%" color="#085257" />
-                                <AnimatedBarChart label="Crescita Reach e Visibilità" value="+314%" percentage="90%" color="#e6683c" />
+                        {/* PRIMA VS DOPO (Dopo più grande ed evidente rispetto al Prima) */}
+                        <div className="gcerti-compare-grid">
+                            {/* PRIMA */}
+                            <div style={{ background: 'rgba(243, 244, 246, 0.85)', border: '1px solid rgba(17,24,39,0.08)', borderRadius: '22px', padding: '20px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '14px' }}>
+                                <div>
+                                    <span style={{ display: 'inline-block', padding: '4px 11px', borderRadius: '100px', background: '#E5E7EB', color: '#374151', fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '10px' }}>
+                                        {t['legacy-badge']}
+                                    </span>
+                                    <h3 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: '0.96rem', color: '#374151', marginBottom: '8px', lineHeight: 1.3 }}>{t['legacy-title']}</h3>
+                                    <p style={{ fontSize: '0.82rem', color: '#6B7280', lineHeight: 1.5, margin: 0 }}>{t['legacy-desc']}</p>
+                                </div>
+                                <div style={{ position: 'relative', width: '100%', maxWidth: '275px', height: '215px', margin: '4px auto 2px' }}>
+                                    <img
+                                        loading="lazy"
+                                        decoding="async"
+                                        src="gcerti-legacy-01.jpg"
+                                        alt="Stile 2025 Post singolo PdR 125"
+                                        style={{
+                                            position: 'absolute',
+                                            left: '4px',
+                                            top: '4px',
+                                            width: '146px',
+                                            aspectRatio: '4 / 5',
+                                            objectFit: 'cover',
+                                            borderRadius: '13px',
+                                            border: '2px solid #FFFFFF',
+                                            boxShadow: '0 8px 20px rgba(0,0,0,0.10)',
+                                            transform: 'rotate(-4deg)',
+                                            zIndex: 1
+                                        }}
+                                    />
+                                    <img
+                                        loading="lazy"
+                                        decoding="async"
+                                        src="gcerti-legacy-02.jpg"
+                                        alt="Stile 2025 Carosello Audit"
+                                        style={{
+                                            position: 'absolute',
+                                            right: '4px',
+                                            bottom: '4px',
+                                            width: '146px',
+                                            aspectRatio: '4 / 5',
+                                            objectFit: 'cover',
+                                            borderRadius: '13px',
+                                            border: '2px solid #FFFFFF',
+                                            boxShadow: '0 12px 26px rgba(0,0,0,0.16)',
+                                            transform: 'rotate(3.5deg)',
+                                            zIndex: 2
+                                        }}
+                                    />
+                                </div>
                             </div>
 
-                            <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', flexWrap: 'wrap', gap: '30px', background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(20px)', padding: 'clamp(30px, 6vw, 50px)', borderRadius: '40px', border: '1px solid rgba(255,255,255,0.5)', boxShadow: '0 20px 60px rgba(0,0,0,0.05)' }}>
-                                <AnimatedCircleChart label="Interaction Rate (da 2.1%)" percentageValue={100} textValue="16.4%" />
-                                <AnimatedCircleChart label="Taglio Sprechi (Budget Ads)" percentageValue={98} textValue="-98%" />
+                            {/* DOPO */}
+                            <div style={{ background: 'linear-gradient(135deg, rgba(8,82,87,0.07), rgba(242,243,236,0.95))', border: '1.5px solid rgba(8,82,87,0.24)', borderRadius: '26px', padding: '26px', boxShadow: '0 16px 38px rgba(8,82,87,0.08)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                                <div>
+                                    <span style={{ display: 'inline-block', padding: '5px 14px', borderRadius: '100px', background: '#085257', color: '#FFFFFF', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '12px' }}>
+                                        {t['new-badge']}
+                                    </span>
+                                    <h3 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: '1.18rem', color: '#085257', marginBottom: '8px', lineHeight: 1.3 }}>{t['new-title']}</h3>
+                                    <p style={{ fontSize: '0.92rem', color: '#1F2937', lineHeight: 1.55, marginBottom: '20px' }}>{t['new-desc']}</p>
+                                </div>
+                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '14px' }}>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                        <img loading="lazy" decoding="async" src="gcerti-petrolio.jpg" alt="Variante C Petrolio" style={{ width: '100%', aspectRatio: '4 / 5', objectFit: 'cover', borderRadius: '14px', boxShadow: '0 12px 24px rgba(8,82,87,0.16)' }} />
+                                        <span style={{ fontSize: '0.74rem', fontWeight: 700, color: '#085257', textAlign: 'center', letterSpacing: '0.5px' }}>C · PETROLIO</span>
+                                    </div>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                        <img loading="lazy" decoding="async" src="gcerti-bordeaux.jpg" alt="Variante C Bordeaux" style={{ width: '100%', aspectRatio: '4 / 5', objectFit: 'cover', borderRadius: '14px', boxShadow: '0 12px 24px rgba(169,48,56,0.16)' }} />
+                                        <span style={{ fontSize: '0.74rem', fontWeight: 700, color: '#A93038', textAlign: 'center', letterSpacing: '0.5px' }}>C · BORDEAUX</span>
+                                    </div>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                        <img loading="lazy" decoding="async" src="gcerti-avorio.jpg" alt="Variante D Avorio" style={{ width: '100%', aspectRatio: '4 / 5', objectFit: 'cover', borderRadius: '14px', boxShadow: '0 12px 24px rgba(0,0,0,0.11)' }} />
+                                        <span style={{ fontSize: '0.74rem', fontWeight: 700, color: '#333333', textAlign: 'center', letterSpacing: '0.5px' }}>D · AVORIO</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* PALETTE UFFICIALE & REGOLE DEL BRAND */}
+                        <div style={{ background: '#FFFFFF', borderRadius: '24px', padding: '24px', border: '1px solid rgba(8,82,87,0.12)', marginBottom: '38px' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: '10px', marginBottom: '14px' }}>
+                                <h3 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: '1.08rem', color: '#111', margin: 0 }}>{t['palette-title']}</h3>
+                                <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#085257' }}>Font: Lato Bold / Black + Lato Regular</span>
+                            </div>
+                            <p style={{ fontSize: '0.9rem', color: '#4B5563', lineHeight: 1.6, marginBottom: '18px' }}>{t['palette-rules']}</p>
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '12px' }}>
+                                {[
+                                    { hex: '#085257', name: 'Petrolio Istituzionale', role: 'Primario & C Petrolio', text: '#FFFFFF' },
+                                    { hex: '#A93038', name: 'Bordeaux Editoriale', role: 'Variante C · PdR 125/192', text: '#FFFFFF' },
+                                    { hex: '#F2F3EC', name: 'Avorio Normativo', role: 'Variante D · Card & Tag', text: '#085257', border: '1px solid rgba(8,82,87,0.2)' },
+                                    { hex: '#669091', name: 'Salvia Secondario', role: 'Accenti & Studio TV', text: '#FFFFFF' },
+                                    { hex: '#333333', name: 'Antracite / Sfumatura', role: 'Testi & Contrasto Cover', text: '#FFFFFF' }
+                                ].map((swatch) => (
+                                    <div key={swatch.hex} style={{ borderRadius: '14px', overflow: 'hidden', border: swatch.border || '1px solid rgba(0,0,0,0.08)' }}>
+                                        <div style={{ background: swatch.hex, color: swatch.text, padding: '16px 14px', fontFamily: 'Unbounded, sans-serif', fontSize: '0.82rem', fontWeight: 700 }}>
+                                            {swatch.hex}
+                                        </div>
+                                        <div style={{ padding: '10px 12px', background: '#FAFAFA' }}>
+                                            <div style={{ fontSize: '0.82rem', fontWeight: 700, color: '#111' }}>{swatch.name}</div>
+                                            <div style={{ fontSize: '0.74rem', color: '#6B7280', marginTop: '2px' }}>{swatch.role}</div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* PRODUZIONE CONTENUTI: FEED, INTERNI CAROSELLI & STUDIO TV */}
+                        <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+                            <h3 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: '1.15rem', color: '#111', marginBottom: '8px' }}>{t['gallery-title']}</h3>
+                            <p style={{ maxWidth: '780px', margin: '0 auto 24px', fontSize: '0.9rem', color: '#4B5563', lineHeight: 1.6 }}>{t['gallery-sub']}</p>
+                        </div>
+
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px' }}>
+                            <div style={{ background: '#FFFFFF', borderRadius: '20px', overflow: 'hidden', border: '1px solid rgba(0,0,0,0.06)', boxShadow: '0 10px 24px rgba(0,0,0,0.04)' }}>
+                                <img loading="lazy" decoding="async" src="gcerti-feed-v18.jpg" alt="Griglia 11 contenuti PED GCERTI" style={{ width: '100%', height: '240px', objectFit: 'cover' }} />
+                                <div style={{ padding: '14px 16px' }}>
+                                    <div style={{ fontWeight: 700, fontSize: '0.9rem', color: '#085257', marginBottom: '4px' }}>Piano Editoriale (11 Output 1080×1350)</div>
+                                    <p style={{ margin: 0, fontSize: '0.82rem', color: '#4B5563', lineHeight: 1.5 }}>Alternanza equilibrata di copertine C Petrolio, C Bordeaux e D Avorio su ISO 19011, 13009, PdR 192, PdR 167 e DigComp 2.2.</p>
+                                </div>
+                            </div>
+
+                            <div style={{ background: '#FFFFFF', borderRadius: '20px', overflow: 'hidden', border: '1px solid rgba(0,0,0,0.06)', boxShadow: '0 10px 24px rgba(0,0,0,0.04)' }}>
+                                <img loading="lazy" decoding="async" src="gcerti-interni-v18.jpg" alt="Confronto copertine e interni carosello" style={{ width: '100%', height: '240px', objectFit: 'cover' }} />
+                                <div style={{ padding: '14px 16px' }}>
+                                    <div style={{ fontWeight: 700, fontSize: '0.9rem', color: '#085257', marginBottom: '4px' }}>Sistema Copertina + Interni Carosello</div>
+                                    <p style={{ margin: 0, fontSize: '0.82rem', color: '#4B5563', lineHeight: 1.5 }}>Continuità tra foto full-bleed esterna e schede interne chiare con evidenziatori cromatici e box step-by-step.</p>
+                                </div>
+                            </div>
+
+                            <div style={{ background: '#FFFFFF', borderRadius: '20px', overflow: 'hidden', border: '1px solid rgba(0,0,0,0.06)', boxShadow: '0 10px 24px rgba(0,0,0,0.04)' }}>
+                                <img loading="lazy" decoding="async" src="gcerti-meet-tv.jpg" alt="Fondale Studio TV Google Meet GCERTI" style={{ width: '100%', height: '240px', objectFit: 'cover' }} />
+                                <div style={{ padding: '14px 16px' }}>
+                                    <div style={{ fontWeight: 700, fontSize: '0.9rem', color: '#085257', marginBottom: '4px' }}>Scenografia 16:9 Studio TV & Webinar</div>
+                                    <p style={{ margin: 0, fontSize: '0.82rem', color: '#4B5563', lineHeight: 1.5 }}>Fondali virtuali dedicati ai relatori Google Meet & Webinar Academy con monitor brandizzati GCERTI PASS e logo istituzionale.</p>
+                                </div>
                             </div>
                         </div>
                     </Reveal>
                 </section>
 
-                <section className="glass-section" style={{ background: 'rgba(255,255,255,0.7)', padding: 'clamp(30px, 6vw, 60px)', borderRadius: '40px', maxWidth: '1000px', margin: '0 auto', width: '92%' }}>
+                <section style={{ maxWidth: '820px', margin: '0 auto 50px', padding: '0 20px', textAlign: 'center' }}>
                     <Reveal>
-                        <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: 'clamp(0.8rem, 2vw, 0.9rem)', textTransform: 'uppercase', letterSpacing: '2px', color: '#085257', marginBottom: 'clamp(30px, 6vw, 40px)', fontWeight: 700 }}>{t['strategy-title']}</h3>
-
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
-                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
-                                <div style={{ background: '#085257', color: 'white', fontFamily: 'Unbounded, sans-serif', width: '50px', height: '50px', borderRadius: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', flexShrink: 0 }}>01</div>
-                                <div>
-                                    <h4 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 'clamp(1.1rem, 3vw, 1.3rem)', marginBottom: '10px', color: '#111' }}>Team Leadership & AI Workflow</h4>
-                                    <p style={{ fontFamily: 'Inter, sans-serif', color: '#555', lineHeight: 1.6, fontSize: 'clamp(0.9rem, 2.5vw, 1rem)' }}>Coordinamento del team creativo e integrazione strutturale dell'Intelligenza Artificiale nei processi aziendali per scalare la produzione di asset B2B abbattendo i tempi.</p>
-                                </div>
-                            </div>
-                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
-                                <div style={{ background: '#085257', color: 'white', fontFamily: 'Unbounded, sans-serif', width: '50px', height: '50px', borderRadius: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', flexShrink: 0 }}>02</div>
-                                <div>
-                                    <h4 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 'clamp(1.1rem, 3vw, 1.3rem)', marginBottom: '10px', color: '#111' }}>Monetizzazione della Compliance</h4>
-                                    <p style={{ fontFamily: 'Inter, sans-serif', color: '#555', lineHeight: 1.6, fontSize: 'clamp(0.9rem, 2.5vw, 1rem)' }}>Abbandono totale della comunicazione "vetrina". Decostruzione delle normative B2B (es. Sgravi INPS) in contenuti che parlano direttamente alle esigenze finanziarie dei CFO.</p>
-                                </div>
-                            </div>
-                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
-                                <div style={{ background: '#085257', color: 'white', fontFamily: 'Unbounded, sans-serif', width: '50px', height: '50px', borderRadius: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', flexShrink: 0 }}>03</div>
-                                <div>
-                                    <h4 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 'clamp(1.1rem, 3vw, 1.3rem)', marginBottom: '10px', color: '#111' }}>Efficienza Chirurgica (Ads)</h4>
-                                    <p style={{ fontFamily: 'Inter, sans-serif', color: '#555', lineHeight: 1.6, fontSize: 'clamp(0.9rem, 2.5vw, 1rem)' }}>Ristrutturazione architetturale delle campagne. Stop al traffico mobile a basso intento; budget spostato al 100% sulla ricerca desktop negli orari d'ufficio per intercettare i veri decisori aziendali.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </Reveal>
-                </section>
-
-                <section style={{ maxWidth: '800px', margin: 'clamp(60px, 10vw, 100px) auto', padding: '0 20px', textAlign: 'center' }}>
-                    <Reveal>
-                        <div className="glass-section" style={{ background: 'rgba(255,255,255,0.8)', padding: 'clamp(30px, 6vw, 50px)', borderRadius: '30px', border: '1px solid rgba(8,82,87,0.1)', boxShadow: '0 20px 40px rgba(0,0,0,0.03)', width: '100%', maxWidth: '92%', margin: '0 auto' }}>
-                            <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: 'clamp(0.8rem, 2vw, 0.9rem)', textTransform: 'uppercase', letterSpacing: '3px', color: '#085257', marginBottom: '20px', fontWeight: 700 }}>Key Takeaway</h3>
-                            <p style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 'clamp(1rem, 4vw, 1.8rem)', color: '#222', lineHeight: 1.5, margin: 0 }}>
+                        <div className="glass-section" style={{ background: 'rgba(255,255,255,0.8)', padding: 'clamp(28px, 5vw, 45px)', borderRadius: '28px', border: '1px solid rgba(8,82,87,0.12)', margin: '0 auto' }}>
+                            <h3 style={{ fontSize: '0.82rem', textTransform: 'uppercase', letterSpacing: '3px', color: '#085257', marginBottom: '16px', fontWeight: 700 }}>Key Takeaway</h3>
+                            <p style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 'clamp(1rem, 3vw, 1.45rem)', color: '#1F2937', lineHeight: 1.5, margin: 0 }}>
                                 "{t['takeaway-desc']}"
                             </p>
-                        </div >
+                        </div>
                     </Reveal>
                 </section>
 
-                <section style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '15px', padding: '20px', marginTop: '20px' }}>
+                <section style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '15px', padding: '20px' }}>
                     <SocialIconOnly type="web" link={SOCIAL_LINKS.web} />
                     <SocialIconOnly type="ig" link={SOCIAL_LINKS.ig} />
                     <SocialIconOnly type="ln" link={SOCIAL_LINKS.ln} />
                 </section>
 
-                <footer style={{ textAlign: 'center', padding: '2rem 2rem 4rem', opacity: 0.5 }}>
-                    <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 'clamp(0.75rem, 2vw, 0.85rem)', fontWeight: 600 }}>© 2026 Angelo Russo — Strategic B2B Branding & Growth</p>
+                <footer style={{ textAlign: 'center', padding: '2rem 2rem 4rem', opacity: 0.6 }}>
+                    <p style={{ fontSize: '0.85rem', fontWeight: 600 }}>© 2026 Angelo Russo · Case Study GCERTI Italy | SB</p>
                 </footer>
             </div>
         </div>

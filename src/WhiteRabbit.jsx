@@ -52,77 +52,77 @@ const WR_LANG = {
     it: {
         'back': '← TORNA',
         'title': 'WHITE RABBIT AGENCY',
-        'role-title': 'L\'Integrazione AI che scala i margini.',
-        'role-sub': 'AI Strategy Lead & Creative Technologist @ White Rabbit (Bruxelles)',
-        'slogan': 'Ho re-ingegnerizzato i processi dell\'agenzia introducendo pipeline video neurali e Agenti LLM, abbattendo i costi di produzione sulle campagne internazionali.',
+        'role-title': 'Digital Communication & Visual Production',
+        'role-sub': 'Digital Communication & Graphic Designer (Erasmus+ VET) · Bruxelles, Ago – Dic 2025',
+        'slogan': 'Mobilità internazionale di 4 mesi a Bruxelles in lingua inglese: identità istituzionali europee, pitch deck e sperimentazione video AI-assisted.',
         'prompt-text': '/imagine prompt: editorial photography, futuristic fashion, cinematic lighting --v 6.0',
-        'btn-generate': 'GENERA IL RISULTATO', 'btn-done': 'SISTEMA OTTIMIZZATO',
-        'challenge-t': 'LA SFIDA (PROFIT BLEEDING)', 'challenge-d': 'L’agenzia disperdeva budget e settimane di lavoro in rendering tradizionali per le campagne internazionali. L\'obiettivo non era solo fare "grafiche più belle", ma scalare la produzione mantenendo il controllo autoriale per i clienti Tier-1.',
-        'solution-t': 'LA SOLUZIONE (AI ARCHITECTURE)', 'solution-d': 'Ho architettato e implementato una pipeline "AI-Augmented" proprietaria. Utilizzando Higgsfield per la generazione video e Agenti Gemini customizzati per scripting e concept, ho trasformato settimane di laborioso editing in poche ore di supervisione strategica.',
-        'results-t': 'IMPATTO FINANZIARIO E OPERATIVO', 'res-1': 'Time-to-Market: -60% (Da giorni a ore)', 'res-2': 'Taglio Costi di Produzione Visiva', 'res-3': 'Automazione Concept via LLM', 'res-4': 'Integrazione Flusso Ibrido Scalabile',
-        'project-endurance': 'THE ENDURANCE PROJECT (SCALABLE STORYTELLING)', 'project-desc': 'Corporate Storytelling per HR: abbattimento dei costi di casting e shooting tradizionali tramite Neural Face Swap, trasformando i dipendenti in protagonisti cinematografici.',
-        'step-1-t': 'AI World Building', 'step-1-d': 'Sviluppo di Prompt Engineering avanzato per creare set digitali ad altissima risoluzione senza i costi logistici di una location reale.',
-        'step-2-t': 'Hybrid Editing & Neural Swap', 'step-2-d': 'Fusione di timeline tradizionali con architetture AI per garantire la "Character Consistency". Sostituzione facciale chirurgica per scalare la presenza dei soggetti.',
-        'step-3-t': 'Sonic Branding', 'step-3-d': 'Sound design immersivo e spaziale per dare peso commerciale e realismo tattile ad asset puramente digitali.',
-        'project-uk': 'URBAN KONG (DATA-DRIVEN SOCIAL GROWTH)', 'project-uk-desc': 'Gestione strategica della crescita social tramite un ecosistema di contenuti analitico e non basato sul "gusto personale".',
-        'uk-s1-t': 'AI Editorial Brain', 'uk-s1-d': 'Deployment di Agenti LLM per mappare i topic cluster ad alta retention e generare calendari editoriali basati sui trend di mercato.',
-        'uk-s2-t': 'Conversion-Focused Motion', 'uk-s2-d': 'Editing neuro-visivo per i Reel: hook nei primi 2 secondi, sound design stratificato e pacing aggressivo per fermare lo scroll.',
-        'uk-s3-t': 'Community Monetization', 'uk-s3-d': 'Trasformazione delle vanity metrics in una community ingaggiata tramite identità visiva coerente e gestione proattiva del brand.',
-        'ig-btn-label': 'ANALIZZA L\'ACCOUNT @URBANKONG_',
-        'project-eu': 'PANAFGEO / EU INSTITUTIONAL BRANDING',
-        'project-eu-desc': 'Compliance-Driven Art Direction: sviluppo dell\'identità per il programma EU Global Gateway, navigando le complesse e rigide linee guida di EuroGeoSurveys e dell\'Unione Europea.',
+        'btn-generate': 'GENERA', 'btn-done': 'COMPLETATO',
+        'challenge-t': 'LA SFIDA', 'challenge-d': 'L’agenzia necessitava di velocizzare la produzione di concept visivi e video per campagne internazionali mantenendo qualità editoriale e rigorosa aderenza ai brand book istituzionali.',
+        'solution-t': 'IL MIO CONTRIBUTO', 'solution-d': 'Supporto al team creativo su pitch deck aziendali in Keynote, asset grafici e animazioni per social media, mock-up UI/UX e sperimentazione di flussi video AI-assisted (Higgsfield, Weavy, editing tradizionale e sound design).',
+        'results-t': 'ATTIVITÀ CERTIFICATE (EUROPASS)', 'res-1': '4 mesi a Bruxelles', 'res-2': 'EU Global Gateway', 'res-3': 'Keynote & UI Mockup', 'res-4': 'Video & AI Workflows',
+        'project-endurance': 'THE ENDURANCE PROJECT', 'project-desc': 'Corporate Storytelling Epico: un tributo alla resilienza del team ispirato alla storica spedizione del 1914. I dipendenti diventano i protagonisti cinematografici grazie all\'integrazione di AI Face Swap.',
+        'step-1-t': 'AI World Building', 'step-1-d': 'Definizione dell’estetica tramite prompting avanzato e generazione di style-frames coerenti per il setting delle scene.',
+        'step-2-t': 'Hybrid Editing & Face Swap', 'step-2-d': 'Montaggio tradizionale integrato con tecniche di Neural Face Swap. Ho sostituito i volti dei soggetti generati con i character target, garantendo la Character Consistency in ogni scena.',
+        'step-3-t': 'Sonic Branding', 'step-3-d': 'Sound design immersivo e sincronizzazione audio per conferire profondità emotiva e peso realistico alle clip generate.',
+        'project-uk': 'URBAN KONG', 'project-uk-desc': 'Social Media Growth & Hybrid Content Strategy.',
+        'uk-s1-t': 'AI Editorial Brain', 'uk-s1-d': 'Analisi trend e ideazione topic cluster tramite Agenti Gemini per un piano editoriale data-driven sempre aggiornato.',
+        'uk-s2-t': 'Reels & Motion', 'uk-s2-d': 'Produzione video short-form: editing dinamico, sound design e hook visivi per massimizzare la retention.',
+        'uk-s3-t': 'Brand Aesthetics', 'uk-s3-d': 'Cura del feed e gestione della community per trasformare l\'identità visiva in engagement reale.',
+        'ig-btn-label': 'VISITA @URBANKONG_',
+        'project-eu': 'PANAFGEO / EU BRANDING',
+        'project-eu-desc': 'Visual Identity istituzionale per il programma EU Global Gateway, in totale conformità con le rigorose EU Guidelines dell\'Unione Europea e di EuroGeoSurveys.',
         'eu-pdf-title': 'PANAFGEO - Brand Guidelines',
-        'eu-pdf-description': 'Oltre il design estetico: un manuale operativo (Brand Book) che garantisce scalabilità e aderenza zero-errori alle policy visive istituzionali EU.',
-        'credits-title': 'CREDITS & TEAM COLLABORATION',
+        'eu-pdf-description': 'Brand book completo per il progetto PanAfGeo: linee guida EU, identità visiva, griglie editoriali e applicazioni istituzionali per il programma di formazione geologica pan-Africano.',
+        'credits-title': 'CREDITS & TEAM',
         'collab-name': 'Gennaro Grieco',
-        'collab-role': 'UI/UX & Graphic Designer',
-        'download-pdf': 'SCARICA IL BRAND BOOK',
+        'collab-role': 'Graphic Designer | UI/UX ',
+        'download-pdf': 'SCARICA BRAND BOOK (PDF)',
         'flip-hint': 'Gira',
         'explore-hint': 'Tocca per esplorare'
     },
     en: {
         'back': '← BACK',
         'title': 'WHITE RABBIT AGENCY',
-        'role-title': 'AI Integration that scales margins.',
-        'role-sub': 'AI Strategy Lead & Creative Technologist @ White Rabbit (Brussels)',
-        'slogan': 'Re-engineered agency processes by introducing neural video pipelines and LLM Agents, slashing production costs on international campaigns.',
+        'role-title': 'Digital Communication & Visual Production',
+        'role-sub': 'Digital Communication & Graphic Designer (Erasmus+ VET) · Brussels, Aug – Dec 2025',
+        'slogan': '4-month international Erasmus+ VET traineeship in Brussels: European institutional identities, pitch decks, and AI-assisted video experimentation.',
         'prompt-text': '/imagine prompt: editorial photography, futuristic fashion, cinematic lighting --v 6.0',
-        'btn-generate': 'GENERATE RESULT',
-        'btn-done': 'SYSTEM OPTIMIZED',
-        'challenge-t': 'THE CHALLENGE (PROFIT BLEEDING)',
-        'challenge-d': 'The agency was bleeding budget and man-hours on traditional rendering for global campaigns. The objective was not just "better graphics," but scaling production while maintaining strict directorial control for Tier-1 clients.',
-        'solution-t': 'THE SOLUTION (AI ARCHITECTURE)',
-        'solution-d': 'I architected and deployed a proprietary "AI-Augmented" pipeline. Utilizing Higgsfield for video generation and custom Gemini Agents for scripting, I turned weeks of labor-intensive editing into hours of strategic oversight.',
-        'results-t': 'FINANCIAL & OPERATIONAL IMPACT',
-        'res-1': 'Time-to-Market: -60% (Days to Hours)',
-        'res-2': 'Slashed Visual Production Costs',
-        'res-3': 'Concept Automation via LLMs',
-        'res-4': 'Scalable Hybrid Workflow Integration',
-        'project-endurance': 'THE ENDURANCE PROJECT (SCALABLE STORYTELLING)',
-        'project-desc': 'HR Corporate Storytelling: eliminating traditional casting and shooting costs via Neural Face Swap, turning employees into cinematic leads.',
+        'btn-generate': 'GENERATE',
+        'btn-done': 'DONE',
+        'challenge-t': 'THE CHALLENGE',
+        'challenge-d': 'The agency needed faster concept and video prototyping for international clients while keeping editorial consistency and strict alignment with institutional European brand books.',
+        'solution-t': 'MY CONTRIBUTION',
+        'solution-d': 'Supported the creative team with Keynote pitch decks, digital/social multimedia assets, UI/UX mock-ups, and AI-assisted video experimentation (Higgsfield, Weavy) combined with traditional timeline editing and sound design.',
+        'results-t': 'CERTIFIED OUTPUTS (EUROPASS)',
+        'res-1': '4 Months in Brussels',
+        'res-2': 'EU Global Gateway',
+        'res-3': 'Keynote & UI Mockups',
+        'res-4': 'Video & AI Workflows',
+        'project-endurance': 'THE ENDURANCE PROJECT',
+        'project-desc': 'Epic Corporate Storytelling: a tribute to team resilience inspired by the 1914 expedition. Employees become cinematic leads through AI Face Swap integration.',
         'step-1-t': 'AI World Building',
-        'step-1-d': 'Advanced Prompt Engineering to create ultra-high-resolution digital sets without the logistical costs of real-world locations.',
-        'step-2-t': 'Hybrid Editing & Neural Swap',
-        'step-2-d': 'Fusing traditional timelines with AI architectures to ensure Character Consistency. Surgical face swapping to scale subject presence.',
+        'step-1-d': 'Defining the aesthetic through advanced prompting and generating consistent style-frames for scene setting.',
+        'step-2-t': 'Hybrid Editing & Face Swap',
+        'step-2-d': 'Traditional timeline editing combined with Neural Face Swap. I replaced generated faces with target characters, ensuring Character Consistency across every scene.',
         'step-3-t': 'Sonic Branding',
-        'step-3-d': 'Immersive and spatial sound design to add commercial weight and tactile realism to purely digital assets.',
-        'project-uk': 'URBAN KONG (DATA-DRIVEN SOCIAL GROWTH)',
-        'project-uk-desc': 'Strategic social growth management through an analytical content ecosystem, avoiding "personal taste" traps.',
+        'step-3-d': 'Immersive sound design and audio synchronization to provide emotional depth and realistic weight to AI-generated clips.',
+        'project-uk': 'URBAN KONG',
+        'project-uk-desc': 'Social Media Growth & Hybrid Content Strategy.',
         'uk-s1-t': 'AI Editorial Brain',
-        'uk-s1-d': 'Deployment of LLM Agents to map high-retention topic clusters and generate market-trend-based editorial calendars.',
-        'uk-s2-t': 'Conversion-Focused Motion',
-        'uk-s2-d': 'Neuro-visual editing for Reels: 2-second hooks, layered sound design, and aggressive pacing to stop the scroll.',
-        'uk-s3-t': 'Community Monetization',
-        'uk-s3-d': 'Converting vanity metrics into an engaged community through consistent visual identity and proactive brand management.',
-        'ig-btn-label': 'ANALYZE @URBANKONG_',
-        'project-eu': 'PANAFGEO / EU INSTITUTIONAL BRANDING',
-        'project-eu-desc': 'Compliance-Driven Art Direction: developing the visual identity for the EU Global Gateway program, strictly navigating the rigid EuroGeoSurveys and European Union guidelines.',
+        'uk-s1-d': 'Trend analysis and topic cluster ideation via Gemini Agents for a data-driven, real-time editorial calendar.',
+        'uk-s2-t': 'Reels & Motion',
+        'uk-s2-d': 'Short-form video production: dynamic editing, sound design, and visual hooks to maximize user retention.',
+        'uk-s3-t': 'Brand Aesthetics',
+        'uk-s3-d': 'Meticulous feed curation and community management to translate visual identity into real engagement.',
+        'ig-btn-label': 'VISIT @URBANKONG_',
+        'project-eu': 'PANAFGEO / EU BRANDING',
+        'project-eu-desc': 'Institutional Visual Identity for the EU Global Gateway program, strictly compliant with the official European Union and EuroGeoSurveys Guidelines.',
         'eu-pdf-title': 'PANAFGEO - Brand Guidelines',
-        'eu-pdf-description': 'Beyond aesthetic design: an operational Brand Book ensuring scalability and zero-error adherence to EU institutional visual policies.',
-        'credits-title': 'CREDITS & TEAM COLLABORATION',
+        'eu-pdf-description': 'Complete brand book for the PanAfGeo project: EU guidelines, visual identity, editorial grids, and institutional applications for the pan-African geological training program.',
+        'credits-title': 'CREDITS & TEAM',
         'collab-name': 'Gennaro Grieco',
-        'collab-role': 'UI/UX & Graphic Designer',
-        'download-pdf': 'DOWNLOAD BRAND BOOK',
+        'collab-role': 'Graphic Designer | UI/UX',
+        'download-pdf': 'DOWNLOAD BRAND BOOK (PDF)',
         'flip-hint': 'Flip',
         'explore-hint': 'Tap to explore'
     }
@@ -165,9 +165,44 @@ const PromptSimulator = ({ t }) => {
     return (
         <div className="prompt-box-container" style={{ margin: '0 auto', maxWidth: '100%' }}>
             <div className="prompt-image-viewport">
-                <motion.img src={PROMPT_IMG_RAW} alt="Source Reference" className="prompt-img" animate={{ opacity: isGenerated ? 0 : 1 }} transition={{ duration: 0.5 }} />
-                <motion.img src={PROMPT_IMG_GEN} alt="AI Generated Result" className="prompt-img absolute-img" animate={{ opacity: isGenerated ? 1 : 0 }} transition={{ duration: 0.5 }} />
-                {isGenerated && <motion.div className="scan-line" initial={{ top: "0%" }} animate={{ top: "100%" }} transition={{ duration: 1.5, ease: "easeInOut" }} />}
+                <img src={PROMPT_IMG_RAW} alt="Source Reference" className="prompt-img" />
+                <motion.img
+                    src={PROMPT_IMG_GEN}
+                    alt="AI Generated Result"
+                    className="prompt-img absolute-img"
+                    initial={false}
+                    animate={{
+                        clipPath: isGenerated ? "inset(0% 0% 0% 0%)" : "inset(0% 0% 100% 0%)",
+                        scale: isGenerated ? 1 : 1.025
+                    }}
+                    transition={{ duration: 1.35, ease: [0.22, 1, 0.36, 1] }}
+                />
+                <motion.div
+                    className="scan-line"
+                    initial={false}
+                    animate={{
+                        top: isGenerated ? "100%" : "0%",
+                        opacity: isGenerated ? [0, 1, 1, 0] : [0, 0.8, 0]
+                    }}
+                    transition={{ duration: 1.35, ease: [0.22, 1, 0.36, 1] }}
+                />
+                <div style={{
+                    position: 'absolute',
+                    top: '12px',
+                    left: '12px',
+                    zIndex: 12,
+                    padding: '4px 10px',
+                    borderRadius: '100px',
+                    background: isGenerated ? 'rgba(230, 104, 60, 0.92)' : 'rgba(17, 24, 39, 0.72)',
+                    color: '#fff',
+                    fontSize: '0.68rem',
+                    fontWeight: 700,
+                    letterSpacing: '0.08em',
+                    backdropFilter: 'blur(6px)',
+                    transition: 'background 0.35s ease'
+                }}>
+                    {isGenerated ? 'AI GENERATED' : 'REFERENCE INPUT'}
+                </div>
             </div>
             <div className="prompt-controls" style={{ flexDirection: 'column' }}>
                 <div className="prompt-input" style={{ width: '100%', fontSize: 'clamp(0.7rem, 2vw, 0.85rem)' }}><span className="prompt-cursor">_</span> {t['prompt-text']}</div>
@@ -211,7 +246,7 @@ const BrandGuidelines3D = ({ file, coverImg, t }) => {
                 <motion.div style={{ position: 'absolute', width: '100%', height: '100%', backfaceVisibility: 'hidden', transform: 'rotateY(180deg)', background: 'linear-gradient(135deg, #1e1e1e, #2a2a2a)', borderRadius: isMobile ? '16px' : '20px', border: '1px solid rgba(255,255,255,0.15)', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: isMobile ? '12px' : '18px', padding: isMobile ? '20px' : '35px', boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}>
                     <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }} style={{ fontSize: isMobile ? '3rem' : '4.5rem', filter: 'drop-shadow(0 10px 20px rgba(255,107,66,0.4))' }}>📄</motion.div>
                     <h3 style={{ color: 'white', margin: 0, fontSize: isMobile ? '1.2rem' : '1.7rem', fontFamily: 'Unbounded, sans-serif', textAlign: 'center', fontWeight: 600, letterSpacing: '-0.02em' }}>{t['eu-pdf-title']}</h3>
-                    <p style={{ color: 'rgba(255,255,255,0.9)', textAlign: 'center', maxWidth: isMobile ? '280px' : '500px', margin: '5px 0', lineHeight: isMobile ? 1.5 : 1.7, fontSize: isMobile ? '0.85rem' : '1rem', fontWeight: 400 }}>{t['eu-pdf-description']}</p>
+                    <p style={{ color: 'rgba(255,255,255,0.9)', textAlign: 'center', maxWidth: isMobile ? '280px' : '500px', margin: '5px 0', lineHeight: isMobile ? 1.5 : 1.7, fontSize: isMobile ? '0.85rem' : '1rem', fontWeight: 400 }}>{isMobile ? 'Brand book PanAfGeo: linee guida EU complete.' : t['eu-pdf-description']}</p>
                     <motion.a href={file} download style={{ padding: isMobile ? '12px 24px' : '16px 40px', background: '#ff6b42', color: 'white', textDecoration: 'none', borderRadius: '50px', fontWeight: 600, fontSize: isMobile ? '0.9rem' : '1.1rem', border: 'none', cursor: 'pointer', marginTop: isMobile ? '5px' : '10px', boxShadow: '0 10px 20px rgba(255,107,66,0.4)', display: 'inline-flex', alignItems: 'center', gap: '8px', letterSpacing: '0.5px' }} whileHover={!isMobile ? { scale: 1.05, background: '#ff8259', boxShadow: '0 15px 30px rgba(255,107,66,0.5)' } : {}} whileTap={{ scale: 0.95 }} onClick={(e) => e.stopPropagation()}>
                         <span style={{ fontSize: isMobile ? '1rem' : '1.2rem' }}>↓</span>{isMobile ? 'PDF' : t['download-pdf']}
                     </motion.a>

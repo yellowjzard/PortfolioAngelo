@@ -37,35 +37,35 @@ const NE_LANG = {
     it: {
         'back': '← TORNA',
         'title': 'NERO ESPRESSO',
-        'role-title': 'Retail Brand Architecture & Operations',
-        'slogan': 'Dal concept tridimensionale al posizionamento di mercato: un sistema visivo e operativo integrato per scalare l\'identità retail.',
+        'role-title': 'Brand Identity e Comunicazione Visiva',
+        'slogan': 'Dal design social al supporto vendite: un ecosistema visivo coerente e multifunzionale.',
         
-        'comm-title': 'Brand Positioning & Digital Growth',
-        'comm-desc': 'Direzione creativa e coordinamento dei canali digitali (IG/LinkedIn) orientati alla conversione e alla percezione di lusso accessibile del brand.',
-        'ops-title': 'Retail Prototyping & Supply Chain Coordination',
-        'ops-desc': 'Ingegnerizzazione del prodotto e pre-visualizzazione 3D (render di insegne e prototipi) per azzerare gli errori di produzione e blindare il rapporto con i fornitori.',
+        'comm-title': 'Social & Visual Strategy',
+        'comm-desc': 'Gestione completa dei canali Instagram e LinkedIn. Creazione di grafiche editoriali e Reels dinamici per rafforzare il posizionamento digitale del brand.',
+        'ops-title': 'Sales & Operations',
+        'ops-desc': 'Il design come strumento di vendita: render 3D, pre-visualizzazioni tecniche e gestione del flusso operativo con i fornitori.',
         
-        'feed-title': 'VISUAL IDENTITY & SOCIAL FEED',
-        'feed-desc': 'Cura maniacale dell\'estetica digitale per riflettere l\'esperienza sensoriale e premium del prodotto.',
-        'ig-btn-label': 'ANALIZZA @NEROESPRESSO_OFFICIAL', 
+        'feed-title': 'SOCIAL FEED',
+        'feed-desc': 'Cura del feed Instagram per trasmettere l\'aroma e l\'identità premium del brand.',
+        'ig-btn-label': 'VISITA @NEROESPRESSO_OFFICIAL', 
 
-        'proto-title': 'RITAGLIO OPERATIVO E PROTOTIPAZIONE',
-        'proto-desc': 'Sviluppo di specifiche tecniche avanzate e asset tridimensionali per la validazione industriale prima della messa in opera.'
+        'proto-title': 'PROTOTIPAZIONE STRATEGICA',
+        'proto-desc': 'Sviluppo di concept e schede tecniche dettagliate per supportare e concretizzare la visione di prodotto.'
     },
     en: {
         'back': '← BACK',
         'title': 'NERO ESPRESSO',
-        'role-title': 'Retail Brand Architecture & Operations',
-        'slogan': 'From 3D concept to market positioning: an integrated visual and operational system to scale retail identity.',
-        'comm-title': 'Brand Positioning & Digital Growth', 
-        'comm-desc': 'Creative direction and coordination of digital channels (IG/LinkedIn) focused on conversion and the brand\'s premium perception.',
-        'ops-title': 'Retail Prototyping & Supply Chain Coordination', 
-        'ops-desc': 'Product engineering and 3D pre-visualization (signage and prototypes) to eliminate manufacturing errors and streamline supplier workflows.',
-        'feed-title': 'VISUAL IDENTITY & SOCIAL FEED', 
-        'feed-desc': 'Meticulous curation of digital aesthetics to reflect the sensory and premium experience of the product.',
-        'ig-btn-label': 'ANALYZE @NEROESPRESSO_OFFICIAL',
-        'proto-title': 'OPERATIVE PROTOTYPING & SPECIFICATIONS', 
-        'proto-desc': 'Development of advanced technical specifications and 3D assets for industrial validation prior to execution.'
+        'role-title': 'Brand Identity & Visual Communication',
+        'slogan': 'From social design to sales support: a coherent and multifunctional visual ecosystem.',
+        'comm-title': 'Social & Visual Strategy', 
+        'comm-desc': 'Full management of Instagram and LinkedIn channels. Creation of editorial graphics and dynamic Reels to strengthen digital positioning.',
+        'ops-title': 'Sales & Operations', 
+        'ops-desc': 'Design as a sales tool: 3D renders, technical pre-visualizations, and operational flow management with suppliers.',
+        'feed-title': 'SOCIAL FEED', 
+        'feed-desc': 'Curating the Instagram feed to convey the brand\'s premium identity and essence.',
+        'ig-btn-label': 'VISIT @NEROESPRESSO_OFFICIAL',
+        'proto-title': 'STRATEGIC PROTOTYPING', 
+        'proto-desc': 'Development of detailed concepts and technical specifications to support the product vision.'
     }
 };
 
@@ -155,12 +155,12 @@ const NeroEspresso = ({ lang, goBack }) => {
 
                         <div className="bento-grid">
                             <div className="bento-card solution-card"> 
-                                <div className="card-icon">📈</div>
+                                <div className="card-icon">📱</div>
                                 <h3>{t['comm-title']}</h3>
                                 <p>{t['comm-desc']}</p>
                             </div>
                             <div className="bento-card challenge-card">
-                                <div className="card-icon">📐</div>
+                                <div className="card-icon">⚙️</div>
                                 <h3>{t['ops-title']}</h3>
                                 <p>{t['ops-desc']}</p>
                             </div>
@@ -222,19 +222,31 @@ const NeroEspresso = ({ lang, goBack }) => {
                     <Reveal>
                         <h2 className="section-label">{t['proto-title']}</h2>
                         <p className="section-desc">{t['proto-desc']}</p>
-                        <div className="horizontal-gallery-track">
-                            {[NE_ASSETS.proto1, NE_ASSETS.proto2, NE_ASSETS.proto3, NE_ASSETS.proto4].map((img, i) => (
-                                <div key={i} className="gallery-item-proto">
-                                    <img loading="lazy" decoding="async" src={img} alt={`Nero Espresso Technical Prototype ${i + 1}`} />
-                                    <span className="item-badge">TECH SPEC {i+1}</span>
+                        <div className="proto-marquee">
+                            <div className="proto-marquee-track">
+                                <div className="proto-marquee-group">
+                                    {[NE_ASSETS.proto1, NE_ASSETS.proto2, NE_ASSETS.proto3, NE_ASSETS.proto4].map((img, i) => (
+                                        <div key={`a-${i}`} className="gallery-item-proto">
+                                            <img loading="lazy" decoding="async" src={img} alt={`Nero Espresso Technical Prototype ${i + 1}`} />
+                                            <span className="item-badge">TECH SPEC {i+1}</span>
+                                        </div>
+                                    ))}
                                 </div>
-                            ))}
+                                <div className="proto-marquee-group" aria-hidden="true">
+                                    {[NE_ASSETS.proto1, NE_ASSETS.proto2, NE_ASSETS.proto3, NE_ASSETS.proto4].map((img, i) => (
+                                        <div key={`b-${i}`} className="gallery-item-proto">
+                                            <img loading="lazy" decoding="async" src={img} alt="" />
+                                            <span className="item-badge">TECH SPEC {i+1}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
                     </Reveal>
                 </section>
 
                 <footer style={{textAlign: 'center', padding: 'clamp(3rem, 8vw, 6rem) 2rem', opacity: 0.5}}>
-                    <p>© 2026 Nero Espresso Case Study | Brand Architecture by Angelo Russo.</p>
+                    <p>© 2026 Nero Espresso Case Study | Brand Identity by Angelo Russo.</p>
                 </footer>
 
             </div>
