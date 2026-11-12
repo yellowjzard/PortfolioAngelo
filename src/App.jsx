@@ -3,6 +3,7 @@ import { ShaderGradientCanvas, ShaderGradient } from '@shadergradient/react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 import ErrorBoundary from './ErrorBoundary';
+import InteractiveMarquee from './InteractiveMarquee';
 
 // Import delle Pagine Progetti Interne (Lazy Loading)
 const WhiteRabbit = lazy(() => import('./WhiteRabbit'));
@@ -368,20 +369,16 @@ function App() {
                                 { title: 'Freelance Lab', sub: 'AR, 3D & Video AI', type: 'freelance', isExternal: false, onClick: () => navigateTo('freelance') },
                             ];
                             return (
-                                <div className="folders-marquee">
-                                    <div className="folders-marquee-track">
-                                        <div className="folders-marquee-group">
-                                            {workFolders.map((folder) => (
-                                                <FolderItem key={`a-${folder.type}`} title={folder.title} sub={folder.sub} type={folder.type} isExternal={folder.isExternal} onClick={folder.onClick} />
-                                            ))}
-                                        </div>
-                                        <div className="folders-marquee-group" aria-hidden="true">
-                                            {workFolders.map((folder) => (
-                                                <FolderItem key={`b-${folder.type}`} title={folder.title} sub={folder.sub} type={folder.type} isExternal={folder.isExternal} onClick={folder.onClick} />
-                                            ))}
-                                        </div>
-                                    </div>
-                                </div>
+                                <InteractiveMarquee
+                                    className="folders-interactive-marquee"
+                                    itemGap={46}
+                                    speed={0.65}
+                                    ariaLabel="Progetti selezionati"
+                                >
+                                    {workFolders.map((folder) => (
+                                        <FolderItem key={folder.type} title={folder.title} sub={folder.sub} type={folder.type} isExternal={folder.isExternal} onClick={folder.onClick} />
+                                    ))}
+                                </InteractiveMarquee>
                             );
                         })()}
                     </Reveal>

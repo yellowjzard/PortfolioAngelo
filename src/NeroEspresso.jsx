@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ShaderGradientCanvas, ShaderGradient } from '@shadergradient/react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'; 
+import InteractiveMarquee from './InteractiveMarquee'; 
 
 // --- CONFIGURAZIONE LINK ---
 const SOCIAL_LINKS = {
@@ -222,26 +223,19 @@ const NeroEspresso = ({ lang, goBack }) => {
                     <Reveal>
                         <h2 className="section-label">{t['proto-title']}</h2>
                         <p className="section-desc">{t['proto-desc']}</p>
-                        <div className="proto-marquee">
-                            <div className="proto-marquee-track">
-                                <div className="proto-marquee-group">
-                                    {[NE_ASSETS.proto1, NE_ASSETS.proto2, NE_ASSETS.proto3, NE_ASSETS.proto4].map((img, i) => (
-                                        <div key={`a-${i}`} className="gallery-item-proto">
-                                            <img loading="lazy" decoding="async" src={img} alt={`Nero Espresso Technical Prototype ${i + 1}`} />
-                                            <span className="item-badge">TECH SPEC {i+1}</span>
-                                        </div>
-                                    ))}
+                        <InteractiveMarquee
+                            className="proto-interactive-marquee"
+                            itemGap={20}
+                            speed={0.6}
+                            ariaLabel="Schede tecniche prototipazione"
+                        >
+                            {[NE_ASSETS.proto1, NE_ASSETS.proto2, NE_ASSETS.proto3, NE_ASSETS.proto4].map((img, i) => (
+                                <div key={i} className="gallery-item-proto">
+                                    <img loading="lazy" decoding="async" src={img} alt={`Nero Espresso Technical Prototype ${i + 1}`} />
+                                    <span className="item-badge">TECH SPEC {i+1}</span>
                                 </div>
-                                <div className="proto-marquee-group" aria-hidden="true">
-                                    {[NE_ASSETS.proto1, NE_ASSETS.proto2, NE_ASSETS.proto3, NE_ASSETS.proto4].map((img, i) => (
-                                        <div key={`b-${i}`} className="gallery-item-proto">
-                                            <img loading="lazy" decoding="async" src={img} alt="" />
-                                            <span className="item-badge">TECH SPEC {i+1}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
+                            ))}
+                        </InteractiveMarquee>
                     </Reveal>
                 </section>
 
