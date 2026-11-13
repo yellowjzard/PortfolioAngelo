@@ -125,7 +125,7 @@ const NeroEspresso = ({ lang, goBack }) => {
                 </ShaderGradientCanvas>
             </div>
             
-            <header><button onClick={goBack} className="lang-btn" style={{position:'fixed', left:'30px', zIndex:100}}>{t['back']}</button></header>
+            <header><button onClick={goBack} className="lang-btn" style={{ position: 'fixed', top: 'clamp(15px, 4vw, 30px)', left: 'clamp(15px, 4vw, 30px)', zIndex: 100 }}>{t['back']}</button></header>
 
             <motion.div className="fixed-intro-layer" style={{ opacity: introOpacity, filter: introBlur, scale: introScale }}>
                 <Typewriter text={t['title']} />

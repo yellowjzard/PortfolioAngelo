@@ -303,15 +303,12 @@ function App() {
             </motion.div>
 
             <div className="content-scroll-layer">
-                <header style={{
-                    position: 'fixed', top: 'clamp(15px, 4vw, 30px)', right: 'clamp(15px, 4vw, 30px)',
-                    zIndex: 100, display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'flex-end'
-                }}>
-                    <nav style={{ display: 'flex', gap: '14px', background: 'rgba(255,255,255,0.6)', padding: '8px 18px', borderRadius: '25px', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.4)', boxShadow: '0 4px 15px rgba(0,0,0,0.05)' }}>
-                        <a href="#about" style={{ textDecoration: 'none', color: '#111', fontWeight: 500, fontSize: 'clamp(0.78rem, 1.5vw, 0.92rem)' }}>{t['nav-about']}</a>
-                        <a href="#works" style={{ textDecoration: 'none', color: '#111', fontWeight: 500, fontSize: 'clamp(0.78rem, 1.5vw, 0.92rem)' }}>{t['nav-works']}</a>
-                        <a href="#education" style={{ textDecoration: 'none', color: '#111', fontWeight: 500, fontSize: 'clamp(0.78rem, 1.5vw, 0.92rem)' }}>{t['nav-edu']}</a>
-                        <a href="#contact" style={{ textDecoration: 'none', color: '#111', fontWeight: 500, fontSize: 'clamp(0.78rem, 1.5vw, 0.92rem)' }}>{t['nav-contact']}</a>
+                <header className="main-header">
+                    <nav className="main-nav">
+                        <a href="#about" style={{ textDecoration: 'none', color: '#111', fontWeight: 500, fontSize: 'clamp(0.74rem, 1.4vw, 0.92rem)' }}>{t['nav-about']}</a>
+                        <a href="#works" style={{ textDecoration: 'none', color: '#111', fontWeight: 500, fontSize: 'clamp(0.74rem, 1.4vw, 0.92rem)' }}>{t['nav-works']}</a>
+                        <a href="#education" style={{ textDecoration: 'none', color: '#111', fontWeight: 500, fontSize: 'clamp(0.74rem, 1.4vw, 0.92rem)' }}>{t['nav-edu']}</a>
+                        <a href="#contact" style={{ textDecoration: 'none', color: '#111', fontWeight: 500, fontSize: 'clamp(0.74rem, 1.4vw, 0.92rem)' }}>{t['nav-contact']}</a>
                     </nav>
                     <button onClick={toggleLang} className="lang-btn">{lang === 'it' ? 'EN' : 'IT'}</button>
                 </header>
