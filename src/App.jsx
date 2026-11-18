@@ -33,7 +33,7 @@ const LANG_DATA = {
         'nav-contact': 'Contatti',
         'about-title': 'CHI SONO',
         'about-headline': 'Marketing B2B, architetture web e produzione AI.',
-        'about-text': 'Specialista in Digital Marketing B2B e Tecnologie Multimediali con Laurea Magistrale conseguita con 110 e Lode all’Accademia di Belle Arti di Napoli. Unisco la gestione operativa di campagne Google Ads e Meta Ads, web architecture su WordPress e audit SEO tecnico alla produzione visiva e video AI-assisted (Higgsfield, Weavy, Google Flow, Adobe CC) e a workflow operativi strutturati su Codex, Claude Code e Antigravity con set personalizzati di skill, istruzioni e regolamenti. Esperienza internazionale a Bruxelles tramite mobilità Erasmus+ VET sulle linee guida della Commissione Europea.',
+        'about-text': 'Specialista in Digital Marketing B2B e Creative Technologist. Unisco la gestione operativa di campagne Google Ads e Meta Ads, architettura web su WordPress e audit SEO tecnico alla produzione visiva e video AI-assisted (Higgsfield, Weavy, Google Flow, Adobe CC) e a workflow operativi strutturati su Codex, Claude Code e Antigravity con set personalizzati di skill, istruzioni e regolamenti. Esperienza internazionale a Bruxelles tramite mobilità Erasmus+ VET sulle linee guida della Commissione Europea.',
         'cv-it': 'Scarica CV (IT)',
         'cv-en': 'Download CV (EN)',
         'pillars': [
@@ -88,7 +88,7 @@ const LANG_DATA = {
         'nav-contact': 'Contact',
         'about-title': 'ABOUT ME',
         'about-headline': 'B2B marketing, web architecture, and AI media workflows.',
-        'about-text': 'B2B Digital Marketing Specialist and Creative Technologist holding a Master’s degree with honors (110/110 cum laude in New Technologies for Art, Academy of Fine Arts of Naples). I combine hands-on management of Google Ads and Meta Ads campaigns, WordPress architecture, and technical SEO audits with AI-assisted visual/video production (Higgsfield, Weavy, Google Flow, Adobe CC) and structured agentic workflows built on Codex, Claude Code, and Antigravity using custom skills, instructions, and operational guardrails. International experience in Brussels via Erasmus+ VET under European Commission brand guidelines.',
+        'about-text': 'B2B Digital Marketing Specialist and Creative Technologist. I combine hands-on management of Google Ads and Meta Ads campaigns, WordPress architecture, and technical SEO audits with AI-assisted visual/video production (Higgsfield, Weavy, Google Flow, Adobe CC) and structured agentic workflows built on Codex, Claude Code, and Antigravity using custom skills, instructions, and operational guardrails. International experience in Brussels via Erasmus+ VET under European Commission brand guidelines.',
         'cv-it': 'Download CV (IT)',
         'cv-en': 'Download CV (EN)',
         'pillars': [
